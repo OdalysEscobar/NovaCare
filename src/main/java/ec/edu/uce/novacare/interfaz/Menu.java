@@ -12,6 +12,7 @@ public class Menu {
 
         do {
 
+
             System.out.println("\n===== SISTEMA DE GESTIÓN =====");
             System.out.println("1. Ingresar al sistema");
             System.out.println("2. Gestionar perfil de usuario");
