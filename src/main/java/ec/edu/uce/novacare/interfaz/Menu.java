@@ -25,6 +25,7 @@ public class Menu {
 
             opcion = scanner.nextInt();
 
+
             switch (opcion) {
 
                 case 1:
