@@ -1,6 +1,10 @@
 package ec.edu.uce.novacare.interfaz;
 
+import java.util.Scanner;
+
 public class MenuGestionarPerfil {
+
+    private Scanner scanner = new Scanner(System.in);
 
     public void mostrarMenu() {
 
