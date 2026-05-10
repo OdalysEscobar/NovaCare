@@ -11,7 +11,7 @@ public class MenuGestionarPerfil {
         int opcion;
 
         do {
-            System.out.println("===== MENU: GESTIONAR PERFIL =====");
+            System.out.println("===== GESTIONAR PERFIL =====");
             System.out.println("1. Crear perfil de usuario");
             System.out.println("2. Actualizar perfil de usuario");
             System.out.println("3. Consultar perfil de usuario");
@@ -31,26 +31,28 @@ public class MenuGestionarPerfil {
             switch (opcion) {
                 case 1:
 
-                    System.out.println("Iniciando sesión...");
+                    System.out.println("Creando perfil de usuario...");
                     break;
 
                 case 2:
 
-                    System.out.println("Registrando usuario...");
+                    System.out.println("Actualizando perfil de usuario...");
                     break;
 
                 case 3:
-                    System.out.println("Registrando usuario...");
+                    System.out.println("Consultando perfil de usuario...");
                     break;
 
                 case 4:
 
-                    System.out.println("Registrando usuario...");
+                    System.out.println("Eliminando perfil de usuario...");
                     break;
 
                 case 0:
 
                     System.out.println("Regresando al menú principal...");
+                    MenuPrincipal menuPrincipal = new MenuPrincipal();
+                    menuPrincipal.mostrarMenu();
                     return;
 
                 default:
@@ -60,9 +62,6 @@ public class MenuGestionarPerfil {
             }
 
         } while (opcion != 0);
-
-
-
 
     }
 }

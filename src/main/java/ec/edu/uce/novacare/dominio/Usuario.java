@@ -1,5 +1,6 @@
 package ec.edu.uce.novacare.dominio;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 public class Usuario {
 
     private String nombre;
@@ -15,6 +16,9 @@ public class Usuario {
         this.apellido = apellido;
         this.contrasena = contrasena;
         this.correo = correo;
+        setNombre(nombre);
+        setApellido(apellido);
+        setCorreo(correo);
     }
 
     @Override
@@ -32,7 +36,14 @@ public class Usuario {
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        String regex = "^[a-zA-Z\\s]+$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(nombre);
+        if (m.matches()) {
+            this.nombre = nombre;
+        } else {
+            System.out.println("Error: Nombre no válido.");
+        }
     }
 
     public String getCorreo() {
@@ -40,7 +51,14 @@ public class Usuario {
     }
 
     public void setCorreo(String correo) {
-        this.correo = correo;
+        String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(correo);
+        if (m.matches()) {
+            this.correo = correo;
+        } else {
+            System.out.println("Error: Correo con formato incorrecto.");
+        }
     }
 
     public String getApellido() {
@@ -48,7 +66,14 @@ public class Usuario {
     }
 
     public void setApellido(String apellido) {
-        this.apellido = apellido;
+        String regex = "^[a-zA-Z\\s]+$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(apellido);
+        if (m.matches()) {
+            this.apellido = apellido;
+        } else {
+            System.out.println("Error: Apellido no válido.");
+        }
     }
 
     public String getContrasena() {
@@ -58,6 +83,5 @@ public class Usuario {
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
-
 
 }
