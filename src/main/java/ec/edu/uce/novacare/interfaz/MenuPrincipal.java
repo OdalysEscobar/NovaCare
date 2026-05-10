@@ -76,7 +76,5 @@ public class MenuPrincipal {
             }
 
         } while (opcion != 0);
-
-        scanner.close();
     }
 }
