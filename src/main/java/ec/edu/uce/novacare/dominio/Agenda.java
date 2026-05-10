@@ -37,5 +37,5 @@ public class Agenda {
     public void setCitas(List<Cita> citas) {
         this.citas = citas;
     }
-    //ff
+
 }
