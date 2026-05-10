@@ -14,11 +14,9 @@ public class Cita {
 
     public Cita(String fecha, Agenda agenda, Cliente cliente, Servicio servicio, String hora) {
         setFecha(fecha);
-        this.fecha = fecha;
         this.agenda = agenda;
         this.cliente = cliente;
         this.servicio = servicio;
-        this.hora = hora;
         setHora(hora);
     }
 

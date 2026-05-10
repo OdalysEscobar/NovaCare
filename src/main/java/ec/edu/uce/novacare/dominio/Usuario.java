@@ -12,10 +12,7 @@ public class Usuario {
     }
 
     public Usuario(String nombre, String apellido, String contrasena, String correo) {
-        this.nombre = nombre;
-        this.apellido = apellido;
         this.contrasena = contrasena;
-        this.correo = correo;
         setNombre(nombre);
         setApellido(apellido);
         setCorreo(correo);

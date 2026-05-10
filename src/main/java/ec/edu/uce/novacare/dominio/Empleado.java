@@ -20,7 +20,6 @@ public class Empleado extends Usuario{
     }
 
     public void setEspecialidad(String especialidad) {
-        // Regla: Solo letras y espacios
         String regex = "^[a-zA-Z\\sÁÉÍÓÚáéíóúñÑ]+$";
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(especialidad);
