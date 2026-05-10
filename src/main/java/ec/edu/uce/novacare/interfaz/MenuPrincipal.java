@@ -2,7 +2,7 @@ package ec.edu.uce.novacare.interfaz;
 
 import java.util.Scanner;
 
-public class Menu {
+public class MenuPrincipal {
 
     private Scanner scanner = new Scanner(System.in);
 
@@ -12,7 +12,7 @@ public class Menu {
 
         do {
 
-            System.out.println("\n===== SISTEMA DE GESTIÓN =====");
+            System.out.println("\n===== MENU PRINCIPAL =====");
             System.out.println("1. Ingresar al sistema");
             System.out.println("2. Gestionar perfil de usuario");
             System.out.println("3. Gestionar citas");
@@ -23,6 +23,12 @@ public class Menu {
             System.out.println("0. Salir");
             System.out.print("Seleccione una opción: ");
 
+            while (!scanner.hasNextInt()) {
+                System.out.println("Error: solo puede ingresar números");
+                scanner.next();
+                System.out.print("Seleccione una opcion: ");
+            }
+
             opcion = scanner.nextInt();
 
 
@@ -30,14 +36,26 @@ public class Menu {
 
                 case 1:
                     System.out.println("Ingresando al sistema...");
+
+                    MenuIngresarSistema menuIngresar = new MenuIngresarSistema();
+                    menuIngresar.mostrarMenu();
+
                     break;
 
                 case 2:
                     System.out.println("Gestionando perfil de usuario...");
+
+                    MenuGestionarPerfil menuPerfil = new MenuGestionarPerfil();
+                    menuPerfil.mostrarMenu();
+
                     break;
 
                 case 3:
                     System.out.println("Gestionando citas...");
+
+                    MenuGestionarCitas menuCitas = new MenuGestionarCitas();
+                    menuCitas.mostrarMenu();
+
                     break;
 
                 case 4:
@@ -58,7 +76,8 @@ public class Menu {
 
                 case 0:
                     System.out.println("Saliendo del sistema...");
-                    break;
+                    scanner.close();
+                    System.exit(0);
 
                 default:
                     System.out.println("Opción inválida.");
