@@ -2,6 +2,7 @@ package ec.edu.uce.novacare.dominio;
 
 import java.util.List;
 
+
 public class Agenda {
     private String citasPendiente;
     private List<Cita> citas;
@@ -28,6 +29,7 @@ public class Agenda {
 
     public void setCitasPendiente(String citasPendiente) {
         this.citasPendiente = citasPendiente;
+
     }
 
     public List<Cita> getCitas() {
@@ -37,7 +39,5 @@ public class Agenda {
     public void setCitas(List<Cita> citas) {
         this.citas = citas;
     }
-
-
 
 }

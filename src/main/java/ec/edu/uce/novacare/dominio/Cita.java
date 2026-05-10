@@ -1,4 +1,6 @@
 package ec.edu.uce.novacare.dominio;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Cita {
     private String fecha;
@@ -11,11 +13,11 @@ public class Cita {
     }
 
     public Cita(String fecha, Agenda agenda, Cliente cliente, Servicio servicio, String hora) {
-        this.fecha = fecha;
+        setFecha(fecha);
         this.agenda = agenda;
         this.cliente = cliente;
         this.servicio = servicio;
-        this.hora = hora;
+        setHora(hora);
     }
 
     @Override
@@ -34,15 +36,32 @@ public class Cita {
     }
 
     public void setFecha(String fecha) {
+    String regex = "^[0-9]{2}/[0-9]{2}/[0-9]{4}$";
+    Pattern p = Pattern.compile(regex);
+    Matcher m = p.matcher(fecha);
+
+    if (m.matches()) {
         this.fecha = fecha;
+    } else {
+        System.out.println("Error: La fecha debe tener el formato DD/MM/AAAA");
     }
+    }
+
 
     public String getHora() {
         return hora;
     }
 
     public void setHora(String hora) {
-        this.hora = hora;
+        String regex = "^([01]?[0-9]|2[0-3]):[0-5][0-9]$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(hora);
+
+        if (m.matches()) {
+            this.hora = hora;
+        } else {
+            System.out.println("Error: La hora '" + hora + "' debe tener el formato HH:MM (24h)");
+        }
     }
 
     public Servicio getServicio() {

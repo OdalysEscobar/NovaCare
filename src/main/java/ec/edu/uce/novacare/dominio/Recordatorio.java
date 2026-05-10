@@ -1,4 +1,6 @@
 package ec.edu.uce.novacare.dominio;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Recordatorio {
 
@@ -9,7 +11,7 @@ public class Recordatorio {
     }
 
     public Recordatorio(String correo, Cita cita) {
-        this.correo = correo;
+        setCorreo(correo);
         this.cita = cita;
     }
 
@@ -26,7 +28,15 @@ public class Recordatorio {
     }
 
     public void setCorreo(String correo) {
-        this.correo = correo;
+        String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(correo);
+
+        if (m.matches()) {
+            this.correo = correo;
+        } else {
+            System.out.println("Error: El formato del correo '" + correo + "' no es válido.");
+        }
     }
 
     public Cita getCita() {
