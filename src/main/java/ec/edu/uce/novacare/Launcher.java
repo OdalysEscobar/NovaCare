@@ -9,6 +9,7 @@ public class Launcher {
 
         MenuIngresarSistema menu1 = new MenuIngresarSistema();
 
+
         menu1.mostrarMenu();
 
         MenuPrincipal menu = new MenuPrincipal();

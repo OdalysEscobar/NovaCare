@@ -1,6 +1,8 @@
 package ec.edu.uce.novacare.interfaz;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MenuIngresarSistema {
 
@@ -9,8 +11,8 @@ public class MenuIngresarSistema {
     public void mostrarMenu() {
 
         int opcion;
-        String nomU;
-        int numCon;
+        String correo;
+        String contrasena;
 
         do {
             System.out.println("===== BIENVENIDO A NOVACARE APP =====");
@@ -33,21 +35,40 @@ public class MenuIngresarSistema {
 
                     System.out.println(" === Iniciar sesión ===");
 
-                    System.out.println("Ingrese su usuario: ");
+                    System.out.println("Ingrese su correo: ");
 
                     scanner.nextLine();
 
-                    nomU = scanner.nextLine();
+
+                    correo = scanner.nextLine();
+
 
                     System.out.println("Ingrese su contraseña: ");
 
-                    numCon = scanner.nextInt();
+                    contrasena = scanner.nextLine();
 
+                    boolean checkCorreo= validarCorreo(correo);
+                    boolean checkContrasena= validarContrasena(contrasena);
+
+                    if(!checkContrasena || !checkCorreo){
+                        if(!checkContrasena && !checkCorreo){
+                            System.out.println("Contrasena y correo, no cumplen con los formatos.");
+                            break;
+                        }
+                        if(!checkCorreo){
+                            System.out.println("Correo con formato incorrecto ");
+                            break;
+                        }
+                        if(!checkContrasena){
+                            System.out.println("Contraseña inválida, solo se permmite numeros y letras");
+                            break;
+                        }
+
+
+                    }
                     System.out.println("Iniciando sesión...");
-
                     MenuPrincipal menuPrincipal = new MenuPrincipal();
                     menuPrincipal.mostrarMenu();
-
                     break;
 
                 case 2:
@@ -73,5 +94,25 @@ public class MenuIngresarSistema {
             }
 
         } while (opcion != 0);
+    }
+
+
+    public boolean validarContrasena(String contrasena){
+
+        Pattern pattern = Pattern.compile("^[a-zA-Z0-9]+$");
+
+        Matcher matcher = pattern.matcher(contrasena);
+
+        return matcher.matches();
+    }
+
+    public boolean validarCorreo (String correo){
+        Pattern pattern = Pattern.compile(
+                "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+        );
+
+        Matcher matcher = pattern.matcher(correo);
+
+        return  matcher.matches();
     }
 }
