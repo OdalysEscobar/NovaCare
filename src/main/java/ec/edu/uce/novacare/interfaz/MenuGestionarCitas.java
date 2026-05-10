@@ -12,8 +12,10 @@ public class MenuGestionarCitas {
 
         do {
             System.out.println("===== GESTIONAR CITAS =====");
-            System.out.println("1. Iniciar sesión");
-            System.out.println("2. Registrar un nuevo usuario");
+            System.out.println("1. Crear Cita");
+            System.out.println("2. Actualizar Citas");
+            System.out.println("3. Consultar Citas");
+            System.out.println("4. Cancelar Citas");
             System.out.println("0. Volver al menú principal");
 
             System.out.println("Seleccione una opción: ");
@@ -29,17 +31,29 @@ public class MenuGestionarCitas {
             switch (opcion) {
                 case 1:
 
-                    System.out.println("Iniciando sesión...");
+                    System.out.println("Creando Cita...");
                     break;
 
                 case 2:
 
-                    System.out.println("Registrando usuario...");
+                    System.out.println("Actualizando cita...");
+                    break;
+
+                case 3:
+
+                    System.out.println("Consultando cita...");
+                    break;
+
+                case 4:
+
+                    System.out.println("Cancelando cita...");
                     break;
 
                 case 0:
 
                     System.out.println("Regresando al menú principal...");
+                    MenuPrincipal menuPrincipal = new MenuPrincipal();
+                    menuPrincipal.mostrarMenu();
                     return;
 
                 default:
