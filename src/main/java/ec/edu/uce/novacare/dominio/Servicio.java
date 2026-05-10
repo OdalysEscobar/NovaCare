@@ -1,4 +1,7 @@
 package ec.edu.uce.novacare.dominio;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 public class Servicio {
     private String tipoServicio;
@@ -9,7 +12,7 @@ public class Servicio {
     }
 
     public Servicio(String tipoServicio, int duracion, boolean dispoinibilidad) {
-        this.tipoServicio = tipoServicio;
+        setTipoServicio(tipoServicio);
         this.duracion = duracion;
         this.dispoinibilidad = dispoinibilidad;
     }
@@ -28,7 +31,15 @@ public class Servicio {
     }
 
     public void setTipoServicio(String tipoServicio) {
-        this.tipoServicio = tipoServicio;
+        String regex = "^[a-zA-Z\\sÁÉÍÓÚáéíóúñÑ]+$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(tipoServicio);
+
+        if (m.matches()) {
+            this.tipoServicio = tipoServicio;
+        } else {
+            System.out.println("Error: El tipo de servicio '" + tipoServicio + "' no es válido.");
+        }
     }
 
     public int getDuracion() {
@@ -36,7 +47,11 @@ public class Servicio {
     }
 
     public void setDuracion(int duracion) {
-        this.duracion = duracion;
+        if (duracion > 0) {
+            this.duracion = duracion;
+        } else {
+            System.out.println("Error: La duración debe ser mayor a 0.");
+        }
     }
 
     public boolean isDispoinibilidad() {
