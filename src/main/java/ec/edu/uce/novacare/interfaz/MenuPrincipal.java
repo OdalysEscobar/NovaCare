@@ -30,6 +30,7 @@ public class MenuPrincipal {
 
             opcion = scanner.nextInt();
 
+
             switch (opcion) {
 
                 case 1:
@@ -50,18 +51,31 @@ public class MenuPrincipal {
 
                 case 3:
                     System.out.println("Gestionando servicios...");
+
+                    MenuGestionarServicios menuServicios = new MenuGestionarServicios();
+                    menuServicios.mostrarMenu();
+
                     break;
 
                 case 4:
                     System.out.println("Gestionando disponibilidad de citas...");
+
+                    MenuGestionarDisponibilidad menuDisp = new MenuGestionarDisponibilidad();
+                    menuDisp.mostrarMenu();
                     break;
 
                 case 5:
                     System.out.println("Gestionando agenda de citas...");
+
+                    MenuGestionarAgenda menuAgenda = new MenuGestionarAgenda();
+                    menuAgenda.mostrarMenu();
                     break;
 
                 case 6:
                     System.out.println("Gestionando reportes de citas...");
+
+                    MenuGestionarReportes menuReportes = new MenuGestionarReportes();
+                    menuReportes.mostrarMenu();
                     break;
 
                 case 0:
