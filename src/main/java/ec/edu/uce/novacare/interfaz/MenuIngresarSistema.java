@@ -8,6 +8,7 @@ public class MenuIngresarSistema {
 
     private Scanner scanner = new Scanner(System.in);
     private IniciarSesion iniciarSesion = new IniciarSesion();
+    private RegistrarUsuario registrarUsuario = new RegistrarUsuario();
 
     public void mostrarMenu() {
 
@@ -41,6 +42,8 @@ public class MenuIngresarSistema {
 
                     System.out.println("Registrando usuario...");
 
+
+                    registrarUsuario.guardarUsuario();
                     MenuPrincipal menuprincipal = new MenuPrincipal();
                     menuprincipal.mostrarMenu();
 
