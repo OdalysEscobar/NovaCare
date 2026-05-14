@@ -34,26 +34,24 @@ public class MenuGestionarServicios {
             }
 
             opcion = scanner.nextInt();
+            scanner.nextLine();
+
 
             switch (opcion) {
                 case 1:
-
-                    System.out.println("Creando servicio...");
+                    crearServicio();
                     break;
 
                 case 2:
-
-                    System.out.println("Actualizando servicio...");
+                    actualizarServicio();
                     break;
 
                 case 3:
-
-                    System.out.println("Consultando servicios...");
+                    consultarServicio();
                     break;
 
                 case 4:
-
-                    System.out.println("Eliminando servicio...");
+                    eliminarServicio();
                     break;
 
                 case 0:
@@ -72,16 +70,16 @@ public class MenuGestionarServicios {
     }
 
     public void crearServicio() {
-        System.out.println("\n--- Nuevo Servicio ---");
+        System.out.println("\t\n--- Nuevo Servicio ---");
         ingresarDatosServicio();
         System.out.println("Servicio creado con éxito.");
     }
 
     public void consultarServicio() {
         if (nombreServicio.isEmpty()) {
-            System.out.println("\nNo hay servicios registrados.");
+            System.out.println("\t\nNo hay servicios registrados.");
         } else {
-            System.out.println("\n===== DETALLES DEL SERVICIO =====");
+            System.out.println("\t\n===== DETALLES DEL SERVICIO =====");
             System.out.println("Nombre: " + nombreServicio);
             System.out.println("Descripción: " + descripcion);
             System.out.println("Precio: $" + precio);
@@ -91,10 +89,10 @@ public class MenuGestionarServicios {
 
     public void actualizarServicio() {
         if (nombreServicio.isEmpty()) {
-            System.out.println("\nNo existe un servicio para actualizar.");
+            System.out.println("\t\nNo existe un servicio para actualizar.");
             return;
         }
-        System.out.println("\n--- Actualizar Datos del Servicio ---");
+        System.out.println("\t\n--- Actualizar Datos del Servicio ---");
         ingresarDatosServicio();
         System.out.println("Servicio actualizado correctamente.");
     }
