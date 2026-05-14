@@ -33,6 +33,7 @@ public class MenuGestionarPerfil {
             }
 
             opcion = scanner.nextInt();
+            scanner.nextLine();
 
             switch (opcion) {
                 case 1:
@@ -88,16 +89,18 @@ public class MenuGestionarPerfil {
         // Nombre
         do{
             System.out.println("Ingrese nuevo nombre: ");
+
             nuevoNombre = scanner.nextLine();
 
             if (!validarNombre(nuevoNombre)){
                 System.out.println("Error: solo letras.");
             }
+
         } while(!validarNombre(nuevoNombre));
 
         // Apellido
         do{
-            System.out.println("Ingrese nuevo apellido: ");
+            System.out.println("\nIngrese nuevo apellido: ");
             nuevoApellido = scanner.nextLine();
 
             if (!validarNombre(nuevoApellido)){
