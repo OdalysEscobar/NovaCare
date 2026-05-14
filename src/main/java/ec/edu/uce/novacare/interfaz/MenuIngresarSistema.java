@@ -7,13 +7,11 @@ import java.util.regex.Pattern;
 public class MenuIngresarSistema {
 
     private Scanner scanner = new Scanner(System.in);
+    private IniciarSesion iniciarSesion = new IniciarSesion();
 
     public void mostrarMenu() {
 
         int opcion;
-        String correo;
-        String contrasena;
-
         do {
             System.out.println("===== BIENVENIDO A NOVACARE APP =====");
             System.out.println("1. Iniciar sesión");
@@ -32,43 +30,11 @@ public class MenuIngresarSistema {
 
             switch (opcion) {
                 case 1:
-
-                    System.out.println(" === Iniciar sesión ===");
-
-                    System.out.println("Ingrese su correo: ");
-
-                    scanner.nextLine();
-
-
-                    correo = scanner.nextLine();
-
-
-                    System.out.println("Ingrese su contraseña: ");
-
-                    contrasena = scanner.nextLine();
-
-                    boolean checkCorreo= validarCorreo(correo);
-                    boolean checkContrasena= validarContrasena(contrasena);
-
-                    if(!checkContrasena || !checkCorreo){
-                        if(!checkContrasena && !checkCorreo){
-                            System.out.println("Contrasena y correo, no cumplen con los formatos.");
-                            break;
-                        }
-                        if(!checkCorreo){
-                            System.out.println("Correo con formato incorrecto ");
-                            break;
-                        }
-                        if(!checkContrasena){
-                            System.out.println("Contraseña inválida, solo se permmite numeros y letras");
-                            break;
-                        }
-
-
-                    }
-                    System.out.println("Iniciando sesión...");
-                    MenuPrincipal menuPrincipal = new MenuPrincipal();
-                    menuPrincipal.mostrarMenu();
+                     if(iniciarSesion.login()==true){
+                         System.out.println("Iniciando sesión...");
+                         MenuPrincipal menuPrincipal = new MenuPrincipal();
+                         menuPrincipal.mostrarMenu();
+                     }
                     break;
 
                 case 2:
@@ -97,22 +63,5 @@ public class MenuIngresarSistema {
     }
 
 
-    public boolean validarContrasena(String contrasena){
 
-        Pattern pattern = Pattern.compile("^[a-zA-Z0-9]+$");
-
-        Matcher matcher = pattern.matcher(contrasena);
-
-        return matcher.matches();
-    }
-
-    public boolean validarCorreo (String correo){
-        Pattern pattern = Pattern.compile(
-                "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
-        );
-
-        Matcher matcher = pattern.matcher(correo);
-
-        return  matcher.matches();
-    }
 }
