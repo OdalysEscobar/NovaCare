@@ -1,152 +1,148 @@
 package ec.edu.uce.novacare.interfaz;
 
-import ec.edu.uce.novacare.dominio.Agenda;
-import ec.edu.uce.novacare.dominio.Cita;
-import ec.edu.uce.novacare.dominio.Cliente;
-import ec.edu.uce.novacare.dominio.Empleado;
-import ec.edu.uce.novacare.dominio.Reporte;
-import ec.edu.uce.novacare.dominio.Servicio;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MenuGestionarReportes {
 
-    private final Scanner scanner = new Scanner(System.in);
-    private final List<Cita> todasLasCitas = new ArrayList<>();
-    private final Empleado empleado = new Empleado();
+    private Scanner scanner = new Scanner(System.in);
 
-    public MenuGestionarReportes() {
-        // Datos de muestra usando los constructores exactos del dominio
-        Cliente c1 = new Cliente("Ana", "Torres", "1234", "ana@email.com", new ArrayList<>());
-        Cliente c2 = new Cliente("Luis", "Mora", "4321", "luis@email.com", new ArrayList<>());
-        Servicio s1 = new Servicio("Corte de cabello", 30, true);
-        Servicio s2 = new Servicio("Tinte completo", 120, true);
-
-        todasLasCitas.add(new Cita("10/05/2026", null, c1, s1, "09:00"));
-        todasLasCitas.add(new Cita("10/05/2026", null, c2, s2, "11:00"));
-        todasLasCitas.add(new Cita("09/05/2026", null, c1, s2, "10:00"));
-        todasLasCitas.add(new Cita("01/05/2026", null, c2, s1, "14:00"));
-        todasLasCitas.add(new Cita("03/05/2026", null, c1, s1, "16:00"));
-    }
+    int numeroCitasPorDia = 5;
+    int numeroCitasPorSemana = 20;
+    int numeroCitasPorMes = 80;
+    int numeroCitasCanceladas = 3;
 
     public void mostrarMenu() {
+
         int opcion;
+
         do {
             System.out.println("\n===== GESTIONAR REPORTES DE CITAS =====");
-            System.out.println("1. Reporte diario");
-            System.out.println("2. Reporte semanal");
-            System.out.println("3. Reporte mensual");
-            System.out.println("4. Reporte de citas canceladas");
-            System.out.println("0. Volver al menu principal");
-            System.out.print("Seleccione una opcion: ");
+            System.out.println("1. Consultar reporte diario");
+            System.out.println("2. Consultar reporte semanal");
+            System.out.println("3. Consultar reporte mensual");
+            System.out.println("4. Consultar reporte de citas canceladas");
+            System.out.println("0. Volver al menú principal");
+
+            System.out.println("Seleccione una opción: ");
 
             while (!scanner.hasNextInt()) {
-                System.out.println("Error: solo puede ingresar numeros.");
+                System.out.println("Error: solo puede ingresar números");
                 scanner.next();
                 System.out.print("Seleccione una opcion: ");
             }
+
             opcion = scanner.nextInt();
-            scanner.nextLine();
 
             switch (opcion) {
-                case 1: generarReporteDiario(); break;
-                case 2: generarReporteSemanal(); break;
-                case 3: generarReporteMensual(); break;
-                case 4: generarReporteCanceladas(); break;
-                case 0: System.out.println("Volviendo al menu principal..."); break;
-                default: System.out.println("Opcion invalida.");
+                case 1:
+                    consultarReporteDiario();
+                    break;
+
+                case 2:
+                    consultarReporteSemanal();
+                    break;
+
+                case 3:
+                    consultarReporteMensual();
+                    break;
+
+                case 4:
+                    consultarReporteCanceladas();
+                    break;
+
+                case 0:
+                    System.out.println("Regresando al menú principal...");
+                    MenuPrincipal menuPrincipal = new MenuPrincipal();
+                    menuPrincipal.mostrarMenu();
+                    return;
+
+                default:
+                    System.out.println("Opción inválida.");
+                    break;
             }
+
         } while (opcion != 0);
     }
 
-    private void generarReporteDiario() {
-        System.out.print("Ingrese la fecha (DD/MM/AAAA): ");
-        String fecha = scanner.nextLine().trim();
-        if (fecha.isEmpty()) {
-            System.out.println("Error: la fecha es obligatoria.");
-            return;
-        }
+    // Consultar Reporte Diario
+    public void consultarReporteDiario() {
+        String fecha;
 
-        List<Cita> citasDia = new ArrayList<>();
-        for (Cita c : todasLasCitas) {
-            if (c.getFecha() != null && c.getFecha().equals(fecha)) {
-                citasDia.add(c);
-            }
-        }
-
-        Reporte reporte = new Reporte(empleado, citasDia, citasDia.size(), 0, 0, 0);
-        System.out.println("\n--- REPORTE DIARIO: " + fecha + " ---");
-        mostrarReporte(reporte);
-    }
-
-    private void generarReporteSemanal() {
-        System.out.print("Ingrese el mes de la semana (MM/AAAA): ");
-        String mesAnio = scanner.nextLine().trim();
-        if (mesAnio.isEmpty()) {
-            System.out.println("Error: el mes es obligatorio.");
-            return;
-        }
-
-        List<Cita> citasSemana = new ArrayList<>();
-        for (Cita c : todasLasCitas) {
-            // fecha formato DD/MM/AAAA — extraer MM/AAAA desde indice 3
-            if (c.getFecha() != null && c.getFecha().length() >= 7
-                    && c.getFecha().substring(3).equals(mesAnio)) {
-                citasSemana.add(c);
-            }
-        }
-
-        Reporte reporte = new Reporte(empleado, citasSemana, 0, citasSemana.size(), 0, 0);
-        System.out.println("\n--- REPORTE SEMANAL: " + mesAnio + " ---");
-        mostrarReporte(reporte);
-    }
-
-    private void generarReporteMensual() {
-        System.out.print("Ingrese el mes (MM/AAAA): ");
-        String mesAnio = scanner.nextLine().trim();
-        if (mesAnio.isEmpty()) {
-            System.out.println("Error: el mes es obligatorio.");
-            return;
-        }
-
-        List<Cita> citasMes = new ArrayList<>();
-        for (Cita c : todasLasCitas) {
-            // fecha formato DD/MM/AAAA — extraer MM/AAAA desde indice 3
-            if (c.getFecha() != null && c.getFecha().length() >= 7
-                    && c.getFecha().substring(3).equals(mesAnio)) {
-                citasMes.add(c);
-            }
-        }
-
-
-        Reporte reporte = new Reporte(empleado, citasMes, 0, 0, citasMes.size(), 0);
-        System.out.println("\n--- REPORTE MENSUAL: " + mesAnio + " ---");
-        mostrarReporte(reporte);
-    }
-
-    private void generarReporteCanceladas() {
-        // En este modelo no hay campo "estado" en Cita,
-        // se muestra el reporte con el contador numeroCitasCancelas
-        System.out.print("Ingrese numero de citas canceladas a registrar: ");
-        while (!scanner.hasNextInt()) { scanner.next(); }
-        int canceladas = scanner.nextInt();
         scanner.nextLine();
 
-        Reporte reporte = new Reporte(empleado, new ArrayList<>(), 0, 0, 0, canceladas);
-        System.out.println("\n--- REPORTE DE CITAS CANCELADAS ---");
-        System.out.println(reporte);
+        do {
+            System.out.println("Ingrese la fecha del reporte (DD/MM/AAAA): ");
+            fecha = scanner.nextLine();
+
+            if (!validarFecha(fecha)) {
+                System.out.println("Error: formato de fecha inválido. Use DD/MM/AAAA");
+            }
+        } while (!validarFecha(fecha));
+
+        System.out.println("\n===== REPORTE DIARIO =====");
+        System.out.println("Fecha: " + fecha);
+        System.out.println("Total de citas del día: " + numeroCitasPorDia);
     }
 
-    private void mostrarReporte(Reporte reporte) {
-        if (reporte.getCitas() == null || reporte.getCitas().isEmpty()) {
-            System.out.println("No hay datos disponibles para este reporte.");
-            return;
-        }
-        for (int i = 0; i < reporte.getCitas().size(); i++) {
-            System.out.println((i + 1) + ". " + reporte.getCitas().get(i));
-        }
-        System.out.println("-----------------------------------");
-        System.out.println(reporte);
+    // Consultar Reporte Semanal
+    public void consultarReporteSemanal() {
+        String semana;
+
+        scanner.nextLine();
+
+        do {
+            System.out.println("Ingrese la semana del reporte (DD/MM/AAAA): ");
+            semana = scanner.nextLine();
+
+            if (!validarFecha(semana)) {
+                System.out.println("Error: formato de fecha inválido. Use DD/MM/AAAA");
+            }
+        } while (!validarFecha(semana));
+
+        System.out.println("\n===== REPORTE SEMANAL =====");
+        System.out.println("Semana desde: " + semana);
+        System.out.println("Total de citas de la semana: " + numeroCitasPorSemana);
+    }
+
+    // Consultar Reporte Mensual
+    public void consultarReporteMensual() {
+        String mes;
+
+        scanner.nextLine();
+
+        do {
+            System.out.println("Ingrese el mes del reporte (MM/AAAA): ");
+            mes = scanner.nextLine();
+
+            if (!validarMes(mes)) {
+                System.out.println("Error: formato de mes inválido. Use MM/AAAA");
+            }
+        } while (!validarMes(mes));
+
+        System.out.println("\n===== REPORTE MENSUAL =====");
+        System.out.println("Mes: " + mes);
+        System.out.println("Total de citas del mes: " + numeroCitasPorMes);
+    }
+
+    // Consultar Reporte de Citas Canceladas
+    public void consultarReporteCanceladas() {
+        System.out.println("\n===== REPORTE DE CITAS CANCELADAS =====");
+        System.out.println("Total de citas canceladas: " + numeroCitasCanceladas);
+    }
+
+    // Validar fecha DD/MM/AAAA
+    public boolean validarFecha(String fecha) {
+        Pattern pattern = Pattern.compile("^[0-9]{2}/[0-9]{2}/[0-9]{4}$");
+        Matcher matcher = pattern.matcher(fecha);
+        return matcher.matches();
+    }
+
+    // Validar mes MM/AAAA
+    public boolean validarMes(String mes) {
+        Pattern pattern = Pattern.compile("^[0-9]{2}/[0-9]{4}$");
+        Matcher matcher = pattern.matcher(mes);
+        return matcher.matches();
     }
 }
