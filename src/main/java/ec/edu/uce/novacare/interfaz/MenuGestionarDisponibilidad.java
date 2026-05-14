@@ -19,7 +19,7 @@ public class MenuGestionarDisponibilidad {
         int opcion;
 
         do {
-            System.out.println("===== GESTIONAR DISPONIBILIDAD DE CITAS =====");
+            System.out.println("\t===== GESTIONAR DISPONIBILIDAD DE CITAS =====");
             System.out.println("1. Crear disponibilidad");
             System.out.println("2. Actualizar disponibilidad");
             System.out.println("3. Consultar disponibilidad");
@@ -35,6 +35,7 @@ public class MenuGestionarDisponibilidad {
             }
 
             opcion = scanner.nextInt();
+            scanner.nextLine();
 
             switch (opcion) {
                 case 1:
@@ -168,5 +169,5 @@ public class MenuGestionarDisponibilidad {
         Matcher matcher = pattern.matcher(hora);
         return matcher.matches();
     }
-
+//
 }
