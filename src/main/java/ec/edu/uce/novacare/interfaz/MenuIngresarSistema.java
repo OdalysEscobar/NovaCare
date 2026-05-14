@@ -40,9 +40,6 @@ public class MenuIngresarSistema {
 
                 case 2:
 
-                    System.out.println("Registrando usuario...");
-
-
                     registrarUsuario.guardarUsuario();
                     MenuPrincipal menuprincipal = new MenuPrincipal();
                     menuprincipal.mostrarMenu();
