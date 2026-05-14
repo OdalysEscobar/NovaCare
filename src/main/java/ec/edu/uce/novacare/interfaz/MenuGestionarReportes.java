@@ -119,6 +119,7 @@ public class MenuGestionarReportes {
             }
         }
 
+
         Reporte reporte = new Reporte(empleado, citasMes, 0, 0, citasMes.size(), 0);
         System.out.println("\n--- REPORTE MENSUAL: " + mesAnio + " ---");
         mostrarReporte(reporte);

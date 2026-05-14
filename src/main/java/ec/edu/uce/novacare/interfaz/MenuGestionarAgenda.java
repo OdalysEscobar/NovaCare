@@ -40,6 +40,7 @@ public class MenuGestionarAgenda {
             System.out.println("0. Volver al menu principal");
             System.out.print("Seleccione una opcion: ");
 
+
             while (!scanner.hasNextInt()) {
                 System.out.println("Error: solo puede ingresar numeros.");
                 scanner.next();
