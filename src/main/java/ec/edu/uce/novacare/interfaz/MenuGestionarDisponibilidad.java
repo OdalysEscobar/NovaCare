@@ -35,6 +35,7 @@ public class MenuGestionarDisponibilidad {
             }
 
             opcion = scanner.nextInt();
+            scanner.nextLine();
 
             switch (opcion) {
                 case 1:
@@ -168,5 +169,5 @@ public class MenuGestionarDisponibilidad {
         Matcher matcher = pattern.matcher(hora);
         return matcher.matches();
     }
-
+//
 }

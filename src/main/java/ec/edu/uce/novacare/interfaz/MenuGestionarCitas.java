@@ -1,6 +1,5 @@
 package ec.edu.uce.novacare.interfaz;
 
-import jdk.swing.interop.SwingInterOpUtils;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
