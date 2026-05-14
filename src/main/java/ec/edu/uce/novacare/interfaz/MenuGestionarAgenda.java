@@ -19,6 +19,7 @@ public class MenuGestionarAgenda {
 
             System.out.println("Seleccione una opción: ");
 
+
             while (!scanner.hasNextInt()) {
                 System.out.println("Error: solo puede ingresar números");
                 scanner.next();
