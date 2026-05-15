@@ -34,7 +34,7 @@ public class testCita {
         // PRUEBA FECHA
         System.out.print("Prueba fecha: ");
         if ("15/08/2026".equals(cita.getFecha())) {
-            System.out.println("PASÓ ✅");
+            System.out.println("PASÓ ✔");
         } else {
             System.out.println("FALLÓ ❌");
         }
@@ -42,7 +42,7 @@ public class testCita {
         // PRUEBA HORA
         System.out.print("Prueba hora: ");
         if ("14:30".equals(cita.getHora())) {
-            System.out.println("PASÓ ✅");
+            System.out.println("PASÓ ✔");
         } else {
             System.out.println("FALLÓ ❌");
         }
@@ -50,7 +50,7 @@ public class testCita {
         // PRUEBA SERVICIO
         System.out.print("Prueba servicio: ");
         if ("Limpieza Facial".equals(cita.getServicio().getTipoServicio())) {
-            System.out.println("PASÓ ✅");
+            System.out.println("PASÓ ✔");
         } else {
             System.out.println("FALLÓ ❌");
         }
