@@ -1,8 +1,7 @@
 package ec.edu.uce.novacare.interfaz;
 
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 import ec.edu.uce.novacare.util.Validaciones;
 
 

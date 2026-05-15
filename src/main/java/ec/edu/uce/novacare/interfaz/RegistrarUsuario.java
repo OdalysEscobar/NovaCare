@@ -3,8 +3,6 @@ package ec.edu.uce.novacare.interfaz;
 import ec.edu.uce.novacare.util.Validaciones;
 
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class RegistrarUsuario {
     Scanner scanner=new Scanner (System.in);
