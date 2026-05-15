@@ -1,8 +1,8 @@
 package ec.edu.uce.novacare.interfaz;
 
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import ec.edu.uce.novacare.util.Validaciones;
 
 
 public class MenuGestionarDisponibilidad {
@@ -124,27 +124,27 @@ public class MenuGestionarDisponibilidad {
         do {
             System.out.print("Ingrese fecha (AAAA-MM-DD): ");
             fecha = scanner.nextLine();
-            if (!validarFecha(fecha)) {
+            if (!Validaciones.validarFecha(fecha)) {
                 System.out.println("Error: Formato de fecha inválido.");
             }
-        } while (!validarFecha(fecha));
+        } while (!Validaciones.validarFecha(fecha));
 
         // Validar Horas (HH:MM)
         do {
             System.out.print("Ingrese hora de inicio (HH:MM): ");
             horaInicio = scanner.nextLine();
-            if (!validarHora(horaInicio)) {
+            if (!Validaciones.validarHora(horaInicio)) {
                 System.out.println("Error: Formato de hora inválido.");
             }
-        } while (!validarHora(horaInicio));
+        } while (!Validaciones.validarHora(horaInicio));
 
         do {
             System.out.print("Ingrese hora de fin (HH:MM): ");
             horaFin = scanner.nextLine();
-            if (!validarHora(horaFin)) {
+            if (!Validaciones.validarHora(horaFin)) {
                 System.out.println("Error: Formato de hora inválido.");
             }
-        } while (!validarHora(horaFin));
+        } while (!Validaciones.validarHora(horaFin));
 
         // Estado (Disponible/Ocupado)
         do {
@@ -156,18 +156,6 @@ public class MenuGestionarDisponibilidad {
         } while (estado.trim().isEmpty());
     }
 
-    public boolean validarFecha(String fecha) {
-        //YYYY-MM-DD
-        Pattern pattern = Pattern.compile("^\\d{4}-\\d{2}-\\d{2}$");
-        Matcher matcher = pattern.matcher(fecha);
-        return matcher.matches();
-    }
 
-    public boolean validarHora(String hora) {
-        // (00:00 a 23:59)
-        Pattern pattern = Pattern.compile("^([01]?[0-9]|2[0-3]):[0-5][0-9]$");
-        Matcher matcher = pattern.matcher(hora);
-        return matcher.matches();
-    }
-//
+
 }

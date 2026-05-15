@@ -1,8 +1,8 @@
 package ec.edu.uce.novacare.interfaz;
 
+import ec.edu.uce.novacare.util.Validaciones;
+
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class RegistrarUsuario {
     Scanner scanner=new Scanner (System.in);
@@ -22,7 +22,7 @@ public class RegistrarUsuario {
         do {
             System.out.println("Ingresa tu nombre: ");
             nombre = scanner.nextLine();
-            checkNombre = validarLetras(nombre);
+            checkNombre = Validaciones.validarLetras(nombre);
             if (checkNombre == false) {
                 System.out.println("El nombre no cumple con los parámetros. Solo se permiten letras.");
             }
@@ -31,7 +31,7 @@ public class RegistrarUsuario {
         do{
             System.out.println("Ingresa tu apellido: ");
             apellido = scanner.nextLine();
-            checkApellido = validarLetras(apellido);
+            checkApellido = Validaciones.validarLetras(apellido);
             if(checkApellido ==false){
                 System.out.println("El apellido no cumple con los parametros");
             }
@@ -40,7 +40,7 @@ public class RegistrarUsuario {
         do{
             System.out.println("Ingresa tu correo: ");
             correo = scanner.nextLine();
-            checkCorreo=validarCorreo(correo);
+            checkCorreo= Validaciones.validarCorreo(correo);
             if (checkCorreo==false){
                 System.out.println("Formato de correo inválido.");
             }
@@ -49,7 +49,7 @@ public class RegistrarUsuario {
         do{
             System.out.println("Ingresa tu contraseña: ");
             contrasena = scanner.nextLine();
-            checkContrasena=validarContrasena(contrasena);
+            checkContrasena=Validaciones.validarContrasena(contrasena);
             if(checkContrasena==false){
                 System.out.println("La contraseña solo puede tener números y letras");
             }
@@ -59,22 +59,5 @@ public class RegistrarUsuario {
 
     }
 
-
-    public boolean validarLetras(String info){
-        Pattern pattern = Pattern.compile("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$");
-        Matcher matcher = pattern.matcher(info);
-        return matcher.matches();
-    }
-    public boolean validarCorreo (String correo){
-        Pattern pattern = Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
-        Matcher matcher= pattern.matcher(correo);
-        return matcher.matches();
-    }
-
-    public boolean validarContrasena (String numeros){
-        Pattern pattern = Pattern.compile("^[a-zA-Z0-9]+$");
-        Matcher matcher = pattern.matcher(numeros);
-        return matcher.matches();
-    }
 
 }

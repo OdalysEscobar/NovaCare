@@ -1,8 +1,8 @@
 package ec.edu.uce.novacare.interfaz;
 
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import ec.edu.uce.novacare.util.Validaciones;
 
 public class IniciarSesion {
     Scanner scanner = new Scanner(System.in);
@@ -19,8 +19,8 @@ public class IniciarSesion {
         correo = scanner.nextLine();
         System.out.println("Ingrese su contraseña: ");
         contrasena = scanner.nextLine();
-        boolean checkCorreo= validarCorreo(correo);
-        boolean checkContrasena= validarContrasena(contrasena);
+        boolean checkCorreo= Validaciones.validarCorreo(correo);
+        boolean checkContrasena= Validaciones.validarContrasena(contrasena);
 
         if(checkCorreo==false|| checkContrasena==false){
             if (checkContrasena==false && checkCorreo==false) {
@@ -40,24 +40,5 @@ public class IniciarSesion {
         }
 
         return true;
-    }
-
-    public boolean validarContrasena(String contrasena){
-
-        Pattern pattern = Pattern.compile("^[a-zA-Z0-9]+$");
-
-        Matcher matcher = pattern.matcher(contrasena);
-
-        return matcher.matches();
-    }
-
-    public boolean validarCorreo (String correo){
-        Pattern pattern = Pattern.compile(
-                "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
-        );
-
-        Matcher matcher = pattern.matcher(correo);
-
-        return  matcher.matches();
     }
 }

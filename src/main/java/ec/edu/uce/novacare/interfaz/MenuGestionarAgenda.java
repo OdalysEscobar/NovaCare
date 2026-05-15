@@ -12,7 +12,6 @@ public class MenuGestionarAgenda {
     String fecha = "10/05/2026";
     String hora = "09:00";
     String servicio = "Corte de cabello";
-    String estado = "Pendiente";
 
     public void mostrarMenu() {
 
@@ -69,7 +68,6 @@ public class MenuGestionarAgenda {
         System.out.println("Fecha: " + fecha);
         System.out.println("Hora: " + hora);
         System.out.println("Servicio: " + servicio);
-        System.out.println("Estado: " + estado);
     }
 
     // Crear Cita en Agenda
@@ -78,7 +76,6 @@ public class MenuGestionarAgenda {
         String nuevaFecha;
         String nuevaHora;
         String nuevoServicio;
-        String nuevoEstado;
 
         scanner.nextLine();
 
@@ -122,21 +119,10 @@ public class MenuGestionarAgenda {
             }
         } while (!validarTexto(nuevoServicio));
 
-        // Estado
-        do {
-            System.out.println("Ingrese el estado (Pendiente/Confirmada/Reprogramada): ");
-            nuevoEstado = scanner.nextLine();
-
-            if (!validarEstado(nuevoEstado)) {
-                System.out.println("Error: ingrese Pendiente, Confirmada o Reprogramada.");
-            }
-        } while (!validarEstado(nuevoEstado));
-
         nombreCliente = nuevoCliente;
         fecha = nuevaFecha;
         hora = nuevaHora;
         servicio = nuevoServicio;
-        estado = nuevoEstado;
 
         System.out.println("\nCita creada en agenda correctamente.");
     }
@@ -146,7 +132,6 @@ public class MenuGestionarAgenda {
         String nuevaFecha;
         String nuevaHora;
         String nuevoServicio;
-        String nuevoEstado;
 
         scanner.nextLine();
 
@@ -180,20 +165,9 @@ public class MenuGestionarAgenda {
             }
         } while (!validarTexto(nuevoServicio));
 
-        // Estado
-        do {
-            System.out.println("Ingrese nuevo estado (Pendiente/Confirmada/Reprogramada): ");
-            nuevoEstado = scanner.nextLine();
-
-            if (!validarEstado(nuevoEstado)) {
-                System.out.println("Error: ingrese Pendiente, Confirmada o Reprogramada.");
-            }
-        } while (!validarEstado(nuevoEstado));
-
         fecha = nuevaFecha;
         hora = nuevaHora;
         servicio = nuevoServicio;
-        estado = nuevoEstado;
 
         System.out.println("\nCita en agenda actualizada correctamente.");
     }
@@ -217,12 +191,5 @@ public class MenuGestionarAgenda {
         Pattern pattern = Pattern.compile("^([01]?[0-9]|2[0-3]):[0-5][0-9]$");
         Matcher matcher = pattern.matcher(hora);
         return matcher.matches();
-    }
-
-    // Validar estado de cita
-    public boolean validarEstado(String estado) {
-        return estado.equalsIgnoreCase("Pendiente") ||
-                estado.equalsIgnoreCase("Confirmada") ||
-                estado.equalsIgnoreCase("Reprogramada");
     }
 }

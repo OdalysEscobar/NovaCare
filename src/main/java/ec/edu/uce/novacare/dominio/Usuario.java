@@ -12,7 +12,7 @@ public class Usuario {
     }
 
     public Usuario(String nombre, String apellido, String contrasena, String correo) {
-        this.contrasena = contrasena;
+        setContrasena(contrasena);
         setNombre(nombre);
         setApellido(apellido);
         setCorreo(correo);
@@ -38,8 +38,6 @@ public class Usuario {
         Matcher m = p.matcher(nombre);
         if (m.matches()) {
             this.nombre = nombre;
-        } else {
-            System.out.println("Error: Nombre no válido.");
         }
     }
 
@@ -53,8 +51,6 @@ public class Usuario {
         Matcher m = p.matcher(correo);
         if (m.matches()) {
             this.correo = correo;
-        } else {
-            System.out.println("Error: Correo con formato incorrecto.");
         }
     }
 
@@ -68,8 +64,6 @@ public class Usuario {
         Matcher m = p.matcher(apellido);
         if (m.matches()) {
             this.apellido = apellido;
-        } else {
-            System.out.println("Error: Apellido no válido.");
         }
     }
 
@@ -78,7 +72,6 @@ public class Usuario {
     }
 
     public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
     }
 
 }

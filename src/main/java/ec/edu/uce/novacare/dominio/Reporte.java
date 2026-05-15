@@ -59,8 +59,6 @@ public class Reporte {
     public void setNumeroCitasPorDia(int numeroCitasPorDia) {
         if (numeroCitasPorDia >= 0) {
             this.numeroCitasPorDia = numeroCitasPorDia;
-        } else {
-            System.out.println("Error: El número de citas no puede ser negativo.");
         }
     }
 

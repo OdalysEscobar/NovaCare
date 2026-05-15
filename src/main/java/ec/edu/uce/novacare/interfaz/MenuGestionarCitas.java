@@ -1,9 +1,8 @@
 package ec.edu.uce.novacare.interfaz;
 
-
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import ec.edu.uce.novacare.util.Validaciones;
 
 public class MenuGestionarCitas {
 
@@ -83,40 +82,40 @@ public class MenuGestionarCitas {
             System.out.println("Ingrese su nombre de usuario");
             nombreUsuario = scanner.nextLine();
 
-            if (!validarNombre(nombreUsuario)){
+            if (!Validaciones.validarLetras(nombreUsuario)){
                 System.out.println("Error: solo letras.");
             }
-        } while (!validarNombre(nombreUsuario));
+        } while (!Validaciones.validarLetras(nombreUsuario));
 
         // tipoServicio
         do{
             System.out.println("Ingrese el servicio que desea: ");
             tipoServicio = scanner.nextLine();
 
-            if (!validarNombre(tipoServicio)){
+            if (!Validaciones.validarLetras(tipoServicio)){
                 System.out.println("Error: solo letras.");
             }
-        } while (!validarNombre(tipoServicio));
+        } while (!Validaciones.validarLetras(tipoServicio));
 
         //fecha
         do{
-            System.out.println("Ingrese la fecha (dd/mm/aaaa)");
+            System.out.println("Ingrese la fecha (AAAA-MM-DD)");
             fecha = scanner.next();
 
-            if (!validarFecha(fecha)){
+            if (!Validaciones.validarFecha(fecha)){
                 System.out.println("Fecha inválida.");
             }
-        } while (!validarFecha(fecha));
+        } while (!Validaciones.validarFecha(fecha));
 
         //hora
         do{
-            System.out.println("Ingrese la hora (hh:mm): ");
+            System.out.println("Ingrese la hora (HH:MM): ");
             hora = scanner.next();
 
-            if (!validarHora(hora)){
+            if (!Validaciones.validarHora(hora)){
                 System.out.println("Hora inválida.");
             }
-        } while(!validarHora(hora));
+        } while(!Validaciones.validarHora(hora));
 
         System.out.println("Cita creada correctamente.");
 
@@ -188,30 +187,4 @@ public class MenuGestionarCitas {
             }
     }
 
-    // Validar nombre
-    public boolean validarNombre(String nombre){
-        Pattern pattern = Pattern.compile("[a-zA-ZáéíóúÁÉÍÓÚ ]+");
-
-        Matcher matcher = pattern.matcher(nombre);
-
-        return matcher.matches();
-    }
-
-    //Validar Fecha
-    public boolean validarFecha(String fecha){
-        Pattern pattern = Pattern.compile("\\d{2}/\\d{2}/\\d{4}");
-
-        Matcher matcher = pattern.matcher(fecha);
-
-        return matcher.matches();
-    }
-
-    //Validar Hora
-    public boolean validarHora(String hora){
-        Pattern pattern = Pattern.compile("\\d{2}:\\d{2}");
-
-        Matcher matcher = pattern.matcher(hora);
-
-        return matcher.matches();
-    }
 }
