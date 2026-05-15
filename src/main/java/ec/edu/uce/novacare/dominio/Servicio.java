@@ -37,8 +37,6 @@ public class Servicio {
 
         if (m.matches()) {
             this.tipoServicio = tipoServicio;
-        } else {
-            System.out.println("Error: El tipo de servicio '" + tipoServicio + "' no es válido.");
         }
     }
 
@@ -49,8 +47,6 @@ public class Servicio {
     public void setDuracion(int duracion) {
         if (duracion > 0) {
             this.duracion = duracion;
-        } else {
-            System.out.println("Error: La duración debe ser mayor a 0.");
         }
     }
 

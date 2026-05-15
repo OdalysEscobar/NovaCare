@@ -11,7 +11,7 @@ public class MenuGestionarServicios {
     String nombreServicio="Corte de cabello";
     String descripcion="Corte Butterfly ";
     String duracion="45";
-    String precio="7.50";
+
 
 
     public void mostrarMenu() {
@@ -83,7 +83,6 @@ public class MenuGestionarServicios {
             System.out.println("\t\n===== DETALLES DEL SERVICIO =====");
             System.out.println("Nombre: " + nombreServicio);
             System.out.println("Descripción: " + descripcion);
-            System.out.println("Precio: $" + precio);
             System.out.println("Duración: " + duracion + " min");
         }
     }
@@ -112,7 +111,6 @@ public class MenuGestionarServicios {
         if (confirmacion.equalsIgnoreCase("si")) {
             nombreServicio = "";
             descripcion = "";
-            precio = "";
             duracion = "";
             System.out.println("Servicio eliminado correctamente.");
         } else {

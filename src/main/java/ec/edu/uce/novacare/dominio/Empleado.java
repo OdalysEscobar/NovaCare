@@ -26,8 +26,6 @@ public class Empleado extends Usuario{
 
         if (m.matches()) {
             this.especialidad = especialidad;
-        } else {
-            System.out.println("Error: La especialidad '" + especialidad + "' no es válida.");
         }
     }
 

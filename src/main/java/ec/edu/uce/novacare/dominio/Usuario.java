@@ -38,8 +38,6 @@ public class Usuario {
         Matcher m = p.matcher(nombre);
         if (m.matches()) {
             this.nombre = nombre;
-        } else {
-            System.out.println("Error: Nombre no válido.");
         }
     }
 
@@ -53,8 +51,6 @@ public class Usuario {
         Matcher m = p.matcher(correo);
         if (m.matches()) {
             this.correo = correo;
-        } else {
-            System.out.println("Error: Correo con formato incorrecto.");
         }
     }
 
@@ -68,8 +64,6 @@ public class Usuario {
         Matcher m = p.matcher(apellido);
         if (m.matches()) {
             this.apellido = apellido;
-        } else {
-            System.out.println("Error: Apellido no válido.");
         }
     }
 

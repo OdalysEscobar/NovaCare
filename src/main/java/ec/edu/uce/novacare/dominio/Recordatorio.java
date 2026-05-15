@@ -34,8 +34,6 @@ public class Recordatorio {
 
         if (m.matches()) {
             this.correo = correo;
-        } else {
-            System.out.println("Error: El formato del correo '" + correo + "' no es válido.");
         }
     }
 
