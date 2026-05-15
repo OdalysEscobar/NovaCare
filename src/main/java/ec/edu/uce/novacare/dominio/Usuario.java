@@ -38,8 +38,6 @@ public class Usuario {
         Matcher m = p.matcher(nombre);
         if (m.matches()) {
             this.nombre = nombre;
-        } else {
-
         }
     }
 
