@@ -1,6 +1,6 @@
 package ec.edu.uce.novacare.dominio;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import ec.edu.uce.novacare.util.Validaciones;
+
 public class Usuario {
 
     private String nombre;
@@ -33,10 +33,8 @@ public class Usuario {
     }
 
     public void setNombre(String nombre) {
-        String regex = "^[a-zA-Z\\s]+$";
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(nombre);
-        if (m.matches()) {
+
+        if (Validaciones.validarLetras(nombre)) {
             this.nombre = nombre;
         }
     }
@@ -46,10 +44,8 @@ public class Usuario {
     }
 
     public void setCorreo(String correo) {
-        String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(correo);
-        if (m.matches()) {
+
+        if (Validaciones.validarCorreo(correo)) {
             this.correo = correo;
         }
     }
@@ -59,10 +55,7 @@ public class Usuario {
     }
 
     public void setApellido(String apellido) {
-        String regex = "^[a-zA-Z\\s]+$";
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(apellido);
-        if (m.matches()) {
+        if (Validaciones.validarLetras(apellido)) {
             this.apellido = apellido;
         }
     }
@@ -72,6 +65,9 @@ public class Usuario {
     }
 
     public void setContrasena(String contrasena) {
+        if(Validaciones.validarContrasena(contrasena)){
+            this.contrasena=contrasena;
+        }
     }
 
 }
