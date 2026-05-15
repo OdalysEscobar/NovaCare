@@ -3,6 +3,7 @@ package ec.edu.uce.novacare.interfaz;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import ec.edu.uce.novacare.util.Validaciones;
 
 public class MenuGestionarReportes {
 
@@ -76,10 +77,10 @@ public class MenuGestionarReportes {
             System.out.println("Ingrese la fecha del reporte (DD/MM/AAAA): ");
             fecha = scanner.nextLine();
 
-            if (!validarFecha(fecha)) {
+            if (!Validaciones.validarFecha(fecha)) {
                 System.out.println("Error: formato de fecha inválido. Use DD/MM/AAAA");
             }
-        } while (!validarFecha(fecha));
+        } while (!Validaciones.validarFecha(fecha));
 
         System.out.println("\n===== REPORTE DIARIO =====");
         System.out.println("Fecha: " + fecha);
@@ -96,10 +97,10 @@ public class MenuGestionarReportes {
             System.out.println("Ingrese la semana del reporte (DD/MM/AAAA): ");
             semana = scanner.nextLine();
 
-            if (!validarFecha(semana)) {
+            if (!Validaciones.validarFecha(semana)) {
                 System.out.println("Error: formato de fecha inválido. Use DD/MM/AAAA");
             }
-        } while (!validarFecha(semana));
+        } while (!Validaciones.validarFecha(semana));
 
         System.out.println("\n===== REPORTE SEMANAL =====");
         System.out.println("Semana desde: " + semana);
@@ -132,12 +133,6 @@ public class MenuGestionarReportes {
         System.out.println("Total de citas canceladas: " + numeroCitasCanceladas);
     }
 
-    // Validar fecha DD/MM/AAAA
-    public boolean validarFecha(String fecha) {
-        Pattern pattern = Pattern.compile("^[0-9]{2}/[0-9]{2}/[0-9]{4}$");
-        Matcher matcher = pattern.matcher(fecha);
-        return matcher.matches();
-    }
 
     // Validar mes MM/AAAA
     public boolean validarMes(String mes) {

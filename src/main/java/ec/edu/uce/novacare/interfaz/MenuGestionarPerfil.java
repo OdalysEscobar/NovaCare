@@ -3,6 +3,7 @@ package ec.edu.uce.novacare.interfaz;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import ec.edu.uce.novacare.util.Validaciones;
 
 public class MenuGestionarPerfil {
 
@@ -92,43 +93,43 @@ public class MenuGestionarPerfil {
 
             nuevoNombre = scanner.nextLine();
 
-            if (!validarNombre(nuevoNombre)){
+            if (!Validaciones.validarLetras(nuevoNombre)){
                 System.out.println("Error: solo letras.");
             }
 
-        } while(!validarNombre(nuevoNombre));
+        } while(!Validaciones.validarLetras(nuevoNombre));
 
         // Apellido
         do{
             System.out.println("\nIngrese nuevo apellido: ");
             nuevoApellido = scanner.nextLine();
 
-            if (!validarNombre(nuevoApellido)){
+            if (!Validaciones.validarLetras(nuevoApellido)){
                 System.out.println("Error: solo letras.");
             }
-        } while(!validarApellido(nuevoApellido));
+        } while(!Validaciones.validarLetras(nuevoApellido));
 
         // Correo
         do{
             System.out.println("Ingrese nuevo correo: ");
             nuevoCorreo = scanner.nextLine();
 
-            if (!validarCorreo(nuevoCorreo)){
+            if (!Validaciones.validarCorreo(nuevoCorreo)){
                 System.out.println("Correo inválido.");
             }
 
-        } while(!validarCorreo(nuevoCorreo));
+        } while(!Validaciones.validarCorreo(nuevoCorreo));
 
         // Contraseña
         do{
             System.out.println("Ingrese nueva contraseña: ");
             nuevaContrasena = scanner.nextLine();
 
-            if(!validarContrasena(nuevaContrasena)){
+            if(!Validaciones.validarContrasena(nuevaContrasena)){
                 System.out.println("Contraseña inválida, solo letras y números");
             }
 
-        } while(!validarContrasena(nuevaContrasena));
+        } while(!Validaciones.validarContrasena(nuevaContrasena));
 
         nombre = nuevoNombre;
         apellido = nuevoApellido;
@@ -161,43 +162,6 @@ public class MenuGestionarPerfil {
         } else{
             System.out.println("Operación cancelada");
         }
-    }
-
-    // Validar Nombre
-    public boolean validarNombre(String nombre) {
-        Pattern pattern = Pattern.compile("[a-zA-ZáéíóúÁÉÍÓÚ]+");
-
-        Matcher matcher = pattern.matcher(nombre);
-
-        return matcher.matches();
-    }
-
-    // Validar Apellido
-    public boolean validarApellido(String apellido) {
-        Pattern pattern = Pattern.compile("[a-zA-ZáéíóúÁÉÍÓÚ]+");
-
-        Matcher matcher = pattern.matcher(apellido);
-
-        return matcher.matches();
-    }
-
-
-    // Validar Correo
-    public boolean validarCorreo(String correo){
-        Pattern pattern = Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
-
-        Matcher matcher = pattern.matcher(correo);
-
-        return matcher.matches();
-    }
-
-    // Validar Contraseña
-    public boolean validarContrasena(String contrasena){
-        Pattern pattern = Pattern.compile("^[a-zA-Z0-9]+$");
-
-        Matcher matcher = pattern.matcher(contrasena);
-
-        return matcher.matches();
     }
 }
 
