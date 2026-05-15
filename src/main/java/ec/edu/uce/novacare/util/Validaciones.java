@@ -23,4 +23,18 @@ public class Validaciones {
         return matcher.matches();
     }
 
+    public static boolean validarFecha(String fecha) {
+        //YYYY-MM-DD
+        Pattern pattern = Pattern.compile("^\\d{4}-\\d{2}-\\d{2}$");
+        Matcher matcher = pattern.matcher(fecha);
+        return matcher.matches();
+    }
+
+    public static boolean validarHora(String hora) {
+        // (00:00 a 23:59)
+        Pattern pattern = Pattern.compile("^([01]?[0-9]|2[0-3]):[0-5][0-9]$");
+        Matcher matcher = pattern.matcher(hora);
+        return matcher.matches();
+    }
+
 }
