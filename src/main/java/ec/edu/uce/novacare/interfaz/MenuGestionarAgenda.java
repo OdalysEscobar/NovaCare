@@ -10,7 +10,7 @@ public class MenuGestionarAgenda {
     private Scanner scanner = new Scanner(System.in);
 
     String nombreCliente = "Ana Torres";
-    String fecha = "10/05/2026";
+    String fecha = "2026-05-10";
     String hora = "09:00";
     String servicio = "Corte de cabello";
     String estado = "Pendiente";
@@ -95,7 +95,7 @@ public class MenuGestionarAgenda {
 
         // Fecha
         do {
-            System.out.println("Ingrese la fecha (AAAA/MM/DD): ");
+            System.out.println("Ingrese la fecha (AAAA-MM-DD): ");
             nuevaFecha = scanner.nextLine();
 
             if (!Validaciones.validarFecha(nuevaFecha)) {
@@ -153,11 +153,11 @@ public class MenuGestionarAgenda {
 
         // Fecha
         do {
-            System.out.println("Ingrese nueva fecha (AAAA/MM/DD): ");
+            System.out.println("Ingrese nueva fecha (AAAA-MM-DD): ");
             nuevaFecha = scanner.nextLine();
 
             if (!Validaciones.validarFecha(nuevaFecha)) {
-                System.out.println("Error: formato de fecha inválido. Use AAAA/MM/DD");
+                System.out.println("Error: formato de fecha inválido. Use AAAA-MM-DD");
             }
         } while (!Validaciones.validarFecha(nuevaFecha));
 
