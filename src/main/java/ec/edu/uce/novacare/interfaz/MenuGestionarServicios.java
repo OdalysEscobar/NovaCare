@@ -10,7 +10,7 @@ public class MenuGestionarServicios {
     String nombreServicio="Corte de cabello";
     String descripcion="Corte Butterfly ";
     String duracion="45";
-    String precio="7.50";
+
 
 
     public void mostrarMenu() {
@@ -82,7 +82,6 @@ public class MenuGestionarServicios {
             System.out.println("\t\n===== DETALLES DEL SERVICIO =====");
             System.out.println("Nombre: " + nombreServicio);
             System.out.println("Descripción: " + descripcion);
-            System.out.println("Precio: $" + precio);
             System.out.println("Duración: " + duracion + " min");
         }
     }
@@ -111,7 +110,6 @@ public class MenuGestionarServicios {
         if (confirmacion.equalsIgnoreCase("si")) {
             nombreServicio = "";
             descripcion = "";
-            precio = "";
             duracion = "";
             System.out.println("Servicio eliminado correctamente.");
         } else {
@@ -137,15 +135,6 @@ public class MenuGestionarServicios {
                 System.out.println("Error: La descripción no puede estar vacía.");
             }
         } while (descripcion.trim().isEmpty());
-
-        // Validar Precio (Decimal)
-        do {
-            System.out.print("Ingrese precio (ej: 15.50): ");
-            precio = scanner.nextLine();
-            if (!validarPrecio(precio)) {
-                System.out.println("Error: Formato de precio inválido.");
-            }
-        } while (!validarPrecio(precio));
 
         // Validar Duración (Números enteros)
         do {
