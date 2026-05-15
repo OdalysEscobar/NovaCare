@@ -12,7 +12,7 @@ public class Usuario {
     }
 
     public Usuario(String nombre, String apellido, String contrasena, String correo) {
-        this.contrasena = contrasena;
+        setContrasena(contrasena);
         setNombre(nombre);
         setApellido(apellido);
         setCorreo(correo);
@@ -78,7 +78,6 @@ public class Usuario {
     }
 
     public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
     }
 
 }

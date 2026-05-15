@@ -3,6 +3,7 @@ package ec.edu.uce.novacare.interfaz;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import ec.edu.uce.novacare.util.Validaciones;
 
 public class MenuGestionarServicios {
 
@@ -124,10 +125,10 @@ public class MenuGestionarServicios {
         do {
             System.out.print("Ingrese nombre del servicio: ");
             nombreServicio = scanner.nextLine();
-            if (!validarTexto(nombreServicio)) {
+            if (!Validaciones.validarLetras(nombreServicio)) {
                 System.out.println("Error: Nombre inválido (solo letras).");
             }
-        } while (!validarTexto(nombreServicio));
+        } while (!Validaciones.validarLetras(nombreServicio));
 
         // Validar Descripción
         do {
@@ -138,15 +139,6 @@ public class MenuGestionarServicios {
             }
         } while (descripcion.trim().isEmpty());
 
-        // Validar Precio (Decimal)
-        do {
-            System.out.print("Ingrese precio (ej: 15.50): ");
-            precio = scanner.nextLine();
-            if (!validarPrecio(precio)) {
-                System.out.println("Error: Formato de precio inválido.");
-            }
-        } while (!validarPrecio(precio));
-
         // Validar Duración (Números enteros)
         do {
             System.out.print("Ingrese duración en minutos: ");
@@ -155,19 +147,6 @@ public class MenuGestionarServicios {
                 System.out.println("Error: Ingrese solo números enteros.");
             }
         } while (!validarNumero(duracion));
-    }
-
-    public boolean validarTexto(String texto) {
-        Pattern pattern = Pattern.compile("[a-zA-ZáéíóúÁÉÍÓÚ ]+");
-        Matcher matcher = pattern.matcher(texto);
-        return matcher.matches();
-    }
-
-    public boolean validarPrecio(String precio) {
-
-        Pattern pattern = Pattern.compile("^[0-9]+(\\.[0-9]{1,2})?$");
-        Matcher matcher = pattern.matcher(precio);
-        return matcher.matches();
     }
 
     public boolean validarNumero(String numero) {
