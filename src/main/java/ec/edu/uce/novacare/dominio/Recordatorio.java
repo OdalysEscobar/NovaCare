@@ -34,8 +34,6 @@ public class Recordatorio {
 
         if (m.matches()) {
             this.correo = correo;
-        } else {
-
         }
     }
 

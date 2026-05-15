@@ -36,15 +36,13 @@ public class Cita {
     }
 
     public void setFecha(String fecha) {
-    String regex = "^[0-9]{2}/[0-9]{2}/[0-9]{4}$";
-    Pattern p = Pattern.compile(regex);
-    Matcher m = p.matcher(fecha);
+        String regex = "^[0-9]{2}/[0-9]{2}/[0-9]{4}$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(fecha);
 
-    if (m.matches()) {
+        if (m.matches()) {
         this.fecha = fecha;
-    } else {
-
-    }
+        }
     }
 
 

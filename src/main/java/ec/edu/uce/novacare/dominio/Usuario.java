@@ -51,8 +51,6 @@ public class Usuario {
         Matcher m = p.matcher(correo);
         if (m.matches()) {
             this.correo = correo;
-        } else {
-
         }
     }
 
@@ -66,8 +64,6 @@ public class Usuario {
         Matcher m = p.matcher(apellido);
         if (m.matches()) {
             this.apellido = apellido;
-        } else {
-
         }
     }
 
