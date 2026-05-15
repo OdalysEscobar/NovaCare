@@ -43,7 +43,7 @@ public class Cita {
     if (m.matches()) {
         this.fecha = fecha;
     } else {
-        System.out.println("Error: La fecha debe tener el formato DD/MM/AAAA");
+
     }
     }
 
@@ -60,7 +60,7 @@ public class Cita {
         if (m.matches()) {
             this.hora = hora;
         } else {
-            System.out.println("Error: La hora '" + hora + "' debe tener el formato HH:MM (24h)");
+
         }
     }
 
