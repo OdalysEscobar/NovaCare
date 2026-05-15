@@ -95,6 +95,7 @@ public class MenuGestionarPerfil {
             if (!Validaciones.validarLetras(nuevoNombre)){
                 System.out.println("Error: solo letras.");
             }
+            ///
 
         } while(!Validaciones.validarLetras(nuevoNombre));
 
