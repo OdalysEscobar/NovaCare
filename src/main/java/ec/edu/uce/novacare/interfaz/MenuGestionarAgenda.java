@@ -1,8 +1,8 @@
 package ec.edu.uce.novacare.interfaz;
 
+import ec.edu.uce.novacare.util.Validaciones;
+
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MenuGestionarAgenda {
 
@@ -84,40 +84,40 @@ public class MenuGestionarAgenda {
             System.out.println("Ingrese el nombre del cliente: ");
             nuevoCliente = scanner.nextLine();
 
-            if (!validarTexto(nuevoCliente)) {
+            if (!Validaciones.validarLetras(nuevoCliente)) {
                 System.out.println("Error: el nombre solo puede contener letras.");
             }
-        } while (!validarTexto(nuevoCliente));
+        } while (!Validaciones.validarLetras(nuevoCliente));
 
         // Fecha
         do {
             System.out.println("Ingrese la fecha (DD/MM/AAAA): ");
             nuevaFecha = scanner.nextLine();
 
-            if (!validarFecha(nuevaFecha)) {
-                System.out.println("Error: formato de fecha inválido. Use DD/MM/AAAA");
+            if (!Validaciones.validarFecha(nuevaFecha)) {
+                System.out.println("Error: formato de fecha inválido. Use AAAA/MM/DD");
             }
-        } while (!validarFecha(nuevaFecha));
+        } while (!Validaciones.validarFecha(nuevaFecha));
 
         // Hora
         do {
             System.out.println("Ingrese la hora (HH:MM): ");
             nuevaHora = scanner.nextLine();
 
-            if (!validarHora(nuevaHora)) {
+            if (!Validaciones.validarHora(nuevaHora)) {
                 System.out.println("Error: formato de hora inválido. Use HH:MM");
             }
-        } while (!validarHora(nuevaHora));
+        } while (!Validaciones.validarHora(nuevaHora));
 
         // Servicio
         do {
             System.out.println("Ingrese el servicio: ");
             nuevoServicio = scanner.nextLine();
 
-            if (!validarTexto(nuevoServicio)) {
+            if (!Validaciones.validarLetras(nuevoServicio)) {
                 System.out.println("Error: el servicio solo puede contener letras.");
             }
-        } while (!validarTexto(nuevoServicio));
+        } while (!Validaciones.validarLetras(nuevoServicio));
 
         nombreCliente = nuevoCliente;
         fecha = nuevaFecha;
@@ -137,33 +137,33 @@ public class MenuGestionarAgenda {
 
         // Fecha
         do {
-            System.out.println("Ingrese nueva fecha (DD/MM/AAAA): ");
+            System.out.println("Ingrese nueva fecha (AAAA/MM/DD): ");
             nuevaFecha = scanner.nextLine();
 
-            if (!validarFecha(nuevaFecha)) {
+            if (!Validaciones.validarFecha(nuevaFecha)) {
                 System.out.println("Error: formato de fecha inválido. Use DD/MM/AAAA");
             }
-        } while (!validarFecha(nuevaFecha));
+        } while (!Validaciones.validarFecha(nuevaFecha));
 
         // Hora
         do {
             System.out.println("Ingrese nueva hora (HH:MM): ");
             nuevaHora = scanner.nextLine();
 
-            if (!validarHora(nuevaHora)) {
+            if (!Validaciones.validarHora(nuevaHora)) {
                 System.out.println("Error: formato de hora inválido. Use HH:MM");
             }
-        } while (!validarHora(nuevaHora));
+        } while (!Validaciones.validarHora(nuevaHora));
 
         // Servicio
         do {
             System.out.println("Ingrese nuevo servicio: ");
             nuevoServicio = scanner.nextLine();
 
-            if (!validarTexto(nuevoServicio)) {
+            if (!Validaciones.validarLetras(nuevoServicio)) {
                 System.out.println("Error: el servicio solo puede contener letras.");
             }
-        } while (!validarTexto(nuevoServicio));
+        } while (!Validaciones.validarLetras(nuevoServicio));
 
         fecha = nuevaFecha;
         hora = nuevaHora;
@@ -172,24 +172,5 @@ public class MenuGestionarAgenda {
         System.out.println("\nCita en agenda actualizada correctamente.");
     }
 
-    // Validar texto (solo letras y espacios)
-    public boolean validarTexto(String texto) {
-        Pattern pattern = Pattern.compile("[a-zA-ZáéíóúÁÉÍÓÚ ]+");
-        Matcher matcher = pattern.matcher(texto);
-        return matcher.matches();
-    }
 
-    // Validar fecha DD/MM/AAAA
-    public boolean validarFecha(String fecha) {
-        Pattern pattern = Pattern.compile("^[0-9]{2}/[0-9]{2}/[0-9]{4}$");
-        Matcher matcher = pattern.matcher(fecha);
-        return matcher.matches();
-    }
-
-    // Validar hora HH:MM
-    public boolean validarHora(String hora) {
-        Pattern pattern = Pattern.compile("^([01]?[0-9]|2[0-3]):[0-5][0-9]$");
-        Matcher matcher = pattern.matcher(hora);
-        return matcher.matches();
-    }
 }

@@ -1,8 +1,6 @@
 package ec.edu.uce.novacare.interfaz;
 
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MenuIngresarSistema {
 
