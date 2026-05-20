@@ -9,6 +9,10 @@ public class Usuario {
     private String contrasena;
 
     public Usuario() {
+        setNombre("");
+        setApellido("");
+        setCorreo("");
+        setContrasena("");
     }
 
     public Usuario(String nombre, String apellido, String contrasena, String correo) {
