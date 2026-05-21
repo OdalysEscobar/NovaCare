@@ -8,10 +8,10 @@ public class MenuGestionarPerfil {
 
     private Scanner scanner = new Scanner(System.in);
 
-    String nombre = "Cristhian";
-    String apellido = "Vinueza";
-    String correo = "cristhian12@gmail.com";
-    String contrasena = "cv0319";
+    public String nombre = "";
+    public String apellido = "";
+    public String correo = "";
+    public String contrasena = "";
 
     public void mostrarMenu() {
 
@@ -19,9 +19,10 @@ public class MenuGestionarPerfil {
 
         do {
             System.out.println("\n===== GESTIONAR PERFIL =====");
-            System.out.println("1. Consultar perfil");
-            System.out.println("2. Actualizar perfil");
-            System.out.println("3. Eliminar perfil");
+            System.out.println("1. Crear perfil");
+            System.out.println("2. Consultar perfil");
+            System.out.println("3. Actualizar perfil");
+            System.out.println("4. Eliminar perfil");
             System.out.println("0. Volver al menú principal");
 
             System.out.println("Seleccione una opción: ");
@@ -36,23 +37,24 @@ public class MenuGestionarPerfil {
             scanner.nextLine();
 
             switch (opcion) {
+
                 case 1:
 
-                    consultarPerfil();
+                    crearPerfil();
                     break;
 
                 case 2:
 
-                    actualizarPerfil();
+                    consultarPerfil();
                     break;
 
                 case 3:
-                    eliminarPerfil();
+
+                    actualizarPerfil();
                     break;
 
                 case 4:
-
-                    System.out.println("Eliminando perfil de usuario...");
+                    eliminarPerfil();
                     break;
 
                 case 0:
@@ -71,8 +73,69 @@ public class MenuGestionarPerfil {
         } while (opcion != 0);
 
     }
+
+    // Crear perfil
+    public void crearPerfil(){
+
+        System.out.println("=== CREAR PERFIL ===");
+
+        // Nombre
+        do{
+            System.out.println("Ingrese nuevo nombre: ");
+
+            nombre = scanner.nextLine();
+
+            if (!Validaciones.validarLetras(nombre)){
+                System.out.println("Error: solo letras.");
+            }
+            ///
+
+        } while(!Validaciones.validarLetras(nombre));
+
+        // Apellido
+        do{
+            System.out.println("\nIngrese nuevo apellido: ");
+            apellido = scanner.nextLine();
+
+            if (!Validaciones.validarLetras(apellido)){
+                System.out.println("Error: solo letras.");
+            }
+        } while(!Validaciones.validarLetras(apellido));
+
+        // Correo
+        do{
+            System.out.println("Ingrese nuevo correo: ");
+            correo = scanner.nextLine();
+
+            if (!Validaciones.validarCorreo(correo)){
+                System.out.println("Correo inválido.");
+            }
+
+        } while(!Validaciones.validarCorreo(correo));
+
+        // Contraseña
+        do{
+            System.out.println("Ingrese nueva contraseña: ");
+            contrasena = scanner.nextLine();
+
+            if(!Validaciones.validarContrasena(contrasena)){
+                System.out.println("Contraseña inválida, solo letras y números");
+            }
+
+        } while(!Validaciones.validarContrasena(contrasena));
+
+
+    }
+
     // Consultar perfil
     public void consultarPerfil(){
+
+        if (nombre.equals("")){
+
+            System.out.println("No existe un perfil registrado.");
+            return;
+        }
+
         System.out.println("\n===== PERFIL =====");
         System.out.println("Nombre: " + nombre);
         System.out.println("Apellido: " + apellido);
@@ -81,67 +144,27 @@ public class MenuGestionarPerfil {
 
     // Actualizar Perfil
     public void actualizarPerfil(){
-        String nuevoNombre;
-        String nuevoApellido;
-        String nuevoCorreo;
-        String nuevaContrasena;
 
-        // Nombre
-        do{
-            System.out.println("Ingrese nuevo nombre: ");
+        if (nombre.equals("")){
 
-            nuevoNombre = scanner.nextLine();
+            System.out.println("No existe un perfil registrado.");
+            return;
+        }
 
-            if (!Validaciones.validarLetras(nuevoNombre)){
-                System.out.println("Error: solo letras.");
-            }
-            ///
-
-        } while(!Validaciones.validarLetras(nuevoNombre));
-
-        // Apellido
-        do{
-            System.out.println("\nIngrese nuevo apellido: ");
-            nuevoApellido = scanner.nextLine();
-
-            if (!Validaciones.validarLetras(nuevoApellido)){
-                System.out.println("Error: solo letras.");
-            }
-        } while(!Validaciones.validarLetras(nuevoApellido));
-
-        // Correo
-        do{
-            System.out.println("Ingrese nuevo correo: ");
-            nuevoCorreo = scanner.nextLine();
-
-            if (!Validaciones.validarCorreo(nuevoCorreo)){
-                System.out.println("Correo inválido.");
-            }
-
-        } while(!Validaciones.validarCorreo(nuevoCorreo));
-
-        // Contraseña
-        do{
-            System.out.println("Ingrese nueva contraseña: ");
-            nuevaContrasena = scanner.nextLine();
-
-            if(!Validaciones.validarContrasena(nuevaContrasena)){
-                System.out.println("Contraseña inválida, solo letras y números");
-            }
-
-        } while(!Validaciones.validarContrasena(nuevaContrasena));
-
-        nombre = nuevoNombre;
-        apellido = nuevoApellido;
-        correo = nuevoCorreo;
-        contrasena = nuevaContrasena;
-
-        System.out.println("\nPerfil actualizado correctamente.");
+        System.out.println("=== ACTUALIZAR PERFIL ===");
+        crearPerfil();
+        System.out.println("Perfil actualizado correctamente.");
     }
 
     // Eliminar Perfil
     public void eliminarPerfil(){
         String confirmacion;
+
+        if (nombre.equals("")){
+
+            System.out.println("No existe un perfil registrado.");
+            return;
+        }
 
         do{
             System.out.println("¿Desea eliminar el perfil? (si/no): ");
