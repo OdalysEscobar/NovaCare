@@ -1,6 +1,5 @@
 package ec.edu.uce.novacare.dominio;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import ec.edu.uce.novacare.util.Validaciones;
 
 public class Empleado extends Usuario{
     private String especialidad;
@@ -20,11 +19,7 @@ public class Empleado extends Usuario{
     }
 
     public void setEspecialidad(String especialidad) {
-        String regex = "^[a-zA-Z\\sÁÉÍÓÚáéíóúñÑ]+$";
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(especialidad);
-
-        if (m.matches()) {
+        if (Validaciones.validarLetras(especialidad)) {
             this.especialidad = especialidad;
         }
     }
