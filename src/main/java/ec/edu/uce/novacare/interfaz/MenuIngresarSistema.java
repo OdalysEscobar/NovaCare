@@ -59,7 +59,4 @@ public class MenuIngresarSistema {
 
         } while (opcion != 0);
     }
-
-
-
 }

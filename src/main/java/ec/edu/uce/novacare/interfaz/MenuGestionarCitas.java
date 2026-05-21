@@ -8,10 +8,10 @@ public class MenuGestionarCitas {
 
     private Scanner scanner = new Scanner(System.in);
 
-    String nombreUsuario = "";
-    String tipoServicio = "";
-    String fecha = "";
-    String hora = "";
+    public String nombreUsuario = "";
+    public String tipoServicio = "";
+    public String fecha = "";
+    public String hora = "";
 
     public void mostrarMenu() {
 
@@ -20,8 +20,8 @@ public class MenuGestionarCitas {
         do {
             System.out.println("===== GESTIONAR CITAS =====");
             System.out.println("1. Crear Cita");
-            System.out.println("2. Actualizar Cita");
-            System.out.println("3. Consultar Cita");
+            System.out.println("2. Consultar Cita");
+            System.out.println("3. Actualizar Cita");
             System.out.println("4. Cancelar Cita");
             System.out.println("0. Volver al menú principal");
 
@@ -44,14 +44,13 @@ public class MenuGestionarCitas {
 
                 case 2:
 
-                    actualizarCita();
+                    consultarCita();
                     break;
 
                 case 3:
 
-                    consultarCita();
+                    actualizarCita();
                     break;
-
                 case 4:
 
                     cancelarCita();
@@ -121,6 +120,23 @@ public class MenuGestionarCitas {
 
     }
 
+    // Consultar Cita
+    public void consultarCita(){
+
+        if(nombreUsuario.equals("")){
+
+            System.out.println("No existe una cita registrada.");
+            return;
+        }
+
+        System.out.println("\n===== DATOS DE LA CITA =====");
+        System.out.println("Nombre: " + nombreUsuario);
+        System.out.println("Servicio: " + tipoServicio);
+        System.out.println("Fecha: " + fecha);
+        System.out.println("Hora: " + hora);
+
+    }
+
     // Actualizar Cita
     public void actualizarCita(){
 
@@ -138,22 +154,6 @@ public class MenuGestionarCitas {
 
     }
 
-    // Consultar Cita
-    public void consultarCita(){
-
-        if(nombreUsuario.equals("")){
-
-            System.out.println("No existe una cita registrada.");
-            return;
-        }
-
-        System.out.println("\n===== DATOS DE LA CITA =====");
-        System.out.println("Nombre: " + nombreUsuario);
-        System.out.println("Servicio: " + tipoServicio);
-        System.out.println("Fecha: " + fecha);
-        System.out.println("Hora: " + hora);
-
-    }
 
     // Cancelar Cita
     public void cancelarCita(){
