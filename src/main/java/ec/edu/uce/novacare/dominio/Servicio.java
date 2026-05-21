@@ -1,43 +1,25 @@
 package ec.edu.uce.novacare.dominio;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 
 public class Servicio {
-    private String tipoServicio;
     private int duracion;
-    private boolean dispoinibilidad;
+    private boolean disponibilidad;
 
     public Servicio() {
+        this.duracion = 0 ;
+        this.disponibilidad = false;
     }
 
-    public Servicio(String tipoServicio, int duracion, boolean dispoinibilidad) {
-        setTipoServicio(tipoServicio);
-        this.duracion = duracion;
-        this.dispoinibilidad = dispoinibilidad;
+    public Servicio(int duracion, boolean disponibilidad) {
+        setDuracion(duracion);
+        setDisponibilidad(disponibilidad);
     }
 
     @Override
     public String toString() {
         return "Servicio{" +
-                "tipoServicio='" + tipoServicio + '\'' +
-                ", duracion=" + duracion +
-                ", dispoinibilidad=" + dispoinibilidad +
+                " duracion=" + duracion +
+                ", dispoinibilidad=" + disponibilidad +
                 '}';
-    }
-
-    public String getTipoServicio() {
-        return tipoServicio;
-    }
-
-    public void setTipoServicio(String tipoServicio) {
-        String regex = "^[a-zA-Z\\sÁÉÍÓÚáéíóúñÑ]+$";
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(tipoServicio);
-
-        if (m.matches()) {
-            this.tipoServicio = tipoServicio;
-        }
     }
 
     public int getDuracion() {
@@ -50,11 +32,11 @@ public class Servicio {
         }
     }
 
-    public boolean isDispoinibilidad() {
-        return dispoinibilidad;
+    public boolean isDisponibilidad() {
+        return disponibilidad;
     }
 
-    public void setDispoinibilidad(boolean dispoinibilidad) {
-        this.dispoinibilidad = dispoinibilidad;
+    public void setDisponibilidad(boolean disponibilidad) {
+        this.disponibilidad = disponibilidad;
     }
 }
