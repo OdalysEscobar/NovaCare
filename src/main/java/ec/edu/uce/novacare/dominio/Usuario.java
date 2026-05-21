@@ -9,10 +9,10 @@ public class Usuario {
     private String contrasena;
 
     public Usuario() {
-        setNombre("");
-        setApellido("");
-        setCorreo("");
-        setContrasena("");
+        this.nombre= "";
+        this.apellido="";
+        this.correo="";
+        this.contrasena="";
     }
 
     public Usuario(String nombre, String apellido, String contrasena, String correo) {

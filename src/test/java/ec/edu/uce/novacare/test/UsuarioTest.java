@@ -32,26 +32,71 @@ class UsuarioTest {
     }
 
     @Test
+    void setNombreInvalido (){
+        Usuario usuario = new Usuario();
+        usuario.setNombre("Shirley123");
+        assertEquals("",usuario.getNombre());
+    }
+
+    @Test
     void getCorreo() {
+        Usuario usuario = new Usuario ("Ana", "Quezada", "ana125", "anita@hotmail.com");
+        assertEquals("anita@hotmail.com", usuario.getCorreo());
     }
 
     @Test
     void setCorreo() {
+        Usuario usuario = new Usuario ();
+        usuario.setCorreo("odalys@gmail.com");
+        assertEquals("odalys@gmail.com",usuario.getCorreo());
+
+    }
+
+    @Test
+    void setCorreoInvalido(){
+        Usuario usuario = new Usuario();
+        usuario.setCorreo("odalys.com");
+        assertEquals("",usuario.getCorreo());
     }
 
     @Test
     void getApellido() {
+        Usuario usuario = new Usuario ("Ana", "Quezada", "ana125", "anita@hotmail.com");
+        assertEquals("Quezada", usuario.getApellido());
+
     }
 
     @Test
     void setApellido() {
+        Usuario usuario= new Usuario ();
+        usuario.setApellido("Mites");
+        assertEquals("Mites",usuario.getApellido());
+    }
+
+    @Test
+    void setApellidoInvalido(){
+        Usuario usuario= new Usuario ();
+        usuario.setApellido("Mite52s");
+        assertEquals("",usuario.getApellido());
     }
 
     @Test
     void getContrasena() {
+        Usuario usuario = new Usuario ("Ana", "Quezada", "ana125", "anita@hotmail.com");
+        assertEquals("ana125", usuario.getContrasena());
     }
 
     @Test
     void setContrasena() {
+        Usuario usuario = new Usuario();
+        usuario.setContrasena("maria123");
+        assertEquals("maria123", usuario.getContrasena());
+    }
+
+    @Test
+    void SetContrasenaInvalida(){
+        Usuario usuario = new Usuario();
+        usuario.setContrasena("maria123?");
+        assertEquals("", usuario.getContrasena());
     }
 }
