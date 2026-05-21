@@ -2,7 +2,6 @@ package ec.edu.uce.novacare.dominio;
 
 import java.util.List;
 
-
 public class Agenda {
     private String citasPendiente;
     private List<Cita> citas;

@@ -1,6 +1,5 @@
 package ec.edu.uce.novacare.dominio;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import ec.edu.uce.novacare.util.Validaciones;
 
 public class Recordatorio {
 
@@ -28,11 +27,7 @@ public class Recordatorio {
     }
 
     public void setCorreo(String correo) {
-        String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(correo);
-
-        if (m.matches()) {
+        if (Validaciones.validarCorreo(correo)) {
             this.correo = correo;
         }
     }

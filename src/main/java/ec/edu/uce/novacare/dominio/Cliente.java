@@ -3,6 +3,7 @@ package ec.edu.uce.novacare.dominio;
 import java.util.List;
 
 public class Cliente extends Usuario {
+    private int numeroDeTelefono;
     private List <Cita> citas;
 
     public Cliente(List<Cita> citas) {

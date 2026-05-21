@@ -1,6 +1,5 @@
 package ec.edu.uce.novacare.dominio;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import ec.edu.uce.novacare.util.Validaciones;
 
 public class Cita {
     private String fecha;
@@ -36,29 +35,18 @@ public class Cita {
     }
 
     public void setFecha(String fecha) {
-        String regex = "^[0-9]{2}/[0-9]{2}/[0-9]{4}$";
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(fecha);
-
-        if (m.matches()) {
+        if (Validaciones.validarFecha(fecha)) {
         this.fecha = fecha;
         }
     }
-
 
     public String getHora() {
         return hora;
     }
 
     public void setHora(String hora) {
-        String regex = "^([01]?[0-9]|2[0-3]):[0-5][0-9]$";
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(hora);
-
-        if (m.matches()) {
+        if (Validaciones.validarHora(hora)) {
             this.hora = hora;
-        } else {
-
         }
     }
 
