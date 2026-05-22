@@ -8,9 +8,9 @@ import ec.edu.uce.novacare.util.Validaciones;
 public class MenuGestionarServicios {
 
     private Scanner scanner = new Scanner(System.in);
-    String nombreServicio="Corte de cabello";
-    String descripcion="Corte Butterfly ";
-    String duracion="45";
+    public String nombreServicio="Corte de cabello";
+    public String descripcion="Corte en capas ";
+    public String duracion="45";
 
 
 
