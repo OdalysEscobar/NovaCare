@@ -89,7 +89,6 @@ public class MenuGestionarServicios {
             System.out.println("Descripción: " + descripcion);
             System.out.println("Duración: " + duracion + " min");
 
-            System.out.println("\n--- RELACIÓN CON CLASE DOMINIO (POJO) ---");
 
             int minutos = Integer.parseInt(duracion);
             Servicio servicioIndividual = new Servicio(minutos, true);
