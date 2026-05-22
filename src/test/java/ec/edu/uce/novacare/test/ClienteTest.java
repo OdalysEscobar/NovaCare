@@ -9,6 +9,26 @@ import static org.junit.jupiter.api.Assertions.*;
 class ClienteTest {
 
     @Test
+    void constructorConParametros() {
+
+        Cita[] citas = new Cita[2];
+
+        Cliente cliente = new Cliente("Kimberly", "Cuvi", "kim123", "kim@gmail.com", "0999999999",
+                citas);
+
+        assertEquals("Kimberly", cliente.getNombre());
+        assertEquals("Cuvi", cliente.getApellido());
+        assertEquals("kim123", cliente.getContrasena());
+        assertEquals("kim@gmail.com", cliente.getCorreo());
+        assertEquals("0999999999", cliente.getNumeroDeTelefono());
+        assertEquals(citas, cliente.getCitas());
+
+        System.out.println(cliente);
+
+        System.out.println("El metodo constructorConParametros funciona correctamente✅");
+    }
+
+    @Test
     void getNumeroDeTelefono() {
         Cliente cliente = new Cliente();
         cliente.setNumeroDeTelefono("0999999999");

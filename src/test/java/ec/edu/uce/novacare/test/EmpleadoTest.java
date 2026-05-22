@@ -9,6 +9,24 @@ import static org.junit.jupiter.api.Assertions.*;
 class EmpleadoTest {
 
     @Test
+    void constructorConParametros() {
+
+        Agenda agenda = new Agenda();
+        Empleado empleado = new Empleado("Odalys", "Escobar", "oda123", "odalys@gmail.com", "Manicure",
+                agenda);
+        assertEquals("Odalys", empleado.getNombre());
+        assertEquals("Escobar", empleado.getApellido());
+        assertEquals("oda123", empleado.getContrasena());
+        assertEquals("odalys@gmail.com", empleado.getCorreo());
+        assertEquals("Manicure", empleado.getEspecialidad());
+        assertEquals(agenda, empleado.getAgenda());
+
+        System.out.println(empleado);
+
+        System.out.println("El metodo constructorConParametros funciona correctamente✅");
+    }
+
+    @Test
     void getEspecialidad() {
         Empleado empleado = new Empleado();
         empleado.setEspecialidad("Depilacion");

@@ -14,8 +14,9 @@ public class Cliente extends Usuario {
         //this.citas = new Cita[0];
     }
 
-    public Cliente(String nombre, String apellido, String contrasena, String correo, Cita[] citas) {
+    public Cliente(String nombre, String apellido, String contrasena, String correo, String numeroDeTelefono, Cita[] citas) {
         super(nombre, apellido, contrasena, correo);
+        setNumeroDeTelefono(numeroDeTelefono);
         this.citas = citas;
     }
 
@@ -46,7 +47,11 @@ public class Cliente extends Usuario {
     @Override
     public String toString() {
         return "Cliente{" +
-                "numeroDeTelefono='" + numeroDeTelefono + '\'' +
+                "nombre='" + getNombre() + '\'' +
+                ", apellido='" + getApellido() + '\'' +
+                ", correo='" + getCorreo() + '\'' +
+                ", contrasena='" + getContrasena() + '\'' +
+                ", numeroDeTelefono='" + numeroDeTelefono + '\'' +
                 ", citas=" + Arrays.toString(citas) +
                 '}';
     }
