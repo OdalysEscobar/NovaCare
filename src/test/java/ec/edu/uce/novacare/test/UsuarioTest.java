@@ -48,7 +48,7 @@ class UsuarioTest {
     void setNombreInvalido (){
         Usuario usuario = new Usuario();
         usuario.setNombre("Shirley123");
-        assertEquals("",usuario.getNombre());
+        assertEquals("Sin nombre",usuario.getNombre());
         System.out.println("El metodo setNombreInvalido funciona correctamente✅");
     }
 
@@ -71,7 +71,7 @@ class UsuarioTest {
     void setCorreoInvalido(){
         Usuario usuario = new Usuario();
         usuario.setCorreo("odalys.com");
-        assertEquals("",usuario.getCorreo());
+        assertEquals("Sin correo",usuario.getCorreo());
         System.out.println("El metodo setCorreoInvalido funciona correctamente✅");
     }
 
@@ -94,7 +94,7 @@ class UsuarioTest {
     void setApellidoInvalido(){
         Usuario usuario= new Usuario ();
         usuario.setApellido("Mite52s");
-        assertEquals("",usuario.getApellido());
+        assertEquals("Sin apellido",usuario.getApellido());
         System.out.println("El metodo setApellidoInvalido funciona correctamente✅");
     }
 
@@ -117,7 +117,7 @@ class UsuarioTest {
     void SetContrasenaInvalida(){
         Usuario usuario = new Usuario();
         usuario.setContrasena("maria123?");
-        assertEquals("", usuario.getContrasena());
+        assertEquals("Sin contrasena", usuario.getContrasena());
         System.out.println("El metodo setContrasenaInvalida funciona correctamente✅");
     }
 }
