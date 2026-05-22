@@ -6,6 +6,8 @@ public class Empleado extends Usuario{
     private  Agenda agenda;
 
     public Empleado() {
+        super ();
+        this.especialidad="Sin especialidad";
     }
 
     public Empleado(String nombre, String apellido, String contrasena, String correo, String especialidad, Agenda agenda) {

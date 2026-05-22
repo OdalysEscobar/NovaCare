@@ -13,6 +13,7 @@ class UsuarioTest {
         assertEquals("Cuvi", usuario.getApellido());
         assertEquals("kim123", usuario.getContrasena());
         assertEquals("kim@gmail.com", usuario.getCorreo());
+        System.out.println(usuario);
         System.out.println("El metodo constructorConParametros funciona correctamente✅");
     }
 
