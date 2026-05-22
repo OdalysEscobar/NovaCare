@@ -63,7 +63,6 @@ public class Usuario {
      * @param nombre nuevo nombre del usuario
      */
     public void setNombre(String nombre) {
-
         if (Validaciones.validarLetras(nombre)) {
             this.nombre = nombre;
         }
