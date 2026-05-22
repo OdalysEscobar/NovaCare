@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class CentroDeBellezaTest {
 
     @Test
-    void crearCentroDeBellezaCorrectamente() {
+    void centroDeBellezaCorrecto() {
 
         Usuario[] usuarios = new Usuario[2];
         Servicio[] servicios = new Servicio[2];
@@ -19,76 +19,91 @@ class CentroDeBellezaTest {
                 "NovaCare",
                 "Pomasqui",
                 "0991234567",
-                "08:00",
+                "09:30",
                 usuarios,
                 servicios
         );
 
         assertNotNull(centro);
+        assertEquals("NovaCare", centro.getNombre());
+        assertEquals("Pomasqui", centro.getDireccion());
+        assertEquals("0991234567", centro.getTelefono());
+        assertEquals("09:30", centro.getHorarioAtencion());
+        assertEquals(2, centro.getUsuarios().length);
+        assertEquals(2, centro.getServicios().length);
+
         System.out.println("CentroDeBelleza creado correctamente ✅");
     }
 
     @Test
-    void crearCentroDeBellezaNulo() {
+    void constructorVacioCorrecto() {
 
-        CentroDeBelleza centro = null;
+        CentroDeBelleza centro = new CentroDeBelleza();
 
-        assertNull(centro);
-        System.out.println("CentroDeBelleza nulo detectado correctamente ✅");
+        assertNotNull(centro);
+        assertEquals("Sin nombre", centro.getNombre());
+        assertEquals("Sin direccion", centro.getDireccion());
+        assertEquals("Sin telefono", centro.getTelefono());
+        assertEquals("00:00", centro.getHorarioAtencion());
+        assertEquals(0, centro.getUsuarios().length);
+        assertEquals(0, centro.getServicios().length);
+
+        System.out.println("Constructor vacío funcionando correctamente ✅");
     }
 
     @Test
-    void validarNombreCorrecto() {
+    void setUsuariosCorrecto() {
 
         CentroDeBelleza centro = new CentroDeBelleza();
-        centro.setNombre("NovaCare");
+        Usuario[] usuarios = new Usuario[3];
 
-        assertEquals("NovaCare", centro.getNombre());
-        System.out.println("Nombre asignado correctamente ✅");
+        centro.setUsuarios(usuarios);
+
+        assertNotNull(centro.getUsuarios());
+        assertEquals(3, centro.getUsuarios().length);
+
+        System.out.println("setUsuarios funcionando correctamente ✅");
+    }
+
+    @Test
+    void setServiciosCorrecto() {
+
+        CentroDeBelleza centro = new CentroDeBelleza();
+        Servicio[] servicios = new Servicio[4];
+
+        centro.setServicios(servicios);
+
+        assertNotNull(centro.getServicios());
+        assertEquals(4, centro.getServicios().length);
+
+        System.out.println("setServicios funcionando correctamente ✅");
+    }
+
+    @Test
+    void setDireccionCorrecto() {
+
+        CentroDeBelleza centro = new CentroDeBelleza();
+        centro.setDireccion("Carapungo");
+
+        assertEquals("Carapungo", centro.getDireccion());
+
+        System.out.println("setDireccion funcionando correctamente ✅");
     }
 
     @Test
     void validarTelefonoCorrecto() {
 
-        CentroDeBelleza centro = new CentroDeBelleza();
-        centro.setTelefono("0991234567");
+        assertTrue(CentroDeBelleza.validarTelefono("0991234567"));
 
-        assertEquals("0991234567", centro.getTelefono());
-        System.out.println("Telefono asignado correctamente ✅");
+        System.out.println("Telefono valido detectado correctamente ✅");
     }
 
     @Test
-    void validarHorarioCorrecto() {
+    void validarTelefonoIncorrecto() {
 
-        CentroDeBelleza centro = new CentroDeBelleza();
-        centro.setHorarioAtencion("09:30");
+        assertFalse(CentroDeBelleza.validarTelefono("123456789"));
 
-        assertEquals("09:30", centro.getHorarioAtencion());
-        System.out.println("Horario asignado correctamente ✅");
-    }
-
-    @Test
-    void asignarUsuariosCorrectamente() {
-
-        CentroDeBelleza centro = new CentroDeBelleza();
-        Usuario[] usuarios = new Usuario[3];
-        centro.setUsuarios(usuarios);
-
-        assertNotNull(centro.getUsuarios());
-        assertEquals(3, centro.getUsuarios().length);
-        System.out.println("Usuarios asignados correctamente ✅");
-    }
-
-    @Test
-    void asignarServiciosCorrectamente() {
-
-        CentroDeBelleza centro = new CentroDeBelleza();
-        Servicio[] servicios = new Servicio[4];
-        centro.setServicios(servicios);
-
-        assertNotNull(centro.getServicios());
-        assertEquals(4, centro.getServicios().length);
-        System.out.println("Servicios asignados correctamente ✅");
+        System.out.println("Telefono invalido detectado correctamente ✅");
     }
 
     @Test
@@ -99,6 +114,19 @@ class CentroDeBellezaTest {
 
         assertNotNull(texto);
         assertTrue(texto.contains("CentroDeBelleza"));
+        assertTrue(texto.contains("nombre"));
+        assertTrue(texto.contains("direccion"));
+
         System.out.println("toString funcionando correctamente ✅");
+    }
+
+    @Test
+    void centroDeBellezaIncorrecto() {
+
+        CentroDeBelleza centro = null;
+
+        assertNull(centro);
+
+        System.out.println("CentroDeBelleza nulo detectado correctamente ✅");
     }
 }
