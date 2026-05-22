@@ -1,5 +1,6 @@
 package ec.edu.uce.novacare.dominio;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -40,5 +41,13 @@ public class Cliente extends Usuario {
         Pattern pattern = Pattern.compile("^09\\d{8}$");
         Matcher matcher= pattern.matcher(telefono);
         return matcher.matches();
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "numeroDeTelefono='" + numeroDeTelefono + '\'' +
+                ", citas=" + Arrays.toString(citas) +
+                '}';
     }
 }
