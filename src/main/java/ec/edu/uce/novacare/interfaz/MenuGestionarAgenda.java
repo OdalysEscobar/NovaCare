@@ -1,206 +1,176 @@
 package ec.edu.uce.novacare.interfaz;
 
-import ec.edu.uce.novacare.dominio.Agenda;
-import ec.edu.uce.novacare.dominio.Cita;
-import ec.edu.uce.novacare.dominio.Cliente;
-import ec.edu.uce.novacare.dominio.Servicio;
-import java.util.ArrayList;
-import java.util.List;
+import ec.edu.uce.novacare.util.Validaciones;
+
 import java.util.Scanner;
 
 public class MenuGestionarAgenda {
 
-    private final Scanner scanner = new Scanner(System.in);
-    private final List<Cita> listaCitas = new ArrayList<>();
-    private Agenda agenda;
+    private Scanner scanner = new Scanner(System.in);
 
-    public MenuGestionarAgenda() {
-        // Datos de muestra usando los constructores exactos del dominio
-        Cliente c1 = new Cliente("Ana", "Torres", "1234", "ana@email.com", new ArrayList<>());
-        Servicio s1 = new Servicio("Corte de cabello", 30, true);
-        Cita cita1 = new Cita("10/05/2026", agenda, c1, s1, "09:00");
-        listaCitas.add(cita1);
-
-        Cliente c2 = new Cliente("Luis", "Mora", "4321", "luis@email.com", new ArrayList<>());
-        Servicio s2 = new Servicio("Tinte completo", 120, true);
-        Cita cita2 = new Cita("10/05/2026", agenda, c2, s2, "11:00");
-        listaCitas.add(cita2);
-
-        agenda = new Agenda("2 citas pendientes", listaCitas);
-    }
+    String nombreCliente = "Ana Torres";
+    String fecha = "2026-05-10";
+    String hora = "09:00";
+    String servicio = "Corte de cabello";
 
     public void mostrarMenu() {
+
         int opcion;
+
         do {
             System.out.println("\n===== GESTIONAR AGENDA DE CITAS =====");
-            System.out.println("1. Crear nueva cita");
-            System.out.println("2. Consultar todas las citas");
-            System.out.println("3. Consultar citas pendientes");
-            System.out.println("4. Actualizar estado de cita");
-            System.out.println("0. Volver al menu principal");
-            System.out.print("Seleccione una opcion: ");
+            System.out.println("1. Consultar agenda");
+            System.out.println("2. Crear cita en agenda");
+            System.out.println("3. Actualizar cita en agenda");
+            System.out.println("0. Volver al menú principal");
+
+            System.out.println("Seleccione una opción: ");
 
             while (!scanner.hasNextInt()) {
-                System.out.println("Error: solo puede ingresar numeros.");
+                System.out.println("Error: solo puede ingresar números");
                 scanner.next();
                 System.out.print("Seleccione una opcion: ");
             }
+
             opcion = scanner.nextInt();
-            scanner.nextLine();
 
             switch (opcion) {
-                case 1: crearCita(); break;
-                case 2: consultarAgenda(); break;
-                case 3: consultarCitasPendientes(); break;
-                case 4: actualizarCita(); break;
-                case 0: System.out.println("Volviendo al menu principal..."); break;
-                default: System.out.println("Opcion invalida.");
+                case 1:
+                    consultarAgenda();
+                    break;
+
+                case 2:
+                    crearCitaAgenda();
+                    break;
+
+                case 3:
+                    actualizarCitaAgenda();
+                    break;
+
+                case 0:
+                    System.out.println("Regresando al menú principal...");
+                    MenuPrincipal menuPrincipal = new MenuPrincipal();
+                    menuPrincipal.mostrarMenu();
+                    return;
+
+                default:
+                    System.out.println("Opción inválida.");
+                    break;
             }
+
         } while (opcion != 0);
     }
 
-    private void crearCita() {
-        System.out.println("\n--- Crear Nueva Cita ---");
+    // Consultar Agenda
+    public void consultarAgenda() {
+        System.out.println("\n===== AGENDA =====");
+        System.out.println("Cliente: " + nombreCliente);
+        System.out.println("Fecha: " + fecha);
+        System.out.println("Hora: " + hora);
+        System.out.println("Servicio: " + servicio);
+    }
 
-        System.out.print("Nombre del cliente: ");
-        String nombre = scanner.nextLine().trim();
-        if (nombre.isEmpty()) {
-            System.out.println("Error: el nombre es obligatorio.");
-            return;
-        }
+    // Crear Cita en Agenda
+    public void crearCitaAgenda() {
+        String nuevoCliente;
+        String nuevaFecha;
+        String nuevaHora;
+        String nuevoServicio;
 
-        System.out.print("Apellido del cliente: ");
-        String apellido = scanner.nextLine().trim();
-        if (apellido.isEmpty()) {
-            System.out.println("Error: el apellido es obligatorio.");
-            return;
-        }
-
-        System.out.print("Correo del cliente: ");
-        String correo = scanner.nextLine().trim();
-        if (correo.isEmpty()) {
-            System.out.println("Error: el correo es obligatorio.");
-            return;
-        }
-
-        // Fecha con formato DD/MM/AAAA (validado por setFecha en Cita)
-        System.out.print("Fecha de la cita (DD/MM/AAAA): ");
-        String fecha = scanner.nextLine().trim();
-        if (fecha.isEmpty()) {
-            System.out.println("Error: la fecha es obligatoria.");
-            return;
-        }
-
-        // Hora con formato HH:MM (validado por setHora en Cita)
-        System.out.print("Hora de la cita (HH:MM): ");
-        String hora = scanner.nextLine().trim();
-        if (hora.isEmpty()) {
-            System.out.println("Error: la hora es obligatoria.");
-            return;
-        }
-
-        // Verificar conflicto de horario
-        for (Cita c : listaCitas) {
-            if (c.getFecha() != null && c.getHora() != null
-                    && c.getFecha().equals(fecha) && c.getHora().equals(hora)) {
-                System.out.println("Error: ya existe una cita en ese horario (" + fecha + " " + hora + ").");
-                return;
-            }
-        }
-
-        System.out.print("Tipo de servicio (ej. Corte, Tinte, Manicure): ");
-        String tipoServicio = scanner.nextLine().trim();
-        if (tipoServicio.isEmpty()) {
-            System.out.println("Error: el servicio es obligatorio.");
-            return;
-        }
-
-        System.out.print("Duracion del servicio (minutos): ");
-        while (!scanner.hasNextInt()) { scanner.next(); }
-        int duracion = scanner.nextInt();
         scanner.nextLine();
 
-        Cliente cliente = new Cliente(nombre, apellido, "sin-clave", correo, new ArrayList<>());
-        Servicio servicio = new Servicio(tipoServicio, duracion, true);
-        Cita nuevaCita = new Cita(fecha, agenda, cliente, servicio, hora);
+        // Nombre cliente
+        do {
+            System.out.println("Ingrese el nombre del cliente: ");
+            nuevoCliente = scanner.nextLine();
 
-        listaCitas.add(nuevaCita);
-        agenda.setCitas(listaCitas);
-        agenda.setCitasPendiente(listaCitas.size() + " citas pendientes");
-        System.out.println("Cita registrada: " + nuevaCita);
+            if (!Validaciones.validarLetras(nuevoCliente)) {
+                System.out.println("Error: el nombre solo puede contener letras.");
+            }
+        } while (!Validaciones.validarLetras(nuevoCliente));
+
+        // Fecha
+        do {
+            System.out.println("Ingrese la fecha (AAAA-MM-DD): ");
+            nuevaFecha = scanner.nextLine();
+
+            if (!Validaciones.validarFecha(nuevaFecha)) {
+                System.out.println("Error: formato de fecha inválido. Use AAAA-MM-DD");
+            }
+        } while (!Validaciones.validarFecha(nuevaFecha));
+
+        // Hora
+        do {
+            System.out.println("Ingrese la hora (HH:MM): ");
+            nuevaHora = scanner.nextLine();
+
+            if (!Validaciones.validarHora(nuevaHora)) {
+                System.out.println("Error: formato de hora inválido. Use HH:MM");
+            }
+        } while (!Validaciones.validarHora(nuevaHora));
+
+        // Servicio
+        do {
+            System.out.println("Ingrese el servicio: ");
+            nuevoServicio = scanner.nextLine();
+
+            if (!Validaciones.validarLetras(nuevoServicio)) {
+                System.out.println("Error: el servicio solo puede contener letras.");
+            }
+        } while (!Validaciones.validarLetras(nuevoServicio));
+
+        nombreCliente = nuevoCliente;
+        fecha = nuevaFecha;
+        hora = nuevaHora;
+        servicio = nuevoServicio;
+
+        System.out.println("\nCita creada en agenda correctamente.");
     }
 
-    private void consultarAgenda() {
-        System.out.println("\n--- Agenda: " + agenda + " ---");
-        if (listaCitas.isEmpty()) {
-            System.out.println("No hay citas programadas.");
-            return;
-        }
-        for (int i = 0; i < listaCitas.size(); i++) {
-            System.out.println("[" + (i + 1) + "] " + listaCitas.get(i));
-        }
-    }
+    // Actualizar Cita en Agenda
+    public void actualizarCitaAgenda() {
+        String nuevaFecha;
+        String nuevaHora;
+        String nuevoServicio;
 
-    private void consultarCitasPendientes() {
-        System.out.println("\n--- Citas Pendientes ---");
-        System.out.println("Estado: " + agenda.getCitasPendiente());
-        if (listaCitas.isEmpty()) {
-            System.out.println("No hay citas programadas.");
-            return;
-        }
-        for (int i = 0; i < listaCitas.size(); i++) {
-            System.out.println("[" + (i + 1) + "] " + listaCitas.get(i));
-        }
-    }
-
-    private void actualizarCita() {
-        consultarAgenda();
-        if (listaCitas.isEmpty()) return;
-
-        System.out.print("Numero de cita a actualizar: ");
-        while (!scanner.hasNextInt()) { scanner.next(); }
-        int idx = scanner.nextInt() - 1;
         scanner.nextLine();
-        if (idx < 0 || idx >= listaCitas.size()) {
-            System.out.println("Error: numero de cita invalido.");
-            return;
-        }
 
-        Cita cita = listaCitas.get(idx);
+        // Fecha
+        do {
+            System.out.println("Ingrese nueva fecha (AAAA-MM-DD): ");
+            nuevaFecha = scanner.nextLine();
 
-        System.out.print("Nueva fecha DD/MM/AAAA (Enter para mantener '" + cita.getFecha() + "'): ");
-        String nuevaFecha = scanner.nextLine().trim();
-        if (!nuevaFecha.isEmpty()) {
-            cita.setFecha(nuevaFecha); // usa la validacion del dominio
-        }
-
-        System.out.print("Nueva hora HH:MM (Enter para mantener '" + cita.getHora() + "'): ");
-        String nuevaHora = scanner.nextLine().trim();
-        if (!nuevaHora.isEmpty()) {
-            // Verificar conflicto con nueva hora
-            boolean conflicto = false;
-            for (int i = 0; i < listaCitas.size(); i++) {
-                if (i != idx && listaCitas.get(i).getFecha() != null
-                        && listaCitas.get(i).getFecha().equals(cita.getFecha())
-                        && listaCitas.get(i).getHora() != null
-                        && listaCitas.get(i).getHora().equals(nuevaHora)) {
-                    conflicto = true;
-                    break;
-                }
+            if (!Validaciones.validarFecha(nuevaFecha)) {
+                System.out.println("Error: formato de fecha inválido. Use AAAA-MM-DD");
             }
-            if (conflicto) {
-                System.out.println("Error: conflicto de horario, ya existe una cita en ese horario.");
-                return;
+        } while (!Validaciones.validarFecha(nuevaFecha));
+
+        // Hora
+        do {
+            System.out.println("Ingrese nueva hora (HH:MM): ");
+            nuevaHora = scanner.nextLine();
+
+            if (!Validaciones.validarHora(nuevaHora)) {
+                System.out.println("Error: formato de hora inválido. Use HH:MM");
             }
-            cita.setHora(nuevaHora); // usa la validacion del dominio
-        }
+        } while (!Validaciones.validarHora(nuevaHora));
 
-        System.out.print("Nuevo tipo de servicio (Enter para mantener '" + cita.getServicio().getTipoServicio() + "'): ");
-        String nuevoServicio = scanner.nextLine().trim();
-        if (!nuevoServicio.isEmpty()) {
-            cita.getServicio().setTipoServicio(nuevoServicio);
-        }
+        // Servicio
+        do {
+            System.out.println("Ingrese nuevo servicio: ");
+            nuevoServicio = scanner.nextLine();
 
-        System.out.println("Cita actualizada: " + cita);
+            if (!Validaciones.validarLetras(nuevoServicio)) {
+                System.out.println("Error: el servicio solo puede contener letras.");
+            }
+        } while (!Validaciones.validarLetras(nuevoServicio));
+
+        fecha = nuevaFecha;
+        hora = nuevaHora;
+        servicio = nuevoServicio;
+
+        System.out.println("\nCita en agenda actualizada correctamente.");
     }
+
+
 }

@@ -2,87 +2,160 @@ package ec.edu.uce.novacare.interfaz;
 
 import java.util.Scanner;
 
+import ec.edu.uce.novacare.util.Validaciones;
+
+
 public class MenuGestionarDisponibilidad {
 
     private final Scanner scanner = new Scanner(System.in);
-    private final boolean[] horariosDisponibles = {
-            true, true, false, true, true, false, true, false, true, true
-    };
-    private final String[] etiquetasHorario = {
-            "08:00", "09:00", "10:00", "11:00", "12:00",
-            "13:00", "14:00", "15:00", "16:00", "17:00"
-    };
+    public String fecha = "2026-05-20";
+    public String horaInicio = "09:00";
+    public String horaFin = "17:00";
+    public String estado = "Disponible";
+
 
     public void mostrarMenu() {
+
         int opcion;
+
         do {
-            System.out.println("\n===== GESTIONAR DISPONIBILIDAD DE CITAS =====");
-            System.out.println("1. Consultar disponibilidad de horarios");
-            System.out.println("2. Filtrar por hora");
-            System.out.println("3. Activar / Desactivar horario (Dueno)");
-            System.out.println("0. Volver al menu principal");
-            System.out.print("Seleccione una opcion: ");
+            System.out.println("===== GESTIONAR DISPONIBILIDAD DE CITAS =====");
+            System.out.println("1. Crear disponibilidad");
+            System.out.println("2. Actualizar disponibilidad");
+            System.out.println("3. Consultar disponibilidad");
+            System.out.println("4. Eliminar disponibilidad");
+            System.out.println("0. Volver al menú principal");
+
+            System.out.println("Seleccione una opción: ");
 
             while (!scanner.hasNextInt()) {
-                System.out.println("Error: solo puede ingresar numeros.");
+                System.out.println("Error: solo puede ingresar números");
                 scanner.next();
                 System.out.print("Seleccione una opcion: ");
             }
+
             opcion = scanner.nextInt();
             scanner.nextLine();
 
             switch (opcion) {
-                case 1: consultarDisponibilidad(); break;
-                case 2: filtrarPorHora(); break;
-                case 3: gestionarHorario(); break;
-                case 0: System.out.println("Volviendo al menu principal..."); break;
-                default: System.out.println("Opcion invalida.");
+                case 1:
+                    crearDisponibilidad();
+                    break;
+
+                case 2:
+                    actualizarDisponibilidad();
+                    break;
+
+                case 3:
+                    consultarDisponibilidad();
+                    break;
+
+                case 4:
+                    eliminarDisponibilidad();
+                    break;
+
+                case 0:
+
+                    System.out.println("Regresando al menú principal...");
+                    MenuPrincipal menuPrincipal = new MenuPrincipal();
+                    menuPrincipal.mostrarMenu();
+                    return;
+
+                default:
+
+                    System.out.println("Opción inválida.");
+                    break;
             }
+
         } while (opcion != 0);
     }
 
-    private void consultarDisponibilidad() {
-        System.out.println("\n--- Horarios del Dia ---");
-        boolean hayDisponible = false;
-        for (int i = 0; i < etiquetasHorario.length; i++) {
-            String estado = horariosDisponibles[i] ? "[DISPONIBLE]" : "[OCUPADO]   ";
-            System.out.println("[" + (i + 1) + "] " + etiquetasHorario[i] + "  " + estado);
-            if (horariosDisponibles[i]) hayDisponible = true;
-        }
-        if (!hayDisponible) System.out.println("No hay horarios disponibles.");
+    public void crearDisponibilidad() {
+        System.out.println("\n--- Nueva Disponibilidad ---");
+        ingresarDatosDisponibilidad();
+        System.out.println("Disponibilidad registrada correctamente.");
     }
 
-    private void filtrarPorHora() {
-        System.out.print("Ingrese la hora a consultar (ej. 09:00): ");
-        String hora = scanner.nextLine().trim();
-        if (hora.isEmpty()) {
-            System.out.println("Error: ingrese una hora.");
+    public void consultarDisponibilidad() {
+        if (fecha.isEmpty()) {
+            System.out.println("\nNo hay horarios de disponibilidad registrados.");
+        } else {
+            System.out.println("\n===== DISPONIBILIDAD ACTUAL =====");
+            System.out.println("Fecha: " + fecha);
+            System.out.println("Hora Inicio: " + horaInicio);
+            System.out.println("Hora Fin: " + horaFin);
+            System.out.println("Estado: " + estado);
+        }
+    }
+
+    public void actualizarDisponibilidad() {
+        if (fecha.isEmpty()) {
+            System.out.println("\nNo existe registro para actualizar.");
             return;
         }
-        boolean encontrado = false;
-        for (int i = 0; i < etiquetasHorario.length; i++) {
-            if (etiquetasHorario[i].equals(hora)) {
-                String estado = horariosDisponibles[i] ? "DISPONIBLE" : "OCUPADO";
-                System.out.println("Horario " + hora + ": " + estado);
-                encontrado = true;
-                break;
+        System.out.println("\n--- Actualizar Horarios ---");
+        ingresarDatosDisponibilidad();
+        System.out.println("Horarios actualizados correctamente.");
+    }
+
+    public void eliminarDisponibilidad() {
+        String confirmacion;
+        do {
+            System.out.print("¿Desea eliminar esta disponibilidad? (si/no): ");
+            confirmacion = scanner.nextLine();
+            if (!confirmacion.equalsIgnoreCase("si") && !confirmacion.equalsIgnoreCase("no")) {
+                System.out.println("Error: solo puede ingresar si o no.");
             }
+        } while (!confirmacion.equalsIgnoreCase("si") && !confirmacion.equalsIgnoreCase("no"));
+
+        if (confirmacion.equalsIgnoreCase("si")) {
+            fecha = "";
+            horaInicio = "";
+            horaFin = "";
+            estado = "";
+            System.out.println("Disponibilidad eliminada correctamente.");
+        } else {
+            System.out.println("Operación cancelada.");
         }
-        if (!encontrado) System.out.println("No hay resultados para la hora '" + hora + "'.");
     }
 
-    private void gestionarHorario() {
-        consultarDisponibilidad();
-        System.out.print("Numero del horario a modificar: ");
-        while (!scanner.hasNextInt()) { scanner.next(); }
-        int idx = scanner.nextInt() - 1;
-        scanner.nextLine();
-        if (idx < 0 || idx >= etiquetasHorario.length) {
-            System.out.println("Error: numero de horario invalido.");
-            return;
-        }
-        horariosDisponibles[idx] = !horariosDisponibles[idx];
-        String nuevoEstado = horariosDisponibles[idx] ? "DISPONIBLE" : "OCUPADO";
-        System.out.println("Horario " + etiquetasHorario[idx] + " actualizado a: " + nuevoEstado);
+    private void ingresarDatosDisponibilidad() {
+        // Validar Fecha (AAAA-MM-DD)
+        do {
+            System.out.print("Ingrese fecha (AAAA-MM-DD): ");
+            fecha = scanner.nextLine();
+            if (!Validaciones.validarFecha(fecha)) {
+                System.out.println("Error: Formato de fecha inválido.");
+            }
+        } while (!Validaciones.validarFecha(fecha));
+
+        // Validar Horas (HH:MM)
+        do {
+            System.out.print("Ingrese hora de inicio (HH:MM): ");
+            horaInicio = scanner.nextLine();
+            if (!Validaciones.validarHora(horaInicio)) {
+                System.out.println("Error: Formato de hora inválido.");
+            }
+        } while (!Validaciones.validarHora(horaInicio));
+
+        do {
+            System.out.print("Ingrese hora de fin (HH:MM): ");
+            horaFin = scanner.nextLine();
+            if (!Validaciones.validarHora(horaFin)) {
+                System.out.println("Error: Formato de hora inválido.");
+            }
+        } while (!Validaciones.validarHora(horaFin));
+
+        // Estado (Disponible/Ocupado)
+        do {
+            System.out.print("Ingrese estado (Disponible/Ocupado): ");
+            estado = scanner.nextLine();
+            if (estado.trim().isEmpty()) {
+                System.out.println("Error: El estado no puede estar vacío.");
+            }
+        } while (estado.trim().isEmpty());
     }
+
+
+
 }

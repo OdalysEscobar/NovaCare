@@ -1,173 +1,172 @@
 package ec.edu.uce.novacare.interfaz;
 
-import ec.edu.uce.novacare.dominio.Servicio;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import ec.edu.uce.novacare.util.Validaciones;
+import ec.edu.uce.novacare.dominio.Servicio;
+import ec.edu.uce.novacare.dominio.TipoServicio;
+
+
 
 public class MenuGestionarServicios {
 
-    private final Scanner scanner = new Scanner(System.in);
-    private final Servicio[] catalogo = new Servicio[50];
-    private int totalServicios = 0;
+    private Scanner scanner = new Scanner(System.in);
+    public String nombreServicio="Corte de cabello";
+    public String descripcion="Corte en capas ";
+    public String duracion="45";
 
-    public MenuGestionarServicios() {
-        catalogo[0] = new Servicio("Corte de cabello", 30, true);
-        catalogo[1] = new Servicio("Tinte completo", 120, true);
-        catalogo[2] = new Servicio("Manicure", 45, false);
-        totalServicios = 3;
-    }
+
 
     public void mostrarMenu() {
+
         int opcion;
 
         do {
-            System.out.println("\n===== GESTIONAR SERVICIOS =====");
+            System.out.println("===== GESTIONAR SERVICIOS =====");
             System.out.println("1. Crear servicio");
-            System.out.println("2. Consultar catalogo");
-            System.out.println("3. Actualizar servicio");
+            System.out.println("2. Actualizar servicio");
+            System.out.println("3. Consultar servicios");
             System.out.println("4. Eliminar servicio");
-            System.out.println("5. Filtrar disponibles");
-            System.out.println("0. Volver al menu principal");
-            System.out.print("Seleccione una opcion: ");
+            System.out.println("0. Volver al menú principal");
+
+            System.out.println("Seleccione una opción: ");
 
             while (!scanner.hasNextInt()) {
-                System.out.println("Error: solo puede ingresar numeros.");
+                System.out.println("Error: solo puede ingresar números");
                 scanner.next();
                 System.out.print("Seleccione una opcion: ");
             }
+
             opcion = scanner.nextInt();
             scanner.nextLine();
 
+
             switch (opcion) {
-                case 1: crearServicio(); break;
-                case 2: consultarCatalogo(); break;
-                case 3: actualizarServicio(); break;
-                case 4: eliminarServicio(); break;
-                case 5: filtrarDisponibles(); break;
-                case 0: System.out.println("Volviendo al menu principal..."); break;
-                default: System.out.println("Opcion invalida.");
+                case 1:
+                    crearServicio();
+                    break;
+
+                case 2:
+                    actualizarServicio();
+                    break;
+
+                case 3:
+                    consultarServicio();
+                    break;
+
+                case 4:
+                    eliminarServicio();
+                    break;
+
+                case 0:
+
+                    System.out.println("Regresando al menú principal...");
+                    MenuPrincipal menuPrincipal = new MenuPrincipal();
+                    menuPrincipal.mostrarMenu();
+                    return;
+
+                default:
+                    System.out.println("Opción inválida.");
+                    break;
             }
+
         } while (opcion != 0);
     }
 
-    private void crearServicio() {
-        System.out.println("\n--- Crear Servicio ---");
-        if (totalServicios >= catalogo.length) {
-            System.out.println("Error: el catalogo esta lleno.");
-            return;
-        }
-
-        System.out.print("Nombre del servicio: ");
-        String tipo = scanner.nextLine().trim();
-        if (tipo.isEmpty()) {
-            System.out.println("Error: el nombre es obligatorio.");
-            return;
-        }
-
-        System.out.print("Duracion (minutos): ");
-        while (!scanner.hasNextInt()) {
-            System.out.print("Ingrese un numero: ");
-            scanner.next();
-        }
-        int duracion = scanner.nextInt();
-        scanner.nextLine();
-        if (duracion <= 0) {
-            System.out.println("Error: la duracion debe ser mayor a 0.");
-            return;
-        }
-
-        System.out.print("Disponible? (s/n): ");
-        String d = scanner.nextLine().trim().toLowerCase();
-        if (!d.equals("s") && !d.equals("n")) {
-            System.out.println("Error: ingrese s o n.");
-            return;
-        }
-
-        Servicio nuevo = new Servicio(tipo, duracion, d.equals("s"));
-        catalogo[totalServicios++] = nuevo;
-        System.out.println("Servicio creado: " + nuevo);
+    public void crearServicio() {
+        System.out.println("\t\n--- Nuevo Servicio ---");
+        ingresarDatosServicio();
+        System.out.println("Servicio creado con éxito.");
     }
 
-    private void consultarCatalogo() {
-        System.out.println("\n--- Catalogo de Servicios ---");
-        if (totalServicios == 0) {
-            System.out.println("No hay servicios registrados.");
-            return;
-        }
-        for (int i = 0; i < totalServicios; i++) {
-            System.out.println("[" + (i + 1) + "] " + catalogo[i]);
+    public void consultarServicio() {
+        if (nombreServicio.isEmpty()) {
+            System.out.println("\t\nNo hay servicios registrados.");
+        } else {
+            System.out.println("\t\n===== DETALLES DEL SERVICIO =====");
+            System.out.println("Nombre: " + nombreServicio);
+            System.out.println("Descripción: " + descripcion);
+            System.out.println("Duración: " + duracion + " min");
+
+
+            int minutos = Integer.parseInt(duracion);
+            Servicio servicioIndividual = new Servicio(minutos, true);
+
+            Servicio[] arregloServicios = new Servicio[]{ servicioIndividual };
+
+            TipoServicio tipo = new TipoServicio("Peluquería", "Servicios de estilismo", arregloServicios);
+
+            System.out.println("Categoría Asignada: " + tipo.getNombreTipoServicio());
+            System.out.println("Detalle Categoría : " + tipo.getDescripcion());
+
+            System.out.println("Estructura en Memoria: " + tipo.toString());
         }
     }
 
-    private void actualizarServicio() {
-        consultarCatalogo();
-        if (totalServicios == 0) return;
-
-        System.out.print("Numero del servicio a actualizar: ");
-        while (!scanner.hasNextInt()) { scanner.next(); }
-        int idx = scanner.nextInt() - 1;
-        scanner.nextLine();
-        if (idx < 0 || idx >= totalServicios) {
-            System.out.println("Error: numero invalido.");
+    public void actualizarServicio() {
+        if (nombreServicio.isEmpty()) {
+            System.out.println("\t\nNo existe un servicio para actualizar.");
             return;
         }
+        System.out.println("\t\n--- Actualizar Datos del Servicio ---");
+        ingresarDatosServicio();
+        System.out.println("Servicio actualizado correctamente.");
+    }
 
-        System.out.print("Nuevo nombre (Enter para mantener '" + catalogo[idx].getTipoServicio() + "'): ");
-        String nombre = scanner.nextLine().trim();
-        if (!nombre.isEmpty()) catalogo[idx].setTipoServicio(nombre);
+    public void eliminarServicio() {
+        String confirmacion;
+        do {
+            System.out.print("¿Desea eliminar el servicio? (si/no): ");
+            confirmacion = scanner.nextLine();
 
-        System.out.print("Nueva duracion en minutos (Enter para mantener " + catalogo[idx].getDuracion() + "): ");
-        String durStr = scanner.nextLine().trim();
-        if (!durStr.isEmpty()) {
-            try {
-                int dur = Integer.parseInt(durStr);
-                if (dur > 0) catalogo[idx].setDuracion(dur);
-                else System.out.println("Duracion no valida, se mantiene la anterior.");
-            } catch (NumberFormatException e) {
-                System.out.println("Valor no valido, se mantiene la anterior.");
+            if (!confirmacion.equalsIgnoreCase("si") && !confirmacion.equalsIgnoreCase("no")) {
+                System.out.println("Error: solo puede ingresar si o no.");
             }
-        }
+        } while (!confirmacion.equalsIgnoreCase("si") && !confirmacion.equalsIgnoreCase("no"));
 
-        System.out.print("Disponible? s/n (Enter para mantener): ");
-        String dStr = scanner.nextLine().trim().toLowerCase();
-        if (dStr.equals("s")) catalogo[idx].setDispoinibilidad(true);
-        else if (dStr.equals("n")) catalogo[idx].setDispoinibilidad(false);
-
-        System.out.println("Servicio actualizado: " + catalogo[idx]);
-    }
-
-    private void eliminarServicio() {
-        consultarCatalogo();
-        if (totalServicios == 0) return;
-
-        System.out.print("Numero del servicio a eliminar: ");
-        while (!scanner.hasNextInt()) { scanner.next(); }
-        int idx = scanner.nextInt() - 1;
-        scanner.nextLine();
-        if (idx < 0 || idx >= totalServicios) {
-            System.out.println("Error: numero invalido.");
-            return;
-        }
-
-        System.out.print("Confirma eliminar '" + catalogo[idx].getTipoServicio() + "'? (s/n): ");
-        String conf = scanner.nextLine().trim().toLowerCase();
-        if (conf.equals("s")) {
-            for (int i = idx; i < totalServicios - 1; i++) catalogo[i] = catalogo[i + 1];
-            catalogo[--totalServicios] = null;
+        if (confirmacion.equalsIgnoreCase("si")) {
+            nombreServicio = "";
+            descripcion = "";
+            duracion = "";
             System.out.println("Servicio eliminado correctamente.");
         } else {
-            System.out.println("Eliminacion cancelada.");
+            System.out.println("Operación cancelada.");
         }
     }
 
-    private void filtrarDisponibles() {
-        System.out.println("\n--- Servicios Disponibles ---");
-        boolean encontrado = false;
-        for (int i = 0; i < totalServicios; i++) {
-            if (catalogo[i].isDispoinibilidad()) {
-                System.out.println("- " + catalogo[i]);
-                encontrado = true;
+    private void ingresarDatosServicio() {
+        // Validar Nombre del Servicio
+        do {
+            System.out.print("Ingrese nombre del servicio: ");
+            nombreServicio = scanner.nextLine();
+            if (!Validaciones.validarLetras(nombreServicio)) {
+                System.out.println("Error: Nombre inválido (solo letras).");
             }
-        }
-        if (!encontrado) System.out.println("No hay servicios disponibles en este momento.");
+        } while (!Validaciones.validarLetras(nombreServicio));
+
+        // Validar Descripción
+        do {
+            System.out.print("Ingrese descripción: ");
+            descripcion = scanner.nextLine();
+            if (descripcion.trim().isEmpty()) {
+                System.out.println("Error: La descripción no puede estar vacía.");
+            }
+        } while (descripcion.trim().isEmpty());
+
+        // Validar Duración (Números enteros)
+        do {
+            System.out.print("Ingrese duración en minutos: ");
+            duracion = scanner.nextLine();
+            if (!validarNumero(duracion)) {
+                System.out.println("Error: Ingrese solo números enteros.");
+            }
+        } while (!validarNumero(duracion));
+    }
+
+    public boolean validarNumero(String numero) {
+        Pattern pattern = Pattern.compile("^[0-9]+$");
+        Matcher matcher = pattern.matcher(numero);
+        return matcher.matches();
     }
 }

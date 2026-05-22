@@ -84,6 +84,7 @@ public class MenuPrincipal {
                     menuIngresarSistema.mostrarMenu();
                     break;
 
+
                 default:
                     System.out.println("Opción inválida.");
             }
