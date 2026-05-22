@@ -50,10 +50,11 @@ public class TipoServicio {
 
     @Override
     public String toString() {
-        return "TipoServicio{" +
-                "nombreTipoServicio='" + nombreTipoServicio + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", servicios=" + Arrays.toString(servicios) +
-                '}';
+        return "\n  ----------------------------------------" +
+                "\n  [Tipo de Servicio en Memoria]" +
+                "\n  Nombre Tipo: '" + nombreTipoServicio + '\'' +
+                "\n  Descripción: '" + descripcion + '\'' +
+                "\n  Arreglo Servicios: " + java.util.Arrays.toString(servicios) +
+                "\n  ----------------------------------------";
     }
 }
