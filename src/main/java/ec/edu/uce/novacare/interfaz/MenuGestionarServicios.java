@@ -4,6 +4,10 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import ec.edu.uce.novacare.util.Validaciones;
+import ec.edu.uce.novacare.dominio.Servicio;
+import ec.edu.uce.novacare.dominio.TipoServicio;
+
+
 
 public class MenuGestionarServicios {
 
@@ -84,6 +88,20 @@ public class MenuGestionarServicios {
             System.out.println("Nombre: " + nombreServicio);
             System.out.println("Descripción: " + descripcion);
             System.out.println("Duración: " + duracion + " min");
+
+            System.out.println("\n--- RELACIÓN CON CLASE DOMINIO (POJO) ---");
+
+            int minutos = Integer.parseInt(duracion);
+            Servicio servicioIndividual = new Servicio(minutos, true);
+
+            Servicio[] arregloServicios = new Servicio[]{ servicioIndividual };
+
+            TipoServicio tipo = new TipoServicio("Peluquería", "Servicios de estilismo", arregloServicios);
+
+            System.out.println("Categoría Asignada: " + tipo.getNombreTipoServicio());
+            System.out.println("Detalle Categoría : " + tipo.getDescripcion());
+
+            System.out.println("Estructura en Memoria: " + tipo.toString());
         }
     }
 
