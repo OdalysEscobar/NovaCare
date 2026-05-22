@@ -7,7 +7,7 @@ import ec.edu.uce.novacare.util.Validaciones;
 
 public class MenuGestionarDisponibilidad {
 
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
     public String fecha = "2026-05-20";
     public String horaInicio = "09:00";
     public String horaFin = "17:00";
