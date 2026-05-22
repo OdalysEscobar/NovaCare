@@ -16,7 +16,6 @@ public class Agenda {
     private int numeroCitasPorSemana;
     private int numeroCitasPorMes;
     private int numeroCitasCanceladas;
-
     private Cita[] citas;
 
     /**
@@ -31,7 +30,7 @@ public class Agenda {
         this.numeroCitasPorSemana=0;
         this.numeroCitasPorMes=0;
         this.numeroCitasCanceladas=0;
-        this.citas = new Cita[0];
+        //this.citas = new Cita[0];
     }
 
     /**
