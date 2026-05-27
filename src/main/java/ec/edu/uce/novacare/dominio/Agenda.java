@@ -30,7 +30,7 @@ public class Agenda {
         this.numeroCitasPorSemana=0;
         this.numeroCitasPorMes=0;
         this.numeroCitasCanceladas=0;
-        //this.citas = new Cita[0];
+        this.citas = new Cita[0];
     }
 
     /**
@@ -208,7 +208,7 @@ public class Agenda {
                 ", numeroCitasPorSemana=" + numeroCitasPorSemana +
                 ", numeroCitasPorMes=" + numeroCitasPorMes +
                 ", numeroCitasCanceladas=" + numeroCitasCanceladas +
-                ", citas=" + Arrays.toString(citas) +
+                ", citas="+ Arrays.toString(citas) +
                 '}';
     }
 }

@@ -1,4 +1,4 @@
-package ec.edu.uce.novacare.test;
+package ec.edu.uce.novacare.test.dominio;
 
 import ec.edu.uce.novacare.dominio.Cita;
 import ec.edu.uce.novacare.dominio.Cliente;
@@ -21,7 +21,6 @@ class ClienteTest {
         assertEquals("kim123", cliente.getContrasena());
         assertEquals("kim@gmail.com", cliente.getCorreo());
         assertEquals("0999999999", cliente.getNumeroDeTelefono());
-        assertEquals(citas, cliente.getCitas());
 
         System.out.println(cliente);
 
@@ -53,14 +52,6 @@ class ClienteTest {
     }
 
     @Test
-    void getCitas() {
-    }
-
-    @Test
-    void setCitas() {
-    }
-
-    @Test
     void validarTelefono() {
             assertTrue(Cliente.validarTelefono("0999999999"));
             System.out.println("El metodo validarTelefono funciona correctamente✅");
@@ -72,8 +63,11 @@ class ClienteTest {
         Cliente cliente = new Cliente();
         cliente.setNumeroDeTelefono("0999999999");
         String esperado = "Cliente{" +
-                "numeroDeTelefono='0999999999'" +
-                ", citas=null" +
+                "nombre='Sin nombre'" +
+                ", apellido='Sin apellido'" +
+                ", correo='Sin correo'" +
+                ", contrasena='Sin contrasena'" +
+                ", numeroDeTelefono='0999999999'" +
                 '}';
         assertEquals(esperado, cliente.toString());
         System.out.println("El metodo toString funciona correctamente✅");

@@ -1,4 +1,4 @@
-package ec.edu.uce.novacare.test;
+package ec.edu.uce.novacare.test.dominio;
 
 import ec.edu.uce.novacare.dominio.Agenda;
 import ec.edu.uce.novacare.dominio.Cita;
@@ -23,7 +23,6 @@ class CitaTest {
         assertEquals("10:00", cita.getHora());
         assertEquals(servicio, cita.getServicio());
         assertEquals(cliente, cita.getCliente());
-        assertEquals(agenda, cita.getAgenda());
 
         System.out.println(cita);
         System.out.println("El metodo constructorConParametros funciona correctamente✅");
@@ -99,13 +98,6 @@ class CitaTest {
     void setServicio() {
     }
 
-    @Test
-    void getAgenda() {
-    }
-
-    @Test
-    void setAgenda() {
-    }
 
     @Test
     void getCliente() {
