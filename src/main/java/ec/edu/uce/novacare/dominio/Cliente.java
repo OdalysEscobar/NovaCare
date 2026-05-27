@@ -6,18 +6,15 @@ import java.util.regex.Pattern;
 
 public class Cliente extends Usuario {
     private String numeroDeTelefono;
-    private Cita[] citas;
 
     public Cliente() {
         super ();
         this.numeroDeTelefono="Sin numero de telefono";
-        //this.citas = new Cita[0];
     }
 
     public Cliente(String nombre, String apellido, String contrasena, String correo, String numeroDeTelefono, Cita[] citas) {
         super(nombre, apellido, contrasena, correo);
         setNumeroDeTelefono(numeroDeTelefono);
-        this.citas = citas;
     }
 
     public String getNumeroDeTelefono() {
@@ -28,14 +25,6 @@ public class Cliente extends Usuario {
         if (validarTelefono(numeroDeTelefono)) {
             this.numeroDeTelefono = numeroDeTelefono;
         }
-    }
-
-    public Cita[] getCitas() {
-        return citas;
-    }
-
-    public void setCitas(Cita[] citas) {
-        this.citas = citas;
     }
 
     public static boolean validarTelefono (String telefono){
@@ -52,7 +41,6 @@ public class Cliente extends Usuario {
                 ", correo='" + getCorreo() + '\'' +
                 ", contrasena='" + getContrasena() + '\'' +
                 ", numeroDeTelefono='" + numeroDeTelefono + '\'' +
-                ", citas=" + Arrays.toString(citas) +
                 '}';
     }
 }

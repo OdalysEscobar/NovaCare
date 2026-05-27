@@ -9,7 +9,6 @@ public class Cita {
     private String hora;
     private Servicio servicio;
     private Cliente cliente;
-    private Agenda agenda;
 
     /**
      * Constructor por defecto.
@@ -31,7 +30,6 @@ public class Cita {
      */
     public Cita(String fecha, Agenda agenda, Cliente cliente, Servicio servicio, String hora) {
         setFecha(fecha);
-        this.agenda = agenda;
         this.cliente = cliente;
         this.servicio = servicio;
         setHora(hora);
@@ -49,7 +47,6 @@ public class Cita {
                 ", hora='" + hora + '\'' +
                 ", servicio=" + servicio +
                 ", cliente=" + cliente +
-                ", agenda=" + agenda +
                 '}';
     }
 
@@ -108,17 +105,6 @@ public class Cita {
      * Obtiene la agenda asociada a la cita.
      * @return agenda de la cita
      */
-    public Agenda getAgenda() {
-        return agenda;
-    }
-
-    /**
-     * Asigna la agenda de la cita.
-     * @param agenda agenda a asignar
-     */
-    public void setAgenda(Agenda agenda) {
-        this.agenda = agenda;
-    }
 
     /**
      * Obtiene el cliente asociado a la cita.
