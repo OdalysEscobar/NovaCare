@@ -29,7 +29,7 @@ public class MenuPrincipal {
             }
 
             opcion = scanner.nextInt();
-
+            scanner.nextLine();
 
             switch (opcion) {
 
