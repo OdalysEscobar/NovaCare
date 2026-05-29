@@ -1,6 +1,9 @@
 package ec.edu.uce.novacare.dominio;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import ec.edu.uce.novacare.util.Validaciones;
+
+/**
+ * Clase que representa a un usuario del sistema NovaCare.
+ */
 public class Usuario {
 
     private String nombre;
@@ -8,16 +11,35 @@ public class Usuario {
     private String apellido;
     private String contrasena;
 
+    /**
+     * Constructor vacio.
+     * Inicializa los atributos con valores predeterminados.
+     */
     public Usuario() {
+        this.nombre= "Sin nombre";
+        this.apellido="Sin apellido";
+        this.correo="Sin correo";
+        this.contrasena="Sin contrasena";
     }
 
+    /**
+     * Constructor con parámetros.
+     * @param nombre nombre del usuario
+     * @param apellido apellido del usuario
+     * @param contrasena contraseña del usuario
+     * @param correo correo electrónico del usuario
+     */
     public Usuario(String nombre, String apellido, String contrasena, String correo) {
-        this.contrasena = contrasena;
         setNombre(nombre);
         setApellido(apellido);
+        setContrasena(contrasena);
         setCorreo(correo);
     }
 
+    /**
+     * Devuelve la información del usuario en formato texto.
+     * @return información del usuario
+     */
     @Override
     public String toString() {
         return "Usuario{" +
@@ -28,57 +50,76 @@ public class Usuario {
                 '}';
     }
 
+    /**
+     * Obtiene el nombre del usuario.
+     * @return nombre del usuario
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * Modifica el nombre del usuario.
+     * @param nombre nuevo nombre del usuario
+     */
     public void setNombre(String nombre) {
-        String regex = "^[a-zA-Z\\s]+$";
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(nombre);
-        if (m.matches()) {
+        if (Validaciones.validarLetras(nombre)) {
             this.nombre = nombre;
-        } else {
-            System.out.println("Error: Nombre no válido.");
         }
     }
 
+    /**
+     * Obtiene el correo del usuario.
+     * @return correo del usuario
+     */
     public String getCorreo() {
         return correo;
     }
 
+    /**
+     * Modifica el correo del usuario.
+     * @param correo nuevo correo del usuario
+     */
     public void setCorreo(String correo) {
-        String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(correo);
-        if (m.matches()) {
+        if (Validaciones.validarCorreo(correo)) {
             this.correo = correo;
-        } else {
-            System.out.println("Error: Correo con formato incorrecto.");
         }
     }
 
+    /**
+     * Obtiene el apellido del usuario.
+     * @return apellido del usuario
+     */
     public String getApellido() {
         return apellido;
     }
 
+    /**
+     * Modifica el apellido del usuario.
+     * @param apellido nuevo apellido del usuario
+     */
     public void setApellido(String apellido) {
-        String regex = "^[a-zA-Z\\s]+$";
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(apellido);
-        if (m.matches()) {
+        if (Validaciones.validarLetras(apellido)) {
             this.apellido = apellido;
-        } else {
-            System.out.println("Error: Apellido no válido.");
         }
     }
 
+    /**
+     * Obtiene la contraseña del usuario.
+     * @return contraseña del usuario
+     */
     public String getContrasena() {
         return contrasena;
     }
 
+    /**
+     * Modifica la contraseña del usuario.
+     * @param contrasena nueva contraseña del usuario
+     */
     public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+        if(Validaciones.validarContrasena(contrasena)){
+            this.contrasena=contrasena;
+        }
     }
 
 }

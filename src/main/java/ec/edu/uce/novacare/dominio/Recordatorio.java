@@ -1,26 +1,31 @@
 package ec.edu.uce.novacare.dominio;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import ec.edu.uce.novacare.util.Validaciones;
 
 public class Recordatorio {
-
+    private String informacionCita;
     private String correo;
     private Cita cita;
 
     public Recordatorio() {
+        this.informacionCita="Sin informacion";
+        this.correo="Sin correo";
     }
 
-    public Recordatorio(String correo, Cita cita) {
+    public Recordatorio(String informacionCita, String correo, Cita cita) {
+        setInformacionCita(informacionCita);
         setCorreo(correo);
         this.cita = cita;
     }
 
-    @Override
-    public String toString() {
-        return "Recordatorio{" +
-                "correo='" + correo + '\'' +
-                ", cita=" + cita +
-                '}';
+    public String getInformacionCita() {
+        return informacionCita;
+    }
+
+    public void setInformacionCita(String informacionCita) {
+        if(Validaciones.validarLetras(informacionCita)) {
+            this.informacionCita = informacionCita;
+        }
     }
 
     public String getCorreo() {
@@ -28,14 +33,8 @@ public class Recordatorio {
     }
 
     public void setCorreo(String correo) {
-        String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(correo);
-
-        if (m.matches()) {
+        if (Validaciones.validarCorreo(correo)) {
             this.correo = correo;
-        } else {
-            System.out.println("Error: El formato del correo '" + correo + "' no es válido.");
         }
     }
 
@@ -45,5 +44,14 @@ public class Recordatorio {
 
     public void setCita(Cita cita) {
         this.cita = cita;
+    }
+
+    @Override
+    public String toString() {
+        return "Recordatorio{" +
+                "informacionCita='" + informacionCita + '\'' +
+                ", correo='" + correo + '\'' +
+                ", cita=" + cita +
+                '}';
     }
 }

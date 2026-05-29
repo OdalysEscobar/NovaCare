@@ -1,16 +1,45 @@
 package ec.edu.uce.novacare.dominio;
-
-import java.util.List;
+import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Cliente extends Usuario {
-    private List <Cita> citas;
+    private String numeroDeTelefono;
 
-    public Cliente(List<Cita> citas) {
-        this.citas = citas;
+    public Cliente() {
+        super ();
+        this.numeroDeTelefono="Sin numero de telefono";
     }
 
-    public Cliente(String nombre, String apellido, String contrasena, String correo, List<Cita> citas) {
+    public Cliente(String nombre, String apellido, String contrasena, String correo, String numeroDeTelefono, Cita[] citas) {
         super(nombre, apellido, contrasena, correo);
-        this.citas = citas;
+        setNumeroDeTelefono(numeroDeTelefono);
+    }
+
+    public String getNumeroDeTelefono() {
+        return numeroDeTelefono;
+    }
+
+    public void setNumeroDeTelefono(String numeroDeTelefono) {
+        if (validarTelefono(numeroDeTelefono)) {
+            this.numeroDeTelefono = numeroDeTelefono;
+        }
+    }
+
+    public static boolean validarTelefono (String telefono){
+        Pattern pattern = Pattern.compile("^09\\d{8}$");
+        Matcher matcher= pattern.matcher(telefono);
+        return matcher.matches();
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "nombre='" + getNombre() + '\'' +
+                ", apellido='" + getApellido() + '\'' +
+                ", correo='" + getCorreo() + '\'' +
+                ", contrasena='" + getContrasena() + '\'' +
+                ", numeroDeTelefono='" + numeroDeTelefono + '\'' +
+                '}';
     }
 }

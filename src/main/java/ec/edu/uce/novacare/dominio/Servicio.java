@@ -1,65 +1,73 @@
 package ec.edu.uce.novacare.dominio;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-
+/**
+ * Clase que representa un servicio dentro del sistema NovaCare.
+ */
 public class Servicio {
-    private String tipoServicio;
     private int duracion;
-    private boolean dispoinibilidad;
-
+    private boolean disponibilidad;
+    /**
+     * Constructor vacio.
+     * Inicializa la duración en 0 y la disponibilidad en false.
+     */
     public Servicio() {
+        this.duracion = 0 ;
+        this.disponibilidad = false;
     }
 
-    public Servicio(String tipoServicio, int duracion, boolean dispoinibilidad) {
-        setTipoServicio(tipoServicio);
-        this.duracion = duracion;
-        this.dispoinibilidad = dispoinibilidad;
+    /**
+     * Constructor con parámetros.
+     * @param duracion duración del servicio
+     * @param disponibilidad disponibilidad del servicio
+     */
+    public Servicio(int duracion, boolean disponibilidad) {
+        setDuracion(duracion);
+        setDisponibilidad(disponibilidad);
     }
 
+    /**
+     * Devuelve la información del servicio en formato texto.
+     * @return información del servicio
+     */
     @Override
     public String toString() {
         return "Servicio{" +
-                "tipoServicio='" + tipoServicio + '\'' +
-                ", duracion=" + duracion +
-                ", dispoinibilidad=" + dispoinibilidad +
+                " duracion=" + duracion +
+                ", disponibilidad=" + disponibilidad +
                 '}';
     }
 
-    public String getTipoServicio() {
-        return tipoServicio;
-    }
-
-    public void setTipoServicio(String tipoServicio) {
-        String regex = "^[a-zA-Z\\sÁÉÍÓÚáéíóúñÑ]+$";
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(tipoServicio);
-
-        if (m.matches()) {
-            this.tipoServicio = tipoServicio;
-        } else {
-            System.out.println("Error: El tipo de servicio '" + tipoServicio + "' no es válido.");
-        }
-    }
-
+    /**
+     * Obtiene la duración del servicio.
+     * @return duración del servicio
+     */
     public int getDuracion() {
         return duracion;
     }
 
+    /**
+     * Modifica la duración del servicio.
+     * @param duracion nueva duración del servicio
+     */
     public void setDuracion(int duracion) {
         if (duracion > 0) {
             this.duracion = duracion;
-        } else {
-            System.out.println("Error: La duración debe ser mayor a 0.");
         }
     }
 
-    public boolean isDispoinibilidad() {
-        return dispoinibilidad;
+    /**
+     * Obtiene la disponibilidad del servicio.
+     * @return true si el servicio está disponible,
+     * false en caso contrario
+     */
+    public boolean isDisponibilidad() {
+        return disponibilidad;
     }
-
-    public void setDispoinibilidad(boolean dispoinibilidad) {
-        this.dispoinibilidad = dispoinibilidad;
+    /**
+     * Modifica la disponibilidad del servicio.
+     * @param disponibilidad nueva disponibilidad del servicio
+     */
+    public void setDisponibilidad(boolean disponibilidad) {
+        this.disponibilidad = disponibilidad;
     }
 }
-

@@ -1,12 +1,13 @@
 package ec.edu.uce.novacare.dominio;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import ec.edu.uce.novacare.util.Validaciones;
 
 public class Empleado extends Usuario{
     private String especialidad;
     private  Agenda agenda;
 
     public Empleado() {
+        super ();
+        this.especialidad="Sin especialidad";
     }
 
     public Empleado(String nombre, String apellido, String contrasena, String correo, String especialidad, Agenda agenda) {
@@ -20,14 +21,8 @@ public class Empleado extends Usuario{
     }
 
     public void setEspecialidad(String especialidad) {
-        String regex = "^[a-zA-Z\\sÁÉÍÓÚáéíóúñÑ]+$";
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(especialidad);
-
-        if (m.matches()) {
+        if (Validaciones.validarLetras(especialidad)) {
             this.especialidad = especialidad;
-        } else {
-            System.out.println("Error: La especialidad '" + especialidad + "' no es válida.");
         }
     }
 
