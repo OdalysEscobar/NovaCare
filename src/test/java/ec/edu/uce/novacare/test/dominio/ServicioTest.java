@@ -1,4 +1,4 @@
-package ec.edu.uce.novacare.test;
+package ec.edu.uce.novacare.test.dominio;
 
 import ec.edu.uce.novacare.dominio.Servicio;
 import org.junit.jupiter.api.Test;
