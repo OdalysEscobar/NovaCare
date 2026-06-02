@@ -11,7 +11,6 @@ class MenuGestionarDisponibilidadTest {
 
         MenuGestionarDisponibilidad disponibilidad = new MenuGestionarDisponibilidad();
 
-        // Al iniciar, el menú ya cuenta con valores quemados por defecto
         assertEquals("2026-05-20", disponibilidad.fecha);
         assertEquals("09:00", disponibilidad.horaInicio);
         assertEquals("17:00", disponibilidad.horaFin);
@@ -94,7 +93,6 @@ class MenuGestionarDisponibilidadTest {
 
         MenuGestionarDisponibilidad disponibilidad = new MenuGestionarDisponibilidad();
 
-        // Simula el estado después de una eliminación (vacío)
         disponibilidad.fecha = "";
         disponibilidad.horaInicio = "";
         disponibilidad.horaFin = "";
@@ -158,7 +156,6 @@ class MenuGestionarDisponibilidadTest {
 
         MenuGestionarDisponibilidad disponibilidad = new MenuGestionarDisponibilidad();
 
-        // Proceso de eliminación asigna cadenas vacías según el método eliminarDisponibilidad()
         disponibilidad.fecha = "";
         disponibilidad.horaInicio = "";
         disponibilidad.horaFin = "";
@@ -177,7 +174,6 @@ class MenuGestionarDisponibilidadTest {
 
         MenuGestionarDisponibilidad disponibilidad = new MenuGestionarDisponibilidad();
 
-        // Los campos mantienen los datos originales si la operación se cancela
         assertNotEquals("", disponibilidad.fecha);
         assertNotEquals("", disponibilidad.horaInicio);
         assertNotEquals("", disponibilidad.horaFin);
