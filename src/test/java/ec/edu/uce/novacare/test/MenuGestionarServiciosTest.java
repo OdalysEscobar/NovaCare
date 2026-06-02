@@ -11,7 +11,6 @@ class MenuGestionarServiciosTest {
 
         MenuGestionarServicios servicio = new MenuGestionarServicios();
 
-        // Al iniciar, el menú ya cuenta con valores establecidos por defecto
         assertEquals("Corte de cabello", servicio.nombreServicio);
         assertEquals("Corte en capas ", servicio.descripcion);
         assertEquals("45", servicio.duracion);
@@ -156,7 +155,6 @@ class MenuGestionarServiciosTest {
 
         MenuGestionarServicios servicio = new MenuGestionarServicios();
 
-        // Si se cancela la operación, las variables retienen su información
         assertNotEquals("", servicio.nombreServicio);
         assertNotEquals("", servicio.descripcion);
         assertNotEquals("", servicio.duracion);
