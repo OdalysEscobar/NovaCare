@@ -1,4 +1,4 @@
-package ec.edu.uce.novacare.test;
+package ec.edu.uce.novacare.test.interfaz;
 
 import ec.edu.uce.novacare.interfaz.MenuGestionarReportes;
 import org.junit.jupiter.api.Test;
