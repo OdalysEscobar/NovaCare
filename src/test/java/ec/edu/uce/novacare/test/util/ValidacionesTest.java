@@ -1,4 +1,4 @@
-package ec.edu.uce.novacare.test;
+package ec.edu.uce.novacare.test.util;
 
 import ec.edu.uce.novacare.util.Validaciones;
 import org.junit.jupiter.api.Test;

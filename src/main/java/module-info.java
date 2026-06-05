@@ -1,6 +1,7 @@
 module ec.edu.uce.novacare {
     requires javafx.controls;
     requires javafx.fxml;
+    requires jdk.unsupported.desktop;
 
 
     opens ec.edu.uce.novacare to javafx.fxml;
