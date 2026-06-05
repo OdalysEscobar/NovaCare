@@ -10,6 +10,14 @@ public class IniciarSesion {
     public IniciarSesion() {
     }
 
+    public boolean validarLogin(String correo, String contrasena){
+
+        boolean checkCorreo = Validaciones.validarCorreo(correo);
+        boolean checkContrasena =  Validaciones.validarContrasena(contrasena);
+        return checkCorreo && checkContrasena;
+
+    }
+
     public boolean login(){
         String correo;
         String contrasena;
