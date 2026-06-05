@@ -84,7 +84,7 @@ class CitaTest {
     @Test
     void setHoraInvalida() {
         Cita cita = new Cita();
-        cita.setHora("100:00");
+        cita.setHora("21:00");
         assertEquals("Sin hora", cita.getHora());
         System.out.println("El metodo setHora funciona correctamente✅");
     }

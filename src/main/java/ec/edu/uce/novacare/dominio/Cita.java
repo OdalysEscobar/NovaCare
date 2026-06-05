@@ -64,7 +64,7 @@ public class Cita {
      */
     public void setFecha(String fecha) {
         if (Validaciones.validarFecha(fecha)) {
-        this.fecha = fecha;
+            this.fecha=fecha;
         }
     }
 
@@ -78,11 +78,16 @@ public class Cita {
 
     /**
      * Establece la hora de la cita si es válida.
+     * Establece que la hora de la cita sea dentro de los horarios del negocio.
      * @param hora nueva hora
      */
     public void setHora(String hora) {
         if (Validaciones.validarHora(hora)) {
-            this.hora = hora;
+            String [] partes = hora.split(":");
+            int horaNumerica = Integer.parseInt(partes[0]);
+            if (horaNumerica>=7 && horaNumerica<=20){
+                this.hora=hora;
+            }
         }
     }
 
