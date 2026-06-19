@@ -43,6 +43,31 @@ public class CentroDeBelleza {
         this.servicios = servicios;
     }
 
+    public boolean editarServicio(Servicio nuevoServicio, int pos) {
+        if (pos >= 0 && pos < servicios.length && servicios[pos] != null) {
+            servicios[pos].setDuracion(nuevoServicio.getDuracion());
+            servicios[pos].setDisponibilidad(nuevoServicio.isDisponibilidad());
+            return true;
+        }
+        return false;
+    }
+
+    public boolean eliminarServicio(int pos) {
+        if (pos >= 0 && pos < numServicios && servicios[pos] != null) {
+
+            for (int i = pos; i < numServicios - 1; i++) {
+                servicios[i] = servicios[i + 1];
+            }
+
+            servicios[numServicios - 1] = null;
+            numServicios--;
+            return true;
+        }
+        return false;
+    }
+
+
+
     public String getNombre() {
         return nombre;
     }
