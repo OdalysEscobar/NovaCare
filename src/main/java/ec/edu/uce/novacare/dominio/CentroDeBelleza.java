@@ -2,7 +2,8 @@ package ec.edu.uce.novacare.dominio;
 
 import ec.edu.uce.novacare.util.Validaciones;
 
-public class CentroDeBelleza {
+public  class CentroDeBelleza {
+
     private static final CentroDeBelleza centro = new CentroDeBelleza("Nova Care");
 
     private static String nombre;
@@ -128,6 +129,56 @@ public class CentroDeBelleza {
         return telefono != null && telefono.matches("^09\\d{8}$");
     }
 
+    public static boolean existe(Usuario u){
+        for (int i=0; i< numUsuarios; i++){
+
+            if(u != null && usuarios[i].equals(u)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean agregarUsuario (Usuario nuevoUsuario){
+
+        if(nuevoUsuario == null){
+            return false;
+        }
+
+        if(!existe(nuevoUsuario)) {
+            if (numUsuarios == usuarios.length) {
+                Usuario[] auxUsuario = new Usuario[usuarios.length + 1];
+                System.arraycopy(usuarios, 0, auxUsuario, 0, usuarios.length);
+                usuarios = auxUsuario;
+            }
+
+            usuarios[numUsuarios] = nuevoUsuario;
+            numUsuarios++;
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public static Usuario buscarUsuario(String correo){
+
+        if (correo == null){
+            return null;
+        }
+        for (int i = 0; i < numUsuarios; i++){
+            if (usuarios[i] != null){
+                if(usuarios[i].getCorreo().equals(correo)){
+
+                    return usuarios[i];
+                }
+
+            }
+
+        }
+
+        return null;
+    }
 
     @Override
     public String toString() {

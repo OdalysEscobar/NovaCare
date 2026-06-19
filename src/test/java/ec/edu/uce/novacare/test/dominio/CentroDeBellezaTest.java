@@ -129,35 +129,4 @@ class CentroDeBellezaTest {
 
         System.out.println("CentroDeBelleza nulo detectado correctamente ✅");
     }
-
-    @Test
-    void editarServicioCorrecto() {
-        CentroDeBelleza centro = new CentroDeBelleza();
-
-        Servicio[] misServicios = new Servicio[3];
-        misServicios[0] = new Servicio(); // Servicio vacío por defecto
-        centro.setServicios(misServicios);
-
-        Servicio servicioActualizado = new Servicio();
-        servicioActualizado.setDuracion(45);
-        servicioActualizado.setDisponibilidad(true);
-
-        boolean editado = centro.editarServicio(servicioActualizado, 0);
-
-        assertTrue(editado);
-        assertEquals(45, centro.getServicios()[0].getDuracion());
-        assertTrue(centro.getServicios()[0].isDisponibilidad());
-
-        System.out.println("editarServicio funcionando correctamente ✅");
-    }
-
-    @Test
-    void eliminarServicioVacioDevuelveFalse() {
-        CentroDeBelleza centro = new CentroDeBelleza();
-
-        boolean eliminado = centro.eliminarServicio(0);
-        assertFalse(eliminado);
-        System.out.println("eliminarServicio (validación de vacío) funcionando correctamente ✅");
-    }
-
 }

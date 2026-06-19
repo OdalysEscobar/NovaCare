@@ -4,7 +4,7 @@ import ec.edu.uce.novacare.util.Validaciones;
 /**
  * Clase que representa a un usuario del sistema NovaCare.
  */
-public abstract class Usuario {
+public class Usuario {
 
     private String nombre;
     private String correo;
