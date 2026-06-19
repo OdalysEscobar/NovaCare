@@ -130,6 +130,8 @@ class CentroDeBellezaTest {
         System.out.println("CentroDeBelleza nulo detectado correctamente ✅");
     }
 
+    //Test servicio
+
     @Test
     void editarServicioCorrecto() {
         CentroDeBelleza centro = new CentroDeBelleza();
@@ -160,6 +162,7 @@ class CentroDeBellezaTest {
         System.out.println("eliminarServicio (validación de vacío) funcionando correctamente ✅");
     }
 
+    //Test usuarios
     @Test
     void agregarUsuarioCorrecto() {
 
@@ -223,4 +226,70 @@ class CentroDeBellezaTest {
         System.out.println("Usuario no encontrado correctamente ❌");
     }
 
+    @Test
+    void editarUsuarioCorrecto() {
+
+        CentroDeBelleza centro = new CentroDeBelleza();
+
+        Usuario u1 = new Usuario("Ana", "Perez", "1234", "ana@gmail.com");
+
+        centro.agregarUsuario(u1);
+
+        Usuario usuarioActualizado = new Usuario("Maria", "Lopez", "5678", "maria@gmail.com");
+
+        boolean editado = centro.editarUsuario(usuarioActualizado, "ana@gmail.com");
+
+        assertTrue(editado);
+
+        Usuario encontrado = centro.buscarUsuario("maria@gmail.com");
+
+        assertNotNull(encontrado);
+        assertEquals("Maria", encontrado.getNombre());
+        assertEquals("Lopez", encontrado.getApellido());
+
+        System.out.println("editarUsuario funcionando correctamente ✅");
+    }
+
+    @Test
+    void editarUsuarioIncorrecto() {
+
+        CentroDeBelleza centro = new CentroDeBelleza();
+
+        Usuario usuarioActualizado = new Usuario("Maria", "Lopez", "5678", "maria@gmail.com");
+
+        boolean editado = centro.editarUsuario(usuarioActualizado, "noexiste@gmail.com");
+
+        assertFalse(editado);
+
+        System.out.println("Usuario no encontrado para editar ❌");
+    }
+
+    @Test
+    void eliminarUsuarioCorrecto() {
+
+        CentroDeBelleza centro = new CentroDeBelleza();
+
+        Usuario u1 = new Usuario("Ana", "Perez", "1234", "ana@gmail.com");
+
+        centro.agregarUsuario(u1);
+
+        boolean eliminado = centro.eliminarUsuario("ana@gmail.com");
+
+        assertTrue(eliminado);
+        assertNull(centro.buscarUsuario("ana@gmail.com"));
+
+        System.out.println("Usuario eliminado correctamente ✅");
+    }
+
+    @Test
+    void eliminarUsuarioIncorrecto() {
+
+        CentroDeBelleza centro = new CentroDeBelleza();
+
+        boolean eliminado = centro.eliminarUsuario("noexiste@gmail.com");
+
+        assertFalse(eliminado);
+
+        System.out.println("Usuario no encontrado para eliminar ❌");
+    }
 }

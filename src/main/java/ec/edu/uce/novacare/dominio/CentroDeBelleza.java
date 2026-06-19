@@ -44,6 +44,95 @@ public  class CentroDeBelleza {
         this.servicios = servicios;
     }
 
+    //Metodos CRUD para  usuario.
+
+    public static boolean existe(Usuario u){
+        for (int i=0; i< numUsuarios; i++){
+
+            if(u != null && usuarios[i].equals(u)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean agregarUsuario (Usuario nuevoUsuario){
+
+        if(nuevoUsuario == null){
+            return false;
+        }
+
+        if(!existe(nuevoUsuario)) {
+            if (numUsuarios == usuarios.length) {
+                Usuario[] auxUsuario = new Usuario[usuarios.length + 1];
+                System.arraycopy(usuarios, 0, auxUsuario, 0, usuarios.length);
+                usuarios = auxUsuario;
+            }
+
+            usuarios[numUsuarios] = nuevoUsuario;
+            numUsuarios++;
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public static Usuario buscarUsuario(String correo){
+
+        if (correo == null){
+            return null;
+        }
+        for (int i = 0; i < numUsuarios; i++){
+            if (usuarios[i] != null){
+                if(usuarios[i].getCorreo().equals(correo)){
+
+                    return usuarios[i];
+                }
+
+            }
+
+        }
+
+        return null;
+    }
+
+    public boolean editarUsuario(Usuario nuevoUsuario, String correo) {
+        for (int i = 0; i < numUsuarios; i++) {
+            if (usuarios[i]!=null && usuarios[i].getCorreo().equals(correo)){
+                usuarios [i].setNombre(nuevoUsuario.getNombre());
+                usuarios [i].setApellido(nuevoUsuario.getApellido());
+                usuarios [i].setCorreo(nuevoUsuario.getCorreo());
+                usuarios[i].setContrasena(nuevoUsuario.getContrasena());
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    public boolean eliminarUsuario(String correo) {
+
+        for (int i = 0; i < numUsuarios; i++) {
+
+            if (usuarios[i] != null && usuarios[i].getCorreo().equals(correo)) {
+
+                for (int j = i; j < numUsuarios - 1; j++) {
+                    usuarios[j] = usuarios[j + 1];
+                }
+
+                usuarios[numUsuarios - 1] = null;
+                numUsuarios--;
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    //Metodos CRUD para servicio
+
     public boolean editarServicio(Servicio nuevoServicio, int pos) {
         if (pos >= 0 && pos < servicios.length && servicios[pos] != null) {
             servicios[pos].setDuracion(nuevoServicio.getDuracion());
@@ -129,56 +218,7 @@ public  class CentroDeBelleza {
         return telefono != null && telefono.matches("^09\\d{8}$");
     }
 
-    public static boolean existe(Usuario u){
-        for (int i=0; i< numUsuarios; i++){
 
-            if(u != null && usuarios[i].equals(u)){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static boolean agregarUsuario (Usuario nuevoUsuario){
-
-        if(nuevoUsuario == null){
-            return false;
-        }
-
-        if(!existe(nuevoUsuario)) {
-            if (numUsuarios == usuarios.length) {
-                Usuario[] auxUsuario = new Usuario[usuarios.length + 1];
-                System.arraycopy(usuarios, 0, auxUsuario, 0, usuarios.length);
-                usuarios = auxUsuario;
-            }
-
-            usuarios[numUsuarios] = nuevoUsuario;
-            numUsuarios++;
-
-            return true;
-        }
-
-        return false;
-    }
-
-    public static Usuario buscarUsuario(String correo){
-
-        if (correo == null){
-            return null;
-        }
-        for (int i = 0; i < numUsuarios; i++){
-            if (usuarios[i] != null){
-                if(usuarios[i].getCorreo().equals(correo)){
-
-                    return usuarios[i];
-                }
-
-            }
-
-        }
-
-        return null;
-    }
 
 
     @Override
@@ -192,4 +232,6 @@ public  class CentroDeBelleza {
                 ", servicios=" + (servicios != null ? servicios.length : 0) +
                 '}';
     }
+
+
 }
