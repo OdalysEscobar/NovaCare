@@ -130,4 +130,67 @@ class CentroDeBellezaTest {
         System.out.println("CentroDeBelleza nulo detectado correctamente ✅");
     }
 
+    @Test
+    void agregarUsuarioCorrecto() {
+
+        CentroDeBelleza centro = new CentroDeBelleza();
+
+        Usuario u1 = new Usuario("Ana", "Perez", "1234", "ana@gmail.com");
+
+        assertTrue(centro.agregarUsuario(u1));
+
+        System.out.println("Usuario agregado correctamente ✅");
+    }
+
+    @Test
+    void agregarUsuarioIncorrecto() {
+
+        CentroDeBelleza centro = new CentroDeBelleza();
+
+        assertFalse(centro.agregarUsuario(null));
+
+        System.out.println("Usuario null rechazado correctamente ❌");
+    }
+
+    @Test
+    void agregarUsuarioExistente() {
+
+        CentroDeBelleza centro = new CentroDeBelleza();
+
+        Usuario u1 = new Usuario("Ana", "Perez", "1234", "ana@gmail.com");
+
+        assertTrue(centro.agregarUsuario(u1));   // primero
+        assertFalse(centro.agregarUsuario(u1));  // duplicado
+
+        System.out.println("Usuario duplicado rechazado correctamente ❌");
+    }
+    @Test
+    void buscarUsuarioCorrecto() {
+
+        CentroDeBelleza centro = new CentroDeBelleza();
+
+        Usuario u1 = new Usuario("Ana", "Perez", "1234", "ana@gmail.com");
+
+        centro.agregarUsuario(u1);
+
+        Usuario encontrado = centro.buscarUsuario("ana@gmail.com");
+
+        assertNotNull(encontrado);
+        assertEquals("ana@gmail.com", encontrado.getCorreo());
+
+        System.out.println("Usuario encontrado correctamente ✅");
+    }
+
+    @Test
+    void buscarUsuarioIncorrecto() {
+
+        CentroDeBelleza centro = new CentroDeBelleza();
+
+        Usuario resultado = centro.buscarUsuario("noexiste@gmail.com");
+
+        assertNull(resultado);
+
+        System.out.println("Usuario no encontrado correctamente ❌");
+    }
+
 }
