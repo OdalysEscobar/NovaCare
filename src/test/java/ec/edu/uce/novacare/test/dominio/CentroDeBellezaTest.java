@@ -45,8 +45,8 @@ class CentroDeBellezaTest {
         assertEquals("Sin direccion", centro.getDireccion());
         assertEquals("Sin telefono", centro.getTelefono());
         assertEquals("00:00", centro.getHorarioAtencion());
-        assertEquals(0, centro.getUsuarios().length);
-        assertEquals(0, centro.getServicios().length);
+        assertEquals(3, centro.getUsuarios().length);
+        assertEquals(3, centro.getServicios().length);
 
         System.out.println("Constructor vacío funcionando correctamente ✅");
     }

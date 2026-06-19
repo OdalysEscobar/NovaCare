@@ -3,20 +3,35 @@ package ec.edu.uce.novacare.dominio;
 import ec.edu.uce.novacare.util.Validaciones;
 
 public class CentroDeBelleza {
-    private String nombre;
-    private String direccion;
-    private String telefono;
-    private String horarioAtencion;
-    private Usuario[] usuarios;
-    private Servicio[] servicios;
+    private static final CentroDeBelleza centro = new CentroDeBelleza("Nova Care");
+
+    private static String nombre;
+    private static String direccion;
+    private static String telefono;
+    private static String horarioAtencion;
+    private static Usuario[] usuarios;
+    private static Servicio[] servicios;
+    private static int numUsuarios;
+    private static int numServicios;
+
+    public static CentroDeBelleza getCentro(){
+        return centro;
+    }
 
     public CentroDeBelleza() {
-        this.nombre = "Sin nombre";
+        this("Sin nombre");
+    }
+
+    public CentroDeBelleza(String nombre) {
+        this.nombre = nombre;
         this.direccion = "Sin direccion";
         this.telefono = "Sin telefono";
         this.horarioAtencion = "00:00";
-        this.usuarios = new Usuario[0];
-        this.servicios = new Servicio[0];
+        this.usuarios = new Usuario[3];
+        this.servicios = new Servicio[3];
+
+        numUsuarios=0;
+        numServicios=0;
     }
 
     public CentroDeBelleza(String nombre, String direccion, String telefono, String horarioAtencion, Usuario[] usuarios, Servicio[] servicios) {

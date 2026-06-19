@@ -41,8 +41,4 @@ public class Cliente extends Usuario {
                 ", numeroDeTelefono='" + numeroDeTelefono + '\'' +
                 '}';
     }
-
-    @Override
-    public void actualizarDatos(){
-    }
 }

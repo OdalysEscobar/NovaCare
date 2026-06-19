@@ -121,6 +121,4 @@ public abstract class Usuario {
             this.contrasena=contrasena;
         }
     }
-
-    public abstract void actualizarDatos();
 }
