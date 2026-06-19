@@ -129,4 +129,5 @@ class CentroDeBellezaTest {
 
         System.out.println("CentroDeBelleza nulo detectado correctamente ✅");
     }
+
 }
