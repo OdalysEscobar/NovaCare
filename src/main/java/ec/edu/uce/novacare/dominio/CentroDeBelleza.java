@@ -133,6 +133,50 @@ public  class CentroDeBelleza {
 
     //Metodos CRUD para servicio
 
+    public static boolean existeServicio(Servicio s) {
+        for (int i = 0; i < numServicios; i++) {
+            if (s != null && servicios[i] != null &&
+                    servicios[i].getDuracion() == s.getDuracion()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // agregarServicio
+    public static boolean agregarServicio(Servicio nuevoServicio) {
+        if (nuevoServicio == null) {
+            return false;
+        }
+        if (!existeServicio(nuevoServicio)) {
+            if (numServicios == servicios.length) {
+                Servicio[] auxServicio = new Servicio[servicios.length + 1];
+                System.arraycopy(servicios, 0, auxServicio, 0, servicios.length);
+                servicios = auxServicio;
+            }
+            servicios[numServicios] = nuevoServicio;
+            numServicios++;
+            return true;
+        }
+        return false;
+    }
+
+    // buscarServicio
+    public static Servicio buscarServicio(int duracion) {
+        if (duracion <= 0) {
+            return null;
+        }
+        for (int i = 0; i < numServicios; i++) {
+            if (servicios[i] != null) {
+                if (servicios[i].getDuracion() == duracion) {
+                    return servicios[i];
+                }
+            }
+        }
+        return null;
+    }
+
+
     public boolean editarServicio(Servicio nuevoServicio, int pos) {
         if (pos >= 0 && pos < servicios.length && servicios[pos] != null) {
             servicios[pos].setDuracion(nuevoServicio.getDuracion());

@@ -131,6 +131,68 @@ class CentroDeBellezaTest {
     }
 
     //Test servicio
+    @Test
+    void agregarServicioCorrecto() {
+
+        CentroDeBelleza centro = new CentroDeBelleza();
+
+        Servicio s1 = new Servicio(60, true);
+
+        assertTrue(centro.agregarServicio(s1));
+
+        System.out.println("Servicio agregado correctamente ✅");
+    }
+
+    @Test
+    void agregarServicioIncorrecto() {
+
+        CentroDeBelleza centro = new CentroDeBelleza();
+
+        assertFalse(centro.agregarServicio(null));
+
+        System.out.println("Servicio null rechazado correctamente ❌");
+    }
+
+    @Test
+    void agregarServicioExistente() {
+
+        CentroDeBelleza centro = new CentroDeBelleza();
+
+        Servicio s1 = new Servicio(60, true);
+
+        assertTrue(centro.agregarServicio(s1));   // primero
+        assertFalse(centro.agregarServicio(s1));  // duplicado
+
+        System.out.println("Servicio duplicado rechazado correctamente ❌");
+    }
+
+    @Test
+    void buscarServicioCorrecto() {
+
+        CentroDeBelleza centro = new CentroDeBelleza();
+
+        Servicio s1 = new Servicio(60, true);
+        centro.agregarServicio(s1);
+
+        Servicio encontrado = centro.buscarServicio(60);
+
+        assertNotNull(encontrado);
+        assertEquals(60, encontrado.getDuracion());
+
+        System.out.println("Servicio encontrado correctamente ✅");
+    }
+
+    @Test
+    void buscarServicioIncorrecto() {
+
+        CentroDeBelleza centro = new CentroDeBelleza();
+
+        Servicio resultado = centro.buscarServicio(999);
+
+        assertNull(resultado);
+
+        System.out.println("Servicio no encontrado correctamente ❌");
+    }
 
     @Test
     void editarServicioCorrecto() {
