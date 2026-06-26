@@ -13,7 +13,7 @@ class TipoServicioTest {
         TipoServicio tipo = new TipoServicio("Masajes", "Masaje terapeutico", servicios);
 
         assertEquals("Masajes", tipo.getNombreTipoServicio());
-        assertEquals("Masajes terapeutico", tipo.getDescripcion());
+        assertEquals("Masaje terapeutico", tipo.getDescripcion());
         assertEquals(servicios, tipo.getServicios());
 
         System.out.println("El metodo constructorConParametros funciona correctamente✅");
@@ -22,7 +22,6 @@ class TipoServicioTest {
     @Test
     void testToString() {
         TipoServicio tipo = new TipoServicio();
-        // Usamos los valores iniciales por defecto definidos en el POJO
         String textoEsperado = "TipoServicio{" +
                 "nombreTipoServicio='Corte de cabello'" +
                 ", descripcion='Corte en capas'" +

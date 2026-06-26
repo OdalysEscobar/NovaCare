@@ -12,6 +12,7 @@ public class TipoServicio {
         this.nombreTipoServicio = "Corte de cabello";
         this.descripcion = "Corte en capas";
         this.servicios = new Servicio[0];
+
     }
 
     public TipoServicio(String nombreTipoServicio, String descripcion, Servicio[] servicios) {
@@ -50,11 +51,10 @@ public class TipoServicio {
 
     @Override
     public String toString() {
-        return "\n  ----------------------------------------" +
-                "\n  [Tipo de Servicio en Memoria]" +
-                "\n  Nombre Tipo: '" + nombreTipoServicio + '\'' +
-                "\n  Descripción: '" + descripcion + '\'' +
-                "\n  Arreglo Servicios: " + java.util.Arrays.toString(servicios) +
-                "\n  ----------------------------------------";
+        return "TipoServicio{" +
+                "nombreTipoServicio='" + nombreTipoServicio + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", servicios=" + java.util.Arrays.toString(servicios) +
+                '}';
     }
 }
