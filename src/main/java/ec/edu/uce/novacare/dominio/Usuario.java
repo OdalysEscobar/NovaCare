@@ -151,7 +151,7 @@ public abstract class Usuario {
     @Override
     public String toString() {
         return "Usuario{" +
-                "codigo=" + codigo +
+                "codigo=" + codigo + '\''+
                 "nombre='" + nombre + '\'' +
                 ", correo='" + correo + '\'' +
                 ", apellido='" + apellido + '\'' +

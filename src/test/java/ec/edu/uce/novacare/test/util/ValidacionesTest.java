@@ -102,6 +102,22 @@ class ValidacionesTest {
 
         System.out.println("Validación de hora incorrecta detectada correctamente✅");
     }
+
+    @Test
+    void validarTelefonoCorrecto() {
+
+        assertTrue(Validaciones.validarTelefono("0991234567"));
+
+        System.out.println("Telefono valido detectado correctamente ✅");
+    }
+
+    @Test
+    void validarTelefonoIncorrecto() {
+
+        assertFalse(Validaciones.validarTelefono("123456789"));
+
+        System.out.println("Telefono invalido detectado correctamente ✅");
+    }
 }
 
 

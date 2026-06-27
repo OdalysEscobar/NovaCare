@@ -25,9 +25,9 @@ public  class CentroDeBelleza {
 
     public CentroDeBelleza(String nombre) {
         this.nombre = nombre;
-        this.direccion = "Sin direccion";
-        this.telefono = "Sin telefono";
-        this.horarioAtencion = "00:00";
+        this.direccion = "Av. Amazonas y Naciones Unidas";
+        this.telefono = "0998765432";
+        this.horarioAtencion = "08:00-18:00";
         this.usuarios = new Usuario[3];
         this.servicios = new Servicio[3];
 
@@ -243,6 +243,16 @@ public  class CentroDeBelleza {
         return false;
     }
 
+    public String consultarServicio(){
+        String texto="";
+        for (Servicio s: servicios){
+            if (s!=null){
+                texto += s+"\r\n";
+            }
+        }
+        return texto;
+    }
+
 
 
     public String getNombre() {
@@ -299,10 +309,6 @@ public  class CentroDeBelleza {
 
     public void setServicios(Servicio[] servicios) {
         this.servicios = servicios;
-    }
-
-    public static boolean validarTelefono(String telefono) {
-        return telefono != null && telefono.matches("^09\\d{8}$");
     }
 
     @Override

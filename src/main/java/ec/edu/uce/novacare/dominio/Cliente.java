@@ -37,11 +37,7 @@ public class Cliente extends Usuario {
 
     @Override
     public String toString() {
-        return "Cliente{" +
-                "nombre='" + getNombre() + '\'' +
-                ", apellido='" + getApellido() + '\'' +
-                ", correo='" + getCorreo() + '\'' +
-                ", contrasena='" + getContrasena() + '\'' +
+        return "Cliente{"+ super.toString()+
                 ", numeroDeTelefono='" + numeroDeTelefono + '\'' +
                 '}';
     }

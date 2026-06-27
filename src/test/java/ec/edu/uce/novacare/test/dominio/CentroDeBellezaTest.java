@@ -9,45 +9,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class CentroDeBellezaTest {
 
     @Test
-    void centroDeBellezaCorrecto() {
+    void singletonCorrecto() {
 
-        Usuario[] usuarios = new Usuario[2];
-        Servicio[] servicios = new Servicio[2];
+        CentroDeBelleza centro1 = CentroDeBelleza.getCentro();
+        CentroDeBelleza centro2 = CentroDeBelleza.getCentro();
 
-        CentroDeBelleza centro = new CentroDeBelleza(
-                "NovaCare",
-                "Pomasqui",
-                "0991234567",
-                "09:30",
-                usuarios,
-                servicios
-        );
+        assertSame(centro1, centro2);
 
-        assertNotNull(centro);
-        assertEquals("NovaCare", centro.getNombre());
-        assertEquals("Pomasqui", centro.getDireccion());
-        assertEquals("0991234567", centro.getTelefono());
-        assertEquals("09:30", centro.getHorarioAtencion());
-        assertEquals(2, centro.getUsuarios().length);
-        assertEquals(2, centro.getServicios().length);
-
-        System.out.println("CentroDeBelleza creado correctamente ✅");
-    }
-
-    @Test
-    void constructorVacioCorrecto() {
-
-        CentroDeBelleza centro = new CentroDeBelleza();
-
-        assertNotNull(centro);
-        assertEquals("Sin nombre", centro.getNombre());
-        assertEquals("Sin direccion", centro.getDireccion());
-        assertEquals("Sin telefono", centro.getTelefono());
-        assertEquals("00:00", centro.getHorarioAtencion());
-        assertEquals(3, centro.getUsuarios().length);
-        assertEquals(3, centro.getServicios().length);
-
-        System.out.println("Constructor vacío funcionando correctamente ✅");
+        System.out.println("Singleton funcionando correctamente ✅");
     }
 
     @Test
@@ -90,22 +59,6 @@ class CentroDeBellezaTest {
     }
 
     @Test
-    void validarTelefonoCorrecto() {
-
-        assertTrue(Validaciones.validarTelefono("0991234567"));
-
-        System.out.println("Telefono valido detectado correctamente ✅");
-    }
-
-    @Test
-    void validarTelefonoIncorrecto() {
-
-        assertFalse(Validaciones.validarTelefono("123456789"));
-
-        System.out.println("Telefono invalido detectado correctamente ✅");
-    }
-
-    @Test
     void validarToString() {
 
         CentroDeBelleza centro = new CentroDeBelleza();
@@ -133,19 +86,27 @@ class CentroDeBellezaTest {
     @Test
     void agregarServicioCorrecto() {
 
-        CentroDeBelleza centro = new CentroDeBelleza();
+        CentroDeBelleza centro = CentroDeBelleza.getCentro();
+        System.out.println(centro);
+        System.out.println("---------------------------------------------------------");
 
         Servicio s1 = new Servicio(60, true);
+        Servicio s2 = new Servicio(45, false);
 
         assertTrue(centro.agregarServicio(s1));
+        assertTrue(centro.agregarServicio(s2));
+
+        System.out.println("Lista de servicios:");
+        System.out.println(centro.consultarServicio());
 
         System.out.println("Servicio agregado correctamente ✅");
+        System.out.println("---------------------------------------------------------");
     }
 
     @Test
     void agregarServicioIncorrecto() {
 
-        CentroDeBelleza centro = new CentroDeBelleza();
+        CentroDeBelleza centro = CentroDeBelleza.getCentro();
 
         assertFalse(centro.agregarServicio(null));
 
@@ -155,36 +116,54 @@ class CentroDeBellezaTest {
     @Test
     void agregarServicioExistente() {
 
-        CentroDeBelleza centro = new CentroDeBelleza();
+        CentroDeBelleza centro = CentroDeBelleza.getCentro();
+        System.out.println(centro);
+        System.out.println("---------------------------------------------------------");
 
         Servicio s1 = new Servicio(60, true);
 
-        assertTrue(centro.agregarServicio(s1));   // primero
-        assertFalse(centro.agregarServicio(s1));  // duplicado
+        assertTrue(centro.agregarServicio(s1));
+        assertFalse(centro.agregarServicio(s1));
+
+        System.out.println("Lista de servicios:");
+        System.out.println(centro.consultarServicio());
 
         System.out.println("Servicio duplicado rechazado correctamente ❌");
+        System.out.println("---------------------------------------------------------");
     }
 
     @Test
     void buscarServicioCorrecto() {
 
-        CentroDeBelleza centro = new CentroDeBelleza();
+        CentroDeBelleza centro = CentroDeBelleza.getCentro();
+        System.out.println(centro);
+        System.out.println("---------------------------------------------------------");
 
         Servicio s1 = new Servicio(60, true);
+        Servicio s2 = new Servicio(45, false);
+
         centro.agregarServicio(s1);
+        centro.agregarServicio(s2);
 
         Servicio encontrado = centro.buscarServicio(60);
+
+        System.out.println("Lista de servicios:");
+        System.out.println(centro.consultarServicio());
 
         assertNotNull(encontrado);
         assertEquals(60, encontrado.getDuracion());
 
+        System.out.println("Servicio encontrado:");
+        System.out.println(encontrado);
+
         System.out.println("Servicio encontrado correctamente ✅");
+        System.out.println("---------------------------------------------------------");
     }
 
     @Test
     void buscarServicioIncorrecto() {
 
-        CentroDeBelleza centro = new CentroDeBelleza();
+        CentroDeBelleza centro = CentroDeBelleza.getCentro();
 
         Servicio resultado = centro.buscarServicio(999);
 
@@ -195,51 +174,101 @@ class CentroDeBellezaTest {
 
     @Test
     void editarServicioCorrecto() {
-        CentroDeBelleza centro = new CentroDeBelleza();
+        CentroDeBelleza centro = CentroDeBelleza.getCentro();
+        System.out.println(centro);
+        System.out.println("---------------------------------------------------------");
 
-        Servicio[] misServicios = new Servicio[3];
-        misServicios[0] = new Servicio(); // Servicio vacío por defecto
-        centro.setServicios(misServicios);
+        System.out.println("=== Servicio antes de editar ===");
 
-        Servicio servicioActualizado = new Servicio();
-        servicioActualizado.setDuracion(45);
-        servicioActualizado.setDisponibilidad(true);
+        Servicio s1 = new Servicio(60, true);
 
-        boolean editado = centro.editarServicio(servicioActualizado, 0);
+        centro.agregarServicio(s1);
+
+        System.out.println(centro.consultarServicio());
+
+        Servicio actualizado = new Servicio(45, false);
+
+        boolean editado = centro.editarServicio(actualizado, 0);
 
         assertTrue(editado);
+
         assertEquals(45, centro.getServicios()[0].getDuracion());
-        assertTrue(centro.getServicios()[0].isDisponibilidad());
+        assertFalse(centro.getServicios()[0].isDisponibilidad());
+
+        System.out.println("=== Servicio actualizado ===");
+        System.out.println(centro.consultarServicio());
 
         System.out.println("editarServicio funcionando correctamente ✅");
+        System.out.println("---------------------------------------------------------");
     }
 
     @Test
-    void eliminarServicioVacioDevuelveFalse() {
-        CentroDeBelleza centro = new CentroDeBelleza();
+    void eliminarServicioCorrecto() {
+
+        CentroDeBelleza centro = CentroDeBelleza.getCentro();
+        System.out.println(centro);
+        System.out.println("---------------------------------------------------------");
+
+        System.out.println("=== Servicios antes de eliminar ===");
+
+        Servicio s1 = new Servicio(60, true);
+        Servicio s2 = new Servicio(45, false);
+
+        centro.agregarServicio(s1);
+        centro.agregarServicio(s2);
+
+        System.out.println(centro.consultarServicio());
 
         boolean eliminado = centro.eliminarServicio(0);
+
+        assertTrue(eliminado);
+        assertNull(centro.buscarServicio(60));
+
+        System.out.println("=== Servicios después de eliminar ===");
+        System.out.println(centro.consultarServicio());
+
+        System.out.println("Servicio eliminado correctamente ✅");
+        System.out.println("---------------------------------------------------------");
+    }
+
+    @Test
+    void eliminarServicioIncorrecto() {
+
+        CentroDeBelleza centro = CentroDeBelleza.getCentro();
+
+        boolean eliminado = centro.eliminarServicio(100);
+
         assertFalse(eliminado);
-        System.out.println("eliminarServicio (validación de vacío) funcionando correctamente ✅");
+
+        System.out.println("Servicio no encontrado para eliminar ❌");
     }
 
     //Test usuarios
     @Test
     void agregarUsuarioCorrecto() {
 
-        CentroDeBelleza centro = new CentroDeBelleza();
+        CentroDeBelleza centro = CentroDeBelleza.getCentro();
+        System.out.println(centro);
+        System.out.println("---------------------------------------------------------");
 
         Usuario u1 = new Empleado("Ana", "Perez", "1234", "ana@gmail.com",Especialidad.MAQUILLAJE,null);
+        Usuario u2 = new Cliente ("Juana", "Pacheco", "12346", "juana@hola.com", "0999999999");
 
         assertTrue(centro.agregarUsuario(u1));
+        assertTrue(centro.agregarUsuario(u2));
+        centro.agregarUsuario("Mario", "Castro", "123546", "mario@uce.com", Especialidad.PEINADO, null);
 
+        System.out.println("Lista de usuarios:");
+        System.out.println(centro.consultarUsario());
         System.out.println("Usuario agregado correctamente ✅");
+        System.out.println("---------------------------------------------------------");
+
     }
 
     @Test
     void agregarUsuarioIncorrecto() {
 
-        CentroDeBelleza centro = new CentroDeBelleza();
+        CentroDeBelleza centro = CentroDeBelleza.getCentro();
 
         assertFalse(centro.agregarUsuario(null));
 
@@ -249,36 +278,53 @@ class CentroDeBellezaTest {
     @Test
     void agregarUsuarioExistente() {
 
-        CentroDeBelleza centro = new CentroDeBelleza();
+        CentroDeBelleza centro = CentroDeBelleza.getCentro();
+        System.out.println(centro);
+        System.out.println("---------------------------------------------------------");
+
 
         Usuario u1 = new Cliente("Ana", "Perez", "1234", "ana@gmail.com","098985242");
 
         assertTrue(centro.agregarUsuario(u1));   // primero
         assertFalse(centro.agregarUsuario(u1));  // duplicado
 
+        System.out.println(centro.consultarUsario());
+
         System.out.println("Usuario duplicado rechazado correctamente ❌");
+        System.out.println("---------------------------------------------------------");
+
     }
     @Test
     void buscarUsuarioCorrecto() {
 
-        CentroDeBelleza centro = new CentroDeBelleza();
+        CentroDeBelleza centro = CentroDeBelleza.getCentro();
+        System.out.println(centro);
+        System.out.println("---------------------------------------------------------");
 
         Usuario u1 = new Empleado("Ana", "Perez", "1234", "ana@gmail.com",Especialidad.PEDICURA, null);
+        Usuario u2 = new Cliente ("Juana", "Pacheco", "12346", "juana@hola.com", "0999999999");
 
         centro.agregarUsuario(u1);
+        centro.agregarUsuario(u2);
 
         Usuario encontrado = centro.buscarUsuario("ana@gmail.com");
+        System.out.println("Lista de usuarios:");
+        System.out.println(centro.consultarUsario());
 
         assertNotNull(encontrado);
+        System.out.println("Usuario encontrado:");
         assertEquals("ana@gmail.com", encontrado.getCorreo());
 
+        System.out.println(encontrado);
+
         System.out.println("Usuario encontrado correctamente ✅");
+        System.out.println("---------------------------------------------------------");
     }
 
     @Test
     void buscarUsuarioIncorrecto() {
 
-        CentroDeBelleza centro = new CentroDeBelleza();
+        CentroDeBelleza centro = CentroDeBelleza.getCentro();
 
         Usuario resultado = centro.buscarUsuario("noexiste@gmail.com");
 
@@ -290,12 +336,16 @@ class CentroDeBellezaTest {
     @Test
     void editarUsuarioCorrecto() {
 
-        CentroDeBelleza centro = new CentroDeBelleza();
+        CentroDeBelleza centro = CentroDeBelleza.getCentro();
+        System.out.println(centro);
+        System.out.println("---------------------------------------------------------");
 
+        System.out.println("=== Usuario a editar ====");
         Usuario u1 = new Cliente("Ana", "Perez", "1234", "ana@gmail.com","099888328");
-
         centro.agregarUsuario(u1);
+        System.out.println(centro.consultarUsario());
 
+        System.out.println("=== Usuario actualizado ===");
         Usuario usuarioActualizado = new Cliente("Maria", "Lopez", "5678", "maria@gmail.com", "098520339");
 
         boolean editado = centro.editarUsuario(usuarioActualizado, "ana@gmail.com");
@@ -307,14 +357,17 @@ class CentroDeBellezaTest {
         assertNotNull(encontrado);
         assertEquals("Maria", encontrado.getNombre());
         assertEquals("Lopez", encontrado.getApellido());
+        System.out.println(centro.consultarUsario());
 
         System.out.println("editarUsuario funcionando correctamente ✅");
+        System.out.println("---------------------------------------------------------");
+
     }
 
     @Test
     void editarUsuarioIncorrecto() {
 
-        CentroDeBelleza centro = new CentroDeBelleza();
+        CentroDeBelleza centro = CentroDeBelleza.getCentro();
 
         Usuario usuarioActualizado = new Cliente("Maria", "Lopez", "5678", "maria@gmail.com","099888318");
 
@@ -328,24 +381,33 @@ class CentroDeBellezaTest {
     @Test
     void eliminarUsuarioCorrecto() {
 
-        CentroDeBelleza centro = new CentroDeBelleza();
+        CentroDeBelleza centro = CentroDeBelleza.getCentro();
+        System.out.println(centro);
+        System.out.println("---------------------------------------------------------");
 
+        System.out.println("=== Usuarios antes de eliminar ===");
         Usuario u1 = new Empleado("Ana", "Perez", "1234", "ana@gmail.com", Especialidad.MANICURA,null);
+        Usuario u2 = new Cliente ("Juana", "Pacheco", "12346", "juana@hola.com", "0999999999");
 
         centro.agregarUsuario(u1);
+        centro.agregarUsuario(u2);
+        centro.agregarUsuario("Mario", "Castro", "123546", "mario@uce.com", Especialidad.PEINADO, null);
+        System.out.println(centro.consultarUsario());
 
         boolean eliminado = centro.eliminarUsuario("ana@gmail.com");
 
         assertTrue(eliminado);
         assertNull(centro.buscarUsuario("ana@gmail.com"));
-
+        System.out.println("=== Usuarios despues de elimianr ===");
+        System.out.println(centro.consultarUsario());
         System.out.println("Usuario eliminado correctamente ✅");
+        System.out.println("---------------------------------------------------------");
     }
 
     @Test
     void eliminarUsuarioIncorrecto() {
 
-        CentroDeBelleza centro = new CentroDeBelleza();
+        CentroDeBelleza centro = CentroDeBelleza.getCentro();
 
         boolean eliminado = centro.eliminarUsuario("noexiste@gmail.com");
 

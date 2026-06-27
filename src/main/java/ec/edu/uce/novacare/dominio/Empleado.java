@@ -39,11 +39,8 @@ public class Empleado extends Usuario{
     }
     @Override
     public String toString() {
-        return "Empleado{" +
-                "nombre='" + getNombre() + '\'' +
-                ", apellido='" + getApellido() + '\'' +
+        return "Empleado{" + super.toString()+
                 ", especialidad='" + especialidad.getDescripcion() + '\'' +
-                ", correo='" + getCorreo() + '\'' +
                 ", agenda=" + agenda +
                 '}';
     }
