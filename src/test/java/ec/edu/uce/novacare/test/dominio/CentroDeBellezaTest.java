@@ -1,8 +1,7 @@
 package ec.edu.uce.novacare.test.dominio;
 
-import ec.edu.uce.novacare.dominio.CentroDeBelleza;
-import ec.edu.uce.novacare.dominio.Servicio;
-import ec.edu.uce.novacare.dominio.Usuario;
+import ec.edu.uce.novacare.dominio.*;
+import ec.edu.uce.novacare.util.Validaciones;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -93,7 +92,7 @@ class CentroDeBellezaTest {
     @Test
     void validarTelefonoCorrecto() {
 
-        assertTrue(CentroDeBelleza.validarTelefono("0991234567"));
+        assertTrue(Validaciones.validarTelefono("0991234567"));
 
         System.out.println("Telefono valido detectado correctamente ✅");
     }
@@ -101,7 +100,7 @@ class CentroDeBellezaTest {
     @Test
     void validarTelefonoIncorrecto() {
 
-        assertFalse(CentroDeBelleza.validarTelefono("123456789"));
+        assertFalse(Validaciones.validarTelefono("123456789"));
 
         System.out.println("Telefono invalido detectado correctamente ✅");
     }
@@ -230,7 +229,7 @@ class CentroDeBellezaTest {
 
         CentroDeBelleza centro = new CentroDeBelleza();
 
-        Usuario u1 = new Usuario("Ana", "Perez", "1234", "ana@gmail.com");
+        Usuario u1 = new Empleado("Ana", "Perez", "1234", "ana@gmail.com",Especialidad.MAQUILLAJE,null);
 
         assertTrue(centro.agregarUsuario(u1));
 
@@ -252,7 +251,7 @@ class CentroDeBellezaTest {
 
         CentroDeBelleza centro = new CentroDeBelleza();
 
-        Usuario u1 = new Usuario("Ana", "Perez", "1234", "ana@gmail.com");
+        Usuario u1 = new Cliente("Ana", "Perez", "1234", "ana@gmail.com","098985242");
 
         assertTrue(centro.agregarUsuario(u1));   // primero
         assertFalse(centro.agregarUsuario(u1));  // duplicado
@@ -264,7 +263,7 @@ class CentroDeBellezaTest {
 
         CentroDeBelleza centro = new CentroDeBelleza();
 
-        Usuario u1 = new Usuario("Ana", "Perez", "1234", "ana@gmail.com");
+        Usuario u1 = new Empleado("Ana", "Perez", "1234", "ana@gmail.com",Especialidad.PEDICURA, null);
 
         centro.agregarUsuario(u1);
 
@@ -293,11 +292,11 @@ class CentroDeBellezaTest {
 
         CentroDeBelleza centro = new CentroDeBelleza();
 
-        Usuario u1 = new Usuario("Ana", "Perez", "1234", "ana@gmail.com");
+        Usuario u1 = new Cliente("Ana", "Perez", "1234", "ana@gmail.com","099888328");
 
         centro.agregarUsuario(u1);
 
-        Usuario usuarioActualizado = new Usuario("Maria", "Lopez", "5678", "maria@gmail.com");
+        Usuario usuarioActualizado = new Cliente("Maria", "Lopez", "5678", "maria@gmail.com", "098520339");
 
         boolean editado = centro.editarUsuario(usuarioActualizado, "ana@gmail.com");
 
@@ -317,7 +316,7 @@ class CentroDeBellezaTest {
 
         CentroDeBelleza centro = new CentroDeBelleza();
 
-        Usuario usuarioActualizado = new Usuario("Maria", "Lopez", "5678", "maria@gmail.com");
+        Usuario usuarioActualizado = new Cliente("Maria", "Lopez", "5678", "maria@gmail.com","099888318");
 
         boolean editado = centro.editarUsuario(usuarioActualizado, "noexiste@gmail.com");
 
@@ -331,7 +330,7 @@ class CentroDeBellezaTest {
 
         CentroDeBelleza centro = new CentroDeBelleza();
 
-        Usuario u1 = new Usuario("Ana", "Perez", "1234", "ana@gmail.com");
+        Usuario u1 = new Empleado("Ana", "Perez", "1234", "ana@gmail.com", Especialidad.MANICURA,null);
 
         centro.agregarUsuario(u1);
 

@@ -37,4 +37,8 @@ public class Validaciones {
         return matcher.matches();
     }
 
+    public static boolean validarTelefono(String telefono) {
+        return telefono != null && telefono.matches("^09\\d{8}$");
+    }
+
 }

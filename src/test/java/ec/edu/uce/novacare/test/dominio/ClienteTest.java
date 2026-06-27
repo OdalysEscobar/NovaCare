@@ -13,8 +13,7 @@ class ClienteTest {
 
         Cita[] citas = new Cita[2];
 
-        Cliente cliente = new Cliente("Kimberly", "Cuvi", "kim123", "kim@gmail.com", "0999999999",
-                citas);
+        Cliente cliente = new Cliente("Kimberly", "Cuvi", "kim123", "kim@gmail.com", "0999999999");
 
         assertEquals("Kimberly", cliente.getNombre());
         assertEquals("Cuvi", cliente.getApellido());

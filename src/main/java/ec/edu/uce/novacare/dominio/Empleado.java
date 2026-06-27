@@ -2,26 +2,28 @@ package ec.edu.uce.novacare.dominio;
 import ec.edu.uce.novacare.util.Validaciones;
 
 public class Empleado extends Usuario{
-    private String especialidad;
+    private Especialidad especialidad;
     private  Agenda agenda;
 
     public Empleado() {
         super ();
-        this.especialidad="Sin especialidad";
+        this.especialidad = Especialidad.MANICURA;
+        this.agenda = new Agenda();
     }
 
-    public Empleado(String nombre, String apellido, String contrasena, String correo, String especialidad, Agenda agenda) {
+    public Empleado(String nombre, String apellido, String contrasena, String correo, Especialidad especialidad, Agenda agenda) {
         super(nombre, apellido, contrasena, correo);
-        setEspecialidad(especialidad);
+        this.especialidad = especialidad;
         this.agenda = agenda;
     }
 
-    public String getEspecialidad() {
+    public Especialidad getEspecialidad() {
+
         return especialidad;
     }
 
-    public void setEspecialidad(String especialidad) {
-        if (Validaciones.validarLetras(especialidad)) {
+    public void setEspecialidad(Especialidad especialidad) {
+        if (especialidad != null) {
             this.especialidad = especialidad;
         }
     }
@@ -31,14 +33,16 @@ public class Empleado extends Usuario{
     }
 
     public void setAgenda(Agenda agenda) {
-        this.agenda = agenda;
+        if (agenda != null){
+            this.agenda = agenda;
+        }
     }
     @Override
     public String toString() {
         return "Empleado{" +
                 "nombre='" + getNombre() + '\'' +
                 ", apellido='" + getApellido() + '\'' +
-                ", especialidad='" + especialidad + '\'' +
+                ", especialidad='" + especialidad.getDescripcion() + '\'' +
                 ", correo='" + getCorreo() + '\'' +
                 ", agenda=" + agenda +
                 '}';

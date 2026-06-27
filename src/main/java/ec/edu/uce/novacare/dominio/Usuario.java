@@ -4,12 +4,14 @@ import ec.edu.uce.novacare.util.Validaciones;
 /**
  * Clase que representa a un usuario del sistema NovaCare.
  */
-public class Usuario {
+public abstract class Usuario {
 
+    private final int codigo;
     private String nombre;
     private String correo;
     private String apellido;
     private String contrasena;
+    private static int contador ;
 
     /**
      * Constructor vacio.
@@ -20,6 +22,7 @@ public class Usuario {
         this.apellido="Sin apellido";
         this.correo="Sin correo";
         this.contrasena="Sin contrasena";
+        this.codigo = ++contador;
     }
 
     /**
@@ -27,27 +30,25 @@ public class Usuario {
      * @param nombre nombre del usuario
      * @param apellido apellido del usuario
      * @param contrasena contraseña del usuario
+
      * @param correo correo electrónico del usuario
      */
     public Usuario(String nombre, String apellido, String contrasena, String correo) {
-        setNombre(nombre);
-        setApellido(apellido);
-        setContrasena(contrasena);
-        setCorreo(correo);
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.contrasena = contrasena;
+        this.correo = correo;
+        contador++;
+        this.codigo = contador;
     }
 
     /**
-     * Devuelve la información del usuario en formato texto.
-     * @return información del usuario
+     * Devuelve el código del usuario
+     *
+     * @return código
      */
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "nombre='" + nombre + '\'' +
-                ", correo='" + correo + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", contrasena='" + contrasena + '\'' +
-                '}';
+    public int getCodigo(){
+        return codigo;
     }
 
     /**
@@ -55,6 +56,7 @@ public class Usuario {
      * @return nombre del usuario
      */
     public String getNombre() {
+
         return nombre;
     }
 
@@ -73,6 +75,7 @@ public class Usuario {
      * @return correo del usuario
      */
     public String getCorreo() {
+
         return correo;
     }
 
@@ -91,6 +94,7 @@ public class Usuario {
      * @return apellido del usuario
      */
     public String getApellido() {
+
         return apellido;
     }
 
@@ -109,6 +113,7 @@ public class Usuario {
      * @return contraseña del usuario
      */
     public String getContrasena() {
+
         return contrasena;
     }
 
@@ -120,5 +125,37 @@ public class Usuario {
         if(Validaciones.validarContrasena(contrasena)){
             this.contrasena=contrasena;
         }
+    }
+
+    public boolean equals(Object obj){
+
+        boolean resp = false;
+
+        if (obj instanceof Usuario){
+
+            Usuario usuario = (Usuario) obj;
+
+            if(this.correo.equals(usuario.getCorreo())){
+                resp = true;
+            }
+        }
+
+        return resp;
+    }
+
+
+    /**
+     * Devuelve la información del usuario en formato texto.
+     * @return información del usuario
+     */
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "codigo=" + codigo +
+                "nombre='" + nombre + '\'' +
+                ", correo='" + correo + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", contrasena='" + contrasena + '\'' +
+                '}';
     }
 }

@@ -36,12 +36,14 @@ public  class CentroDeBelleza {
     }
 
     public CentroDeBelleza(String nombre, String direccion, String telefono, String horarioAtencion, Usuario[] usuarios, Servicio[] servicios) {
-        setNombre(nombre);
-        setDireccion(direccion);
-        setTelefono(telefono);
-        setHorarioAtencion(horarioAtencion);
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.horarioAtencion = horarioAtencion;
         this.usuarios = usuarios;
         this.servicios = servicios;
+        this.numUsuarios = 0;
+        this.numServicios = 0;
     }
 
     //Metodos CRUD para  usuario.
@@ -227,7 +229,7 @@ public  class CentroDeBelleza {
     }
 
     public void setTelefono(String telefono) {
-        if (validarTelefono(telefono)) {
+        if (Validaciones.validarTelefono(telefono)) {
             this.telefono = telefono;
         }
     }
@@ -262,9 +264,6 @@ public  class CentroDeBelleza {
         return telefono != null && telefono.matches("^09\\d{8}$");
     }
 
-
-
-
     @Override
     public String toString() {
         return "CentroDeBelleza{" +
@@ -276,6 +275,4 @@ public  class CentroDeBelleza {
                 ", servicios=" + (servicios != null ? servicios.length : 0) +
                 '}';
     }
-
-
 }

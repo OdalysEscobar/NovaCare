@@ -11,7 +11,7 @@ import java.util.Arrays;
 public class Agenda {
     private String citasPendiente;
     private String fecha;
-    private String estado;
+    private EstadoAgenda estado;
     private int numeroCitasPorDia;
     private int numeroCitasPorSemana;
     private int numeroCitasPorMes;
@@ -25,7 +25,7 @@ public class Agenda {
     public Agenda() {
         this.citasPendiente="Sin citas pendientes";
         this.fecha="Sin fecha";
-        this.estado="Sin estado";
+        this.estado= EstadoAgenda.DISPONIBLE;
         this.numeroCitasPorDia=0;
         this.numeroCitasPorSemana=0;
         this.numeroCitasPorMes=0;
@@ -44,16 +44,16 @@ public class Agenda {
      * @param numeroCitasPorMes número de citas por mes
      * @param numeroCitasCanceladas número de citas canceladas
      */
-    public Agenda(String citasPendiente, Cita[] citas, String fecha, String estado, int numeroCitasPorDia,
+    public Agenda(String citasPendiente, Cita[] citas, String fecha, EstadoAgenda estado, int numeroCitasPorDia,
                   int numeroCitasPorSemana , int numeroCitasPorMes, int numeroCitasCanceladas) {
         this.citasPendiente = citasPendiente;
         this.citas = citas;
-        setFecha(fecha);
-        setEstado(estado);
-        setNumeroCitasPorDia(numeroCitasPorDia);
-        setNumeroCitasPorSemana(numeroCitasPorSemana);
-        setNumeroCitasPorMes(numeroCitasPorMes);
-        setNumeroCitasCanceladas(numeroCitasCanceladas);
+        this.fecha = fecha;
+        this.numeroCitasPorDia = numeroCitasPorDia;
+        this.numeroCitasPorSemana = numeroCitasPorSemana;
+        this.numeroCitasPorMes = numeroCitasPorMes;
+        this.numeroCitasCanceladas = numeroCitasCanceladas;
+        this.estado = estado;
     }
 
 
@@ -92,21 +92,15 @@ public class Agenda {
         }
     }
 
-    /**
-     * Obtiene el estado de la agenda.
-     * @return estado de la agenda
-     */
-    public String getEstado() {
+    public EstadoAgenda getEstado() {
         return estado;
     }
 
-    /**
-     * Modifica el estado de la agenda.
-     * @param estado nuevo estado de la agenda
-     */
-    public void setEstado(String estado) {
-        if (Validaciones.validarLetras(estado)) {
+    public void setEstado(EstadoAgenda estado) {
+        if (estado != null) {
             this.estado = estado;
+        } else{
+            this.estado = EstadoAgenda.DISPONIBLE;
         }
     }
 
@@ -203,7 +197,7 @@ public class Agenda {
         return "Agenda{" +
                 "citasPendiente='" + citasPendiente + '\'' +
                 ", fecha='" + fecha + '\'' +
-                ", estado='" + estado + '\'' +
+                ", estado='" + estado.getDescripcion() + '\'' +
                 ", numeroCitasPorDia=" + numeroCitasPorDia +
                 ", numeroCitasPorSemana=" + numeroCitasPorSemana +
                 ", numeroCitasPorMes=" + numeroCitasPorMes +

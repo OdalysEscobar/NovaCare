@@ -1,4 +1,6 @@
 package ec.edu.uce.novacare.dominio;
+import ec.edu.uce.novacare.util.Validaciones;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,9 +12,9 @@ public class Cliente extends Usuario {
         this.numeroDeTelefono="Sin numero de telefono";
     }
 
-    public Cliente(String nombre, String apellido, String contrasena, String correo, String numeroDeTelefono, Cita[] citas) {
+    public Cliente(String nombre, String apellido, String contrasena, String correo, String numeroDeTelefono) {
         super(nombre, apellido, contrasena, correo);
-        setNumeroDeTelefono(numeroDeTelefono);
+        this.numeroDeTelefono = numeroDeTelefono;
     }
 
     public String getNumeroDeTelefono() {
@@ -20,8 +22,10 @@ public class Cliente extends Usuario {
     }
 
     public void setNumeroDeTelefono(String numeroDeTelefono) {
-        if (validarTelefono(numeroDeTelefono)) {
+        if (Validaciones.validarTelefono(numeroDeTelefono)) {
             this.numeroDeTelefono = numeroDeTelefono;
+        }else{
+            this.numeroDeTelefono = "Sin numero de telefono";
         }
     }
 
