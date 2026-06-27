@@ -12,7 +12,7 @@ public class Cliente extends Usuario {
         this.numeroDeTelefono="Sin numero de telefono";
     }
 
-    public Cliente(String nombre, String apellido, String contrasena, String correo, String numeroDeTelefono) {
+    public Cliente( String nombre, String apellido, String contrasena, String correo, String numeroDeTelefono) {
         super(nombre, apellido, contrasena, correo);
         this.numeroDeTelefono = numeroDeTelefono;
     }

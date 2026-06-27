@@ -11,8 +11,8 @@ public class Empleado extends Usuario{
         this.agenda = new Agenda();
     }
 
-    public Empleado(String nombre, String apellido, String contrasena, String correo, Especialidad especialidad, Agenda agenda) {
-        super(nombre, apellido, contrasena, correo);
+    public Empleado( String nombre, String apellido, String contrasena, String correo, Especialidad especialidad, Agenda agenda) {
+        super( nombre, apellido, contrasena, correo);
         this.especialidad = especialidad;
         this.agenda = agenda;
     }

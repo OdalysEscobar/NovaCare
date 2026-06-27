@@ -48,13 +48,19 @@ public  class CentroDeBelleza {
 
     //Metodos CRUD para  usuario.
 
-    public static boolean existe(Usuario u){
-        for (int i=0; i< numUsuarios; i++){
+    public static boolean validarDuplicado(Object o){
+        if (!(o instanceof Usuario)) {
+            return false;
+        }
 
-            if(u != null && usuarios[i].equals(u)){
+        Usuario usuario = (Usuario)o;
+
+        for (int i=0; i<numUsuarios; i++){
+            if (usuarios[i] !=null && usuarios[i].equals(usuario)){
                 return true;
             }
         }
+
         return false;
     }
 
@@ -64,7 +70,7 @@ public  class CentroDeBelleza {
             return false;
         }
 
-        if(!existe(nuevoUsuario)) {
+        if(!validarDuplicado(nuevoUsuario)) {
             if (numUsuarios == usuarios.length) {
                 Usuario[] auxUsuario = new Usuario[usuarios.length + 1];
                 System.arraycopy(usuarios, 0, auxUsuario, 0, usuarios.length);
@@ -78,6 +84,30 @@ public  class CentroDeBelleza {
         }
 
         return false;
+    }
+
+    public static boolean agregarUsuario (String nombre, String apellido, String contrasena, String correo, String numeroDeTelefono){
+        boolean resp=false;
+
+        Cliente cliente = new Cliente(nombre, apellido, contrasena, correo, numeroDeTelefono);
+        if(!validarDuplicado(cliente)){
+            if(numUsuarios == usuarios.length){
+                Usuario [] auxUsuario = new Usuario[usuarios.length+1];
+                System.arraycopy(usuarios,0, auxUsuario,0, usuarios.length);
+                usuarios=auxUsuario;
+            }
+
+            usuarios [numUsuarios]=cliente;
+            numUsuarios++;
+
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean agregarUsuario (String nombre, String apellido, String contrasena, String correo, Especialidad especialidad, Agenda agenda){
+        Empleado emp = new Empleado (nombre, apellido, contrasena, correo, especialidad, agenda);
+        return agregarUsuario(emp);
     }
 
     public static Usuario buscarUsuario(String correo){
@@ -113,6 +143,7 @@ public  class CentroDeBelleza {
         return false;
     }
 
+
     public boolean eliminarUsuario(String correo) {
 
         for (int i = 0; i < numUsuarios; i++) {
@@ -131,6 +162,16 @@ public  class CentroDeBelleza {
         }
 
         return false;
+    }
+
+    public String consultarUsario(){
+        String texto="";
+        for (Usuario u: usuarios){
+            if (u!=null){
+                texto += u+"\r\n";
+            }
+        }
+        return texto;
     }
 
     //Metodos CRUD para servicio
@@ -274,5 +315,18 @@ public  class CentroDeBelleza {
                 ", usuarios=" + (usuarios != null ? usuarios.length : 0) +
                 ", servicios=" + (servicios != null ? servicios.length : 0) +
                 '}';
+    }
+
+    public void inicializar (){
+        //Para usuarios
+        agregarUsuario("Maria", "Alvarez", "1235", "maria@uce.com", "0995631247");
+        agregarUsuario("Juan", "Estrada", "14897", "juan@hotmail.com", Especialidad.BARBERIA, new Agenda());
+        agregarUsuario("Sofia", "Moran", "65423", "sofi@uce.com", "0995631756");
+        //Para servicios
+        Servicio servicio1 = new Servicio (20,true);
+        Servicio servicio2 = new Servicio (60,false);
+
+        agregarServicio(servicio1);
+        agregarServicio(servicio2);
     }
 }
