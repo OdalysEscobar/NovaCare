@@ -3,6 +3,8 @@ package ec.edu.uce.novacare.interfaz;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import ec.edu.uce.novacare.dominio.Disponibilidad;
 import ec.edu.uce.novacare.util.Validaciones;
 import ec.edu.uce.novacare.dominio.Servicio;
 import ec.edu.uce.novacare.dominio.TipoServicio;
@@ -91,7 +93,7 @@ public class MenuGestionarServicios {
 
 
             int minutos = Integer.parseInt(duracion);
-            Servicio servicioIndividual = new Servicio(minutos, true);
+            Servicio servicioIndividual = new Servicio(minutos, Disponibilidad.DISPONIBLE);
 
             Servicio[] arregloServicios = new Servicio[]{ servicioIndividual };
 

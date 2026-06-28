@@ -5,14 +5,14 @@ package ec.edu.uce.novacare.dominio;
  */
 public class Servicio {
     private int duracion;
-    private boolean disponibilidad;
+    private Disponibilidad disponibilidad;
     /**
      * Constructor vacio.
      * Inicializa la duración en 0 y la disponibilidad en false.
      */
     public Servicio() {
         this.duracion = 0 ;
-        this.disponibilidad = false;
+        this.disponibilidad = Disponibilidad.NO_DISPONIBLE;
     }
 
     /**
@@ -20,22 +20,11 @@ public class Servicio {
      * @param duracion duración del servicio
      * @param disponibilidad disponibilidad del servicio
      */
-    public Servicio(int duracion, boolean disponibilidad) {
+    public Servicio(int duracion, Disponibilidad disponibilidad) {
         setDuracion(duracion);
         setDisponibilidad(disponibilidad);
     }
 
-    /**
-     * Devuelve la información del servicio en formato texto.
-     * @return información del servicio
-     */
-    @Override
-    public String toString() {
-        return "Servicio{" +
-                " duracion=" + duracion +
-                ", disponibilidad=" + disponibilidad +
-                '}';
-    }
 
     /**
      * Obtiene la duración del servicio.
@@ -60,14 +49,30 @@ public class Servicio {
      * @return true si el servicio está disponible,
      * false en caso contrario
      */
-    public boolean isDisponibilidad() {
+    public Disponibilidad getDisponibilidad() {
         return disponibilidad;
     }
     /**
      * Modifica la disponibilidad del servicio.
      * @param disponibilidad nueva disponibilidad del servicio
      */
-    public void setDisponibilidad(boolean disponibilidad) {
-        this.disponibilidad = disponibilidad;
+    public void setDisponibilidad(Disponibilidad disponibilidad) {
+
+        if(disponibilidad != null){
+            this.disponibilidad = disponibilidad;
+        }
     }
+
+    /**
+     * Devuelve la información del servicio en formato texto.
+     * @return información del servicio
+     */
+    @Override
+    public String toString() {
+        return "Servicio{" +
+                " duracion=" + duracion +
+                ", disponibilidad=" + disponibilidad +
+                '}';
+    }
+
 }

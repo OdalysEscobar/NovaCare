@@ -223,7 +223,7 @@ public  class CentroDeBelleza {
     public boolean editarServicio(Servicio nuevoServicio, int pos) {
         if (pos >= 0 && pos < servicios.length && servicios[pos] != null) {
             servicios[pos].setDuracion(nuevoServicio.getDuracion());
-            servicios[pos].setDisponibilidad(nuevoServicio.isDisponibilidad());
+            servicios[pos].setDisponibilidad(nuevoServicio.getDisponibilidad());
             return true;
         }
         return false;
@@ -329,8 +329,8 @@ public  class CentroDeBelleza {
         agregarUsuario("Juan", "Estrada", "14897", "juan@hotmail.com", Especialidad.BARBERIA, new Agenda());
         agregarUsuario("Sofia", "Moran", "65423", "sofi@uce.com", "0995631756");
         //Para servicios
-        Servicio servicio1 = new Servicio (20,true);
-        Servicio servicio2 = new Servicio (60,false);
+        Servicio servicio1 = new Servicio (20,Disponibilidad.DISPONIBLE);
+        Servicio servicio2 = new Servicio (60,Disponibilidad.NO_DISPONIBLE);
 
         agregarServicio(servicio1);
         agregarServicio(servicio2);

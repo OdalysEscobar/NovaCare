@@ -1,5 +1,6 @@
 package ec.edu.uce.novacare.test.dominio;
 
+import ec.edu.uce.novacare.dominio.Disponibilidad;
 import ec.edu.uce.novacare.dominio.Servicio;
 import org.junit.jupiter.api.Test;
 
@@ -9,15 +10,15 @@ class ServicioTest {
 
     @Test
     void constructorConParametros(){
-        Servicio servicio = new Servicio (200, false);
+        Servicio servicio = new Servicio (200, Disponibilidad.NO_DISPONIBLE);
         assertEquals(200, servicio.getDuracion());
-        assertEquals(false, servicio.isDisponibilidad());
+        assertEquals(Disponibilidad.NO_DISPONIBLE, servicio.getDisponibilidad());
         System.out.println("El metodo constructorConParametros funciona correctamente✅");
     }
 
     @Test
     void testToString() {
-        Servicio servicio = new Servicio(123, true);
+        Servicio servicio = new Servicio(123, Disponibilidad.DISPONIBLE);
         String textoEsperado = "Servicio{" +
                 " duracion=123"+
                 ", disponibilidad=true" +
@@ -28,7 +29,7 @@ class ServicioTest {
 
     @Test
     void getDuracion() {
-        Servicio servicio = new Servicio(200, true);
+        Servicio servicio = new Servicio(200, Disponibilidad.DISPONIBLE);
         assertEquals(200, servicio.getDuracion());
         System.out.println("El metodo getDuracion funciona correctamente✅");
     }
@@ -49,17 +50,18 @@ class ServicioTest {
     }
 
     @Test
-    void isDisponibilidad() {
-        Servicio servicio = new Servicio(200, true);
-        assertEquals(true, servicio.isDisponibilidad());
+    void setDisponibilidad() {
+        Servicio servicio = new Servicio();
+        servicio.setDisponibilidad(Disponibilidad.DISPONIBLE);
+        assertEquals(Disponibilidad.DISPONIBLE, servicio.getDisponibilidad());
         System.out.println("El metodo isDisponibilidad funciona correctamente✅");
     }
 
     @Test
-    void setDisponibilidad() {
+    void setDisponibilidadNull() {
         Servicio servicio = new Servicio();
-            servicio.setDisponibilidad(false);
-            assertEquals(false, servicio.isDisponibilidad());
+            servicio.setDisponibilidad(null);
+            assertEquals(Disponibilidad.NO_DISPONIBLE, servicio.getDisponibilidad());
         System.out.println("El metodo setDisponibilidad funciona correctamente✅");
     }
 }
