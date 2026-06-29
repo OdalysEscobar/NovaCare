@@ -8,7 +8,7 @@ public class TestCentroDeBellezaDAO {
         CentroDeBellezaDAOFabrica fabrica = new CentroDeBellezaDAOFabrica();
         CRUD dao = fabrica.crearCentroDeBellezaDAO();
 
-        String accion = "D";
+        String accion = "C";
         Servicio serv;
         int id = 0;
 
