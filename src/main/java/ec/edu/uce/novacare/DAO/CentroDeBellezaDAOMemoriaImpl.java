@@ -4,7 +4,7 @@ import ec.edu.uce.novacare.dominio.CentroDeBelleza;
 import ec.edu.uce.novacare.dominio.Servicio;
 import ec.edu.uce.novacare.dominio.Usuario;
 
-public class CentroDeBellezaDAO implements CRUD {
+public class CentroDeBellezaDAOMemoriaImpl implements CRUD {
 
     private CentroDeBelleza centro = CentroDeBelleza.getCentro();
 
@@ -14,7 +14,6 @@ public class CentroDeBellezaDAO implements CRUD {
             Servicio s = (Servicio) o;
             return centro.agregarServicio(s);
         } else if (o instanceof Usuario) {
-            Usuario u = (Usuario) o;
             return true;
         }
         return false;
@@ -23,7 +22,6 @@ public class CentroDeBellezaDAO implements CRUD {
     @Override
     public boolean editar(Object o) {
         if (o instanceof Servicio) {
-            Servicio s = (Servicio) o;
             return true;
         }
         return false;
@@ -32,8 +30,7 @@ public class CentroDeBellezaDAO implements CRUD {
     @Override
     public boolean eliminar(Object o) {
         if (o instanceof Integer) {
-            int pos = (Integer) o;
-            return centro.eliminarServicio(pos);
+            return centro.eliminarServicio((Integer) o);
         }
         return false;
     }
@@ -41,7 +38,7 @@ public class CentroDeBellezaDAO implements CRUD {
     @Override
     public Object buscar(Object o) {
         if (o instanceof Integer) {
-            int pos = (Integer) o;
+            return centro.buscarServicio((Integer) o);
         }
         return null;
     }
