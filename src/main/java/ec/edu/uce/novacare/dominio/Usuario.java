@@ -4,7 +4,7 @@ import ec.edu.uce.novacare.util.Validaciones;
 /**
  * Clase que representa a un usuario del sistema NovaCare.
  */
-public abstract class Usuario {
+public abstract class Usuario implements Comparable<Usuario> {
 
     private final int codigo;
     private String nombre;
@@ -157,5 +157,17 @@ public abstract class Usuario {
                 ", apellido='" + apellido + '\'' +
                 ", contrasena='" + contrasena + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Usuario o) {
+        int resp = this.nombre.compareTo(o.getNombre());
+        if (resp > 0){
+            return 1;
+        } else if (resp < 0){
+            return  -1;
+        } else{
+            return 0;
+        }
     }
 }

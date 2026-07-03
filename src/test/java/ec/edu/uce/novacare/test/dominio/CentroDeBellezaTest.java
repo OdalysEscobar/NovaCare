@@ -4,6 +4,8 @@ import ec.edu.uce.novacare.dominio.*;
 import ec.edu.uce.novacare.util.Validaciones;
 import ec.edu.uce.novacare.dominio.Disponibilidad;
 import org.junit.jupiter.api.Test;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,8 +14,8 @@ class CentroDeBellezaTest {
     @Test
     void centroDeBellezaCorrecto() {
 
-        Usuario[] usuarios = new Usuario[2];
-        Servicio[] servicios = new Servicio[2];
+        List<Usuario> usuarios = new ArrayList<>();
+        List<Servicio> servicios = new ArrayList<>();
 
         CentroDeBelleza centro = new CentroDeBelleza(
                 "NovaCare",
@@ -29,8 +31,8 @@ class CentroDeBellezaTest {
         assertEquals("Pomasqui", centro.getDireccion());
         assertEquals("0991234567", centro.getTelefono());
         assertEquals("09:30", centro.getHorarioAtencion());
-        assertEquals(2, centro.getUsuarios().length);
-        assertEquals(2, centro.getServicios().length);
+        assertEquals(0, centro.getUsuarios().size());
+        assertEquals(0, centro.getServicios().size());
 
         System.out.println("CentroDeBelleza creado correctamente ✅");
     }
@@ -42,11 +44,11 @@ class CentroDeBellezaTest {
 
         assertNotNull(centro);
         assertEquals("Sin nombre", centro.getNombre());
-        assertEquals("Sin direccion", centro.getDireccion());
-        assertEquals("Sin telefono", centro.getTelefono());
-        assertEquals("00:00", centro.getHorarioAtencion());
-        assertEquals(3, centro.getUsuarios().length);
-        assertEquals(3, centro.getServicios().length);
+        assertEquals("Av. Amazonas y Naciones Unidas", centro.getDireccion());
+        assertEquals("0998765432", centro.getTelefono());
+        assertEquals("08:00-18:00", centro.getHorarioAtencion());
+        assertEquals(0, centro.getUsuarios().size());
+        assertEquals(0, centro.getServicios().size());
 
         System.out.println("Constructor vacío funcionando correctamente ✅");
     }
@@ -55,12 +57,12 @@ class CentroDeBellezaTest {
     void setUsuariosCorrecto() {
 
         CentroDeBelleza centro = new CentroDeBelleza();
-        Usuario[] usuarios = new Usuario[3];
+        List<Usuario> usuarios = new ArrayList<>();
 
         centro.setUsuarios(usuarios);
 
         assertNotNull(centro.getUsuarios());
-        assertEquals(3, centro.getUsuarios().length);
+        assertEquals(0, centro.getUsuarios().size());
 
         System.out.println("setUsuarios funcionando correctamente ✅");
     }
@@ -69,12 +71,12 @@ class CentroDeBellezaTest {
     void setServiciosCorrecto() {
 
         CentroDeBelleza centro = new CentroDeBelleza();
-        Servicio[] servicios = new Servicio[4];
+        List<Servicio> servicios = new ArrayList<>();
 
         centro.setServicios(servicios);
 
         assertNotNull(centro.getServicios());
-        assertEquals(4, centro.getServicios().length);
+        assertEquals(0, centro.getServicios().size());
 
         System.out.println("setServicios funcionando correctamente ✅");
     }
@@ -198,8 +200,9 @@ class CentroDeBellezaTest {
     void editarServicioCorrecto() {
         CentroDeBelleza centro = new CentroDeBelleza();
 
-        Servicio[] misServicios = new Servicio[3];
-        misServicios[0] = new Servicio(); // Servicio vacío por defecto
+        List<Servicio> misServicios = new ArrayList<>();
+        Servicio servicio = new Servicio();
+        misServicios.add(0,servicio) ; // Servicio vacío por defecto
         centro.setServicios(misServicios);
 
         Servicio servicioActualizado = new Servicio();
@@ -209,8 +212,8 @@ class CentroDeBellezaTest {
         boolean editado = centro.editarServicio(servicioActualizado, 0);
 
         assertTrue(editado);
-        assertEquals(45, centro.getServicios()[0].getDuracion());
-        assertEquals(Disponibilidad.DISPONIBLE, centro.getServicios()[0].getDisponibilidad());
+        assertEquals(45, centro.getServicios().get(0).getDuracion());
+        assertEquals(Disponibilidad.DISPONIBLE, centro.getServicios().get(0).getDisponibilidad());
 
         System.out.println("editarServicio funcionando correctamente ✅");
     }

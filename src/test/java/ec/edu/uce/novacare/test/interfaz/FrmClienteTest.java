@@ -1,6 +1,6 @@
 package ec.edu.uce.novacare.test.interfaz;
 
-import ec.edu.uce.novacare.DAO.CentroDeBellezaDAO;
+//import ec.edu.uce.novacare.DAO.CentroDeBellezaDAO;
 import ec.edu.uce.novacare.dominio.CentroDeBelleza;
 import ec.edu.uce.novacare.dominio.Cliente;
 import ec.edu.uce.novacare.dominio.Usuario;
@@ -11,12 +11,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FrmClienteTest {
 
-    private CentroDeBellezaDAO dao;
+    //private CentroDeBellezaDAO dao;
 
     @BeforeEach
     void setUp() {
         // Se crea el DAO y se inicializa el sistema antes de cada prueba
-        dao = new CentroDeBellezaDAO();
+        //dao = new CentroDeBellezaDAO();
         CentroDeBelleza.getCentro().inicializar();
     }
 
@@ -25,7 +25,8 @@ class FrmClienteTest {
         // Simula lo que hace FrmCliente al presionar el botón Agregar
         Cliente c = new Cliente("Laura", "Torres", "pass123", "laura@gmail.com", "0991112233");
 
-        boolean ok = dao.agregar(c);
+        //boolean ok = dao.agregar(c);
+        boolean ok = CentroDeBelleza.agregarUsuario(c);
 
         assertTrue(ok);
 
@@ -35,7 +36,8 @@ class FrmClienteTest {
     @Test
     void agregarClienteNuloDesdeFormulario() {
         // Simula que desde el formulario no se construyó correctamente el objeto
-        boolean ok = dao.agregar(null);
+        //boolean ok = dao.agregar(null);
+        boolean ok = CentroDeBelleza.agregarUsuario(null);
 
         assertFalse(ok);
 
@@ -47,8 +49,11 @@ class FrmClienteTest {
         // Agrega un cliente y luego intenta agregarlo otra vez
         Cliente c = new Cliente("Laura", "Torres", "pass123", "laura2@gmail.com", "0991112234");
 
-        dao.agregar(c);
-        boolean ok = dao.agregar(c);
+//        dao.agregar(c);
+//        boolean ok = dao.agregar(c);
+
+        CentroDeBelleza.agregarUsuario(c);
+        boolean ok = CentroDeBelleza.agregarUsuario(c);
 
         assertFalse(ok);
 
@@ -79,7 +84,10 @@ class FrmClienteTest {
     @Test
     void editarClienteDesdeFormulario() {
         // Primero se agrega un cliente
-        dao.agregar(new Cliente("Ana", "Perez", "1234", "ana@test.com", "0991111111"));
+        //dao.agregar(new Cliente("Ana", "Perez", "1234", "ana@test.com", "0991111111"));
+        CentroDeBelleza.agregarUsuario(
+                new Cliente("Ana", "Perez", "1234", "ana@test.com", "0991111111")
+        );
 
         // Luego se construye uno nuevo con los datos actualizados
         Cliente actualizado = new Cliente("AnaEditada", "Gomez", "9999", "ana_nueva@test.com", "0992222222");
@@ -107,7 +115,10 @@ class FrmClienteTest {
     @Test
     void eliminarClienteDesdeFormulario() {
         // Agrega un cliente y luego lo elimina
-        dao.agregar(new Cliente("Pedro", "Ruiz", "abc", "pedro@test.com", "0993333333"));
+        //dao.agregar(new Cliente("Pedro", "Ruiz", "abc", "pedro@test.com", "0993333333"));
+        CentroDeBelleza.agregarUsuario(
+                new Cliente("Pedro", "Ruiz", "abc", "pedro@test.com", "0993333333")
+        );
 
         boolean ok = CentroDeBelleza.getCentro().eliminarUsuario("pedro@test.com");
 

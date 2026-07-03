@@ -1,6 +1,6 @@
 package ec.edu.uce.novacare.interfaz;
 
-import ec.edu.uce.novacare.DAO.CentroDeBellezaDAO;
+//import ec.edu.uce.novacare.DAO.CentroDeBellezaDAO;
 import ec.edu.uce.novacare.dominio.CentroDeBelleza;
 import ec.edu.uce.novacare.dominio.Cliente;
 import ec.edu.uce.novacare.dominio.Usuario;
@@ -110,7 +110,7 @@ public class FrmCliente extends JFrame {
         if (!validarCampos()) return;
 
         // Conexión GUI → Dominio via DAO (patrón requerido por la persona 3)
-        CentroDeBellezaDAO dao = new CentroDeBellezaDAO();
+        //CentroDeBellezaDAO dao = new CentroDeBellezaDAO();
         Cliente c = new Cliente(
                 txtNombre.getText().trim(),
                 txtApellido.getText().trim(),
@@ -120,7 +120,8 @@ public class FrmCliente extends JFrame {
         );
 
         // El DAO llama internamente a CentroDeBelleza.agregarUsuario()
-        boolean ok = dao.agregar(c);
+        //boolean ok = dao.agregar(c);
+        boolean ok = CentroDeBelleza.agregarUsuario(c);
 
         if (ok) { mostrarMensaje("✔ Cliente agregado.", new Color(0, 128, 0)); limpiar(); }
         else    { mostrarMensaje("✘ El cliente ya existe.", Color.RED); }
@@ -180,7 +181,7 @@ public class FrmCliente extends JFrame {
             txtNombre.setText(u.getNombre());
             txtApellido.setText(u.getApellido());
             txtCorreo.setText(u.getCorreo());
-            mostrarMensaje("✔ Cliente encontrado.", new Color(0, 128, 0));
+            mostrarMensaje("✔ Cliente encontrado.", new Color(13, 128, 0));
         } else {
             txtArea.setText("");
             mostrarMensaje("✘ Cliente no encontrado.", Color.RED);

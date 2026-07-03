@@ -1,6 +1,6 @@
 package ec.edu.uce.novacare.interfaz;
 
-import ec.edu.uce.novacare.DAO.CentroDeBellezaDAO;
+//import ec.edu.uce.novacare.DAO.CentroDeBellezaDAO;
 import ec.edu.uce.novacare.dominio.*;
 
 import javax.swing.*;
@@ -110,7 +110,7 @@ public class FrmEmpleado extends JFrame {
         if (!validarCampos()) return;
 
         // Conexión GUI → Dominio via DAO
-        CentroDeBellezaDAO dao = new CentroDeBellezaDAO();
+        //CentroDeBellezaDAO dao = new CentroDeBellezaDAO();
         Empleado emp = new Empleado(
                 txtNombre.getText().trim(),
                 txtApellido.getText().trim(),
@@ -120,7 +120,8 @@ public class FrmEmpleado extends JFrame {
                 new Agenda() // crea una agenda vacía por defecto
         );
 
-        boolean ok = dao.agregar(emp);
+        //boolean ok = dao.agregar(emp);
+        boolean ok = CentroDeBelleza.agregarUsuario(emp);
 
         if (ok) { mostrarMensaje("✔ Empleado agregado.", new Color(0, 128, 0)); limpiar(); }
         else    { mostrarMensaje("✘ El empleado ya existe.", Color.RED); }

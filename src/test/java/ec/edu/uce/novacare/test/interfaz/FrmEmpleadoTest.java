@@ -1,6 +1,6 @@
 package ec.edu.uce.novacare.test.interfaz;
 
-import ec.edu.uce.novacare.DAO.CentroDeBellezaDAO;
+//import ec.edu.uce.novacare.DAO.CentroDeBellezaDAO;
 import ec.edu.uce.novacare.dominio.Agenda;
 import ec.edu.uce.novacare.dominio.CentroDeBelleza;
 import ec.edu.uce.novacare.dominio.Empleado;
@@ -13,12 +13,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FrmEmpleadoTest {
 
-    private CentroDeBellezaDAO dao;
+    //private CentroDeBellezaDAO dao;
 
     @BeforeEach
     void setUp() {
         // Se prepara el DAO y se cargan datos iniciales
-        dao = new CentroDeBellezaDAO();
+        //dao = new CentroDeBellezaDAO();
         CentroDeBelleza.getCentro().inicializar();
     }
 
@@ -34,7 +34,7 @@ class FrmEmpleadoTest {
                 new Agenda()
         );
 
-        boolean ok = dao.agregar(emp);
+        boolean ok = CentroDeBelleza.agregarUsuario(emp);
 
         assertTrue(ok);
 
@@ -44,7 +44,7 @@ class FrmEmpleadoTest {
     @Test
     void agregarEmpleadoNuloDesdeFormulario() {
         // Simula que el objeto empleado no se generó correctamente
-        boolean ok = dao.agregar(null);
+        boolean ok = CentroDeBelleza.agregarUsuario(null);
 
         assertFalse(ok);
 
@@ -63,8 +63,10 @@ class FrmEmpleadoTest {
                 new Agenda()
         );
 
-        dao.agregar(emp);
-        boolean ok = dao.agregar(emp);
+//        dao.agregar(emp);
+//        boolean ok = dao.agregar(emp);
+        CentroDeBelleza.agregarUsuario(emp);
+        boolean ok = CentroDeBelleza.agregarUsuario(emp);
 
         assertFalse(ok);
 
@@ -95,7 +97,8 @@ class FrmEmpleadoTest {
     @Test
     void editarEmpleadoDesdeFormulario() {
         // Agrega primero un empleado
-        dao.agregar(new Empleado(
+        //dao.agregar(new Empleado(
+        CentroDeBelleza.agregarUsuario(new Empleado(
                 "Luis",
                 "Mora",
                 "pass",
@@ -144,7 +147,8 @@ class FrmEmpleadoTest {
     @Test
     void eliminarEmpleadoDesdeFormulario() {
         // Agrega un empleado y luego lo elimina
-        dao.agregar(new Empleado(
+        //dao.agregar(new Empleado(
+        CentroDeBelleza.agregarUsuario(new Empleado(
                 "Rosa",
                 "Lima",
                 "r123",

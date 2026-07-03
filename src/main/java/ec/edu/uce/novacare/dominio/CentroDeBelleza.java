@@ -1,6 +1,8 @@
 package ec.edu.uce.novacare.dominio;
 
 import ec.edu.uce.novacare.util.Validaciones;
+import java.util.ArrayList;
+import java.util.List;
 
 public  class CentroDeBelleza {
 
@@ -10,8 +12,8 @@ public  class CentroDeBelleza {
     private static String direccion;
     private static String telefono;
     private static String horarioAtencion;
-    private static Usuario[] usuarios;
-    private static Servicio[] servicios;
+    private static List <Usuario> usuarios;
+    private static List<Servicio> servicios;
     private static int numUsuarios;
     private static int numServicios;
 
@@ -28,22 +30,22 @@ public  class CentroDeBelleza {
         this.direccion = "Av. Amazonas y Naciones Unidas";
         this.telefono = "0998765432";
         this.horarioAtencion = "08:00-18:00";
-        this.usuarios = new Usuario[3];
-        this.servicios = new Servicio[3];
+        usuarios = new ArrayList<>();
+        servicios = new ArrayList<>();
 
-        numUsuarios=0;
-        numServicios=0;
+        //numUsuarios=0;
+        //numServicios=0;
     }
 
-    public CentroDeBelleza(String nombre, String direccion, String telefono, String horarioAtencion, Usuario[] usuarios, Servicio[] servicios) {
+    public CentroDeBelleza(String nombre, String direccion, String telefono, String horarioAtencion, List<Usuario> usuarios, List<Servicio>servicios) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
         this.horarioAtencion = horarioAtencion;
         this.usuarios = usuarios;
         this.servicios = servicios;
-        this.numUsuarios = 0;
-        this.numServicios = 0;
+        //this.numUsuarios = 0;
+        //this.numServicios = 0;
     }
 
     //Metodos CRUD para  usuario.
@@ -55,8 +57,8 @@ public  class CentroDeBelleza {
 
         Usuario usuario = (Usuario)o;
 
-        for (int i=0; i<numUsuarios; i++){
-            if (usuarios[i] !=null && usuarios[i].equals(usuario)){
+        for (Usuario u:usuarios){
+            if (u!=null && u.equals(usuario)){
                 return true;
             }
         }
@@ -71,15 +73,7 @@ public  class CentroDeBelleza {
         }
 
         if(!validarDuplicado(nuevoUsuario)) {
-            if (numUsuarios == usuarios.length) {
-                Usuario[] auxUsuario = new Usuario[usuarios.length + 1];
-                System.arraycopy(usuarios, 0, auxUsuario, 0, usuarios.length);
-                usuarios = auxUsuario;
-            }
-
-            usuarios[numUsuarios] = nuevoUsuario;
-            numUsuarios++;
-
+            usuarios.add(nuevoUsuario);
             return true;
         }
 
@@ -91,18 +85,11 @@ public  class CentroDeBelleza {
 
         Cliente cliente = new Cliente(nombre, apellido, contrasena, correo, numeroDeTelefono);
         if(!validarDuplicado(cliente)){
-            if(numUsuarios == usuarios.length){
-                Usuario [] auxUsuario = new Usuario[usuarios.length+1];
-                System.arraycopy(usuarios,0, auxUsuario,0, usuarios.length);
-                usuarios=auxUsuario;
-            }
-
-            usuarios [numUsuarios]=cliente;
-            numUsuarios++;
-
-            return true;
+            usuarios.add(cliente);
+            resp= true;
+            return resp;
         }
-        return false;
+        return resp;
     }
 
     public static boolean agregarUsuario (String nombre, String apellido, String contrasena, String correo, Especialidad especialidad, Agenda agenda){
@@ -115,27 +102,22 @@ public  class CentroDeBelleza {
         if (correo == null){
             return null;
         }
-        for (int i = 0; i < numUsuarios; i++){
-            if (usuarios[i] != null){
-                if(usuarios[i].getCorreo().equals(correo)){
-
-                    return usuarios[i];
-                }
-
+        for (Usuario u:usuarios){
+            if (u.getCorreo().equals(correo)){
+                return u;
             }
-
         }
 
         return null;
     }
 
     public boolean editarUsuario(Usuario nuevoUsuario, String correo) {
-        for (int i = 0; i < numUsuarios; i++) {
-            if (usuarios[i]!=null && usuarios[i].getCorreo().equals(correo)){
-                usuarios [i].setNombre(nuevoUsuario.getNombre());
-                usuarios [i].setApellido(nuevoUsuario.getApellido());
-                usuarios [i].setCorreo(nuevoUsuario.getCorreo());
-                usuarios[i].setContrasena(nuevoUsuario.getContrasena());
+        for (Usuario usuario : usuarios) {
+            if (usuario != null && usuario.getCorreo().equals(correo)){
+                usuario.setNombre(nuevoUsuario.getNombre());
+                usuario.setApellido(nuevoUsuario.getApellido());
+                usuario.setCorreo(nuevoUsuario.getCorreo());
+                usuario.setContrasena(nuevoUsuario.getContrasena());
                 return true;
             }
 
@@ -146,16 +128,11 @@ public  class CentroDeBelleza {
 
     public boolean eliminarUsuario(String correo) {
 
-        for (int i = 0; i < numUsuarios; i++) {
+        for (int i = 0; i < usuarios.size(); i++) {
 
-            if (usuarios[i] != null && usuarios[i].getCorreo().equals(correo)) {
+            if (usuarios.get(i).getCorreo().equals(correo)) {
 
-                for (int j = i; j < numUsuarios - 1; j++) {
-                    usuarios[j] = usuarios[j + 1];
-                }
-
-                usuarios[numUsuarios - 1] = null;
-                numUsuarios--;
+                usuarios.remove(i);
 
                 return true;
             }
@@ -177,9 +154,8 @@ public  class CentroDeBelleza {
     //Metodos CRUD para servicio
 
     public static boolean existeServicio(Servicio s) {
-        for (int i = 0; i < numServicios; i++) {
-            if (s != null && servicios[i] != null &&
-                    servicios[i].getDuracion() == s.getDuracion()) {
+        for (int i = 0; i < servicios.size(); i++) {
+            if (s != null && servicios.get(i)!= null && servicios.get(i).getDuracion() == s.getDuracion()) {
                 return true;
             }
         }
@@ -192,13 +168,7 @@ public  class CentroDeBelleza {
             return false;
         }
         if (!existeServicio(nuevoServicio)) {
-            if (numServicios == servicios.length) {
-                Servicio[] auxServicio = new Servicio[servicios.length + 1];
-                System.arraycopy(servicios, 0, auxServicio, 0, servicios.length);
-                servicios = auxServicio;
-            }
-            servicios[numServicios] = nuevoServicio;
-            numServicios++;
+           servicios.add(nuevoServicio);
             return true;
         }
         return false;
@@ -209,11 +179,9 @@ public  class CentroDeBelleza {
         if (duracion <= 0) {
             return null;
         }
-        for (int i = 0; i < numServicios; i++) {
-            if (servicios[i] != null) {
-                if (servicios[i].getDuracion() == duracion) {
-                    return servicios[i];
-                }
+        for (int i = 0; i < servicios.size(); i++) {
+            if (servicios.get(i).getDuracion() == duracion) {
+                    return servicios.get(i);
             }
         }
         return null;
@@ -221,23 +189,17 @@ public  class CentroDeBelleza {
 
 
     public boolean editarServicio(Servicio nuevoServicio, int pos) {
-        if (pos >= 0 && pos < servicios.length && servicios[pos] != null) {
-            servicios[pos].setDuracion(nuevoServicio.getDuracion());
-            servicios[pos].setDisponibilidad(nuevoServicio.getDisponibilidad());
+        if (pos >= 0 && pos < servicios.size() && servicios.get(pos) != null) {
+            servicios.get(pos).setDuracion(nuevoServicio.getDuracion());
+            servicios.get(pos).setDisponibilidad(nuevoServicio.getDisponibilidad());
             return true;
         }
         return false;
     }
 
     public boolean eliminarServicio(int pos) {
-        if (pos >= 0 && pos < numServicios && servicios[pos] != null) {
-
-            for (int i = pos; i < numServicios - 1; i++) {
-                servicios[i] = servicios[i + 1];
-            }
-
-            servicios[numServicios - 1] = null;
-            numServicios--;
+        if (pos >= 0 && pos < servicios.size() && servicios.get(pos) != null) {
+            servicios.remove(pos);
             return true;
         }
         return false;
@@ -295,19 +257,19 @@ public  class CentroDeBelleza {
         }
     }
 
-    public Usuario[] getUsuarios() {
+    public List<Usuario> getUsuarios() {
         return usuarios;
     }
 
-    public void setUsuarios(Usuario[] usuarios) {
+    public void setUsuarios(List <Usuario> usuarios) {
         this.usuarios = usuarios;
     }
 
-    public Servicio[] getServicios() {
+    public List<Servicio> getServicios() {
         return servicios;
     }
 
-    public void setServicios(Servicio[] servicios) {
+    public void setServicios(List<Servicio> servicios) {
         this.servicios = servicios;
     }
 
@@ -318,8 +280,8 @@ public  class CentroDeBelleza {
                 ", direccion='" + direccion + '\'' +
                 ", telefono='" + telefono + '\'' +
                 ", horarioAtencion='" + horarioAtencion + '\'' +
-                ", usuarios=" + (usuarios != null ? usuarios.length : 0) +
-                ", servicios=" + (servicios != null ? servicios.length : 0) +
+                ", usuarios=" + (usuarios != null ? usuarios.size() : 0) +
+                ", servicios=" + (servicios != null ? servicios.size() : 0) +
                 '}';
     }
 
