@@ -257,7 +257,7 @@ public  class CentroDeBelleza {
         }
     }
 
-    public List<Usuario> getUsuarios() {
+    public static List<Usuario> getUsuarios() {
         return usuarios;
     }
 
