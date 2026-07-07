@@ -1,17 +1,28 @@
 package ec.edu.uce.novacare.test.interfaz;
 
+import ec.edu.uce.novacare.DAO.UsuarioDAO;
+import ec.edu.uce.novacare.DAO.UsuarioDAOMemoriaImpl;
 import ec.edu.uce.novacare.interfaz.MenuGestionarPerfil;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class MenuGestionarPerfilTest {
 
+    private UsuarioDAO usuarioDAO;
+
+    @BeforeEach
+    void setUp() {
+        // 🔥 Inicializamos la simulación limpia del DAO antes de cada test
+        this.usuarioDAO = new UsuarioDAOMemoriaImpl();
+    }
+
     // Mostrar Menu
     @Test
     void mostrarMenuCorrecto() {
 
-        MenuGestionarPerfil perfil = new MenuGestionarPerfil();
+        MenuGestionarPerfil perfil = new MenuGestionarPerfil(usuarioDAO);
 
         assertEquals("", perfil.nombre);
         assertEquals("", perfil.apellido);
@@ -23,7 +34,7 @@ class MenuGestionarPerfilTest {
     @Test
     void mostrarMenuIncorrecto() {
 
-        MenuGestionarPerfil perfil = new MenuGestionarPerfil();
+        MenuGestionarPerfil perfil = new MenuGestionarPerfil(usuarioDAO);
 
         assertEquals("Eithan", perfil.nombre);
         assertEquals("Moran", perfil.apellido);
@@ -37,7 +48,7 @@ class MenuGestionarPerfilTest {
     @Test
     void crearPerfilCorrecto() {
 
-        MenuGestionarPerfil perfil = new MenuGestionarPerfil();
+        MenuGestionarPerfil perfil = new MenuGestionarPerfil(usuarioDAO);
 
         perfil.nombre = "Eithan";
         perfil.apellido = "Moran";
@@ -57,7 +68,7 @@ class MenuGestionarPerfilTest {
     @Test
     void crearPerfilIncorrecto() {
 
-        MenuGestionarPerfil perfil = new MenuGestionarPerfil();
+        MenuGestionarPerfil perfil = new MenuGestionarPerfil(usuarioDAO);
         perfil.nombre = "Eithan6";
         perfil.apellido = "Moran5";
         perfil.correo = "eithan09@gmailcom";
@@ -79,7 +90,7 @@ class MenuGestionarPerfilTest {
     void consultarPerfilCorrecto() {
 
 
-        MenuGestionarPerfil perfil = new MenuGestionarPerfil();
+        MenuGestionarPerfil perfil = new MenuGestionarPerfil(usuarioDAO);
 
         perfil.nombre = "Eithan";
         perfil.apellido = "Moran";
@@ -95,7 +106,7 @@ class MenuGestionarPerfilTest {
     @Test
     void consultarPerfilVacio() {
 
-        MenuGestionarPerfil perfil = new MenuGestionarPerfil();
+        MenuGestionarPerfil perfil = new MenuGestionarPerfil(usuarioDAO);
 
         assertEquals("", perfil.nombre);
         assertEquals("", perfil.apellido);
@@ -109,7 +120,7 @@ class MenuGestionarPerfilTest {
     @Test
     void actualizarPerfilCorrecto() {
 
-        MenuGestionarPerfil perfil = new MenuGestionarPerfil();
+        MenuGestionarPerfil perfil = new MenuGestionarPerfil(usuarioDAO);
 
         perfil.nombre = "Eithan";
         perfil.apellido = "Moran";
@@ -133,7 +144,7 @@ class MenuGestionarPerfilTest {
     @Test
     void actualizarPerfilIncorrecto() {
 
-        MenuGestionarPerfil perfil = new MenuGestionarPerfil();
+        MenuGestionarPerfil perfil = new MenuGestionarPerfil(usuarioDAO);
 
         perfil.nombre = "Carlos23";
         perfil.apellido = "Lopez45";
@@ -154,7 +165,7 @@ class MenuGestionarPerfilTest {
     void eliminarPerfilCorrecto() {
 
         MenuGestionarPerfil perfil =
-                new MenuGestionarPerfil();
+                new MenuGestionarPerfil(usuarioDAO);
 
         perfil.nombre = "Eithan";
         perfil.apellido = "Moran";
@@ -179,7 +190,7 @@ class MenuGestionarPerfilTest {
     @Test
     void eliminarPerfilIncorrecto() {
 
-        MenuGestionarPerfil perfil = new MenuGestionarPerfil();
+        MenuGestionarPerfil perfil = new MenuGestionarPerfil(usuarioDAO);
 
         perfil.nombre = "Eithan";
         perfil.apellido = "Moran";

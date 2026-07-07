@@ -9,16 +9,20 @@ import ec.edu.uce.novacare.util.Validaciones;
 import ec.edu.uce.novacare.dominio.Servicio;
 import ec.edu.uce.novacare.dominio.TipoServicio;
 
-
+import ec.edu.uce.novacare.DAO.UsuarioDAO;
 
 public class MenuGestionarServicios {
 
     private Scanner scanner = new Scanner(System.in);
+    private UsuarioDAO usuarioDAO;
+
     public String nombreServicio="Corte de cabello";
     public String descripcion="Corte en capas ";
     public String duracion="45";
 
-
+    public MenuGestionarServicios(UsuarioDAO usuarioDAO) {
+        this.usuarioDAO = usuarioDAO;
+    }
 
     public void mostrarMenu() {
 
@@ -64,7 +68,7 @@ public class MenuGestionarServicios {
                 case 0:
 
                     System.out.println("Regresando al menú principal...");
-                    MenuPrincipal menuPrincipal = new MenuPrincipal();
+                    MenuPrincipal menuPrincipal = new MenuPrincipal(usuarioDAO);
                     menuPrincipal.mostrarMenu();
                     return;
 

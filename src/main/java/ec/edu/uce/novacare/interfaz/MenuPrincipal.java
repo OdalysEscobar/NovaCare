@@ -41,7 +41,7 @@ public class MenuPrincipal {
                 case 1:
                     System.out.println("Gestionando perfil de usuario...");
 
-                    MenuGestionarPerfil menuPerfil = new MenuGestionarPerfil();
+                    MenuGestionarPerfil menuPerfil = new MenuGestionarPerfil(usuarioDAO);
                     menuPerfil.mostrarMenu();
 
                     break;
@@ -49,7 +49,7 @@ public class MenuPrincipal {
                 case 2:
                     System.out.println("Gestionando citas...");
 
-                    MenuGestionarCitas menuCitas = new MenuGestionarCitas();
+                    MenuGestionarCitas menuCitas = new MenuGestionarCitas(usuarioDAO);
                     menuCitas.mostrarMenu();
 
                     break;
@@ -57,7 +57,7 @@ public class MenuPrincipal {
                 case 3:
                     System.out.println("Gestionando servicios...");
 
-                    MenuGestionarServicios menuServicios = new MenuGestionarServicios();
+                    MenuGestionarServicios menuServicios = new MenuGestionarServicios(usuarioDAO);
                     menuServicios.mostrarMenu();
 
                     break;
@@ -65,21 +65,21 @@ public class MenuPrincipal {
                 case 4:
                     System.out.println("Gestionando disponibilidad de citas...");
 
-                    MenuGestionarDisponibilidad menuDisp = new MenuGestionarDisponibilidad();
+                    MenuGestionarDisponibilidad menuDisp = new MenuGestionarDisponibilidad(usuarioDAO);
                     menuDisp.mostrarMenu();
                     break;
 
                 case 5:
                     System.out.println("Gestionando agenda de citas...");
 
-                    MenuGestionarAgenda menuAgenda = new MenuGestionarAgenda();
+                    MenuGestionarAgenda menuAgenda = new MenuGestionarAgenda(usuarioDAO);
                     menuAgenda.mostrarMenu();
                     break;
 
                 case 6:
                     System.out.println("Gestionando reportes de citas...");
 
-                    MenuGestionarReportes menuReportes = new MenuGestionarReportes();
+                    MenuGestionarReportes menuReportes = new MenuGestionarReportes(usuarioDAO);
                     menuReportes.mostrarMenu();
                     break;
 

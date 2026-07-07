@@ -1,15 +1,26 @@
 package ec.edu.uce.novacare.test.interfaz;
+
+import ec.edu.uce.novacare.DAO.UsuarioDAO;
+import ec.edu.uce.novacare.DAO.UsuarioDAOMemoriaImpl;
 import ec.edu.uce.novacare.interfaz.MenuGestionarDisponibilidad;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class MenuGestionarDisponibilidadTest {
 
+    private UsuarioDAO usuarioDAO;
+
+    @BeforeEach
+    void setUp() {
+        this.usuarioDAO = new UsuarioDAOMemoriaImpl();
+    }
+
     @Test
     void mostrarMenuCorrecto() {
 
-        MenuGestionarDisponibilidad disponibilidad = new MenuGestionarDisponibilidad();
+        MenuGestionarDisponibilidad disponibilidad = new MenuGestionarDisponibilidad(usuarioDAO);
 
         assertEquals("2026-05-20", disponibilidad.fecha);
         assertEquals("09:00", disponibilidad.horaInicio);
@@ -22,7 +33,7 @@ class MenuGestionarDisponibilidadTest {
     @Test
     void mostrarMenuIncorrecto() {
 
-        MenuGestionarDisponibilidad disponibilidad = new MenuGestionarDisponibilidad();
+        MenuGestionarDisponibilidad disponibilidad = new MenuGestionarDisponibilidad(usuarioDAO);
 
         assertNotEquals("", disponibilidad.fecha);
         assertNotEquals("", disponibilidad.horaInicio);
@@ -36,7 +47,7 @@ class MenuGestionarDisponibilidadTest {
     @Test
     void crearDisponibilidadCorrecto() {
 
-        MenuGestionarDisponibilidad disponibilidad = new MenuGestionarDisponibilidad();
+        MenuGestionarDisponibilidad disponibilidad = new MenuGestionarDisponibilidad(usuarioDAO);
 
         disponibilidad.fecha = "2026-06-15";
         disponibilidad.horaInicio = "08:30";
@@ -54,7 +65,7 @@ class MenuGestionarDisponibilidadTest {
     @Test
     void crearDisponibilidadIncorrecto() {
 
-        MenuGestionarDisponibilidad disponibilidad = new MenuGestionarDisponibilidad();
+        MenuGestionarDisponibilidad disponibilidad = new MenuGestionarDisponibilidad(usuarioDAO);
 
         disponibilidad.fecha = "15-06-2026";
         disponibilidad.horaInicio = "25:99";
@@ -73,7 +84,7 @@ class MenuGestionarDisponibilidadTest {
     @Test
     void consultarDisponibilidadCorrecto() {
 
-        MenuGestionarDisponibilidad disponibilidad = new MenuGestionarDisponibilidad();
+        MenuGestionarDisponibilidad disponibilidad = new MenuGestionarDisponibilidad(usuarioDAO);
 
         disponibilidad.fecha = "2026-05-20";
         disponibilidad.horaInicio = "09:00";
@@ -91,7 +102,7 @@ class MenuGestionarDisponibilidadTest {
     @Test
     void consultarDisponibilidadVacio() {
 
-        MenuGestionarDisponibilidad disponibilidad = new MenuGestionarDisponibilidad();
+        MenuGestionarDisponibilidad disponibilidad = new MenuGestionarDisponibilidad(usuarioDAO);
 
         disponibilidad.fecha = "";
         disponibilidad.horaInicio = "";
@@ -110,7 +121,7 @@ class MenuGestionarDisponibilidadTest {
     @Test
     void actualizarDisponibilidadCorrecto() {
 
-        MenuGestionarDisponibilidad disponibilidad = new MenuGestionarDisponibilidad();
+        MenuGestionarDisponibilidad disponibilidad = new MenuGestionarDisponibilidad(usuarioDAO);
 
         // Valores iniciales
         disponibilidad.fecha = "2026-05-20";
@@ -135,7 +146,7 @@ class MenuGestionarDisponibilidadTest {
     @Test
     void actualizarDisponibilidadIncorrecto() {
 
-        MenuGestionarDisponibilidad disponibilidad = new MenuGestionarDisponibilidad();
+        MenuGestionarDisponibilidad disponibilidad = new MenuGestionarDisponibilidad(usuarioDAO);
 
         disponibilidad.fecha = "2026/05/22";
         disponibilidad.horaInicio = "10-00";
@@ -154,7 +165,7 @@ class MenuGestionarDisponibilidadTest {
     @Test
     void eliminarDisponibilidadCorrecto() {
 
-        MenuGestionarDisponibilidad disponibilidad = new MenuGestionarDisponibilidad();
+        MenuGestionarDisponibilidad disponibilidad = new MenuGestionarDisponibilidad(usuarioDAO);
 
         disponibilidad.fecha = "";
         disponibilidad.horaInicio = "";
@@ -172,7 +183,7 @@ class MenuGestionarDisponibilidadTest {
     @Test
     void eliminarDisponibilidadIncorrecto() {
 
-        MenuGestionarDisponibilidad disponibilidad = new MenuGestionarDisponibilidad();
+        MenuGestionarDisponibilidad disponibilidad = new MenuGestionarDisponibilidad(usuarioDAO);
 
         assertNotEquals("", disponibilidad.fecha);
         assertNotEquals("", disponibilidad.horaInicio);

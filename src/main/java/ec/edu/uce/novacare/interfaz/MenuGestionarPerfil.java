@@ -11,13 +11,17 @@ import ec.edu.uce.novacare.util.Validaciones;
 public class MenuGestionarPerfil {
 
     private Scanner scanner = new Scanner(System.in);
-    private UsuarioDAO dao = new UsuarioDAOFabrica().crearUsuarioDAO();
+    private UsuarioDAO dao;
 
     public String nombre = "";
     public String apellido = "";
     public String correo = "";
     public String contrasena = "";
     public String telefono = "";
+
+    public MenuGestionarPerfil(UsuarioDAO dao) {
+        this.dao = dao;
+    }
 
     public void mostrarMenu() {
 
@@ -66,7 +70,7 @@ public class MenuGestionarPerfil {
                 case 0:
 
                     System.out.println("Regresando al menú principal...");
-                    MenuPrincipal menuPrincipal = new MenuPrincipal();
+                    MenuPrincipal menuPrincipal = new MenuPrincipal(dao);
                     menuPrincipal.mostrarMenu();
                     return;
 

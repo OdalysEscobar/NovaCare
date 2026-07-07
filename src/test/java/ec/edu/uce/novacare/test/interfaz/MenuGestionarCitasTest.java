@@ -1,17 +1,27 @@
 package ec.edu.uce.novacare.test.interfaz;
 
+import ec.edu.uce.novacare.DAO.UsuarioDAO;
+import ec.edu.uce.novacare.DAO.UsuarioDAOMemoriaImpl;
 import ec.edu.uce.novacare.interfaz.MenuGestionarCitas;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class MenuGestionarCitasTest {
 
+    private UsuarioDAO usuarioDAO;
+
+    @BeforeEach
+    void setUp() {
+        this.usuarioDAO = new UsuarioDAOMemoriaImpl();
+    }
+
     // Mostrar Menu
     @Test
     void mostrarMenuCorrecto() {
 
-        MenuGestionarCitas cita = new MenuGestionarCitas();
+        MenuGestionarCitas cita = new MenuGestionarCitas(usuarioDAO);
 
         assertEquals("", cita.nombreUsuario);
         assertEquals("", cita.tipoServicio);
@@ -23,7 +33,7 @@ class MenuGestionarCitasTest {
     @Test
     void mostrarMenuIncorrecto() {
 
-        MenuGestionarCitas cita = new MenuGestionarCitas();
+        MenuGestionarCitas cita = new MenuGestionarCitas(usuarioDAO);
 
         assertNotEquals("Emma", cita.nombreUsuario);
         assertNotEquals("Corte de pelo", cita.tipoServicio);
@@ -37,7 +47,7 @@ class MenuGestionarCitasTest {
     @Test
     void crearCitaCorrecto() {
 
-        MenuGestionarCitas cita = new MenuGestionarCitas();
+        MenuGestionarCitas cita = new MenuGestionarCitas(usuarioDAO);
 
         cita.nombreUsuario = "Emma";
         cita.tipoServicio = "Corte de cabello";
@@ -55,7 +65,7 @@ class MenuGestionarCitasTest {
     @Test
     void crearCitaIncorrecto() {
 
-        MenuGestionarCitas cita = new MenuGestionarCitas();
+        MenuGestionarCitas cita = new MenuGestionarCitas(usuarioDAO);
 
         cita.nombreUsuario = "Emma123";
         cita.tipoServicio = "Corte de 456";
@@ -74,7 +84,7 @@ class MenuGestionarCitasTest {
     @Test
     void consultarCitaCorrecto() {
 
-        MenuGestionarCitas cita = new MenuGestionarCitas();
+        MenuGestionarCitas cita = new MenuGestionarCitas(usuarioDAO);
 
         cita.nombreUsuario = "Emma";
         cita.tipoServicio = "Corte de cabello";
@@ -92,7 +102,7 @@ class MenuGestionarCitasTest {
     @Test
     void consultarCitaVacio() {
 
-        MenuGestionarCitas cita = new MenuGestionarCitas();
+        MenuGestionarCitas cita = new MenuGestionarCitas(usuarioDAO);
 
         assertEquals("", cita.nombreUsuario);
         assertEquals("", cita.tipoServicio);
@@ -106,7 +116,7 @@ class MenuGestionarCitasTest {
     @Test
     void actualizarCitaCorrecto() {
 
-        MenuGestionarCitas cita = new MenuGestionarCitas();
+        MenuGestionarCitas cita = new MenuGestionarCitas(usuarioDAO);
 
         cita.nombreUsuario = "Emma";
         cita.tipoServicio = "Corte de cabello";
@@ -130,7 +140,7 @@ class MenuGestionarCitasTest {
     @Test
     void actualizarCitaIncorrecto() {
 
-        MenuGestionarCitas cita = new MenuGestionarCitas();
+        MenuGestionarCitas cita = new MenuGestionarCitas(usuarioDAO);
 
         cita.nombreUsuario = "Mabel99";
         cita.tipoServicio = "Tinte*";
@@ -149,7 +159,7 @@ class MenuGestionarCitasTest {
     @Test
     void cancelarCitaCorrecto() {
 
-        MenuGestionarCitas cita = new MenuGestionarCitas();
+        MenuGestionarCitas cita = new MenuGestionarCitas(usuarioDAO);
 
         cita.nombreUsuario = "Emma";
         cita.tipoServicio = "Corte de cabello";
@@ -173,7 +183,7 @@ class MenuGestionarCitasTest {
     @Test
     void cancelarCitaIncorrecto() {
 
-        MenuGestionarCitas cita = new MenuGestionarCitas();
+        MenuGestionarCitas cita = new MenuGestionarCitas(usuarioDAO);
 
         cita.nombreUsuario = "Emma";
         cita.tipoServicio = "Corte de cabello";
@@ -188,10 +198,5 @@ class MenuGestionarCitasTest {
 
         System.out.println("Validación de cancelación incorrecta detectada correctamente ✅");
     }
-
-
-
-
-
 
 }

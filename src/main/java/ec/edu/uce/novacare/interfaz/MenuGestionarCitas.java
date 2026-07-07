@@ -1,17 +1,22 @@
 package ec.edu.uce.novacare.interfaz;
 
 import java.util.Scanner;
-
+import ec.edu.uce.novacare.DAO.UsuarioDAO;
 import ec.edu.uce.novacare.util.Validaciones;
 
 public class MenuGestionarCitas {
 
     private Scanner scanner = new Scanner(System.in);
+    private UsuarioDAO usuarioDAO;
 
     public String nombreUsuario = "";
     public String tipoServicio = "";
     public String fecha = "";
     public String hora = "";
+
+    public MenuGestionarCitas(UsuarioDAO usuarioDAO) {
+        this.usuarioDAO = usuarioDAO;
+    }
 
     public void mostrarMenu() {
 
@@ -59,7 +64,7 @@ public class MenuGestionarCitas {
                 case 0:
 
                     System.out.println("Regresando al menú principal...");
-                    MenuPrincipal menuPrincipal = new MenuPrincipal();
+                    MenuPrincipal menuPrincipal = new MenuPrincipal(usuarioDAO);
                     menuPrincipal.mostrarMenu();
                     return;
 

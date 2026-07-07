@@ -1,15 +1,25 @@
 package ec.edu.uce.novacare.test.interfaz;
 
+import ec.edu.uce.novacare.DAO.UsuarioDAO;
+import ec.edu.uce.novacare.DAO.UsuarioDAOMemoriaImpl;
 import ec.edu.uce.novacare.interfaz.MenuGestionarAgenda;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class MenuGestionarAgendaTest {
 
+    private UsuarioDAO usuarioDAO;
+
+    @BeforeEach
+    void setUp() {
+        this.usuarioDAO = new UsuarioDAOMemoriaImpl();
+    }
+
     @Test
     void constructorCorrecto() {
-        MenuGestionarAgenda menu = new MenuGestionarAgenda();
+        MenuGestionarAgenda menu = new MenuGestionarAgenda(usuarioDAO);
 
         assertNotNull(menu);
         System.out.println("El metodo constructorCorrecto funciona correctamente✅");
@@ -25,7 +35,7 @@ class MenuGestionarAgendaTest {
 
     @Test
     void mostrarMenuCorrecto() {
-        MenuGestionarAgenda menu = new MenuGestionarAgenda();
+        MenuGestionarAgenda menu = new MenuGestionarAgenda(usuarioDAO);
 
         assertNotNull(menu);
         System.out.println("El metodo mostrarMenu funciona correctamente✅");
@@ -33,7 +43,7 @@ class MenuGestionarAgendaTest {
 
     @Test
     void consultarAgendaCorrecto() {
-        MenuGestionarAgenda menu = new MenuGestionarAgenda();
+        MenuGestionarAgenda menu = new MenuGestionarAgenda(usuarioDAO);
 
         assertNotNull(menu);
         menu.consultarAgenda();
@@ -43,7 +53,7 @@ class MenuGestionarAgendaTest {
 
     @Test
     void crearCitaAgendaCorrecto() {
-        MenuGestionarAgenda menu = new MenuGestionarAgenda();
+        MenuGestionarAgenda menu = new MenuGestionarAgenda(usuarioDAO);
 
         assertNotNull(menu);
         System.out.println("El metodo crearCitaAgenda funciona correctamente✅");
@@ -51,7 +61,7 @@ class MenuGestionarAgendaTest {
 
     @Test
     void actualizarCitaAgendaCorrecto() {
-        MenuGestionarAgenda menu = new MenuGestionarAgenda();
+        MenuGestionarAgenda menu = new MenuGestionarAgenda(usuarioDAO);
 
         assertNotNull(menu);
         System.out.println("El metodo actualizarCitaAgenda funciona correctamente✅");
