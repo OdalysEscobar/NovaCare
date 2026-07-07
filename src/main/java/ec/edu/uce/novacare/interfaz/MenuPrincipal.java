@@ -1,10 +1,15 @@
 package ec.edu.uce.novacare.interfaz;
 
 import java.util.Scanner;
+import ec.edu.uce.novacare.DAO.UsuarioDAO;
 
 public class MenuPrincipal {
 
     private Scanner scanner = new Scanner(System.in);
+    private UsuarioDAO usuarioDAO;
+    public MenuPrincipal(UsuarioDAO usuarioDAO) {
+        this.usuarioDAO = usuarioDAO;
+    }
 
     public void mostrarMenu() {
 
@@ -80,7 +85,7 @@ public class MenuPrincipal {
 
                 case 0:
                     System.out.println("Regresando a pantalla de inicio...");
-                    MenuIngresarSistema menuIngresarSistema = new MenuIngresarSistema();
+                    MenuIngresarSistema menuIngresarSistema = new MenuIngresarSistema(usuarioDAO);
                     menuIngresarSistema.mostrarMenu();
                     break;
 

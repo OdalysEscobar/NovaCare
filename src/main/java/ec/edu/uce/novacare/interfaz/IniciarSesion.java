@@ -1,13 +1,19 @@
 package ec.edu.uce.novacare.interfaz;
 
+import ec.edu.uce.novacare.DAO.UsuarioDAO;
+import ec.edu.uce.novacare.DAO.UsuarioDAOMemoriaImpl;
+import ec.edu.uce.novacare.dominio.Usuario;
+
 import java.util.Scanner;
 
 import ec.edu.uce.novacare.util.Validaciones;
 
 public class IniciarSesion {
     Scanner scanner = new Scanner(System.in);
+    private UsuarioDAO usuarioDAO;
 
-    public IniciarSesion() {
+    public IniciarSesion(UsuarioDAO usuarioDAO) {
+        this.usuarioDAO = usuarioDAO;
     }
 
     public boolean validarLogin(String correo, String contrasena){
@@ -46,6 +52,33 @@ public class IniciarSesion {
                 return false;
             }
         }
+
+        Usuario usuario = usuarioDAO.buscarPorCorreo(correo);
+
+
+        if(usuario == null){
+            System.out.println("Usuario no registrado.");
+            return false;
+        }
+
+
+
+        // NUEVA PARTE: verificar contraseña
+
+        if(!usuario.getContrasena().equals(contrasena)){
+            System.out.println("Contraseña incorrecta.");
+            return false;
+        }
+
+
+
+        System.out.println("==============================");
+        System.out.println("Bienvenido(a) "
+                + usuario.getNombre()
+                + " "
+                + usuario.getApellido());
+        System.out.println("==============================");
+
 
         return true;
     }

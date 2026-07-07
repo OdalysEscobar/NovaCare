@@ -3,16 +3,23 @@ package ec.edu.uce.novacare.interfaz;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import ec.edu.uce.novacare.DAO.UsuarioDAO;
 import ec.edu.uce.novacare.util.Validaciones;
+
 
 public class MenuGestionarReportes {
 
     private Scanner scanner = new Scanner(System.in);
+    private UsuarioDAO usuarioDAO;
 
     int numeroCitasPorDia = 5;
     int numeroCitasPorSemana = 20;
     int numeroCitasPorMes = 80;
     int numeroCitasCanceladas = 3;
+
+    public MenuGestionarReportes(UsuarioDAO usuarioDAO) {
+        this.usuarioDAO = usuarioDAO;
+    }
 
     public void mostrarMenu() {
 
@@ -55,7 +62,7 @@ public class MenuGestionarReportes {
 
                 case 0:
                     System.out.println("Regresando al menú principal...");
-                    MenuPrincipal menuPrincipal = new MenuPrincipal();
+                    MenuPrincipal menuPrincipal = new MenuPrincipal(usuarioDAO);
                     menuPrincipal.mostrarMenu();
                     return;
 

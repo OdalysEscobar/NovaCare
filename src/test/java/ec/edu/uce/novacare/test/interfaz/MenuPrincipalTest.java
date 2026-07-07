@@ -1,5 +1,6 @@
 package ec.edu.uce.novacare.test.interfaz;
-
+import ec.edu.uce.novacare.DAO.UsuarioDAO;
+import ec.edu.uce.novacare.DAO.UsuarioDAOMemoriaImpl;
 import ec.edu.uce.novacare.interfaz.MenuPrincipal;
 import ec.edu.uce.novacare.interfaz.MenuGestionarPerfil;
 import ec.edu.uce.novacare.interfaz.MenuGestionarCitas;
@@ -8,17 +9,26 @@ import ec.edu.uce.novacare.interfaz.MenuGestionarDisponibilidad;
 import ec.edu.uce.novacare.interfaz.MenuGestionarServicios;
 import ec.edu.uce.novacare.interfaz.MenuGestionarReportes;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class MenuPrincipalTest {
 
+    private UsuarioDAO usuarioDAO;
+
+    @BeforeEach
+    void setUp() {
+        // Inicializamos una simulación limpia del DAO antes de ejecutar cada prueba
+        this.usuarioDAO = new UsuarioDAOMemoriaImpl();
+    }
+
     // Mostrar Menu
     @Test
     void mostrarMenuCorrecto() {
 
-        MenuPrincipal menu = new MenuPrincipal();
+        MenuPrincipal menu = new MenuPrincipal(usuarioDAO);
         assertNotNull(menu);
         System.out.println("Menú principal creado correctamente ✅");
     }

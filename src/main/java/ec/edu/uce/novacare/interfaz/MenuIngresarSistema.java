@@ -1,12 +1,21 @@
 package ec.edu.uce.novacare.interfaz;
 
 import java.util.Scanner;
+import ec.edu.uce.novacare.DAO.UsuarioDAO;
 
 public class MenuIngresarSistema {
 
+    private UsuarioDAO usuarioDAO;
     private Scanner scanner = new Scanner(System.in);
-    private IniciarSesion iniciarSesion = new IniciarSesion();
-    private RegistrarUsuario registrarUsuario = new RegistrarUsuario();
+
+    private IniciarSesion iniciarSesion;
+    private RegistrarUsuario registrarUsuario;
+
+    public MenuIngresarSistema(UsuarioDAO usuarioDAO){
+        this.usuarioDAO = usuarioDAO;
+        this.iniciarSesion = new IniciarSesion(usuarioDAO);
+        this.registrarUsuario = new RegistrarUsuario();
+    }
 
     public void mostrarMenu() {
 
@@ -31,7 +40,7 @@ public class MenuIngresarSistema {
                 case 1:
                      if(iniciarSesion.login()==true){
                          System.out.println("Iniciando sesión...");
-                         MenuPrincipal menuPrincipal = new MenuPrincipal();
+                         MenuPrincipal menuPrincipal = new MenuPrincipal(usuarioDAO);
                          menuPrincipal.mostrarMenu();
                      }
                     break;
@@ -39,7 +48,7 @@ public class MenuIngresarSistema {
                 case 2:
 
                     registrarUsuario.guardarUsuario();
-                    MenuPrincipal menuprincipal = new MenuPrincipal();
+                    MenuPrincipal menuprincipal = new MenuPrincipal(usuarioDAO);
                     menuprincipal.mostrarMenu();
 
                     break;

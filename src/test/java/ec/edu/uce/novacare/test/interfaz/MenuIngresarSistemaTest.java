@@ -1,20 +1,31 @@
 package ec.edu.uce.novacare.test.interfaz;
 
+import ec.edu.uce.novacare.DAO.UsuarioDAO;
+import ec.edu.uce.novacare.DAO.UsuarioDAOMemoriaImpl;
 import ec.edu.uce.novacare.interfaz.MenuIngresarSistema;
 import ec.edu.uce.novacare.interfaz.IniciarSesion;
 import ec.edu.uce.novacare.interfaz.RegistrarUsuario;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class MenuIngresarSistemaTest {
 
+    private UsuarioDAO usuarioDAO;
+
+    @BeforeEach
+    void setUp() {
+        // Inicializamos el DAO en memoria compartido para las pruebas del menú
+        this.usuarioDAO = new UsuarioDAOMemoriaImpl();
+    }
+
     // Mostrar Menú
     @Test
     void mostrarMenuCorrecto() {
 
-        MenuIngresarSistema menu = new MenuIngresarSistema();
+        MenuIngresarSistema menu = new MenuIngresarSistema(usuarioDAO);
 
         assertNotNull(menu);
 
@@ -34,7 +45,7 @@ class MenuIngresarSistemaTest {
     @Test
     void iniciarSesionCorrecto() {
 
-        IniciarSesion sesion = new IniciarSesion();
+        IniciarSesion sesion = new IniciarSesion(usuarioDAO);
 
         assertNotNull(sesion);
 

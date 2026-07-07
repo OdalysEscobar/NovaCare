@@ -2,17 +2,21 @@ package ec.edu.uce.novacare;
 
 import ec.edu.uce.novacare.interfaz.MenuIngresarSistema;
 import ec.edu.uce.novacare.interfaz.MenuPrincipal;
+import ec.edu.uce.novacare.DAO.UsuarioDAO;
+import ec.edu.uce.novacare.DAO.UsuarioDAOMemoriaImpl;
 
 public class Launcher {
 
     public static void main(String[] args) {
 
-        MenuIngresarSistema menu1 = new MenuIngresarSistema();
+        UsuarioDAO usuarioDAO = new UsuarioDAOMemoriaImpl();
+
+        MenuIngresarSistema menu1 = new MenuIngresarSistema(usuarioDAO);
 
 
         menu1.mostrarMenu();
 
-        MenuPrincipal menu = new MenuPrincipal();
+        MenuPrincipal menu = new MenuPrincipal(usuarioDAO);
 
         menu.mostrarMenu();
     }
