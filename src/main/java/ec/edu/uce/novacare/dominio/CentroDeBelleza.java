@@ -18,6 +18,7 @@ public  class CentroDeBelleza {
     private static int numServicios;
 
     public static CentroDeBelleza getCentro(){
+
         return centro;
     }
 
