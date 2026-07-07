@@ -10,4 +10,5 @@ public class ServicioDAOMemorialImpl {
     CentroDeBelleza centro = CentroDeBelleza.getCentro();
     private static List<Servicio> servicios = CentroDeBelleza.getServicios();
 
+
 }

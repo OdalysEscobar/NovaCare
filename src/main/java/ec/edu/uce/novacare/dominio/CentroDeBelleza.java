@@ -266,12 +266,12 @@ public  class CentroDeBelleza {
         this.usuarios = usuarios;
     }
 
-    public List<Servicio> getServicios() {
+    public static List<Servicio> getServicios() {
         return servicios;
     }
 
-    public void setServicios(List<Servicio> servicios) {
-        this.servicios = servicios;
+    public static void setServicios(List<Servicio> servicios) {
+        CentroDeBelleza.servicios = servicios;
     }
 
     @Override
