@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 import java.util.ArrayList;
 
 import ec.edu.uce.novacare.DAO.DAO;
+import ec.edu.uce.novacare.DAO.ServicioDAOFabrica;
 import ec.edu.uce.novacare.DAO.UsuarioDAO;
 import ec.edu.uce.novacare.dominio.Disponibilidad;
 import ec.edu.uce.novacare.util.Validaciones;
@@ -93,7 +94,6 @@ public class MenuGestionarServicios {
     }
 
     public void consultarServicio() {
-
 
         List<TipoServicio> tiposServicios = (List<TipoServicio>) dao.listarTodos();
 
@@ -316,7 +316,7 @@ public class MenuGestionarServicios {
         tipoServicio.setNombreTipoServicio(nombreServicio);
         tipoServicio.setDescripcion(descripcion);
 
-
+        DAO servicioDAO = new ServicioDAOFabrica().crearServicioDAO();
         String respuesta;
 
         do {
@@ -357,7 +357,7 @@ public class MenuGestionarServicios {
             tipoServicio.getServicios().add(servicio);
 
             // Guardar el servicio
-            dao.nuevo(servicio);
+            servicioDAO.nuevo(servicio);
 
             // Preguntar si desea agregar otro servicio
             do {

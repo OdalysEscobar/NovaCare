@@ -1,10 +1,8 @@
 package ec.edu.uce.novacare.interfaz;
 
 import java.util.Scanner;
-import ec.edu.uce.novacare.DAO.UsuarioDAO;
-import ec.edu.uce.novacare.DAO.UsuarioDAOMemoriaImpl;
-import ec.edu.uce.novacare.DAO.DAO;
-import ec.edu.uce.novacare.DAO.ServicioDAOMemorialImpl;
+
+import ec.edu.uce.novacare.DAO.*;
 
 public class MenuPrincipal {
 
@@ -13,6 +11,7 @@ public class MenuPrincipal {
     private DAO dao;
     public MenuPrincipal(UsuarioDAO usuarioDAO) {
         this.usuarioDAO = usuarioDAO;
+        this.dao = new TipoServicioDAOMemoriaImpl();
     }
     public MenuPrincipal(DAO dao){
         this.dao = dao;
