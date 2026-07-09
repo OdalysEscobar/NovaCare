@@ -1,27 +1,33 @@
 package ec.edu.uce.novacare.interfaz;
 
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.ArrayList;
 
+import ec.edu.uce.novacare.DAO.DAO;
+import ec.edu.uce.novacare.DAO.UsuarioDAO;
 import ec.edu.uce.novacare.dominio.Disponibilidad;
 import ec.edu.uce.novacare.util.Validaciones;
 import ec.edu.uce.novacare.dominio.Servicio;
 import ec.edu.uce.novacare.dominio.TipoServicio;
-
-import ec.edu.uce.novacare.DAO.UsuarioDAO;
+import ec.edu.uce.novacare.dominio.CentroDeBelleza;
 
 public class MenuGestionarServicios {
 
+
     private Scanner scanner = new Scanner(System.in);
+    private DAO dao;
     private UsuarioDAO usuarioDAO;
+    private CentroDeBelleza centro = CentroDeBelleza.getCentro();
 
     public String nombreServicio="Corte de cabello";
     public String descripcion="Corte en capas ";
     public String duracion="45";
 
-    public MenuGestionarServicios(UsuarioDAO usuarioDAO) {
-        this.usuarioDAO = usuarioDAO;
+    public MenuGestionarServicios(DAO dao) {
+        this.dao= dao;
     }
 
     public void mostrarMenu() {
@@ -87,89 +93,293 @@ public class MenuGestionarServicios {
     }
 
     public void consultarServicio() {
-        if (nombreServicio.isEmpty()) {
-            System.out.println("\t\nNo hay servicios registrados.");
-        } else {
-            System.out.println("\t\n===== DETALLES DEL SERVICIO =====");
-            System.out.println("Nombre: " + nombreServicio);
-            System.out.println("Descripción: " + descripcion);
-            System.out.println("Duración: " + duracion + " min");
 
 
-            int minutos = Integer.parseInt(duracion);
-            Servicio servicioIndividual = new Servicio(minutos, Disponibilidad.DISPONIBLE);
+        List<TipoServicio> tiposServicios = (List<TipoServicio>) dao.listarTodos();
 
-            Servicio[] arregloServicios = new Servicio[]{ servicioIndividual };
+        if (tiposServicios.isEmpty()) {
+            System.out.println("\n No hay servicios registrados.");
+            return;
+        }
 
-            TipoServicio tipo = new TipoServicio("Peluquería", "Servicios de estilismo", arregloServicios);
+        System.out.println("\n╔══════════════════════════════════════════╗");
+        System.out.println("║          CATÁLOGO DE SERVICIOS           ║");
+        System.out.println("╚══════════════════════════════════════════╝");
 
-            System.out.println("Categoría Asignada: " + tipo.getNombreTipoServicio());
-            System.out.println("Detalle Categoría : " + tipo.getDescripcion());
 
-            System.out.println("Estructura en Memoria: " + tipo.toString());
+        for (TipoServicio tipoServicio : tiposServicios) {
+
+            System.out.println("\n╭──────────────────────────────────────────╮");
+            System.out.println("  TIPO DE SERVICIO: " + tipoServicio.getNombreTipoServicio());
+            System.out.println("╰──────────────────────────────────────────╯");
+
+
+            if (tipoServicio.getServicios() == null || tipoServicio.getServicios().isEmpty()) {
+
+                System.out.println("  No tiene servicios asignados.");
+
+            } else {
+
+                System.out.printf("%-5s %-25s %-15s %-15s%n",
+                        "N°", "Servicio", "Duración", "Estado");
+
+                System.out.println("------------------------------------------------");
+
+
+                int contador = 1;
+
+                for (Servicio servicio : tipoServicio.getServicios()) {
+
+                    System.out.printf("%-5d %-25s %-15s %-15s%n",
+                            contador,
+                            servicio.getNombre(),
+                            servicio.getDuracion() + " min",
+                            servicio.getDisponibilidad()
+                    );
+
+                    contador++;
+                }
+            }
+
+            System.out.println();
         }
     }
 
     public void actualizarServicio() {
-        if (nombreServicio.isEmpty()) {
-            System.out.println("\t\nNo existe un servicio para actualizar.");
+
+        System.out.println("\n========== ACTUALIZAR SERVICIO ==========");
+
+        List<TipoServicio> tipos = (List<TipoServicio>) dao.listarTodos();
+
+        if (tipos.isEmpty()) {
+            System.out.println("No existen tipos de servicio registrados.");
             return;
         }
-        System.out.println("\t\n--- Actualizar Datos del Servicio ---");
-        ingresarDatosServicio();
-        System.out.println("Servicio actualizado correctamente.");
+
+        // Mostrar los tipos de servicio
+        System.out.println("\nTipos de Servicio:");
+        for (int i = 0; i < tipos.size(); i++) {
+            System.out.println((i + 1) + ". " + tipos.get(i).getNombreTipoServicio());
+        }
+
+        System.out.print("\nSeleccione una opción: ");
+        int opcionTipo = Integer.parseInt(scanner.nextLine());
+
+        if (opcionTipo < 1 || opcionTipo > tipos.size()) {
+            System.out.println("Opción inválida.");
+            return;
+        }
+
+        TipoServicio tipoServicio = tipos.get(opcionTipo - 1);
+
+        // Verificar que tenga servicios
+        if (tipoServicio.getServicios() == null || tipoServicio.getServicios().isEmpty()) {
+            System.out.println("Este tipo de servicio no tiene servicios registrados.");
+            return;
+        }
+
+        // Mostrar los servicios
+        System.out.println("\nServicios de " + tipoServicio.getNombreTipoServicio() + ":");
+
+        List<Servicio> servicios = tipoServicio.getServicios();
+
+        for (int i = 0; i < servicios.size(); i++) {
+            Servicio s = servicios.get(i);
+
+            System.out.println((i + 1) + ". " + s.getNombre()
+                    + " | Duración: " + s.getDuracion() + " min"
+                    + " | Estado: " + s.getDisponibilidad());
+        }
+
+        System.out.print("\nSeleccione el servicio que desea modificar: ");
+        int opcionServicio = Integer.parseInt(scanner.nextLine());
+
+        if (opcionServicio < 1 || opcionServicio > servicios.size()) {
+            System.out.println("Opción inválida.");
+            return;
+        }
+
+        Servicio servicioSeleccionado = servicios.get(opcionServicio - 1);
+        String nombreAnterior = servicioSeleccionado.getNombre();
+
+        // Nuevos datos
+        System.out.print("Nuevo nombre: ");
+        String nuevoNombre = scanner.nextLine();
+
+        System.out.print("Nueva duración: ");
+        int nuevaDuracion = Integer.parseInt(scanner.nextLine());
+
+        System.out.print("¿Disponible? (S/N): ");
+        boolean disponible = scanner.nextLine().equalsIgnoreCase("S");
+
+        Servicio nuevoServicio = new Servicio();
+        nuevoServicio.setNombre(nuevoNombre);
+        nuevoServicio.setDuracion(nuevaDuracion);
+        nuevoServicio.setDisponibilidad(disponible ? Disponibilidad.DISPONIBLE: Disponibilidad.NO_DISPONIBLE);
+
+        if(dao.editar(opcionServicio - 1, nuevoServicio)){
+            System.out.println("Servicio actualizado correctamente.");
+        }else{
+            System.out.println("No se pudo actualizar.");
+        }
     }
 
     public void eliminarServicio() {
-        String confirmacion;
-        do {
-            System.out.print("¿Desea eliminar el servicio? (si/no): ");
-            confirmacion = scanner.nextLine();
+        List<TipoServicio> tipos = (List<TipoServicio>) dao.listarTodos();
 
-            if (!confirmacion.equalsIgnoreCase("si") && !confirmacion.equalsIgnoreCase("no")) {
-                System.out.println("Error: solo puede ingresar si o no.");
-            }
-        } while (!confirmacion.equalsIgnoreCase("si") && !confirmacion.equalsIgnoreCase("no"));
+        if (tipos.isEmpty()) {
+            System.out.println("No existen tipos de servicio.");
+            return;
+        }
 
-        if (confirmacion.equalsIgnoreCase("si")) {
-            nombreServicio = "";
-            descripcion = "";
-            duracion = "";
+        System.out.println("\n===== TIPOS DE SERVICIO =====");
+
+        for (int i = 0; i < tipos.size(); i++) {
+            System.out.println((i + 1) + ". " +
+                    tipos.get(i).getNombreTipoServicio());
+        }
+
+        System.out.print("Seleccione un tipo: ");
+        int opcionTipo = Integer.parseInt(scanner.nextLine());
+
+        if(opcionTipo <1 || opcionTipo>tipos.size()){
+            System.out.println("Opción inválida.");
+            return;
+        }
+
+        TipoServicio tipo = tipos.get(opcionTipo-1);
+
+        List<Servicio> servicios = tipo.getServicios();
+
+        if(servicios.isEmpty()){
+            System.out.println("No existen servicios.");
+            return;
+        }
+
+        System.out.println("\n===== SERVICIOS =====");
+
+        for(int i=0;i<servicios.size();i++){
+
+            System.out.println((i+1)+". "+servicios.get(i).getNombre());
+
+        }
+
+        System.out.print("Seleccione el servicio: ");
+        int opcionServicio=Integer.parseInt(scanner.nextLine());
+
+        if(opcionServicio<1 || opcionServicio>servicios.size()){
+            System.out.println("Opción inválida.");
+            return;
+        }
+
+        Servicio servicio=servicios.get(opcionServicio-1);
+
+        System.out.print("¿Eliminar "+servicio.getNombre()+"? (S/N): ");
+
+        if(scanner.nextLine().equalsIgnoreCase("S")){
+
+            servicios.remove(servicio);
+
             System.out.println("Servicio eliminado correctamente.");
-        } else {
+
+        }else{
+
             System.out.println("Operación cancelada.");
+
         }
     }
-
     private void ingresarDatosServicio() {
-        // Validar Nombre del Servicio
+
+        // Validar Nombre del Tipo de Servicio
         do {
-            System.out.print("Ingrese nombre del servicio: ");
+            System.out.print("Ingrese nombre del tipo de servicio: ");
             nombreServicio = scanner.nextLine();
+
             if (!Validaciones.validarLetras(nombreServicio)) {
                 System.out.println("Error: Nombre inválido (solo letras).");
             }
+
         } while (!Validaciones.validarLetras(nombreServicio));
 
         // Validar Descripción
         do {
             System.out.print("Ingrese descripción: ");
             descripcion = scanner.nextLine();
+
             if (descripcion.trim().isEmpty()) {
                 System.out.println("Error: La descripción no puede estar vacía.");
             }
+
         } while (descripcion.trim().isEmpty());
 
-        // Validar Duración (Números enteros)
-        do {
-            System.out.print("Ingrese duración en minutos: ");
-            duracion = scanner.nextLine();
-            if (!validarNumero(duracion)) {
-                System.out.println("Error: Ingrese solo números enteros.");
-            }
-        } while (!validarNumero(duracion));
-    }
+        TipoServicio tipoServicio = new TipoServicio();
+        tipoServicio.setNombreTipoServicio(nombreServicio);
+        tipoServicio.setDescripcion(descripcion);
 
+
+        String respuesta;
+
+        do {
+
+            Servicio servicio = new Servicio();
+
+            // Validar nombre del servicio
+            String nombre;
+            do {
+                System.out.print("Ingrese nombre del servicio: ");
+                nombre = scanner.nextLine();
+
+                if (!Validaciones.validarLetras(nombre)) {
+                    System.out.println("Error: Nombre inválido (solo letras).");
+                }
+
+            } while (!Validaciones.validarLetras(nombre));
+
+            servicio.setNombre(nombre);
+
+            // Validar duración
+            String duracionTexto;
+            do {
+                System.out.print("Ingrese duración en minutos: ");
+                duracionTexto = scanner.nextLine();
+
+                if (!validarNumero(duracionTexto)) {
+                    System.out.println("Error: Ingrese solo números enteros.");
+                }
+
+            } while (!validarNumero(duracionTexto));
+
+            servicio.setDuracion(Integer.parseInt(duracionTexto));
+
+            servicio.setDisponibilidad(Disponibilidad.DISPONIBLE);
+
+            // Agregar el servicio al tipo
+            tipoServicio.getServicios().add(servicio);
+
+            // Guardar el servicio
+            dao.nuevo(servicio);
+
+            // Preguntar si desea agregar otro servicio
+            do {
+                System.out.print("¿Desea agregar otro servicio? (S/N): ");
+                respuesta = scanner.nextLine().trim();
+
+                if (!respuesta.equalsIgnoreCase("S") &&
+                        !respuesta.equalsIgnoreCase("N")) {
+                    System.out.println("Error: Opción inválida.");
+                }
+
+            } while (!respuesta.equalsIgnoreCase("S") &&
+                    !respuesta.equalsIgnoreCase("N"));
+
+        } while (respuesta.equalsIgnoreCase("S"));
+
+        if(dao.nuevo(tipoServicio)){
+            System.out.println("Tipo de servicio registrado correctamente.");
+        }else{
+            System.out.println("No se pudo registrar.");
+        }
+    }
     public boolean validarNumero(String numero) {
         Pattern pattern = Pattern.compile("^[0-9]+$");
         Matcher matcher = pattern.matcher(numero);

@@ -1,5 +1,6 @@
 package ec.edu.uce.novacare.dominio;
 
+import ec.edu.uce.novacare.DAO.*;
 import ec.edu.uce.novacare.util.Validaciones;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +14,9 @@ public  class CentroDeBelleza {
     private static String telefono;
     private static String horarioAtencion;
     private static List <Usuario> usuarios;
-    private static List<Servicio> servicios;
+    private static List<TipoServicio> tipoServicios;
     private static int numUsuarios;
-    private static int numServicios;
+    private  Agenda agenda;
 
     public static CentroDeBelleza getCentro(){
 
@@ -26,16 +27,14 @@ public  class CentroDeBelleza {
         this("Sin nombre");
     }
 
-    public CentroDeBelleza(String nombre) {
+    private CentroDeBelleza(String nombre) {
         this.nombre = nombre;
         this.direccion = "Av. Amazonas y Naciones Unidas";
         this.telefono = "0998765432";
         this.horarioAtencion = "08:00-18:00";
-        usuarios = new ArrayList<>();
-        servicios = new ArrayList<>();
-
-        //numUsuarios=0;
-        //numServicios=0;
+        usuarios = new ArrayList<>(3);
+        tipoServicios = new ArrayList<>(3);
+        this.agenda = new Agenda();
     }
 
     public CentroDeBelleza(String nombre, String direccion, String telefono, String horarioAtencion, List<Usuario> usuarios, List<Servicio>servicios) {
@@ -44,9 +43,6 @@ public  class CentroDeBelleza {
         this.telefono = telefono;
         this.horarioAtencion = horarioAtencion;
         this.usuarios = usuarios;
-        this.servicios = servicios;
-        //this.numUsuarios = 0;
-        //this.numServicios = 0;
     }
 
     //Metodos CRUD para  usuario.
@@ -84,12 +80,11 @@ public  class CentroDeBelleza {
     public static boolean agregarUsuario (String nombre, String apellido, String contrasena, String correo, String numeroDeTelefono){
         boolean resp=false;
 
+        UsuarioDAOFabrica usuarioDAOFabrica = new UsuarioDAOFabrica();
+        UsuarioDAO usuarioDAO = usuarioDAOFabrica.crearUsuarioDAO();
+
         Cliente cliente = new Cliente(nombre, apellido, contrasena, correo, numeroDeTelefono);
-        if(!validarDuplicado(cliente)){
-            usuarios.add(cliente);
-            resp= true;
-            return resp;
-        }
+        usuarioDAO.nuevo(cliente);
         return resp;
     }
 
@@ -152,71 +147,101 @@ public  class CentroDeBelleza {
         return texto;
     }
 
-    //Metodos CRUD para servicio
 
-    public static boolean existeServicio(Servicio s) {
-        for (int i = 0; i < servicios.size(); i++) {
-            if (s != null && servicios.get(i)!= null && servicios.get(i).getDuracion() == s.getDuracion()) {
+    // CRUD Tipo de Servicio
+
+    public boolean existeTipoServicio(TipoServicio tipoServicio) {
+
+        if (tipoServicio == null) {
+            return false;
+        }
+
+        for (TipoServicio ts : tipoServicios) {
+
+            if (ts != null && ts.getNombreTipoServicio().equalsIgnoreCase(tipoServicio.getNombreTipoServicio())) {
+
                 return true;
             }
         }
+
         return false;
     }
 
-    // agregarServicio
-    public static boolean agregarServicio(Servicio nuevoServicio) {
-        if (nuevoServicio == null) {
+    public boolean agregarTipoServicio(TipoServicio nuevoTipoServicio) {
+
+        if (nuevoTipoServicio == null) {
             return false;
         }
-        if (!existeServicio(nuevoServicio)) {
-           servicios.add(nuevoServicio);
+
+        if (!existeTipoServicio(nuevoTipoServicio)) {
+            tipoServicios.add(nuevoTipoServicio);
             return true;
         }
+
         return false;
     }
 
-    // buscarServicio
-    public static Servicio buscarServicio(int duracion) {
-        if (duracion <= 0) {
+    public TipoServicio buscarTipoServicio(String nombre) {
+
+        if (nombre == null) {
             return null;
         }
-        for (int i = 0; i < servicios.size(); i++) {
-            if (servicios.get(i).getDuracion() == duracion) {
-                    return servicios.get(i);
+
+        for (TipoServicio ts : tipoServicios) {
+
+            if (ts != null &&
+                    ts.getNombreTipoServicio().equalsIgnoreCase(nombre)) {
+
+                return ts;
             }
         }
+
         return null;
     }
 
+    public boolean editarTipoServicio(String nombre, TipoServicio nuevoTipo) {
 
-    public boolean editarServicio(Servicio nuevoServicio, int pos) {
-        if (pos >= 0 && pos < servicios.size() && servicios.get(pos) != null) {
-            servicios.get(pos).setDuracion(nuevoServicio.getDuracion());
-            servicios.get(pos).setDisponibilidad(nuevoServicio.getDisponibilidad());
+        TipoServicio tipo = buscarTipoServicio(nombre);
+
+        if (tipo != null) {
+
+            tipo.setNombreTipoServicio(nuevoTipo.getNombreTipoServicio());
+            tipo.setDescripcion(nuevoTipo.getDescripcion());
+
             return true;
         }
+
         return false;
     }
 
-    public boolean eliminarServicio(int pos) {
-        if (pos >= 0 && pos < servicios.size() && servicios.get(pos) != null) {
-            servicios.remove(pos);
-            return true;
-        }
-        return false;
-    }
+    public boolean eliminarTipoServicio(String nombre) {
 
-    public String consultarServicio(){
-        String texto="";
-        for (Servicio s: servicios){
-            if (s!=null){
-                texto += s+"\r\n";
+        for (int i = 0; i < tipoServicios.size(); i++) {
+
+            if (tipoServicios.get(i).getNombreTipoServicio().equalsIgnoreCase(nombre)) {
+
+                tipoServicios.remove(i);
+
+                return true;
             }
         }
-        return texto;
+
+        return false;
     }
 
+    public String consultarTipoServicio() {
 
+        String texto = "";
+
+        for (TipoServicio ts : tipoServicios) {
+
+            if (ts != null) {
+                texto += ts + "\n";
+            }
+        }
+
+        return texto;
+    }
 
     public String getNombre() {
         return nombre;
@@ -266,12 +291,17 @@ public  class CentroDeBelleza {
         this.usuarios = usuarios;
     }
 
-    public static List<Servicio> getServicios() {
-        return servicios;
+
+    public void setAgenda(Agenda agenda) {
+        this.agenda = agenda;
     }
 
-    public static void setServicios(List<Servicio> servicios) {
-        CentroDeBelleza.servicios = servicios;
+    public Agenda getAgenda() {
+        return agenda;
+    }
+
+    public static List<TipoServicio> getTipoServicios() {
+        return tipoServicios;
     }
 
     @Override
@@ -282,7 +312,6 @@ public  class CentroDeBelleza {
                 ", telefono='" + telefono + '\'' +
                 ", horarioAtencion='" + horarioAtencion + '\'' +
                 ", usuarios=" + (usuarios != null ? usuarios.size() : 0) +
-                ", servicios=" + (servicios != null ? servicios.size() : 0) +
                 '}';
     }
 
@@ -291,11 +320,13 @@ public  class CentroDeBelleza {
         agregarUsuario("Maria", "Alvarez", "1235", "maria@uce.com", "0995631247");
         agregarUsuario("Juan", "Estrada", "14897", "juan@hotmail.com", Especialidad.BARBERIA, new Agenda());
         agregarUsuario("Sofia", "Moran", "65423", "sofi@uce.com", "0995631756");
-        //Para servicios
-        Servicio servicio1 = new Servicio (20,Disponibilidad.DISPONIBLE);
-        Servicio servicio2 = new Servicio (60,Disponibilidad.NO_DISPONIBLE);
 
-        agregarServicio(servicio1);
-        agregarServicio(servicio2);
+
+        //Para servicios
+        Servicio servicio1 = new Servicio ("prueba1",Disponibilidad.DISPONIBLE,20);
+        Servicio servicio2 = new Servicio ("prueba2",Disponibilidad.NO_DISPONIBLE,50);
+
+//        agregarServicio(servicio1);
+//        agregarServicio(servicio2);
     }
 }

@@ -2,6 +2,8 @@ package ec.edu.uce.novacare.dominio;
 
 import ec.edu.uce.novacare.util.Validaciones;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Arrays;
 
 /**
@@ -16,7 +18,7 @@ public class Agenda {
     private int numeroCitasPorSemana;
     private int numeroCitasPorMes;
     private int numeroCitasCanceladas;
-    private Cita[] citas;
+    private  List <Cita> citas;
 
     /**
      * Constructor por defecto.
@@ -30,7 +32,7 @@ public class Agenda {
         this.numeroCitasPorSemana=0;
         this.numeroCitasPorMes=0;
         this.numeroCitasCanceladas=0;
-        this.citas = new Cita[0];
+        this.citas =  new ArrayList<>();
     }
 
     /**
@@ -44,7 +46,7 @@ public class Agenda {
      * @param numeroCitasPorMes número de citas por mes
      * @param numeroCitasCanceladas número de citas canceladas
      */
-    public Agenda(String citasPendiente, Cita[] citas, String fecha, EstadoAgenda estado, int numeroCitasPorDia,
+    public Agenda(String citasPendiente, List<Cita> citas, String fecha, EstadoAgenda estado, int numeroCitasPorDia,
                   int numeroCitasPorSemana , int numeroCitasPorMes, int numeroCitasCanceladas) {
         this.citasPendiente = citasPendiente;
         this.citas = citas;
@@ -55,7 +57,6 @@ public class Agenda {
         this.numeroCitasCanceladas = numeroCitasCanceladas;
         this.estado = estado;
     }
-
 
 
     /**
@@ -180,7 +181,7 @@ public class Agenda {
      * Obtiene el arreglo de citas.
      * @return arreglo de citas
      */
-    public Cita[] getCitas() {
+    public List<Cita> getCitas() {
         return citas;
     }
 
@@ -188,7 +189,7 @@ public class Agenda {
      * Modifica el arreglo de citas.
      * @param citas nuevo arreglo de citas
      */
-    public void setCitas(Cita[] citas) {
+    public void setCitas(List<Cita> citas) {
         this.citas = citas;
     }
 
@@ -202,7 +203,7 @@ public class Agenda {
                 ", numeroCitasPorSemana=" + numeroCitasPorSemana +
                 ", numeroCitasPorMes=" + numeroCitasPorMes +
                 ", numeroCitasCanceladas=" + numeroCitasCanceladas +
-                ", citas="+ Arrays.toString(citas) +
+                ", citas="+ citas+
                 '}';
     }
 }

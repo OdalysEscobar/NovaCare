@@ -3,21 +3,31 @@ package ec.edu.uce.novacare.dominio;
 import ec.edu.uce.novacare.util.Validaciones;
 
 public class Recordatorio {
+
+    private final int id;
     private String informacionCita;
     private String correo;
     private Cita cita;
+    private static int contador;
+
+
 
     public Recordatorio() {
+        this.id = contador++;
         this.informacionCita="Sin informacion";
         this.correo="Sin correo";
     }
 
     public Recordatorio(String informacionCita, String correo, Cita cita) {
+        this.id = contador++;
         setInformacionCita(informacionCita);
         setCorreo(correo);
         this.cita = cita;
     }
 
+    public int getId(){
+        return id;
+    }
     public String getInformacionCita() {
         return informacionCita;
     }
@@ -47,9 +57,25 @@ public class Recordatorio {
     }
 
     @Override
+    public boolean equals(Object obj){
+
+        if(this == obj){
+            return true;
+        }
+
+        if(!(obj instanceof Recordatorio)){
+            return false;
+        }
+
+        Recordatorio recordatorio = (Recordatorio)obj;
+
+        return this.id == recordatorio.getId();
+    }
+    @Override
     public String toString() {
         return "Recordatorio{" +
-                "informacionCita='" + informacionCita + '\'' +
+                "id=" + id +
+                ", informacionCita='" + informacionCita + '\'' +
                 ", correo='" + correo + '\'' +
                 ", cita=" + cita +
                 '}';

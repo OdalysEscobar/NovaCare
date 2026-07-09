@@ -2,13 +2,20 @@ package ec.edu.uce.novacare.interfaz;
 
 import java.util.Scanner;
 import ec.edu.uce.novacare.DAO.UsuarioDAO;
+import ec.edu.uce.novacare.DAO.UsuarioDAOMemoriaImpl;
+import ec.edu.uce.novacare.DAO.DAO;
+import ec.edu.uce.novacare.DAO.ServicioDAOMemorialImpl;
 
 public class MenuPrincipal {
 
     private Scanner scanner = new Scanner(System.in);
     private UsuarioDAO usuarioDAO;
+    private DAO dao;
     public MenuPrincipal(UsuarioDAO usuarioDAO) {
         this.usuarioDAO = usuarioDAO;
+    }
+    public MenuPrincipal(DAO dao){
+        this.dao = dao;
     }
 
     public void mostrarMenu() {
@@ -57,7 +64,7 @@ public class MenuPrincipal {
                 case 3:
                     System.out.println("Gestionando servicios...");
 
-                    MenuGestionarServicios menuServicios = new MenuGestionarServicios(usuarioDAO);
+                    MenuGestionarServicios menuServicios = new MenuGestionarServicios(dao);
                     menuServicios.mostrarMenu();
 
                     break;

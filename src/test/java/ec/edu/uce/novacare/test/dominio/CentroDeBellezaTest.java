@@ -32,7 +32,6 @@ class CentroDeBellezaTest {
         assertEquals("0991234567", centro.getTelefono());
         assertEquals("09:30", centro.getHorarioAtencion());
         assertEquals(0, centro.getUsuarios().size());
-        assertEquals(0, centro.getServicios().size());
 
         System.out.println("CentroDeBelleza creado correctamente ✅");
     }
@@ -48,7 +47,6 @@ class CentroDeBellezaTest {
         assertEquals("0998765432", centro.getTelefono());
         assertEquals("08:00-18:00", centro.getHorarioAtencion());
         assertEquals(0, centro.getUsuarios().size());
-        assertEquals(0, centro.getServicios().size());
 
         System.out.println("Constructor vacío funcionando correctamente ✅");
     }
@@ -67,19 +65,6 @@ class CentroDeBellezaTest {
         System.out.println("setUsuarios funcionando correctamente ✅");
     }
 
-    @Test
-    void setServiciosCorrecto() {
-
-        CentroDeBelleza centro = new CentroDeBelleza();
-        List<Servicio> servicios = new ArrayList<>();
-
-        centro.setServicios(servicios);
-
-        assertNotNull(centro.getServicios());
-        assertEquals(0, centro.getServicios().size());
-
-        System.out.println("setServicios funcionando correctamente ✅");
-    }
 
     @Test
     void setDireccionCorrecto() {
@@ -132,100 +117,6 @@ class CentroDeBellezaTest {
         System.out.println("CentroDeBelleza nulo detectado correctamente ✅");
     }
 
-    //Test servicio
-    @Test
-    void agregarServicioCorrecto() {
-
-        CentroDeBelleza centro = new CentroDeBelleza();
-
-        Servicio s1 = new Servicio(60, Disponibilidad.DISPONIBLE);
-
-        assertTrue(centro.agregarServicio(s1));
-
-        System.out.println("Servicio agregado correctamente ✅");
-    }
-
-    @Test
-    void agregarServicioIncorrecto() {
-
-        CentroDeBelleza centro = new CentroDeBelleza();
-
-        assertFalse(centro.agregarServicio(null));
-
-        System.out.println("Servicio null rechazado correctamente ❌");
-    }
-
-    @Test
-    void agregarServicioExistente() {
-
-        CentroDeBelleza centro = new CentroDeBelleza();
-
-        Servicio s1 = new Servicio(60, Disponibilidad.DISPONIBLE);
-
-        assertTrue(centro.agregarServicio(s1));   // primero
-        assertFalse(centro.agregarServicio(s1));  // duplicado
-
-        System.out.println("Servicio duplicado rechazado correctamente ❌");
-    }
-
-    @Test
-    void buscarServicioCorrecto() {
-
-        CentroDeBelleza centro = new CentroDeBelleza();
-
-        Servicio s1 = new Servicio(60, Disponibilidad.DISPONIBLE);
-        centro.agregarServicio(s1);
-
-        Servicio encontrado = centro.buscarServicio(60);
-
-        assertNotNull(encontrado);
-        assertEquals(60, encontrado.getDuracion());
-
-        System.out.println("Servicio encontrado correctamente ✅");
-    }
-
-    @Test
-    void buscarServicioIncorrecto() {
-
-        CentroDeBelleza centro = new CentroDeBelleza();
-
-        Servicio resultado = centro.buscarServicio(999);
-
-        assertNull(resultado);
-
-        System.out.println("Servicio no encontrado correctamente ❌");
-    }
-
-    @Test
-    void editarServicioCorrecto() {
-        CentroDeBelleza centro = new CentroDeBelleza();
-
-        List<Servicio> misServicios = new ArrayList<>();
-        Servicio servicio = new Servicio();
-        misServicios.add(0,servicio) ; // Servicio vacío por defecto
-        centro.setServicios(misServicios);
-
-        Servicio servicioActualizado = new Servicio();
-        servicioActualizado.setDuracion(45);
-        servicioActualizado.setDisponibilidad(Disponibilidad.DISPONIBLE);
-
-        boolean editado = centro.editarServicio(servicioActualizado, 0);
-
-        assertTrue(editado);
-        assertEquals(45, centro.getServicios().get(0).getDuracion());
-        assertEquals(Disponibilidad.DISPONIBLE, centro.getServicios().get(0).getDisponibilidad());
-
-        System.out.println("editarServicio funcionando correctamente ✅");
-    }
-
-    @Test
-    void eliminarServicioVacioDevuelveFalse() {
-        CentroDeBelleza centro = new CentroDeBelleza();
-
-        boolean eliminado = centro.eliminarServicio(0);
-        assertFalse(eliminado);
-        System.out.println("eliminarServicio (validación de vacío) funcionando correctamente ✅");
-    }
 
     //Test usuarios
     @Test

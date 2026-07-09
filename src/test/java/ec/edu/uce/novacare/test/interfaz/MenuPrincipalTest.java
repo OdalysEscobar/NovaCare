@@ -44,7 +44,7 @@ class MenuPrincipalTest {
     @Test
     void opcionGestionarPerfilCorrecto() {
 
-        MenuGestionarPerfil menuPerfil = new MenuGestionarPerfil();
+        MenuGestionarPerfil menuPerfil = new MenuGestionarPerfil(U);
 
         assertNotNull(menuPerfil);
 

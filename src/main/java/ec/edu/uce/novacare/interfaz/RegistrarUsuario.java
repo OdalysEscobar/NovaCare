@@ -1,5 +1,9 @@
 package ec.edu.uce.novacare.interfaz;
 
+import ec.edu.uce.novacare.DAO.UsuarioDAO;
+import ec.edu.uce.novacare.DAO.UsuarioDAOFabrica;
+import ec.edu.uce.novacare.dominio.Cliente;
+import ec.edu.uce.novacare.dominio.Usuario;
 import ec.edu.uce.novacare.util.Validaciones;
 
 import java.util.Scanner;
@@ -10,7 +14,7 @@ public class RegistrarUsuario {
     public RegistrarUsuario () {
     }
 
-    public void guardarUsuario () {
+    public boolean guardarUsuario () {
         System.out.println("=== Registrar Usuario ===");
         String nombre;
         String apellido;
@@ -55,7 +59,21 @@ public class RegistrarUsuario {
             }
         }while(checkContrasena==false);
 
-        System.out.println("Registrando ususario...");
+
+        UsuarioDAOFabrica usuarioDAOFabrica = new UsuarioDAOFabrica();
+        UsuarioDAO usuarioDAO= usuarioDAOFabrica.crearUsuarioDAO();
+        Usuario  usuario = new Cliente(
+                nombre,
+                apellido,
+                contrasena,
+                correo,
+                "09855878"
+        );
+
+        return usuarioDAO.nuevo(usuario);
+
+
+
 
     }
 

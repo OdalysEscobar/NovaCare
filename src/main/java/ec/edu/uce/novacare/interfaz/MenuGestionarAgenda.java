@@ -178,5 +178,4 @@ public class MenuGestionarAgenda {
         System.out.println("\nCita en agenda actualizada correctamente.");
     }
 
-
 }

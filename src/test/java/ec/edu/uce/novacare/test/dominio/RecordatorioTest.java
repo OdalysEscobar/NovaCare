@@ -71,14 +71,32 @@ class RecordatorioTest {
 
     @Test
     void getCita() {
+
+        Cita cita = new Cita();
+
+        Recordatorio recordatorio = new Recordatorio();
+        recordatorio.setCita(cita);
+
+        assertEquals(cita, recordatorio.getCita());
+
+        System.out.println("El metodo getCita funciona correctamente✅");
     }
 
     @Test
     void setCita() {
+        Cita cita = new Cita();
+
+        Recordatorio recordatorio = new Recordatorio();
+        recordatorio.setCita(cita);
+
+        assertNotNull(recordatorio.getCita());
+
+        System.out.println("El metodo setCita funciona correctamente✅");
     }
 
     @Test
     void testToString() {
+
         Cita cita = new Cita();
 
         Recordatorio recordatorio = new Recordatorio();
@@ -86,11 +104,14 @@ class RecordatorioTest {
         recordatorio.setCorreo("odalys@gmail.com");
         recordatorio.setCita(cita);
 
+
         String esperado = "Recordatorio{" +
-                "informacionCita='Limpieza Facial'" +
+                "id=" + recordatorio.getId() +
+                ", informacionCita='Limpieza Facial'" +
                 ", correo='odalys@gmail.com'" +
                 ", cita=" + cita +
                 '}';
+
 
         assertEquals(esperado, recordatorio.toString());
 

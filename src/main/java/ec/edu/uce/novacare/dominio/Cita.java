@@ -1,22 +1,32 @@
 package ec.edu.uce.novacare.dominio;
 import ec.edu.uce.novacare.util.Validaciones;
 
+import java.util.Objects;
+import java.util.List;
+import java.util.ArrayList;
+
 /**
  * Representa una cita dentro del sistema.
  */
 public class Cita {
+    private final int id;
     private String fecha;
     private String hora;
     private Servicio servicio;
     private Cliente cliente;
+    private List<Recordatorio> recordatorios;
+    private static int contador=1;
+
 
     /**
      * Constructor por defecto.
      * Inicializa la cita con valores por defecto.
      */
     public Cita() {
+        this.id = contador++;
         this.fecha="Sin fecha";
         this.hora= "Sin hora";
+        this.recordatorios = new ArrayList<>();
     }
 
     /**
@@ -29,10 +39,12 @@ public class Cita {
      * @param hora hora de la cita
      */
     public Cita(String fecha, Agenda agenda, Cliente cliente, Servicio servicio, String hora) {
+        this.id = contador++;
         setFecha(fecha);
         this.cliente = cliente;
         this.servicio = servicio;
         setHora(hora);
+        this.recordatorios = new ArrayList<>();
     }
 
     /**
@@ -48,6 +60,10 @@ public class Cita {
                 ", servicio=" + servicio +
                 ", cliente=" + cliente +
                 '}';
+    }
+
+    public int getId() {
+        return id;
     }
 
     /**
@@ -126,4 +142,32 @@ public class Cita {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
+    public List<Recordatorio> getRecordatorios() {
+        return recordatorios;
+    }
+
+    public void agregarRecordatorio(Recordatorio recordatorio) {
+
+        if(recordatorio != null){
+            recordatorios.add(recordatorio);
+        }
+
+    }
+
+    public void eliminarRecordatorio(Recordatorio recordatorio){
+
+        recordatorios.remove(recordatorio);
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cita cita = (Cita) o;
+        return Objects.equals(fecha, cita.fecha) && Objects.equals(hora, cita.hora) && Objects.equals(cliente, cita .cliente);
+    }
+
+
 }

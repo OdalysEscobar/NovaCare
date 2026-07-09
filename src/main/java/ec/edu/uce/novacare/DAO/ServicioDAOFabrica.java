@@ -1,9 +1,7 @@
 package ec.edu.uce.novacare.DAO;
 
 public class ServicioDAOFabrica {
-
-    public ServicioDAO crearServicioDAO() {
+    public DAO crearServicioDAO(){
         return new ServicioDAOMemorialImpl();
     }
-
 }

@@ -6,6 +6,16 @@ package ec.edu.uce.novacare.dominio;
 public class Servicio {
     private int duracion;
     private Disponibilidad disponibilidad;
+    private String nombre;
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     /**
      * Constructor vacio.
      * Inicializa la duración en 0 y la disponibilidad en false.
@@ -13,6 +23,12 @@ public class Servicio {
     public Servicio() {
         this.duracion = 0 ;
         this.disponibilidad = Disponibilidad.NO_DISPONIBLE;
+    }
+
+    public Servicio(String nombre, Disponibilidad disponibilidad, int duracion) {
+        this.nombre = nombre;
+        this.disponibilidad = disponibilidad;
+        this.duracion = duracion;
     }
 
     /**

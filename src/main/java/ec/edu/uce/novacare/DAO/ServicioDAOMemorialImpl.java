@@ -3,21 +3,36 @@ package ec.edu.uce.novacare.DAO;
 import ec.edu.uce.novacare.dominio.Servicio;
 import ec.edu.uce.novacare.dominio.CentroDeBelleza;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class ServicioDAOMemorialImpl implements ServicioDAO {
+public class ServicioDAOMemorialImpl implements DAO {
 
     CentroDeBelleza centro = CentroDeBelleza.getCentro();
-    private static List<Servicio> servicios = CentroDeBelleza.getServicios();
+    private static List<Servicio> servicios = new ArrayList<>();
 
-    private boolean existeServicio(Servicio servicio){
 
-        for (Servicio s : servicios){
+    @Override
+    public boolean nuevo(Object objeto) {
+        if(objeto != null && objeto instanceof Servicio){
+            Servicio nuevoServicio = (Servicio) objeto;
 
-            if (servicio != null &&
-                    s != null &&
-                    s.getDuracion() == servicio.getDuracion()){
+            if(!existe(nuevoServicio)){
+                servicios.add(nuevoServicio);
+                return true;
+            }
+        }
+        return false;
 
+    }
+
+    @Override
+    public boolean editar(int pos, Object objeto) {
+        if(objeto != null && objeto instanceof Servicio){
+            Servicio nuevoServicio = (Servicio) objeto;
+
+            if(!existe(nuevoServicio)){
+                servicios.add(pos,nuevoServicio);
                 return true;
             }
         }
@@ -26,67 +41,42 @@ public class ServicioDAOMemorialImpl implements ServicioDAO {
     }
 
     @Override
-    public boolean nuevo(Servicio nuevoServicio){
+    public boolean eliminar(int pos) {
+        Servicio servicio = servicios.get(pos);
 
-        if(nuevoServicio == null){
+        if (servicio != null) {
+            servicios.remove(pos);
+            return true;
+        }
+
+        return false;
+
+    }
+
+    @Override
+    public Object buscarPorId(int id) {
+        return servicios.get(id);
+    }
+
+    @Override
+    public List listarTodos() {
+
+        return servicios;
+    }
+
+    @Override
+    public boolean existe(Object objeto) {
+        if (objeto != null && objeto instanceof Servicio) {
+            Servicio servicio = (Servicio) objeto;
+
+            for (Servicio s : servicios) {
+                if (s != null && s.getNombre() != null && servicio.getNombre() != null
+                        && s.getNombre().equalsIgnoreCase(servicio.getNombre())) {
+                    return true;
+                }
+            }
             return false;
         }
-
-        if(!existeServicio(nuevoServicio)){
-            servicios.add(nuevoServicio);
-            return true;
-        }
-
         return false;
-    }
-
-    @Override
-    public Servicio buscar(int duracion){
-
-        if(duracion <= 0){
-            return null;
-        }
-
-        for(Servicio servicio : servicios){
-
-            if(servicio.getDuracion() == duracion){
-                return servicio;
-            }
-
-        }
-
-        return null;
-    }
-
-    @Override
-    public boolean editar(Servicio nuevoServicio, int pos) {
-
-        if (pos >= 0 && pos < servicios.size() && servicios.get(pos) != null) {
-
-            servicios.get(pos).setDuracion(nuevoServicio.getDuracion());
-            servicios.get(pos).setDisponibilidad(nuevoServicio.getDisponibilidad());
-
-            return true;
-        }
-
-        return false;
-    }
-
-    @Override
-    public boolean eliminar(int pos) {
-
-        if (pos >= 0 && pos < servicios.size() && servicios.get(pos) != null) {
-
-            servicios.remove(pos);
-
-            return true;
-        }
-
-        return false;
-    }
-
-    @Override
-    public List<Servicio> listar() {
-        return servicios;
     }
 }

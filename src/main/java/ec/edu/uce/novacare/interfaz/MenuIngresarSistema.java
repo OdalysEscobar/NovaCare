@@ -1,6 +1,7 @@
 package ec.edu.uce.novacare.interfaz;
 
 import java.util.Scanner;
+
 import ec.edu.uce.novacare.DAO.UsuarioDAO;
 
 public class MenuIngresarSistema {
@@ -35,21 +36,28 @@ public class MenuIngresarSistema {
             }
 
             opcion = scanner.nextInt();
+            scanner.nextLine();
 
             switch (opcion) {
                 case 1:
-                     if(iniciarSesion.login()==true){
-                         System.out.println("Iniciando sesión...");
-                         MenuPrincipal menuPrincipal = new MenuPrincipal(usuarioDAO);
-                         menuPrincipal.mostrarMenu();
-                     }
+                    if(iniciarSesion.login()==true){
+                        System.out.println("Iniciando sesión...");
+                        MenuPrincipal menuPrincipal = new MenuPrincipal(usuarioDAO);
+                        menuPrincipal.mostrarMenu();
+                    }
                     break;
 
                 case 2:
 
-                    registrarUsuario.guardarUsuario();
-                    MenuPrincipal menuprincipal = new MenuPrincipal(usuarioDAO);
-                    menuprincipal.mostrarMenu();
+                    if(registrarUsuario.guardarUsuario()){
+                        System.out.println("Usuario creado exitosamente2");
+                        MenuPrincipal menuprincipal = new MenuPrincipal(usuarioDAO);
+                        menuprincipal.mostrarMenu();
+                    }else{
+                        System.out.println("No pude hacer Magea, su usuario ya existe...");
+
+                    }
+
 
                     break;
 

@@ -7,8 +7,10 @@ import ec.edu.uce.novacare.dominio.Usuario;
 import java.util.List;
 
 public class UsuarioDAOMemoriaImpl implements UsuarioDAO{
-    CentroDeBelleza centro = CentroDeBelleza.getCentro();
+
     private static List<Usuario> usuarios = CentroDeBelleza.getUsuarios();
+
+    CentroDeBelleza centro = CentroDeBelleza.getCentro();
 
     private boolean validarDuplicado(Object o){
         if (!(o instanceof Usuario)) {
@@ -89,5 +91,6 @@ public class UsuarioDAOMemoriaImpl implements UsuarioDAO{
     public List<Usuario> listar() {
         return usuarios;
     }
+
 
 }
