@@ -216,12 +216,14 @@ public class MenuGestionarServicios {
         nuevoServicio.setNombre(nuevoNombre);
         nuevoServicio.setDuracion(nuevaDuracion);
         nuevoServicio.setDisponibilidad(disponible ? Disponibilidad.DISPONIBLE: Disponibilidad.NO_DISPONIBLE);
+        DAO servicioDAO = new ServicioDAOFabrica().crearServicioDAO();
 
-        if(dao.editar(opcionServicio - 1, nuevoServicio)){
-            System.out.println("Servicio actualizado correctamente.");
-        }else{
-            System.out.println("No se pudo actualizar.");
-        }
+        servicioSeleccionado.setNombre(nuevoNombre);
+        servicioSeleccionado.setDuracion(nuevaDuracion);
+        servicioSeleccionado.setDisponibilidad( disponible ? Disponibilidad.DISPONIBLE : Disponibilidad.NO_DISPONIBLE
+        );
+
+        System.out.println("Servicio actualizado correctamente.");
     }
 
     public void eliminarServicio() {
@@ -288,6 +290,7 @@ public class MenuGestionarServicios {
 
         }
     }
+
     private void ingresarDatosServicio() {
 
         // Validar Nombre del Tipo de Servicio

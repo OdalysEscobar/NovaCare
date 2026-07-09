@@ -31,8 +31,8 @@ public class ServicioDAOMemorialImpl implements DAO {
         if(objeto != null && objeto instanceof Servicio){
             Servicio nuevoServicio = (Servicio) objeto;
 
-            if(!existe(nuevoServicio)){
-                servicios.add(pos,nuevoServicio);
+            if(pos >= 0 && pos < servicios.size()){
+                servicios.set(pos,nuevoServicio);
                 return true;
             }
         }
