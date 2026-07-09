@@ -71,11 +71,6 @@ public class RegistrarUsuario {
         );
 
         return usuarioDAO.nuevo(usuario);
-
-
-
-
     }
-
 
 }

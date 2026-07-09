@@ -50,11 +50,11 @@ public class MenuIngresarSistema {
                 case 2:
 
                     if(registrarUsuario.guardarUsuario()){
-                        System.out.println("Usuario creado exitosamente2");
+                        System.out.println("Usuario creado exitosamente");
                         MenuPrincipal menuprincipal = new MenuPrincipal(usuarioDAO);
                         menuprincipal.mostrarMenu();
                     }else{
-                        System.out.println("No pude hacer Magea, su usuario ya existe...");
+                        System.out.println("No se pudo registrar, su usuario ya existe...");
 
                     }
 
