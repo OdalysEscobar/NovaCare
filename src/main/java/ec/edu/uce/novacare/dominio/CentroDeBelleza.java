@@ -43,6 +43,7 @@ public  class CentroDeBelleza {
         this.telefono = telefono;
         this.horarioAtencion = horarioAtencion;
         this.usuarios = usuarios;
+        this.agenda = new Agenda();
     }
 
     //Metodos CRUD para  usuario.
@@ -88,8 +89,8 @@ public  class CentroDeBelleza {
         return resp;
     }
 
-    public static boolean agregarUsuario (String nombre, String apellido, String contrasena, String correo, Especialidad especialidad, Agenda agenda){
-        Empleado emp = new Empleado (nombre, apellido, contrasena, correo, especialidad, agenda);
+    public static boolean agregarUsuario (String nombre, String apellido, String contrasena, String correo, Especialidad especialidad){
+        Empleado emp = new Empleado (nombre, apellido, contrasena, correo, especialidad);
         return agregarUsuario(emp);
     }
 
@@ -318,7 +319,7 @@ public  class CentroDeBelleza {
     public void inicializar (){
         //Para usuarios
         agregarUsuario("Maria", "Alvarez", "1235", "maria@uce.com", "0995631247");
-        agregarUsuario("Juan", "Estrada", "14897", "juan@hotmail.com", Especialidad.BARBERIA, new Agenda());
+        agregarUsuario("Juan", "Estrada", "14897", "juan@hotmail.com", Especialidad.BARBERIA);
         agregarUsuario("Sofia", "Moran", "65423", "sofi@uce.com", "0995631756");
 
 
