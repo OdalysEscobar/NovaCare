@@ -13,13 +13,12 @@ class EmpleadoTest {
     void constructorConParametros() {
 
         Agenda agenda = new Agenda();
-        Empleado empleado = new Empleado("Odalys", "Escobar", "oda123", "odalys@gmail.com", Especialidad.PEINADO, agenda);
+        Empleado empleado = new Empleado("Odalys", "Escobar", "oda123", "odalys@gmail.com", Especialidad.PEINADO);
         assertEquals("Odalys", empleado.getNombre());
         assertEquals("Escobar", empleado.getApellido());
         assertEquals("oda123", empleado.getContrasena());
         assertEquals("odalys@gmail.com", empleado.getCorreo());
         assertEquals(Especialidad.PEINADO, empleado.getEspecialidad());
-        assertEquals(agenda, empleado.getAgenda());
 
         System.out.println(empleado);
 
@@ -52,36 +51,11 @@ class EmpleadoTest {
         System.out.println("El metodo setEspecialidadInvalida funciona correctamente✅");
     }
 
-    @Test
-    void getAgenda() {
-
-        Agenda agenda = new Agenda();
-        Empleado empleado = new Empleado();
-
-        empleado.setAgenda(agenda);
-
-        assertEquals(agenda, empleado.getAgenda());
-
-        System.out.println("getAgenda correcto ✅");
-    }
-
-    @Test
-    void setAgenda() {
-
-        Agenda agenda = new Agenda();
-        Empleado empleado = new Empleado();
-
-        empleado.setAgenda(agenda);
-
-        assertEquals(agenda, empleado.getAgenda());
-
-        System.out.println("setAgenda correcto ✅");
-    }
 
     @Test
     void testToString() {
         Agenda agenda = new Agenda();
-        Empleado empleado = new Empleado("Odalys", "Escobar", "oda123", "odalys@gmail.com", Especialidad.SPA, agenda);
+        Empleado empleado = new Empleado("Odalys", "Escobar", "oda123", "odalys@gmail.com", Especialidad.SPA);
 
         String resultado = empleado.toString();
 
