@@ -30,17 +30,21 @@ public class CitaDAOMemoriaImpl implements DAO {
 
         if (objeto != null && objeto instanceof Cita) {
             Cita nuevaCita = (Cita) objeto;
-            List<Cita> citas = agenda.getCitas();
+            try {
 
-            // Verificamos que la posición sea válida en la lista de citas de la agenda
-            if (pos >= 0 && pos < citas.size()) {
-                Cita citaOriginal = citas.get(pos);
+                Cita citaOriginal = agenda.getCitas().get(pos);
 
                 citaOriginal.setFecha(nuevaCita.getFecha());
                 citaOriginal.setHora(nuevaCita.getHora());
                 citaOriginal.setCliente(nuevaCita.getCliente());
                 citaOriginal.setServicio(nuevaCita.getServicio());
+
                 return true;
+
+            } catch (IndexOutOfBoundsException ex) {
+
+                System.out.println("No existe la cita.");
+                return false;
             }
         }
 
@@ -49,23 +53,28 @@ public class CitaDAOMemoriaImpl implements DAO {
 
     @Override
     public boolean eliminar(int pos) {
-        List<Cita> citas = agenda.getCitas();
+        try {
 
-        if (pos >= 0 && pos < citas.size()) {
-            citas.remove(pos);
+            agenda.getCitas().remove(pos);
             return true;
+
+        } catch (IndexOutOfBoundsException ex) {
+
+            System.out.println("No existe la cita.");
+            return false;
         }
-        return false;
     }
 
     @Override
     public Object buscarPorId(int id) {
-        List<Cita> citas = agenda.getCitas();
+        try {
+            return agenda.getCitas().get(id);
 
-        if (id >= 0 && id < citas.size()) {
-            return citas.get(id);
+        } catch (IndexOutOfBoundsException ex) {
+
+            System.out.println("No existe la cita.");
+            return null;
         }
-        return null;
     }
 
     @Override

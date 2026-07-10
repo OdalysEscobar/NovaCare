@@ -30,8 +30,9 @@ public class TipoServicioDAOMemoriaImpl implements DAO{
         if (objeto != null && objeto instanceof TipoServicio) {
             TipoServicio nuevoTipoServicio = (TipoServicio) objeto;
 
+            try{
+
             // Verificamos que la posición sea válida en la lista
-            if (pos >= 0 && pos < tipoServicios.size()) {
                 TipoServicio tipoServicioOriginal = tipoServicios.get(pos);
 
                 // Actualizamos los datos básicos
@@ -51,6 +52,10 @@ public class TipoServicioDAOMemoriaImpl implements DAO{
                     }
                 }
                 return true;
+            }catch (IndexOutOfBoundsException ex) {
+
+                System.out.println("No existe el tipo de servicio.");
+                return false;
             }
         }
         return false;
@@ -58,19 +63,29 @@ public class TipoServicioDAOMemoriaImpl implements DAO{
 
     @Override
     public boolean eliminar(int pos) {
-        if (pos >= 0 && pos < tipoServicios.size()) {
+        try {
+
             tipoServicios.remove(pos);
             return true;
+
+        } catch (IndexOutOfBoundsException ex) {
+
+            System.out.println("No existe el tipo de servicio.");
+            return false;
         }
-        return false;
     }
 
     @Override
     public Object buscarPorId(int id) {
-        if (id >= 0 && id < tipoServicios.size()) {
+        try {
+
             return tipoServicios.get(id);
+
+        } catch (IndexOutOfBoundsException ex) {
+
+            System.out.println("No existe el tipo de servicio.");
+            return null;
         }
-        return null;
     }
 
     @Override
@@ -92,81 +107,5 @@ public class TipoServicioDAOMemoriaImpl implements DAO{
         }
         return false;
     }
-//    private boolean validarDuplicado(Object o){
-//        if (!(o instanceof TipoServicio)) {
-//            return false;
-//        }
-//
-//        TipoServicio tipoServicio = (TipoServicio) o;
-//
-//        for (TipoServicio s: tipoServicios){
-//            if (s!=null && s.getNombreTipoServicio().equals(tipoServicio.getNombreTipoServicio())){
-//                return true;
-//            }
-//        }
-//
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean nuevo(TipoServicio tipoServicio) {
-//        if(tipoServicio == null){
-//            return false;
-//        }
-//
-//        if(tipoServicio == null){
-//            return false;
-//        }
-//
-//        if(!validarDuplicado(tipoServicio)) {
-//            tipoServicios.add(tipoServicio);
-//            return true;
-//        }
-//
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean editar(TipoServicio tipoServicio, String nombreTipoServicio) {
-//        ServicioDAOFabrica servicioDAOFabrica = new ServicioDAOFabrica();
-//        ServicioDAO servicioDAO = servicioDAOFabrica.crearServicioDAO();
-//        for (TipoServicio tipoServicio1: tipoServicios){
-//            if(tipoServicio1!=null && tipoServicio1.getNombreTipoServicio().equals(nombreTipoServicio)){
-//                tipoServicio1.setNombreTipoServicio(tipoServicio.getNombreTipoServicio());
-//                tipoServicio1.setDescripcion(tipoServicio.getDescripcion());
-//
-//                for(Servicio servicio: tipoServicio.getServicios()){
-//
-//                    if(!servicioDAO.editar(servicio, servicio.getNombre())){
-//                        servicioDAO.nuevo(servicio);
-//                    }
-//                }
-//                return  true;
-//            }
-//        }
-//
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean eliminar(String nombreTipoServicio) {
-//        return false;
-//    }
-//
-//    @Override
-//    public TipoServicio buscarPorNombre(String nombreTipoServicio) {
-//        return null;
-//    }
-//
-//    @Override
-//    public List<TipoServicio> listar() {
-//        return tipoServicios;
-//    }
-//
-//    @Override
-//    public boolean existe(String nombreTipoServicio) {
-//        return false;
-//    }
-
 
 }

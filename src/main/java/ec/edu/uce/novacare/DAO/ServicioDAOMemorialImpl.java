@@ -31,9 +31,12 @@ public class ServicioDAOMemorialImpl implements DAO {
         if(objeto != null && objeto instanceof Servicio){
             Servicio nuevoServicio = (Servicio) objeto;
 
-            if(pos >= 0 && pos < servicios.size()){
+            try{
                 servicios.set(pos,nuevoServicio);
                 return true;
+            }catch(IndexOutOfBoundsException ex){
+                System.out.println("No existe el servicio.");
+                return false;
             }
         }
 
@@ -42,20 +45,31 @@ public class ServicioDAOMemorialImpl implements DAO {
 
     @Override
     public boolean eliminar(int pos) {
-        Servicio servicio = servicios.get(pos);
 
-        if (servicio != null) {
-            servicios.remove(pos);
-            return true;
-        }
+            try{
 
-        return false;
+                servicios.remove(pos);
+                return true;
 
+            }catch(IndexOutOfBoundsException ex){
+
+                System.out.println("No existe el servicio.");
+                return false;
+
+            }
     }
 
     @Override
     public Object buscarPorId(int id) {
-        return servicios.get(id);
+        try {
+            return servicios.get(id);
+
+        } catch (IndexOutOfBoundsException ex) {
+
+            System.out.println("Error: no existe un servicio en la posición " + id + ".");
+            return null;
+
+        }
     }
 
     @Override
