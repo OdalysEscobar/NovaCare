@@ -238,7 +238,14 @@ public class MenuGestionarCitas {
                     + cita.getHora());
         }
         System.out.print("\nSeleccione la cita que desea actualizar: ");
-        int opcion = Integer.parseInt(scanner.nextLine());
+        int opcion;
+
+        try {
+            opcion = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException ex) {
+            System.out.println("Error: debe ingresar un número.");
+            return;
+        }
 
         if (opcion < 1 || opcion > citas.size()) {
             System.out.println("Opción inválida.");
@@ -266,7 +273,14 @@ public class MenuGestionarCitas {
         }
 
         System.out.print("Seleccione un tipo de servicio: ");
-        int opcionTipo = Integer.parseInt(scanner.nextLine());
+        int opcionTipo;
+
+        try {
+            opcionTipo = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException ex) {
+            System.out.println("Error: debe ingresar un número.");
+            return;
+        }
 
         if (opcionTipo < 1 || opcionTipo > tipos.size()) {
             System.out.println("Opción inválida.");
@@ -289,7 +303,14 @@ public class MenuGestionarCitas {
         }
 
         System.out.print("Seleccione un servicio: ");
-        int opcionServicio = Integer.parseInt(scanner.nextLine());
+        int opcionServicio;
+
+        try {
+            opcionServicio = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException ex) {
+            System.out.println("Error: debe ingresar un número.");
+            return;
+        }
 
         if (opcionServicio < 1 || opcionServicio > servicios.size()) {
             System.out.println("Opción inválida.");
@@ -351,7 +372,14 @@ public class MenuGestionarCitas {
         }
 
         System.out.print("\nSeleccione la cita que desea cancelar: ");
-        int opcion = Integer.parseInt(scanner.nextLine());
+        int opcion;
+
+        try {
+            opcion = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException ex) {
+            System.out.println("Error: debe ingresar un número.");
+            return;
+        }
 
         if (opcion < 1 || opcion > citas.size()) {
             System.out.println("Opción inválida.");

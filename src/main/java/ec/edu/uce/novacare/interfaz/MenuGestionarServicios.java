@@ -163,7 +163,20 @@ public class MenuGestionarServicios {
         }
 
         System.out.print("\nSeleccione una opción: ");
-        int opcionTipo = Integer.parseInt(scanner.nextLine());
+
+        int opcionTipo;
+
+        try {
+            opcionTipo = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException ex) {
+            System.out.println("Error: debe ingresar un número.");
+            return;
+        }
+
+        if (opcionTipo < 1 || opcionTipo > tipos.size()) {
+            System.out.println("Opción inválida.");
+            return;
+        }
 
         if (opcionTipo < 1 || opcionTipo > tipos.size()) {
             System.out.println("Opción inválida.");
@@ -192,8 +205,14 @@ public class MenuGestionarServicios {
         }
 
         System.out.print("\nSeleccione el servicio que desea modificar: ");
-        int opcionServicio = Integer.parseInt(scanner.nextLine());
+        int opcionServicio;
 
+        try {
+            opcionServicio = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException ex) {
+            System.out.println("Error: debe ingresar un número.");
+            return;
+        }
         if (opcionServicio < 1 || opcionServicio > servicios.size()) {
             System.out.println("Opción inválida.");
             return;
@@ -207,7 +226,14 @@ public class MenuGestionarServicios {
         String nuevoNombre = scanner.nextLine();
 
         System.out.print("Nueva duración: ");
-        int nuevaDuracion = Integer.parseInt(scanner.nextLine());
+        int nuevaDuracion;
+
+        try {
+            nuevaDuracion = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException ex) {
+            System.out.println("Error: la duración debe ser un número.");
+            return;
+        }
 
         System.out.print("¿Disponible? (S/N): ");
         boolean disponible = scanner.nextLine().equalsIgnoreCase("S");
@@ -242,7 +268,14 @@ public class MenuGestionarServicios {
         }
 
         System.out.print("Seleccione un tipo: ");
-        int opcionTipo = Integer.parseInt(scanner.nextLine());
+        int opcionTipo;
+
+        try {
+            opcionTipo = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException ex) {
+            System.out.println("Error: debe ingresar un número.");
+            return;
+        }
 
         if(opcionTipo <1 || opcionTipo>tipos.size()){
             System.out.println("Opción inválida.");
@@ -267,7 +300,14 @@ public class MenuGestionarServicios {
         }
 
         System.out.print("Seleccione el servicio: ");
-        int opcionServicio=Integer.parseInt(scanner.nextLine());
+        int opcionServicio;
+
+        try {
+            opcionServicio = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException ex) {
+            System.out.println("Error: debe ingresar un número.");
+            return;
+        }
 
         if(opcionServicio<1 || opcionServicio>servicios.size()){
             System.out.println("Opción inválida.");
