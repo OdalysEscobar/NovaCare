@@ -28,7 +28,7 @@ public class MenuGestionarPerfil {
         int opcion;
 
         do {
-            System.out.println("\n===== GESTIONAR PERFIL =====");
+            System.out.println("\n===== GESTIONAR PERFIL USUARIOS =====");
             System.out.println("1. Crear perfil");
             System.out.println("2. Consultar perfil");
             System.out.println("3. Actualizar perfil");
@@ -162,7 +162,7 @@ public class MenuGestionarPerfil {
     public void consultarPerfil(){
 
         System.out.println("Ingrese el correo del usuario:");
-        correo = scanner.nextLine();
+        String correo = scanner.nextLine();
 
         Usuario usuario = dao.buscarPorCorreo(correo);
 
