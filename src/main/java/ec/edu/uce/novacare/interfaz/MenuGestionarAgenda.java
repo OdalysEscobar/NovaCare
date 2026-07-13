@@ -1,22 +1,22 @@
 package ec.edu.uce.novacare.interfaz;
 
+import ec.edu.uce.novacare.DAO.CitaDAOMemoriaImpl;
+import ec.edu.uce.novacare.DAO.DAO;
 import ec.edu.uce.novacare.DAO.UsuarioDAO;
+import ec.edu.uce.novacare.dominio.Cita;
 import ec.edu.uce.novacare.util.Validaciones;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class MenuGestionarAgenda {
 
     private Scanner scanner = new Scanner(System.in);
     private UsuarioDAO usuarioDAO;
-
-    String nombreCliente = "Ana Torres";
-    String fecha = "2026-05-10";
-    String hora = "09:00";
-    String servicio = "Corte de cabello";
-
+    private DAO dao;
     public MenuGestionarAgenda(UsuarioDAO usuarioDAO) {
         this.usuarioDAO = usuarioDAO;
+        this.dao = new CitaDAOMemoriaImpl();
     }
 
     public void mostrarMenu() {
@@ -26,8 +26,6 @@ public class MenuGestionarAgenda {
         do {
             System.out.println("\n===== GESTIONAR AGENDA DE CITAS =====");
             System.out.println("1. Consultar agenda");
-            System.out.println("2. Crear cita en agenda");
-            System.out.println("3. Actualizar cita en agenda");
             System.out.println("0. Volver al menú principal");
 
             System.out.println("Seleccione una opción: ");
@@ -35,22 +33,15 @@ public class MenuGestionarAgenda {
             while (!scanner.hasNextInt()) {
                 System.out.println("Error: solo puede ingresar números");
                 scanner.next();
-                System.out.print("Seleccione una opcion: ");
+                System.out.print("Seleccione una opción: ");
             }
-
             opcion = scanner.nextInt();
+            scanner.nextLine();
 
             switch (opcion) {
+
                 case 1:
                     consultarAgenda();
-                    break;
-
-                case 2:
-                    crearCitaAgenda();
-                    break;
-
-                case 3:
-                    actualizarCitaAgenda();
                     break;
 
                 case 0:
@@ -61,7 +52,6 @@ public class MenuGestionarAgenda {
 
                 default:
                     System.out.println("Opción inválida.");
-                    break;
             }
 
         } while (opcion != 0);
@@ -69,113 +59,33 @@ public class MenuGestionarAgenda {
 
     // Consultar Agenda
     public void consultarAgenda() {
-        System.out.println("\n===== AGENDA =====");
-        System.out.println("Cliente: " + nombreCliente);
-        System.out.println("Fecha: " + fecha);
-        System.out.println("Hora: " + hora);
-        System.out.println("Servicio: " + servicio);
-    }
+        List<Cita> citas = (List<Cita>) dao.listarTodos();
 
-    // Crear Cita en Agenda
-    public void crearCitaAgenda() {
-        String nuevoCliente;
-        String nuevaFecha;
-        String nuevaHora;
-        String nuevoServicio;
+        if (citas.isEmpty()) {
+            System.out.println("No existen citas agendadas.");
+            return;
+        }
 
-        scanner.nextLine();
+        System.out.println("\n========== AGENDA DE CITAS ==========");
 
-        // Nombre cliente
-        do {
-            System.out.println("Ingrese el nombre del cliente: ");
-            nuevoCliente = scanner.nextLine();
+        System.out.printf("%-5s %-20s %-20s %-15s %-10s%n",
+                "N°", "Cliente", "Servicio", "Fecha", "Hora");
 
-            if (!Validaciones.validarLetras(nuevoCliente)) {
-                System.out.println("Error: el nombre solo puede contener letras.");
-            }
-        } while (!Validaciones.validarLetras(nuevoCliente));
+        System.out.println("-----------------------------------------------------------------------");
 
-        // Fecha
-        do {
-            System.out.println("Ingrese la fecha (AAAA-MM-DD): ");
-            nuevaFecha = scanner.nextLine();
+        int contador = 1;
 
-            if (!Validaciones.validarFecha(nuevaFecha)) {
-                System.out.println("Error: formato de fecha inválido. Use AAAA-MM-DD");
-            }
-        } while (!Validaciones.validarFecha(nuevaFecha));
+        for (Cita cita : citas) {
 
-        // Hora
-        do {
-            System.out.println("Ingrese la hora (HH:MM): ");
-            nuevaHora = scanner.nextLine();
+            System.out.printf("%-5d %-20s %-20s %-15s %-10s%n",
+                    contador,
+                    cita.getCliente().getNombre(),
+                    cita.getServicio().getNombre(),
+                    cita.getFecha(),
+                    cita.getHora());
 
-            if (!Validaciones.validarHora(nuevaHora)) {
-                System.out.println("Error: formato de hora inválido. Use HH:MM");
-            }
-        } while (!Validaciones.validarHora(nuevaHora));
-
-        // Servicio
-        do {
-            System.out.println("Ingrese el servicio: ");
-            nuevoServicio = scanner.nextLine();
-
-            if (!Validaciones.validarLetras(nuevoServicio)) {
-                System.out.println("Error: el servicio solo puede contener letras.");
-            }
-        } while (!Validaciones.validarLetras(nuevoServicio));
-
-        nombreCliente = nuevoCliente;
-        fecha = nuevaFecha;
-        hora = nuevaHora;
-        servicio = nuevoServicio;
-
-        System.out.println("\nCita creada en agenda correctamente.");
-    }
-
-    // Actualizar Cita en Agenda
-    public void actualizarCitaAgenda() {
-        String nuevaFecha;
-        String nuevaHora;
-        String nuevoServicio;
-
-        scanner.nextLine();
-
-        // Fecha
-        do {
-            System.out.println("Ingrese nueva fecha (AAAA-MM-DD): ");
-            nuevaFecha = scanner.nextLine();
-
-            if (!Validaciones.validarFecha(nuevaFecha)) {
-                System.out.println("Error: formato de fecha inválido. Use AAAA-MM-DD");
-            }
-        } while (!Validaciones.validarFecha(nuevaFecha));
-
-        // Hora
-        do {
-            System.out.println("Ingrese nueva hora (HH:MM): ");
-            nuevaHora = scanner.nextLine();
-
-            if (!Validaciones.validarHora(nuevaHora)) {
-                System.out.println("Error: formato de hora inválido. Use HH:MM");
-            }
-        } while (!Validaciones.validarHora(nuevaHora));
-
-        // Servicio
-        do {
-            System.out.println("Ingrese nuevo servicio: ");
-            nuevoServicio = scanner.nextLine();
-
-            if (!Validaciones.validarLetras(nuevoServicio)) {
-                System.out.println("Error: el servicio solo puede contener letras.");
-            }
-        } while (!Validaciones.validarLetras(nuevoServicio));
-
-        fecha = nuevaFecha;
-        hora = nuevaHora;
-        servicio = nuevoServicio;
-
-        System.out.println("\nCita en agenda actualizada correctamente.");
+            contador++;
+        }
     }
 
 }
