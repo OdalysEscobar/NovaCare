@@ -2,6 +2,9 @@ package ec.edu.uce.novacare.util;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Validaciones {
 
@@ -25,9 +28,13 @@ public class Validaciones {
 
     public static boolean validarFecha(String fecha) {
         //YYYY-MM-DD
-        Pattern pattern = Pattern.compile("^\\d{4}-\\d{2}-\\d{2}$");
-        Matcher matcher = pattern.matcher(fecha);
-        return matcher.matches();
+        try {
+            LocalDate.parse(fecha, DateTimeFormatter.ISO_LOCAL_DATE);
+            return true;
+
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
 
     public static boolean validarHora(String hora) {
