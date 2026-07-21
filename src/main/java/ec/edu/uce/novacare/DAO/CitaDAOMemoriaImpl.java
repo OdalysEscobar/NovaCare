@@ -3,6 +3,8 @@ package ec.edu.uce.novacare.DAO;
 import ec.edu.uce.novacare.dominio.Agenda;
 import ec.edu.uce.novacare.dominio.CentroDeBelleza;
 import ec.edu.uce.novacare.dominio.Cita;
+import ec.edu.uce.novacare.persistencia.Persistencia;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +12,11 @@ import java.util.List;
 public class CitaDAOMemoriaImpl implements DAO {
 
     private Agenda agenda = CentroDeBelleza.getCentro().getAgenda();
+
+    public CitaDAOMemoriaImpl() {
+
+        agenda.setCitas(Persistencia.cargarCitas());
+    }
 
     @Override
     public boolean nuevo(Object objeto) {
@@ -19,6 +26,7 @@ public class CitaDAOMemoriaImpl implements DAO {
             if (!existe(nuevaCita)) {
                 // Asumiendo que agenda.getCitas() devuelve una estructura de lista modificable (List)
                 agenda.getCitas().add(nuevaCita);
+                Persistencia.guardarCitas(agenda.getCitas());
                 return true;
             }
         }
@@ -38,6 +46,7 @@ public class CitaDAOMemoriaImpl implements DAO {
                 citaOriginal.setHora(nuevaCita.getHora());
                 citaOriginal.setCliente(nuevaCita.getCliente());
                 citaOriginal.setServicio(nuevaCita.getServicio());
+                Persistencia.guardarCitas(agenda.getCitas());
 
                 return true;
 
@@ -56,6 +65,7 @@ public class CitaDAOMemoriaImpl implements DAO {
         try {
 
             agenda.getCitas().remove(pos);
+            Persistencia.guardarCitas(agenda.getCitas());
             return true;
 
         } catch (IndexOutOfBoundsException ex) {

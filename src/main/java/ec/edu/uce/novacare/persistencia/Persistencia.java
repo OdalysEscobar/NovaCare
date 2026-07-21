@@ -1,15 +1,16 @@
 package ec.edu.uce.novacare.persistencia;
 
 import ec.edu.uce.novacare.dominio.Usuario;
+import ec.edu.uce.novacare.dominio.Cita;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import ec.edu.uce.novacare.dominio.TipoServicio;
 
 public class Persistencia {
 
+    //ARCHIVO USUARIOS
+
     private static final String ARCHIVO_USUARIOS = "src/main/resources/usuarios.dat";
-    private static final String ARCHIVO_SERVICIOS = "src/main/resources/servicios.dat";
 
     public static void guardarUsuarios(List<Usuario> usuarios) {
 
@@ -44,38 +45,39 @@ public class Persistencia {
         }
     }
 
-    public static void guardarServicios(List<TipoServicio> tipoServicios) {
+    // ARCHIVO CITAS
 
-        try (FileOutputStream fos = new FileOutputStream(ARCHIVO_SERVICIOS);
+    private static final String ARCHIVO_CITAS = "src/main/resources/citas.dat";
+
+    public static void guardarCitas(List<Cita> citas) {
+        try (FileOutputStream fos = new FileOutputStream(ARCHIVO_CITAS);
              ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-
-            oos.writeObject(tipoServicios);
-
-        } catch (IOException ioe) {
-            System.err.println("Error al guardar los servicios: " + ioe.getMessage()
-            );
+            oos.writeObject(citas);
+        } catch (IOException e) {
+            System.err.println("Error al guardar las citas: " + e.getMessage());
         }
+
     }
 
-    public static List<TipoServicio> cargarServicios() {
+    public static List<Cita> cargarCitas() {
 
-        File archivo = new File(ARCHIVO_SERVICIOS);
+        File archivo = new File(ARCHIVO_CITAS);
 
-        if (!archivo.exists() || archivo.length() == 0) {
+        // Si el archivo todavía no existe, devolvemos una lista vacía
+        if (!archivo.exists()) {
             return new ArrayList<>();
         }
 
         try (FileInputStream fis = new FileInputStream(archivo);
              ObjectInputStream ois = new ObjectInputStream(fis)) {
 
-            return (List<TipoServicio>) ois.readObject();
+            return (List<Cita>) ois.readObject();
 
         } catch (IOException | ClassNotFoundException e) {
-            System.err.println(
-                    "Error al cargar los servicios: " + e.getMessage()
-            );
+            System.err.println("Error al cargar los citas: " + e.getMessage());
             return new ArrayList<>();
         }
     }
+
 
 }
