@@ -1,5 +1,6 @@
 package ec.edu.uce.novacare.persistencia;
 
+import ec.edu.uce.novacare.dominio.TipoServicio;
 import ec.edu.uce.novacare.dominio.Usuario;
 import ec.edu.uce.novacare.dominio.Cita;
 import java.io.*;
@@ -41,6 +42,46 @@ public class Persistencia {
 
         } catch (IOException | ClassNotFoundException e) {
             System.err.println("Error al cargar los usuarios: " + e.getMessage());
+            return new ArrayList<>();
+        }
+    }
+
+    //ARCHIVO TIPO DE SERVICIOS
+    private static final String ARCHIVO_SERVICIOS = "src/main/resources/servicios.dat";
+    public static void guardarServicios(
+            List<TipoServicio> tipoServicios) {
+
+        try (FileOutputStream fos =
+                     new FileOutputStream(ARCHIVO_SERVICIOS);
+             ObjectOutputStream oos =
+                     new ObjectOutputStream(fos)) {
+
+            oos.writeObject(tipoServicios);
+
+        } catch (IOException e) {
+            System.err.println(
+                    "Error al guardar los servicios: " + e.getMessage()
+            );
+        }
+    }
+
+    public static List<TipoServicio> cargarServicios() {
+
+        File archivo = new File(ARCHIVO_SERVICIOS);
+
+        if (!archivo.exists() || archivo.length() == 0) {
+            return new ArrayList<>();
+        }
+
+        try (FileInputStream fis = new FileInputStream(archivo);
+             ObjectInputStream ois = new ObjectInputStream(fis)) {
+
+            return (List<TipoServicio>) ois.readObject();
+
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println(
+                    "Error al cargar los servicios: " + e.getMessage()
+            );
             return new ArrayList<>();
         }
     }
