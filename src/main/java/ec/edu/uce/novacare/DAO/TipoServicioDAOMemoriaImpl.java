@@ -4,11 +4,16 @@ import ec.edu.uce.novacare.dominio.CentroDeBelleza;
 import ec.edu.uce.novacare.dominio.Servicio;
 import ec.edu.uce.novacare.dominio.TipoServicio;
 import ec.edu.uce.novacare.dominio.Usuario;
+import ec.edu.uce.novacare.persistencia.Persistencia;
 
 import java.util.List;
 
 public class TipoServicioDAOMemoriaImpl implements DAO{
-    private static List<TipoServicio> tipoServicios = CentroDeBelleza.getTipoServicios();
+    private static List<TipoServicio> tipoServicios = Persistencia.cargarServicios();
+
+    public TipoServicioDAOMemoriaImpl() {
+        CentroDeBelleza.getCentro().setTipoServicios(tipoServicios);
+    }
 
     @Override
     public boolean nuevo(Object objeto) {

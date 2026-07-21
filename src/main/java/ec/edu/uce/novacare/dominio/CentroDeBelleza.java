@@ -107,6 +107,10 @@ public  class CentroDeBelleza {
         return tipoServicios;
     }
 
+    public static void setTipoServicios(List<TipoServicio> tipoServicios) {
+        CentroDeBelleza.tipoServicios = tipoServicios;
+    }
+
     @Override
     public String toString() {
         return "CentroDeBelleza{" +
