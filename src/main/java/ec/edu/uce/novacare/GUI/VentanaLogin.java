@@ -1,4 +1,4 @@
-package ec.edu.uce.novacare.GUI;
+package ec.edu.uce.novacare.gui;
 
 import javax.swing.*;
 
@@ -10,7 +10,7 @@ public class VentanaLogin {
     public VentanaLogin() {
         ingresarButton.addActionListener(e -> {
             JFrame menuFrame = new JFrame("Menú Principal - NovaCare");
-            menuFrame.setContentPane(new VentanaMenu().panelPrincipal);
+            menuFrame.setContentPane(new ec.edu.uce.novacare.gui.VentanaMenu().panelPrincipal);
             menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             menuFrame.pack();
             menuFrame.setLocationRelativeTo(null);

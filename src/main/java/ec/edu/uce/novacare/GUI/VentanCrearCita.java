@@ -1,4 +1,4 @@
-package ec.edu.uce.novacare.GUI;
+package ec.edu.uce.novacare.gui;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -30,7 +30,7 @@ public class VentanCrearCita {
                     JOptionPane.showMessageDialog(null, "Cita creada correctamente.");
 
                     JFrame citasFrame = new JFrame("Gestionar Citas - NovaCare");
-                    citasFrame.setContentPane(new VentanaGestionarCitas().panelPrincipal);
+                    citasFrame.setContentPane(new ec.edu.uce.novacare.gui.VentanaGestionarCitas().panelPrincipal);
                     citasFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     citasFrame.pack();
                     citasFrame.setLocationRelativeTo(null);
@@ -51,7 +51,7 @@ public class VentanCrearCita {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame citasFrame = new JFrame("Gestionar Citas - NovaCare");
-                citasFrame.setContentPane(new VentanaGestionarCitas().panelPrincipal);
+                citasFrame.setContentPane(new ec.edu.uce.novacare.gui.VentanaGestionarCitas().panelPrincipal);
                 citasFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 citasFrame.pack();
                 citasFrame.setLocationRelativeTo(null);

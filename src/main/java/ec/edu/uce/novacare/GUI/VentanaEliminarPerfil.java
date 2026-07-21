@@ -1,4 +1,4 @@
-package ec.edu.uce.novacare.GUI;
+package ec.edu.uce.novacare.gui;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -21,7 +21,7 @@ public class VentanaEliminarPerfil {
                     JOptionPane.showMessageDialog(null, "Perfil eliminado correctamente.");
 
                     JFrame gestionFrame = new JFrame("Gestionar Perfil - NovaCare");
-                    gestionFrame.setContentPane(new VentanaGestionarPerfil().panelPrincipal);
+                    gestionFrame.setContentPane(new ec.edu.uce.novacare.gui.VentanaGestionarPerfil().panelPrincipal);
                     gestionFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     gestionFrame.pack();
                     gestionFrame.setLocationRelativeTo(null);
@@ -43,7 +43,7 @@ public class VentanaEliminarPerfil {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame gestionFrame = new JFrame("Gestionar Perfil - NovaCare");
-                gestionFrame.setContentPane(new VentanaGestionarPerfil().panelPrincipal);
+                gestionFrame.setContentPane(new ec.edu.uce.novacare.gui.VentanaGestionarPerfil().panelPrincipal);
                 gestionFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 gestionFrame.pack();
                 gestionFrame.setLocationRelativeTo(null);

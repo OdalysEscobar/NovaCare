@@ -1,4 +1,4 @@
-package ec.edu.uce.novacare.GUI;
+package ec.edu.uce.novacare.gui;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -26,7 +26,7 @@ public class VentanaCrearServicio {
                         JOptionPane.showMessageDialog(null, "Servicio creado con éxito.");
 
                         JFrame serviciosFrame = new JFrame("Gestionar Servicios - NovaCare");
-                        serviciosFrame.setContentPane(new VentanaGestionarServicios().panelPrincipal);
+                        serviciosFrame.setContentPane(new ec.edu.uce.novacare.gui.VentanaGestionarServicios().panelPrincipal);
                         serviciosFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                         serviciosFrame.pack();
                         serviciosFrame.setLocationRelativeTo(null);
@@ -50,7 +50,7 @@ public class VentanaCrearServicio {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame serviciosFrame = new JFrame("Gestionar Servicios - NovaCare");
-                serviciosFrame.setContentPane(new VentanaGestionarServicios().panelPrincipal);
+                serviciosFrame.setContentPane(new ec.edu.uce.novacare.gui.VentanaGestionarServicios().panelPrincipal);
                 serviciosFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 serviciosFrame.pack();
                 serviciosFrame.setLocationRelativeTo(null);

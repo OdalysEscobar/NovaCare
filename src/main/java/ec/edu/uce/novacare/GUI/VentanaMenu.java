@@ -1,4 +1,4 @@
-package ec.edu.uce.novacare.GUI;
+package ec.edu.uce.novacare.gui;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -18,7 +18,7 @@ public class VentanaMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame gestionFrame = new JFrame("Gestionar Perfil - NovaCare");
-                gestionFrame.setContentPane(new VentanaGestionarPerfil().panelPrincipal);
+                gestionFrame.setContentPane(new ec.edu.uce.novacare.gui.VentanaGestionarPerfil().panelPrincipal);
                 gestionFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 gestionFrame.pack();
                 gestionFrame.setLocationRelativeTo(null);
@@ -35,7 +35,7 @@ public class VentanaMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame citasFrame = new JFrame("Gestionar Citas - NovaCare");
-                citasFrame.setContentPane(new VentanaGestionarCitas().panelPrincipal);
+                citasFrame.setContentPane(new ec.edu.uce.novacare.gui.VentanaGestionarCitas().panelPrincipal);
                 citasFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 citasFrame.pack();
                 citasFrame.setLocationRelativeTo(null);
@@ -52,7 +52,7 @@ public class VentanaMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame serviciosFrame = new JFrame("Gestionar Servicios - NovaCare");
-                serviciosFrame.setContentPane(new VentanaGestionarServicios().panelPrincipal);
+                serviciosFrame.setContentPane(new ec.edu.uce.novacare.gui.VentanaGestionarServicios().panelPrincipal);
                 serviciosFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 serviciosFrame.pack();
                 serviciosFrame.setLocationRelativeTo(null);
@@ -68,7 +68,7 @@ public class VentanaMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame disponibilidadFrame = new JFrame("Gestionar Disponibilidad - NovaCare");
-                disponibilidadFrame.setContentPane(new VentanaGestionarDisponibilidad().panelPrincipal);
+                disponibilidadFrame.setContentPane(new ec.edu.uce.novacare.gui.VentanaGestionarDisponibilidad().panelPrincipal);
                 disponibilidadFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 disponibilidadFrame.pack();
                 disponibilidadFrame.setLocationRelativeTo(null);
@@ -85,7 +85,7 @@ public class VentanaMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame agendaFrame = new JFrame("Gestionar Agenda - NovaCare");
-                agendaFrame.setContentPane(new VentanaGestionarAgenda().panelPrincipal);
+                agendaFrame.setContentPane(new ec.edu.uce.novacare.gui.VentanaGestionarAgenda().panelPrincipal);
                 agendaFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 agendaFrame.pack();
                 agendaFrame.setLocationRelativeTo(null);
@@ -102,7 +102,7 @@ public class VentanaMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame reportesFrame = new JFrame("Gestionar Reportes - NovaCare");
-                reportesFrame.setContentPane(new VentanaGestionarReportes().panelPrincipal);
+                reportesFrame.setContentPane(new ec.edu.uce.novacare.gui.VentanaGestionarReportes().panelPrincipal);
                 reportesFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 reportesFrame.pack();
                 reportesFrame.setLocationRelativeTo(null);
