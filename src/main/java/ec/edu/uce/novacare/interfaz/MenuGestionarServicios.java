@@ -76,8 +76,6 @@ public class MenuGestionarServicios {
                 case 0:
 
                     System.out.println("Regresando al menú principal...");
-//                    MenuPrincipal menuPrincipal = new MenuPrincipal(dao);
-//                    menuPrincipal.mostrarMenu();
                     return;
 
                 default:
@@ -150,20 +148,22 @@ public class MenuGestionarServicios {
 
         System.out.println("\n========== ACTUALIZAR SERVICIO ==========");
 
-        List<TipoServicio> tipos = (List<TipoServicio>) dao.listarTodos();
+        List<TipoServicio> tipos =
+                (List<TipoServicio>) dao.listarTodos();
 
         if (tipos.isEmpty()) {
             System.out.println("No existen tipos de servicio registrados.");
             return;
         }
 
-        // Mostrar los tipos de servicio
         System.out.println("\nTipos de Servicio:");
+
         for (int i = 0; i < tipos.size(); i++) {
-            System.out.println((i + 1) + ". " + tipos.get(i).getNombreTipoServicio());
+            System.out.println((i + 1) + ". "
+                    + tipos.get(i).getNombreTipoServicio());
         }
 
-        System.out.print("\nSeleccione una opción: ");
+        System.out.print("\nSeleccione un tipo de servicio: ");
 
         int opcionTipo;
 
@@ -179,78 +179,210 @@ public class MenuGestionarServicios {
             return;
         }
 
-        if (opcionTipo < 1 || opcionTipo > tipos.size()) {
-            System.out.println("Opción inválida.");
-            return;
-        }
+        TipoServicio tipoServicio =
+                tipos.get(opcionTipo - 1);
 
-        TipoServicio tipoServicio = tipos.get(opcionTipo - 1);
+        System.out.println("\n¿Qué desea hacer?");
+        System.out.println("1. Modificar un servicio existente");
+        System.out.println("2. Agregar un nuevo servicio");
+        System.out.print("Seleccione una opción: ");
 
-        // Verificar que tenga servicios
-        if (tipoServicio.getServicios() == null || tipoServicio.getServicios().isEmpty()) {
-            System.out.println("Este tipo de servicio no tiene servicios registrados.");
-            return;
-        }
-
-        // Mostrar los servicios
-        System.out.println("\nServicios de " + tipoServicio.getNombreTipoServicio() + ":");
-
-        List<Servicio> servicios = tipoServicio.getServicios();
-
-        for (int i = 0; i < servicios.size(); i++) {
-            Servicio s = servicios.get(i);
-
-            System.out.println((i + 1) + ". " + s.getNombre()
-                    + " | Duración: " + s.getDuracion() + " min"
-                    + " | Estado: " + s.getDisponibilidad());
-        }
-
-        System.out.print("\nSeleccione el servicio que desea modificar: ");
-        int opcionServicio;
+        int accion;
 
         try {
-            opcionServicio = Integer.parseInt(scanner.nextLine());
+            accion = Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException ex) {
             System.out.println("Error: debe ingresar un número.");
             return;
         }
-        if (opcionServicio < 1 || opcionServicio > servicios.size()) {
-            System.out.println("Opción inválida.");
-            return;
+
+        switch (accion) {
+
+            case 1:
+
+                List<Servicio> servicios =
+                        tipoServicio.getServicios();
+
+                if (servicios == null || servicios.isEmpty()) {
+                    System.out.println(
+                            "Este tipo de servicio no tiene servicios registrados."
+                    );
+                    break;
+                }
+
+                System.out.println("\nServicios de "
+                        + tipoServicio.getNombreTipoServicio() + ":");
+
+                for (int i = 0; i < servicios.size(); i++) {
+
+                    Servicio servicio = servicios.get(i);
+
+                    System.out.println((i + 1) + ". "
+                            + servicio.getNombre()
+                            + " | Duración: "
+                            + servicio.getDuracion()
+                            + " min | Estado: "
+                            + servicio.getDisponibilidad());
+                }
+
+                System.out.print(
+                        "\nSeleccione el servicio que desea modificar: "
+                );
+
+                int opcionServicio;
+
+                try {
+                    opcionServicio =
+                            Integer.parseInt(scanner.nextLine());
+                } catch (NumberFormatException ex) {
+                    System.out.println(
+                            "Error: debe ingresar un número."
+                    );
+                    break;
+                }
+
+                if (opcionServicio < 1
+                        || opcionServicio > servicios.size()) {
+
+                    System.out.println("Opción inválida.");
+                    break;
+                }
+
+                Servicio servicioSeleccionado =
+                        servicios.get(opcionServicio - 1);
+
+                System.out.print("Nuevo nombre: ");
+                String nuevoNombre = scanner.nextLine();
+
+                System.out.print("Nueva duración en minutos: ");
+
+                int nuevaDuracion;
+
+                try {
+                    nuevaDuracion =
+                            Integer.parseInt(scanner.nextLine());
+                } catch (NumberFormatException ex) {
+                    System.out.println(
+                            "Error: la duración debe ser un número."
+                    );
+                    break;
+                }
+
+                System.out.print("¿Disponible? (S/N): ");
+                String respuestaModificar =
+                        scanner.nextLine().trim();
+
+                if (!respuestaModificar.equalsIgnoreCase("S")
+                        && !respuestaModificar.equalsIgnoreCase("N")) {
+
+                    System.out.println(
+                            "Error: debe ingresar S o N."
+                    );
+                    break;
+                }
+
+                servicioSeleccionado.setNombre(nuevoNombre);
+                servicioSeleccionado.setDuracion(nuevaDuracion);
+
+                servicioSeleccionado.setDisponibilidad(
+                        respuestaModificar.equalsIgnoreCase("S")
+                                ? Disponibilidad.DISPONIBLE
+                                : Disponibilidad.NO_DISPONIBLE
+                );
+
+                if (dao.editar(opcionTipo - 1, tipoServicio)) {
+                    System.out.println(
+                            "Servicio actualizado correctamente."
+                    );
+                } else {
+                    System.out.println(
+                            "No se pudo actualizar el servicio."
+                    );
+                }
+
+                break;
+
+            case 2:
+
+                Servicio nuevoServicio = new Servicio();
+
+                System.out.print(
+                        "Ingrese el nombre del nuevo servicio: "
+                );
+
+                String nombreNuevo = scanner.nextLine();
+
+                if (!Validaciones.validarLetras(nombreNuevo)) {
+                    System.out.println("Error: nombre inválido.");
+                    break;
+                }
+
+                System.out.print(
+                        "Ingrese la duración en minutos: "
+                );
+
+                int duracionNueva;
+
+                try {
+                    duracionNueva =
+                            Integer.parseInt(scanner.nextLine());
+                } catch (NumberFormatException ex) {
+                    System.out.println(
+                            "Error: la duración debe ser un número."
+                    );
+                    break;
+                }
+
+                if (duracionNueva <= 0) {
+                    System.out.println(
+                            "La duración debe ser mayor que cero."
+                    );
+                    break;
+                }
+
+                System.out.print(
+                        "¿El servicio está disponible? (S/N): "
+                );
+
+                String respuestaAgregar =
+                        scanner.nextLine().trim();
+
+                if (!respuestaAgregar.equalsIgnoreCase("S")
+                        && !respuestaAgregar.equalsIgnoreCase("N")) {
+
+                    System.out.println(
+                            "Error: debe ingresar S o N."
+                    );
+                    break;
+                }
+
+                nuevoServicio.setNombre(nombreNuevo);
+                nuevoServicio.setDuracion(duracionNueva);
+
+                nuevoServicio.setDisponibilidad(
+                        respuestaAgregar.equalsIgnoreCase("S")
+                                ? Disponibilidad.DISPONIBLE
+                                : Disponibilidad.NO_DISPONIBLE
+                );
+
+                tipoServicio.getServicios().add(nuevoServicio);
+
+                if (dao.editar(opcionTipo - 1, tipoServicio)) {
+                    System.out.println(
+                            "Servicio agregado correctamente."
+                    );
+                } else {
+                    System.out.println(
+                            "No se pudo agregar el servicio."
+                    );
+                }
+
+                break;
+
+            default:
+                System.out.println("Opción inválida.");
+                break;
         }
-
-        Servicio servicioSeleccionado = servicios.get(opcionServicio - 1);
-        String nombreAnterior = servicioSeleccionado.getNombre();
-
-        // Nuevos datos
-        System.out.print("Nuevo nombre: ");
-        String nuevoNombre = scanner.nextLine();
-
-        System.out.print("Nueva duración: ");
-        int nuevaDuracion;
-
-        try {
-            nuevaDuracion = Integer.parseInt(scanner.nextLine());
-        } catch (NumberFormatException ex) {
-            System.out.println("Error: la duración debe ser un número.");
-            return;
-        }
-
-        System.out.print("¿Disponible? (S/N): ");
-        boolean disponible = scanner.nextLine().equalsIgnoreCase("S");
-
-        Servicio nuevoServicio = new Servicio();
-        nuevoServicio.setNombre(nuevoNombre);
-        nuevoServicio.setDuracion(nuevaDuracion);
-        nuevoServicio.setDisponibilidad(disponible ? Disponibilidad.DISPONIBLE: Disponibilidad.NO_DISPONIBLE);
-        DAO servicioDAO = new ServicioDAOFabrica().crearServicioDAO();
-
-        servicioSeleccionado.setNombre(nuevoNombre);
-        servicioSeleccionado.setDuracion(nuevaDuracion);
-        servicioSeleccionado.setDisponibilidad( disponible ? Disponibilidad.DISPONIBLE : Disponibilidad.NO_DISPONIBLE
-        );
-
-        System.out.println("Servicio actualizado correctamente.");
     }
 
     public void eliminarServicio() {
