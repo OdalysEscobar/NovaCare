@@ -64,5 +64,55 @@ public class VentanaMenu {
                 }
             }
         });
+        gestionarDisponibilidadDeCitasButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame disponibilidadFrame = new JFrame("Gestionar Disponibilidad - NovaCare");
+                disponibilidadFrame.setContentPane(new VentanaGestionarDisponibilidad().panelPrincipal);
+                disponibilidadFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                disponibilidadFrame.pack();
+                disponibilidadFrame.setLocationRelativeTo(null);
+                disponibilidadFrame.setVisible(true);
+
+                JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor(gestionarDisponibilidadDeCitasButton);
+                if (ventanaActual != null) {
+                    ventanaActual.dispose();
+                }
+            }
+        });
+
+        gestionarAgendaDeCitasButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame agendaFrame = new JFrame("Gestionar Agenda - NovaCare");
+                agendaFrame.setContentPane(new VentanaGestionarAgenda().panelPrincipal);
+                agendaFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                agendaFrame.pack();
+                agendaFrame.setLocationRelativeTo(null);
+                agendaFrame.setVisible(true);
+
+                JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor(gestionarAgendaDeCitasButton);
+                if (ventanaActual != null) {
+                    ventanaActual.dispose();
+                }
+            }
+        });
+
+        gestionarReportesDeCitasButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame reportesFrame = new JFrame("Gestionar Reportes - NovaCare");
+                reportesFrame.setContentPane(new VentanaGestionarReportes().panelPrincipal);
+                reportesFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                reportesFrame.pack();
+                reportesFrame.setLocationRelativeTo(null);
+                reportesFrame.setVisible(true);
+
+                JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor(gestionarReportesDeCitasButton);
+                if (ventanaActual != null) {
+                    ventanaActual.dispose();
+                }
+            }
+        });
     }
 }
