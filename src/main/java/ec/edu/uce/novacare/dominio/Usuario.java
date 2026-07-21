@@ -44,6 +44,9 @@ public abstract class Usuario implements Comparable<Usuario>, Serializable {
         this.codigo = contador;
     }
 
+    public static void setContador(int contador) {
+        Usuario.contador = contador;
+    }
     /**
      * Devuelve el código del usuario
      *

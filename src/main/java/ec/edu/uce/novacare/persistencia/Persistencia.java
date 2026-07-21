@@ -35,10 +35,22 @@ public class Persistencia {
             return new ArrayList<>();
         }
 
-        try (FileInputStream fis = new FileInputStream(archivo);
+        try (FileInputStream fis = new FileInputStream(ARCHIVO_USUARIOS);
              ObjectInputStream ois = new ObjectInputStream(fis)) {
 
-            return (List<Usuario>) ois.readObject();
+            List<Usuario> usuarios = (List<Usuario>) ois.readObject();
+
+            int mayor = 0;
+
+            for (Usuario usuario : usuarios) {
+                if (usuario.getCodigo() > mayor) {
+                    mayor = usuario.getCodigo();
+                }
+            }
+
+            Usuario.setContador(mayor);
+
+            return usuarios;
 
         } catch (IOException | ClassNotFoundException e) {
             System.err.println("Error al cargar los usuarios: " + e.getMessage());
