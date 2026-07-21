@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="ec.edu.uce.novacare.GUI.VentanaGestionarServicios">
+  <grid id="27dc6" binding="panelPrincipal" layout-manager="GridBagLayout">
+    <constraints>
+      <xy x="20" y="20" width="339" height="326"/>
+    </constraints>
+    <properties>
+      <background color="-1840129"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <component id="6f0c9" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <font size="18"/>
+          <foreground color="-16777216"/>
+          <text value="GESTIONAR SERVICIOS"/>
+        </properties>
+      </component>
+      <component id="b64c5" class="javax.swing.JButton" binding="crearServiciosButton" default-binding="true">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <background color="-4989973"/>
+          <foreground color="-16777216"/>
+          <text value="Crear Servicios"/>
+        </properties>
+      </component>
+      <component id="22a7a" class="javax.swing.JButton" binding="actualizarServiciosButton" default-binding="true">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <background color="-4989973"/>
+          <foreground color="-16777216"/>
+          <text value="Actualizar Servicios"/>
+        </properties>
+      </component>
+      <component id="60689" class="javax.swing.JButton" binding="consultarServiciosButton" default-binding="true">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <background color="-4989973"/>
+          <foreground color="-16777216"/>
+          <text value="Consultar Servicios"/>
+        </properties>
+      </component>
+      <component id="8a3b8" class="javax.swing.JButton" binding="eliminarServicioButton" default-binding="true">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <background color="-4989973"/>
+          <foreground color="-16777216"/>
+          <text value="Eliminar Servicio"/>
+        </properties>
+      </component>
+      <component id="39ac6" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="be03" class="javax.swing.JButton" binding="volverAlMenuPrincipalButton" default-binding="true">
+        <constraints>
+          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <background color="-3115559"/>
+          <foreground color="-16777216"/>
+          <text value="Volver al Menu Principal"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>
