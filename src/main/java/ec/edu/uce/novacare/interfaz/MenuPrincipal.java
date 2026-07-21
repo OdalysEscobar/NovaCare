@@ -1,8 +1,10 @@
 package ec.edu.uce.novacare.interfaz;
 
 import java.util.Scanner;
-
-import ec.edu.uce.novacare.DAO.*;
+import ec.edu.uce.novacare.DAO.UsuarioDAO;
+import ec.edu.uce.novacare.DAO.UsuarioDAOMemoriaImpl;
+import ec.edu.uce.novacare.DAO.DAO;
+import ec.edu.uce.novacare.DAO.ServicioDAOMemorialImpl;
 
 public class MenuPrincipal {
 
@@ -11,7 +13,6 @@ public class MenuPrincipal {
     private DAO dao;
     public MenuPrincipal(UsuarioDAO usuarioDAO) {
         this.usuarioDAO = usuarioDAO;
-        this.dao = new TipoServicioDAOMemoriaImpl();
     }
     public MenuPrincipal(DAO dao){
         this.dao = dao;
@@ -63,7 +64,7 @@ public class MenuPrincipal {
                 case 3:
                     System.out.println("Gestionando servicios...");
 
-                    MenuGestionarServicios menuServicios = new MenuGestionarServicios(dao);
+                    MenuGestionarServicios menuServicios = new MenuGestionarServicios(dao,usuarioDAO);
                     menuServicios.mostrarMenu();
 
                     break;
@@ -85,7 +86,7 @@ public class MenuPrincipal {
                 case 6:
                     System.out.println("Gestionando reportes de citas...");
 
-                    MenuGestionarReportes menuReportes = new MenuGestionarReportes(usuarioDAO);
+                    MenuGestionarReportes menuReportes = new MenuGestionarReportes(dao, usuarioDAO);
                     menuReportes.mostrarMenu();
                     break;
 

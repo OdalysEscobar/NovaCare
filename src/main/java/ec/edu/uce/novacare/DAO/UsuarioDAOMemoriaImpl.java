@@ -1,6 +1,7 @@
 package ec.edu.uce.novacare.DAO;
 
 import ec.edu.uce.novacare.dominio.CentroDeBelleza;
+import ec.edu.uce.novacare.persistencia.Persistencia;
 import ec.edu.uce.novacare.dominio.Cliente;
 import ec.edu.uce.novacare.dominio.Usuario;
 
@@ -8,9 +9,13 @@ import java.util.List;
 
 public class UsuarioDAOMemoriaImpl implements UsuarioDAO{
 
-    private static List<Usuario> usuarios = CentroDeBelleza.getUsuarios();
+    private static List<Usuario> usuarios = Persistencia.cargarUsuarios();
 
-    CentroDeBelleza centro = CentroDeBelleza.getCentro();
+    private CentroDeBelleza centro = CentroDeBelleza.getCentro();
+
+    public UsuarioDAOMemoriaImpl() {
+        centro.setUsuarios(usuarios);
+    }
 
     private boolean validarDuplicado(Object o){
         if (!(o instanceof Usuario)) {
@@ -37,6 +42,7 @@ public class UsuarioDAOMemoriaImpl implements UsuarioDAO{
 
         if(!validarDuplicado(nuevoUsuario)) {
             usuarios.add(nuevoUsuario);
+            Persistencia.guardarUsuarios(usuarios);
             return true;
         }
 
@@ -51,6 +57,7 @@ public class UsuarioDAOMemoriaImpl implements UsuarioDAO{
                 usuario.setApellido(nuevo.getApellido());
                 usuario.setCorreo(nuevo.getCorreo());
                 usuario.setContrasena(nuevo.getContrasena());
+                Persistencia.guardarUsuarios(usuarios);
                 return true;
             }
 
@@ -65,6 +72,8 @@ public class UsuarioDAOMemoriaImpl implements UsuarioDAO{
             if (usuarios.get(i).getCorreo().equals(correo)) {
 
                 usuarios.remove(i);
+
+                Persistencia.guardarUsuarios(usuarios);
 
                 return true;
             }

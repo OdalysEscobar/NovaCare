@@ -175,7 +175,7 @@ class AgendaTest {
     @Test
     void getCitas() {
         Agenda agenda = new Agenda();
-        Cita[] citas = new Cita[3];
+        java.util.List<Cita> citas = new java.util.ArrayList<>();
         agenda.setCitas(citas);
         assertEquals(citas, agenda.getCitas());
         System.out.println("El metodo getCitas funciona correctamente ✅");
@@ -184,7 +184,7 @@ class AgendaTest {
     @Test
     void setCitas() {
         Agenda agenda = new Agenda();
-        Cita[] citas = new Cita[2];
+        java.util.List<Cita> citas = new java.util.ArrayList<>();
         agenda.setCitas(citas);
         assertEquals(citas, agenda.getCitas());
         System.out.println("El metodo setCitas funciona correctamente ✅");
@@ -210,7 +210,7 @@ class AgendaTest {
                 ", numeroCitasPorSemana=10" +
                 ", numeroCitasPorMes=30" +
                 ", numeroCitasCanceladas=1" +
-                ", citas=" + Arrays.toString(agenda.getCitas())+
+                ", citas=" + agenda.getCitas() +
                 '}';
         assertEquals(esperado, agenda.toString());
         System.out.println(agenda);

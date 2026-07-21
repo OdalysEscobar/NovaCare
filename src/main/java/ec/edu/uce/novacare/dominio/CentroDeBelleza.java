@@ -122,12 +122,16 @@ public  class CentroDeBelleza {
         // USUARIOS
         UsuarioDAO usuarioDAO = new UsuarioDAOFabrica().crearUsuarioDAO();
 
-        usuarioDAO.nuevo(new Cliente("Maria", "Alvarez", "1235", "maria@uce.com", "0995631247"));
+        if(usuarioDAO.listar().isEmpty()){
 
-        usuarioDAO.nuevo(new Empleado(
-                "Juan", "Estrada", "14897", "juan@hotmail.com", Especialidad.BARBERIA));
+            usuarioDAO.nuevo(new Cliente("Maria", "Alvarez", "1235", "maria@uce.com", "0995631247"));
 
-        usuarioDAO.nuevo(new Cliente("Sofia", "Moran", "65423", "sofi@uce.com", "0995631756"));
+            usuarioDAO.nuevo(new Empleado(
+                    "Juan", "Estrada", "14897", "juan@hotmail.com", Especialidad.BARBERIA));
+
+            usuarioDAO.nuevo(new Cliente("Sofia", "Moran", "65423", "sofi@uce.com", "0995631756"));
+
+        }
 
         //TIPOS DE SERVICIO
         DAO tipoServicioDAO = new TipoServicioDAOFabrica().crearTipoServicioDAO();

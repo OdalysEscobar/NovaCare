@@ -13,7 +13,7 @@ public class Launcher {
         UsuarioDAO usuarioDAO = new UsuarioDAOMemoriaImpl();
 
         MenuIngresarSistema menu1 = new MenuIngresarSistema(usuarioDAO);
-        CentroDeBelleza centroDeBelleza = new CentroDeBelleza();
+        CentroDeBelleza centroDeBelleza = CentroDeBelleza.getCentro();
         centroDeBelleza.inicializar();
 
 
