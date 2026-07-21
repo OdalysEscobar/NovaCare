@@ -14,7 +14,6 @@ public class Recordatorio implements Serializable {
     private static int contador;
 
 
-
     public Recordatorio() {
         this.id = contador++;
         this.informacionCita="Sin informacion";

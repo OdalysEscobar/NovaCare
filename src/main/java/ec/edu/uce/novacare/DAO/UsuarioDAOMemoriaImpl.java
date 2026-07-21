@@ -57,6 +57,10 @@ public class UsuarioDAOMemoriaImpl implements UsuarioDAO{
                 usuario.setApellido(nuevo.getApellido());
                 usuario.setCorreo(nuevo.getCorreo());
                 usuario.setContrasena(nuevo.getContrasena());
+                if (usuario instanceof Cliente && nuevo instanceof Cliente) {
+                    ((Cliente) usuario).setNumeroDeTelefono(
+                            ((Cliente) nuevo).getNumeroDeTelefono());
+                }
                 Persistencia.guardarUsuarios(usuarios);
                 return true;
             }
