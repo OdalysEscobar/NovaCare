@@ -14,7 +14,7 @@ public  class CentroDeBelleza {
     private static String telefono;
     private static String horarioAtencion;
     private static List <Usuario> usuarios;
-    private static List<TipoServicio> tipoServicios;
+    private static List<TipoServicio> tipoServicios = new ArrayList<>();
     private static int numUsuarios;
     private  Agenda agenda;
 

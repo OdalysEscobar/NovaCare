@@ -76,8 +76,8 @@ public class MenuGestionarServicios {
                 case 0:
 
                     System.out.println("Regresando al menú principal...");
-                    MenuPrincipal menuPrincipal = new MenuPrincipal(dao);
-                    menuPrincipal.mostrarMenu();
+//                    MenuPrincipal menuPrincipal = new MenuPrincipal(dao);
+//                    menuPrincipal.mostrarMenu();
                     return;
 
                 default:

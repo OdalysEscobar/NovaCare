@@ -3,7 +3,6 @@ package ec.edu.uce.novacare.DAO;
 import ec.edu.uce.novacare.dominio.CentroDeBelleza;
 import ec.edu.uce.novacare.dominio.Servicio;
 import ec.edu.uce.novacare.dominio.TipoServicio;
-import ec.edu.uce.novacare.dominio.Usuario;
 import ec.edu.uce.novacare.persistencia.Persistencia;
 
 import java.util.List;
@@ -12,7 +11,7 @@ public class TipoServicioDAOMemoriaImpl implements DAO{
     private static List<TipoServicio> tipoServicios = Persistencia.cargarServicios();
 
     public TipoServicioDAOMemoriaImpl() {
-        CentroDeBelleza.getCentro().setTipoServicios(tipoServicios);
+        CentroDeBelleza.setTipoServicios(tipoServicios);
     }
 
     @Override
@@ -23,6 +22,8 @@ public class TipoServicioDAOMemoriaImpl implements DAO{
 
             if (!existe(tipoServicio)) {
                 tipoServicios.add(tipoServicio);
+                Persistencia.guardarServicios(tipoServicios);
+                CentroDeBelleza.setTipoServicios(tipoServicios);
                 return true;
             }
         }
@@ -56,6 +57,8 @@ public class TipoServicioDAOMemoriaImpl implements DAO{
                         }
                     }
                 }
+                Persistencia.guardarServicios(tipoServicios);
+                CentroDeBelleza.setTipoServicios(tipoServicios);
                 return true;
             }catch (IndexOutOfBoundsException ex) {
 
@@ -71,6 +74,8 @@ public class TipoServicioDAOMemoriaImpl implements DAO{
         try {
 
             tipoServicios.remove(pos);
+            Persistencia.guardarServicios(tipoServicios);
+            CentroDeBelleza.setTipoServicios(tipoServicios);
             return true;
 
         } catch (IndexOutOfBoundsException ex) {
