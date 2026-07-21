@@ -5,6 +5,7 @@ import ec.edu.uce.novacare.dominio.CentroDeBelleza;
 import ec.edu.uce.novacare.dominio.Cita;
 import ec.edu.uce.novacare.persistencia.Persistencia;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ public class CitaDAOMemoriaImpl implements DAO {
     private Agenda agenda = CentroDeBelleza.getCentro().getAgenda();
 
     public CitaDAOMemoriaImpl() {
+
         agenda.setCitas(Persistencia.cargarCitas());
     }
 
