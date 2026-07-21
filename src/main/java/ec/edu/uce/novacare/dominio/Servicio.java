@@ -1,9 +1,12 @@
 package ec.edu.uce.novacare.dominio;
+import ec.edu.uce.novacare.persistencia.Persistencia;
+
+import java.io.Serializable;
 
 /**
  * Clase que representa un servicio dentro del sistema NovaCare.
  */
-public class Servicio {
+public class Servicio implements Serializable {
     private int duracion;
     private Disponibilidad disponibilidad;
     private String nombre;

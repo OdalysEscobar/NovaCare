@@ -1,8 +1,11 @@
 package ec.edu.uce.novacare.dominio;
 
 import ec.edu.uce.novacare.util.Validaciones;
+import ec.edu.uce.novacare.persistencia.Persistencia;
 
-public class Recordatorio {
+import java.io.Serializable;
+
+public class Recordatorio implements Serializable {
 
     private final int id;
     private String informacionCita;

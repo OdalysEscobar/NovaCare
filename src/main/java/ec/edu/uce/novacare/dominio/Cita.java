@@ -1,6 +1,8 @@
 package ec.edu.uce.novacare.dominio;
 import ec.edu.uce.novacare.util.Validaciones;
+import ec.edu.uce.novacare.persistencia.Persistencia;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.List;
 import java.util.ArrayList;
@@ -8,7 +10,7 @@ import java.util.ArrayList;
 /**
  * Representa una cita dentro del sistema.
  */
-public class Cita {
+public class Cita implements Serializable {
     private final int id;
     private String fecha;
     private String hora;
