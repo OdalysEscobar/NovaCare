@@ -53,9 +53,33 @@ public class VentanaGestionarServicios {
             }
         });
 
-        consultarServiciosButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        consultarServiciosButton.addActionListener(e -> {
+
+            JFrame consultarFrame =
+                    new JFrame("Catálogo de Servicios - NovaCare");
+
+            VentanaConsultarServicios ventana =
+                    new VentanaConsultarServicios();
+
+            consultarFrame.setContentPane(
+                    ventana.panelPrincipal
+            );
+
+            consultarFrame.setDefaultCloseOperation(
+                    JFrame.EXIT_ON_CLOSE
+            );
+
+            consultarFrame.pack();
+            consultarFrame.setLocationRelativeTo(null);
+            consultarFrame.setVisible(true);
+
+            JFrame ventanaActual =
+                    (JFrame) SwingUtilities.getWindowAncestor(
+                            consultarServiciosButton
+                    );
+
+            if (ventanaActual != null) {
+                ventanaActual.dispose();
             }
         });
 
