@@ -16,10 +16,12 @@ public class RegistrarUsuario {
     private JTextField textField3;
     private JPasswordField passwordField1;
     private JButton registrarButton;
+    private JButton regresarAlInicioButton;
 
     public RegistrarUsuario() {
 
         registrarButton.addActionListener(e -> guardarUsuario());
+        regresarAlInicioButton.addActionListener(e -> regresarAlInicio());
     }
 
     public JPanel getPanel1() {
@@ -147,6 +149,33 @@ public class RegistrarUsuario {
                     "Error de registro",
                     JOptionPane.ERROR_MESSAGE
             );
+        }
+    }
+
+    private void regresarAlInicio() {
+
+        JFrame inicioFrame =
+                new JFrame("NovaCare");
+
+        inicioFrame.setContentPane(
+                new NovaCare().getPanelPrincipal()
+        );
+
+        inicioFrame.setDefaultCloseOperation(
+                JFrame.EXIT_ON_CLOSE
+        );
+
+        inicioFrame.pack();
+        inicioFrame.setLocationRelativeTo(null);
+        inicioFrame.setVisible(true);
+
+        JFrame ventanaActual =
+                (JFrame) SwingUtilities.getWindowAncestor(
+                        regresarAlInicioButton
+                );
+
+        if (ventanaActual != null) {
+            ventanaActual.dispose();
         }
     }
 

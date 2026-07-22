@@ -12,10 +12,12 @@ public class VentanaLogin {
     private JTextField textField1;
     private JPasswordField passwordField1;
     private JButton ingresarButton;
+    private JButton regresarAlInicioButton;
 
     public VentanaLogin() {
 
         ingresarButton.addActionListener(e -> iniciarSesion());
+        regresarAlInicioButton.addActionListener(e -> regresarAlInicio());
     }
 
     private void iniciarSesion() {
@@ -102,6 +104,33 @@ public class VentanaLogin {
         JFrame ventanaActual =
                 (JFrame) SwingUtilities.getWindowAncestor(
                         ingresarButton
+                );
+
+        if (ventanaActual != null) {
+            ventanaActual.dispose();
+        }
+    }
+
+    private void regresarAlInicio() {
+
+        JFrame inicioFrame =
+                new JFrame("NovaCare");
+
+        inicioFrame.setContentPane(
+                new NovaCare().getPanelPrincipal()
+        );
+
+        inicioFrame.setDefaultCloseOperation(
+                JFrame.EXIT_ON_CLOSE
+        );
+
+        inicioFrame.pack();
+        inicioFrame.setLocationRelativeTo(null);
+        inicioFrame.setVisible(true);
+
+        JFrame ventanaActual =
+                (JFrame) SwingUtilities.getWindowAncestor(
+                        regresarAlInicioButton
                 );
 
         if (ventanaActual != null) {

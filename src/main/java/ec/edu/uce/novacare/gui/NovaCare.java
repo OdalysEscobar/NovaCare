@@ -62,6 +62,10 @@ public class NovaCare {
 
     }
 
+    public JPanel getPanelPrincipal() {
+        return panelPrincipal;
+    }
+
     public static void main(String[] args) {
         JFrame frame = new JFrame("NovaCare");
         frame.setContentPane(new NovaCare().panelPrincipal);
