@@ -12,6 +12,7 @@ public class VentanaMenu {
     private JButton gestionarDisponibilidadDeCitasButton;
     private JButton gestionarAgendaDeCitasButton;
     private JButton gestionarReportesDeCitasButton;
+    private JButton salirButton;
 
     public VentanaMenu() {
         gestionarPerfilDeUsuarioButton.addActionListener(new ActionListener() {
@@ -109,6 +110,30 @@ public class VentanaMenu {
                 reportesFrame.setVisible(true);
 
                 JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor(gestionarReportesDeCitasButton);
+                if (ventanaActual != null) {
+                    ventanaActual.dispose();
+                }
+            }
+        });
+
+        salirButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                JFrame inicioFrame = new JFrame("NovaCare");
+
+                NovaCare ventanaInicio = new NovaCare();
+
+                inicioFrame.setContentPane(ventanaInicio.getPanelPrincipal());
+
+                inicioFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                inicioFrame.pack();
+                inicioFrame.setLocationRelativeTo(null);
+                inicioFrame.setVisible(true);
+
+                JFrame ventanaActual =
+                        (JFrame) SwingUtilities.getWindowAncestor(salirButton);
+
                 if (ventanaActual != null) {
                     ventanaActual.dispose();
                 }
