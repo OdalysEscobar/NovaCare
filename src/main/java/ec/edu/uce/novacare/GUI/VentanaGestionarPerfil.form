@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="ec.edu.uce.novacare.gui.VentanaGestionarPerfil">
+  <grid id="27dc6" binding="panelPrincipal" layout-manager="GridBagLayout">
+    <constraints>
+      <xy x="94" y="84" width="317" height="400"/>
+    </constraints>
+    <properties>
+      <background color="-2308"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <component id="1dbe2" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <font size="16"/>
+          <foreground color="-16777216"/>
+          <text value="GESTIONAR PERFIL USUARIO"/>
+        </properties>
+      </component>
+      <component id="fc24d" class="javax.swing.JButton" binding="crearPerfilButton" default-binding="true">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <background color="-4989973"/>
+          <foreground color="-16777216"/>
+          <text value="Crear perfil "/>
+        </properties>
+      </component>
+      <component id="b143f" class="javax.swing.JButton" binding="consultarPerfilButton" default-binding="true">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <background color="-4989973"/>
+          <foreground color="-16777216"/>
+          <text value="Consultar perfil"/>
+        </properties>
+      </component>
+      <component id="9f6ee" class="javax.swing.JButton" binding="actualizarPerfilButton" default-binding="true">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <background color="-4989973"/>
+          <foreground color="-16777216"/>
+          <text value="Actualizar perfil"/>
+        </properties>
+      </component>
+      <component id="833aa" class="javax.swing.JButton" binding="eliminarPerfilButton" default-binding="true">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <background color="-4989973"/>
+          <foreground color="-16777216"/>
+          <text value="Eliminar perfil"/>
+        </properties>
+      </component>
+      <component id="e603d" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <text value="  "/>
+        </properties>
+      </component>
+      <component id="6b474" class="javax.swing.JButton" binding="volverAlMenuPrincipalButton" default-binding="true">
+        <constraints>
+          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <background color="-4989973"/>
+          <foreground color="-16777216"/>
+          <text value="Volver al menu principal"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>

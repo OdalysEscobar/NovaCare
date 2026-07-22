@@ -1,4 +1,5 @@
 package ec.edu.uce.novacare.test.interfaz;
+
 import ec.edu.uce.novacare.DAO.UsuarioDAO;
 import ec.edu.uce.novacare.DAO.UsuarioDAOMemoriaImpl;
 import ec.edu.uce.novacare.interfaz.MenuPrincipal;
@@ -8,6 +9,8 @@ import ec.edu.uce.novacare.interfaz.MenuGestionarAgenda;
 import ec.edu.uce.novacare.interfaz.MenuGestionarDisponibilidad;
 import ec.edu.uce.novacare.interfaz.MenuGestionarServicios;
 import ec.edu.uce.novacare.interfaz.MenuGestionarReportes;
+import ec.edu.uce.novacare.DAO.DAO;
+import ec.edu.uce.novacare.DAO.ServicioDAOMemorialImpl;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,11 +20,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class MenuPrincipalTest {
 
     private UsuarioDAO usuarioDAO;
+    private DAO generalDAO;
 
     @BeforeEach
     void setUp() {
         // Inicializamos una simulación limpia del DAO antes de ejecutar cada prueba
         this.usuarioDAO = new UsuarioDAOMemoriaImpl();
+        this.generalDAO = new ServicioDAOMemorialImpl();
     }
 
     // Mostrar Menu
@@ -44,7 +49,7 @@ class MenuPrincipalTest {
     @Test
     void opcionGestionarPerfilCorrecto() {
 
-        MenuGestionarPerfil menuPerfil = new MenuGestionarPerfil(U);
+        MenuGestionarPerfil menuPerfil = new MenuGestionarPerfil(usuarioDAO);
 
         assertNotNull(menuPerfil);
 
@@ -64,7 +69,7 @@ class MenuPrincipalTest {
     @Test
     void opcionGestionarCitasCorrecto() {
 
-        MenuGestionarCitas menuCitas = new MenuGestionarCitas();
+        MenuGestionarCitas menuCitas = new MenuGestionarCitas(usuarioDAO);
 
         assertNotNull(menuCitas);
 
@@ -84,7 +89,7 @@ class MenuPrincipalTest {
     @Test
     void opcionGestionarServiciosCorrecto() {
 
-        MenuGestionarServicios menuServicios = new MenuGestionarServicios();
+        MenuGestionarServicios menuServicios = new MenuGestionarServicios(generalDAO, usuarioDAO);
 
         assertNotNull(menuServicios);
 
@@ -104,7 +109,7 @@ class MenuPrincipalTest {
     @Test
     void opcionGestionarDisponibilidadCorrecto() {
 
-        MenuGestionarDisponibilidad menuDisp = new MenuGestionarDisponibilidad();
+        MenuGestionarDisponibilidad menuDisp = new MenuGestionarDisponibilidad(usuarioDAO);
 
         assertNotNull(menuDisp);
 
@@ -124,7 +129,7 @@ class MenuPrincipalTest {
     @Test
     void opcionGestionarAgendaCorrecto() {
 
-        MenuGestionarAgenda menuAgenda = new MenuGestionarAgenda();
+        MenuGestionarAgenda menuAgenda = new MenuGestionarAgenda(usuarioDAO);
 
         assertNotNull(menuAgenda);
 
@@ -144,7 +149,7 @@ class MenuPrincipalTest {
     @Test
     void opcionGestionarReportesCorrecto() {
 
-        MenuGestionarReportes menuReportes = new MenuGestionarReportes();
+        MenuGestionarReportes menuReportes = new MenuGestionarReportes(generalDAO, usuarioDAO);
 
         assertNotNull(menuReportes);
 

@@ -3,11 +3,13 @@ package ec.edu.uce.novacare.dominio;
 import ec.edu.uce.novacare.DAO.DAO; // Usamos la interfaz única DAO
 import ec.edu.uce.novacare.DAO.ServicioDAOMemorialImpl;
 import ec.edu.uce.novacare.util.Validaciones;
+
+import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 
 
-public class TipoServicio {
+public class TipoServicio implements Serializable {
     private String nombreTipoServicio;
     private String descripcion;
     private List<Servicio> servicios;

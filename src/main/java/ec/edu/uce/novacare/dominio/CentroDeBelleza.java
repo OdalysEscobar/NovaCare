@@ -14,7 +14,7 @@ public  class CentroDeBelleza {
     private static String telefono;
     private static String horarioAtencion;
     private static List <Usuario> usuarios;
-    private static List<TipoServicio> tipoServicios;
+    private static List<TipoServicio> tipoServicios = new ArrayList<>();
     private static int numUsuarios;
     private  Agenda agenda;
 
@@ -107,6 +107,10 @@ public  class CentroDeBelleza {
         return tipoServicios;
     }
 
+    public static void setTipoServicios(List<TipoServicio> tipoServicios) {
+        CentroDeBelleza.tipoServicios = tipoServicios;
+    }
+
     @Override
     public String toString() {
         return "CentroDeBelleza{" +
@@ -122,49 +126,54 @@ public  class CentroDeBelleza {
         // USUARIOS
         UsuarioDAO usuarioDAO = new UsuarioDAOFabrica().crearUsuarioDAO();
 
-        usuarioDAO.nuevo(new Cliente("Maria", "Alvarez", "1235", "maria@uce.com", "0995631247"));
+        if(usuarioDAO.listar().isEmpty()){
 
-        usuarioDAO.nuevo(new Empleado(
-                "Juan", "Estrada", "14897", "juan@hotmail.com", Especialidad.BARBERIA));
+            usuarioDAO.nuevo(new Cliente("Maria", "Alvarez", "1235", "maria@uce.com", "0995631247"));
 
-        usuarioDAO.nuevo(new Cliente("Sofia", "Moran", "65423", "sofi@uce.com", "0995631756"));
+            usuarioDAO.nuevo(new Empleado(
+                    "Juan", "Estrada", "14897", "juan@hotmail.com", Especialidad.BARBERIA));
+
+            usuarioDAO.nuevo(new Cliente("Sofia", "Moran", "65423", "sofi@uce.com", "0995631756"));
+
+        }
 
         //TIPOS DE SERVICIO
         DAO tipoServicioDAO = new TipoServicioDAOFabrica().crearTipoServicioDAO();
 
-        // Manicura
-        TipoServicio manicura = new TipoServicio();
-        manicura.setNombreTipoServicio("Manicura");
-        manicura.setDescripcion("Servicios para uñas");
+        if (tipoServicioDAO.listarTodos().isEmpty()) {
+            // Manicura
+            TipoServicio manicura = new TipoServicio();
+            manicura.setNombreTipoServicio("Manicura");
+            manicura.setDescripcion("Servicios para uñas");
 
-        Servicio acrilicas = new Servicio();
-        acrilicas.setNombre("Acrílicas");
-        acrilicas.setDuracion(60);
-        acrilicas.setDisponibilidad(Disponibilidad.DISPONIBLE);
+            Servicio acrilicas = new Servicio();
+            acrilicas.setNombre("Acrílicas");
+            acrilicas.setDuracion(60);
+            acrilicas.setDisponibilidad(Disponibilidad.DISPONIBLE);
 
-        Servicio normales = new Servicio();
-        normales.setNombre("Normales");
-        normales.setDuracion(40);
-        normales.setDisponibilidad(Disponibilidad.DISPONIBLE);
+            Servicio normales = new Servicio();
+            normales.setNombre("Normales");
+            normales.setDuracion(40);
+            normales.setDisponibilidad(Disponibilidad.DISPONIBLE);
 
-        manicura.getServicios().add(acrilicas);
-        manicura.getServicios().add(normales);
+            manicura.getServicios().add(acrilicas);
+            manicura.getServicios().add(normales);
 
-        tipoServicioDAO.nuevo(manicura);
+            tipoServicioDAO.nuevo(manicura);
 
-        // Peinados
-        TipoServicio peinados = new TipoServicio();
-        peinados.setNombreTipoServicio("Peinados");
-        peinados.setDescripcion("Servicios de peinado");
+            // Peinados
+            TipoServicio peinados = new TipoServicio();
+            peinados.setNombreTipoServicio("Peinados");
+            peinados.setDescripcion("Servicios de peinado");
 
-        Servicio novia = new Servicio();
-        novia.setNombre("Novia");
-        novia.setDuracion(120);
-        novia.setDisponibilidad(Disponibilidad.DISPONIBLE);
+            Servicio novia = new Servicio();
+            novia.setNombre("Novia");
+            novia.setDuracion(120);
+            novia.setDisponibilidad(Disponibilidad.DISPONIBLE);
 
-        peinados.getServicios().add(novia);
+            peinados.getServicios().add(novia);
 
-        tipoServicioDAO.nuevo(peinados);
-
+            tipoServicioDAO.nuevo(peinados);
+        }
     }
 }

@@ -1,5 +1,7 @@
 package ec.edu.uce.novacare.test.interfaz;
 
+import ec.edu.uce.novacare.DAO.DAO;
+import ec.edu.uce.novacare.DAO.ServicioDAOMemorialImpl;
 import ec.edu.uce.novacare.DAO.UsuarioDAO;
 import ec.edu.uce.novacare.DAO.UsuarioDAOMemoriaImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,10 +11,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MenuGestionarServiciosTest {
 
+    private DAO dao;
     private UsuarioDAO usuarioDAO;
 
     @BeforeEach
     void setUp() {
+
+        dao = new ServicioDAOMemorialImpl();
         // 🔥 Inicializamos la simulación limpia del DAO antes de ejecutar cada prueba
         this.usuarioDAO = new UsuarioDAOMemoriaImpl();
     }
@@ -20,7 +25,7 @@ class MenuGestionarServiciosTest {
     @Test
     void mostrarMenuCorrecto() {
 
-        MenuGestionarServicios servicio = new MenuGestionarServicios(usuarioDAO);
+        MenuGestionarServicios servicio = new MenuGestionarServicios(dao, usuarioDAO);
 
         assertEquals("Corte de cabello", servicio.nombreServicio);
         assertEquals("Corte en capas ", servicio.descripcion);
@@ -32,7 +37,7 @@ class MenuGestionarServiciosTest {
     @Test
     void mostrarMenuIncorrecto() {
 
-        MenuGestionarServicios servicio = new MenuGestionarServicios(usuarioDAO);
+        MenuGestionarServicios servicio = new MenuGestionarServicios(dao,usuarioDAO);
 
         assertNotEquals("", servicio.nombreServicio);
         assertNotEquals("", servicio.descripcion);
@@ -45,7 +50,7 @@ class MenuGestionarServiciosTest {
     @Test
     void crearServicioCorrecto() {
 
-        MenuGestionarServicios servicio = new MenuGestionarServicios(usuarioDAO);
+        MenuGestionarServicios servicio = new MenuGestionarServicios(dao,usuarioDAO);
 
         servicio.nombreServicio = "Limpieza Facial";
         servicio.descripcion = "Exfoliación e hidratación profunda";
@@ -61,7 +66,7 @@ class MenuGestionarServiciosTest {
     @Test
     void crearServicioIncorrecto() {
 
-        MenuGestionarServicios servicio = new MenuGestionarServicios(usuarioDAO);
+        MenuGestionarServicios servicio = new MenuGestionarServicios(dao,usuarioDAO);
 
         servicio.nombreServicio = "Facial123";
         servicio.descripcion = "   ";
@@ -78,7 +83,7 @@ class MenuGestionarServiciosTest {
     @Test
     void consultarServicioCorrecto() {
 
-        MenuGestionarServicios servicio = new MenuGestionarServicios(usuarioDAO);
+        MenuGestionarServicios servicio = new MenuGestionarServicios(dao , usuarioDAO);
 
         servicio.nombreServicio = "Corte de cabello";
         servicio.descripcion = "Corte en capas ";
@@ -94,7 +99,7 @@ class MenuGestionarServiciosTest {
     @Test
     void consultarServicioVacio() {
 
-        MenuGestionarServicios servicio = new MenuGestionarServicios(usuarioDAO);
+        MenuGestionarServicios servicio = new MenuGestionarServicios(dao, usuarioDAO);
 
         servicio.nombreServicio = "";
         servicio.descripcion = "";
@@ -111,7 +116,7 @@ class MenuGestionarServiciosTest {
     @Test
     void actualizarServicioCorrecto() {
 
-        MenuGestionarServicios servicio = new MenuGestionarServicios(usuarioDAO);
+        MenuGestionarServicios servicio = new MenuGestionarServicios(dao, usuarioDAO);
 
         servicio.nombreServicio = "Corte de cabello";
         servicio.descripcion = "Corte en capas";
@@ -131,7 +136,7 @@ class MenuGestionarServiciosTest {
     @Test
     void actualizarServicioIncorrecto() {
 
-        MenuGestionarServicios servicio = new MenuGestionarServicios(usuarioDAO);
+        MenuGestionarServicios servicio = new MenuGestionarServicios(dao, usuarioDAO);
 
         servicio.nombreServicio = "Manicura5";
         servicio.descripcion = "";
@@ -148,7 +153,7 @@ class MenuGestionarServiciosTest {
     @Test
     void eliminarServicioCorrecto() {
 
-        MenuGestionarServicios servicio = new MenuGestionarServicios(usuarioDAO);
+        MenuGestionarServicios servicio = new MenuGestionarServicios(dao, usuarioDAO);
 
         servicio.nombreServicio = "";
         servicio.descripcion = "";
@@ -164,7 +169,7 @@ class MenuGestionarServiciosTest {
     @Test
     void eliminarServicioIncorrecto() {
 
-        MenuGestionarServicios servicio = new MenuGestionarServicios(usuarioDAO);
+        MenuGestionarServicios servicio = new MenuGestionarServicios(dao, usuarioDAO);
 
         assertNotEquals("", servicio.nombreServicio);
         assertNotEquals("", servicio.descripcion);

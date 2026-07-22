@@ -1,10 +1,12 @@
 package ec.edu.uce.novacare.dominio;
 import ec.edu.uce.novacare.util.Validaciones;
 
+import java.io.Serializable;
+
 /**
  * Clase que representa a un usuario del sistema NovaCare.
  */
-public abstract class Usuario implements Comparable<Usuario> {
+public abstract class Usuario implements Comparable<Usuario>, Serializable {
 
     private final int codigo;
     private String nombre;
@@ -42,6 +44,9 @@ public abstract class Usuario implements Comparable<Usuario> {
         this.codigo = contador;
     }
 
+    public static void setContador(int contador) {
+        Usuario.contador = contador;
+    }
     /**
      * Devuelve el código del usuario
      *

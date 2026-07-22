@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="ec.edu.uce.novacare.gui.VentanaConsultarPerfil">
+  <grid id="27dc6" binding="panelPrincipal" layout-manager="GridBagLayout">
+    <constraints>
+      <xy x="20" y="20" width="320" height="414"/>
+    </constraints>
+    <properties>
+      <background color="-2761238"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <component id="d6488" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <font size="18"/>
+          <foreground color="-16777216"/>
+          <text value="Correo Electronico:"/>
+        </properties>
+      </component>
+      <component id="fd3bc" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <background color="-4989973"/>
+          <foreground color="-16777216"/>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="e90f0" class="javax.swing.JTextArea" binding="textArea1" default-binding="true">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <background color="-4989973"/>
+          <foreground color="-16777216"/>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="98c53" class="javax.swing.JButton" binding="consultarButton" default-binding="true">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <background color="-3115559"/>
+          <foreground color="-16777216"/>
+          <text value="Consultar"/>
+        </properties>
+      </component>
+      <component id="41fcd" class="javax.swing.JButton" binding="volverButton" default-binding="true">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <background color="-11272"/>
+          <foreground color="-16777216"/>
+          <text value="Volver"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>

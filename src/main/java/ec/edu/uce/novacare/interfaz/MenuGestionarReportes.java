@@ -5,20 +5,23 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import ec.edu.uce.novacare.DAO.UsuarioDAO;
 import ec.edu.uce.novacare.util.Validaciones;
+import ec.edu.uce.novacare.DAO.DAO;
 
 
 public class MenuGestionarReportes {
 
     private Scanner scanner = new Scanner(System.in);
     private UsuarioDAO usuarioDAO;
+    private DAO dao;
 
     int numeroCitasPorDia = 5;
     int numeroCitasPorSemana = 20;
     int numeroCitasPorMes = 80;
     int numeroCitasCanceladas = 3;
 
-    public MenuGestionarReportes(UsuarioDAO usuarioDAO) {
+    public MenuGestionarReportes(DAO dao, UsuarioDAO usuarioDAO) {
         this.usuarioDAO = usuarioDAO;
+        this.dao = dao;
     }
 
     public void mostrarMenu() {
