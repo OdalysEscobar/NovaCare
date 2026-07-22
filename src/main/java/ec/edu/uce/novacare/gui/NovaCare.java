@@ -27,6 +27,39 @@ public class NovaCare {
             }
         });
 
+        registrarUsuarioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                JFrame registroFrame =
+                        new JFrame("Registrar Usuario - NovaCare");
+
+                RegistrarUsuario formularioRegistro =
+                        new RegistrarUsuario();
+
+                registroFrame.setContentPane(
+                        formularioRegistro.getPanel1()
+                );
+
+                registroFrame.setDefaultCloseOperation(
+                        JFrame.DISPOSE_ON_CLOSE
+                );
+
+                registroFrame.pack();
+                registroFrame.setLocationRelativeTo(null);
+                registroFrame.setVisible(true);
+
+                JFrame ventanaActual =
+                        (JFrame) SwingUtilities.getWindowAncestor(
+                                registrarUsuarioButton
+                        );
+
+                if (ventanaActual != null) {
+                    ventanaActual.dispose();
+                }
+            }
+        });
+
     }
 
     public static void main(String[] args) {
