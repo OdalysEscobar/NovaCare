@@ -17,6 +17,7 @@ public class MenuGestionarAgenda {
     public MenuGestionarAgenda(UsuarioDAO usuarioDAO) {
         this.usuarioDAO = usuarioDAO;
         this.dao = new CitaDAOMemoriaImpl();
+
     }
 
     public void mostrarMenu() {
