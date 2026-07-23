@@ -81,5 +81,4 @@ public class VentanaGestionarReportes {
             ventanaActual.dispose();
         }
     }
-
 }
