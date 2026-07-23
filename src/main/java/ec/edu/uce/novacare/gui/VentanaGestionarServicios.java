@@ -106,9 +106,32 @@ public class VentanaGestionarServicios {
             }
         });
 
-        eliminarServicioButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        eliminarServicioButton.addActionListener(e -> {
+
+            JFrame frame = new JFrame("Eliminar Servicio - NovaCare");
+
+            VentanaEliminarServicio ventanaEliminar =
+                    new VentanaEliminarServicio();
+
+            frame.setContentPane(
+                    ventanaEliminar.panelPrincipal
+            );
+
+            frame.setDefaultCloseOperation(
+                    JFrame.EXIT_ON_CLOSE
+            );
+
+            frame.pack();
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+
+            JFrame ventanaActual =
+                    (JFrame) SwingUtilities.getWindowAncestor(
+                            panelPrincipal
+                    );
+
+            if (ventanaActual != null) {
+                ventanaActual.dispose();
             }
         });
     }
