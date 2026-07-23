@@ -118,10 +118,6 @@ public class TipoServicio implements Serializable {
 
     @Override
     public String toString() {
-        return "TipoServicio{" +
-                "nombreTipoServicio='" + nombreTipoServicio + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", servicios=" + servicios +
-                '}';
+        return nombreTipoServicio;
     }
 }

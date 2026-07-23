@@ -88,10 +88,9 @@ public class Servicio implements Serializable {
      */
     @Override
     public String toString() {
-        return "Servicio{" +
-                " duracion=" + duracion +
-                ", disponibilidad=" + disponibilidad +
-                '}';
+        return nombre;
     }
+
+
 
 }
