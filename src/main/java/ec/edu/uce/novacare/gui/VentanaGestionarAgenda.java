@@ -1,107 +1,166 @@
 package ec.edu.uce.novacare.gui;
 
+import ec.edu.uce.novacare.DAO.CitaDAOMemoriaImpl;
+import ec.edu.uce.novacare.DAO.DAO;
 import ec.edu.uce.novacare.dominio.Cita;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 public class VentanaGestionarAgenda {
+
     public JPanel panelPrincipal;
+
     private JButton consultarAgendaButton;
     private JButton volverAlMenuPrincipalButton;
     private JTable table1;
     private JButton regresarButton;
 
+    private DAO dao;
+
     public VentanaGestionarAgenda() {
-        consultarAgendaButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                consultarAgenda();
-            }
-        });
 
-        regresarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                regresarAGestionarCitas();
-            }
-        });
+        dao = new CitaDAOMemoriaImpl();
 
-        volverAlMenuPrincipalButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                regresarMenuPrincipal();
-            }
-        });
+        consultarAgendaButton.addActionListener(e -> consultarAgenda());
+
+        regresarButton.addActionListener(e -> regresarAGestionarCitas());
+
+        volverAlMenuPrincipalButton.addActionListener(
+                e -> regresarMenuPrincipal()
+        );
     }
 
     private void consultarAgenda() {
-        List<Cita> listaCitas = null;
+
+        List<Cita> listaCitas =
+                (List<Cita>) dao.listarTodos();
+
+        String[] columnas = {
+                "N°",
+                "Cliente",
+                "Servicio",
+                "Fecha",
+                "Hora"
+        };
+
+        DefaultTableModel modelo =
+                new DefaultTableModel(columnas, 0) {
+
+                    @Override
+                    public boolean isCellEditable(
+                            int row,
+                            int column
+                    ) {
+                        return false;
+                    }
+                };
 
         if (listaCitas == null || listaCitas.isEmpty()) {
+
+            table1.setModel(modelo);
+
             JOptionPane.showMessageDialog(
                     panelPrincipal,
                     "No hay citas creadas.",
-                    "Agenda Vacía",
+                    "Agenda vacía",
                     JOptionPane.WARNING_MESSAGE
             );
 
-            table1.setModel(new DefaultTableModel(
-                    new Object[][]{},
-                    new String[]{"N°", "Cliente", "Servicio", "Fecha", "Hora"}
-            ));
             return;
         }
 
-        String[] columnas = {"N°", "Cliente", "Servicio", "Fecha", "Hora"};
-        DefaultTableModel modelo = new DefaultTableModel(columnas, 0) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
+        int contador = 1;
 
-        int index = 1;
-        for (Cita c : listaCitas) {
+        for (Cita cita : listaCitas) {
+
+            String nombreCliente = "";
+
+            if (cita.getCliente() != null) {
+                nombreCliente =
+                        cita.getCliente().getNombre();
+            }
+
+            String nombreServicio = "";
+
+            if (cita.getServicio() != null) {
+                nombreServicio =
+                        cita.getServicio().getNombre();
+            }
+
             Object[] fila = {
-                    index++,
-                    c.getCliente(),
-                    c.getServicio(),
-                    c.getFecha(),
-                    c.getHora()
+                    contador,
+                    nombreCliente,
+                    nombreServicio,
+                    cita.getFecha(),
+                    cita.getHora()
             };
+
             modelo.addRow(fila);
+
+            contador++;
         }
 
         table1.setModel(modelo);
+
+        JOptionPane.showMessageDialog(
+                panelPrincipal,
+                "Agenda cargada correctamente.",
+                "Consultar agenda",
+                JOptionPane.INFORMATION_MESSAGE
+        );
     }
 
     private void regresarAGestionarCitas() {
-        JFrame gestionarCitasFrame = new JFrame("Gestionar Citas - NovaCare");
-        gestionarCitasFrame.setContentPane(new VentanaGestionarCitas().panelPrincipal);
-        gestionarCitasFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JFrame gestionarCitasFrame =
+                new JFrame("Gestionar Citas - NovaCare");
+
+        gestionarCitasFrame.setContentPane(
+                new VentanaGestionarCitas().panelPrincipal
+        );
+
+        gestionarCitasFrame.setDefaultCloseOperation(
+                JFrame.EXIT_ON_CLOSE
+        );
+
         gestionarCitasFrame.pack();
         gestionarCitasFrame.setLocationRelativeTo(null);
         gestionarCitasFrame.setVisible(true);
 
-        JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor(regresarButton);
+        JFrame ventanaActual =
+                (JFrame) SwingUtilities.getWindowAncestor(
+                        panelPrincipal
+                );
+
         if (ventanaActual != null) {
             ventanaActual.dispose();
         }
     }
 
     private void regresarMenuPrincipal() {
-        JFrame menuFrame = new JFrame("NovaCare - Menú Principal");
-        menuFrame.setContentPane(new VentanaMenu().panelPrincipal);
-        menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JFrame menuFrame =
+                new JFrame("NovaCare - Menú Principal");
+
+        menuFrame.setContentPane(
+                new VentanaMenu().panelPrincipal
+        );
+
+        menuFrame.setDefaultCloseOperation(
+                JFrame.EXIT_ON_CLOSE
+        );
+
         menuFrame.pack();
         menuFrame.setLocationRelativeTo(null);
         menuFrame.setVisible(true);
 
-        JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor(volverAlMenuPrincipalButton);
+        JFrame ventanaActual =
+                (JFrame) SwingUtilities.getWindowAncestor(
+                        panelPrincipal
+                );
+
         if (ventanaActual != null) {
             ventanaActual.dispose();
         }
