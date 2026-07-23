@@ -14,10 +14,6 @@ public class VentanaCrearServicio {
 
     public JPanel panelPrincipal;
 
-    // textField1 = Tipo de servicio
-    // textField2 = Descripción
-    // textField3 = Nombre del servicio
-    // textField4 = Duración
     private JTextField textField1;
     private JTextField textField2;
     private JTextField textField3;
@@ -26,10 +22,6 @@ public class VentanaCrearServicio {
     private JButton CREARButton;
     private JButton volverButton;
 
-    /*
-     * Aquí se guardan temporalmente el tipo y sus servicios
-     * mientras el usuario decide agregar más.
-     */
     private TipoServicio tipoServicioTemporal;
 
     public VentanaCrearServicio() {
@@ -134,10 +126,6 @@ public class VentanaCrearServicio {
             return;
         }
 
-        /*
-         * La primera vez que se presiona CREAR,
-         * se construye el TipoServicio temporal.
-         */
         if (tipoServicioTemporal == null) {
 
             tipoServicioTemporal = new TipoServicio(
@@ -146,15 +134,12 @@ public class VentanaCrearServicio {
                     new ArrayList<>()
             );
 
-            /*
-             * Bloqueamos estos campos porque los siguientes servicios
-             * pertenecerán al mismo tipo.
-             */
+
             textField1.setEditable(false);
             textField2.setEditable(false);
         }
 
-        // Evitar servicios repetidos dentro del mismo tipo
+
         for (Servicio servicioExistente :
                 tipoServicioTemporal.getServicios()) {
 
@@ -173,14 +158,12 @@ public class VentanaCrearServicio {
             }
         }
 
-        // Crear el servicio
         Servicio servicio = new Servicio(
                 nombreServicio,
                 Disponibilidad.DISPONIBLE,
                 duracion
         );
 
-        // Añadirlo al tipo temporal
         tipoServicioTemporal.getServicios().add(servicio);
 
         int respuesta = JOptionPane.showConfirmDialog(
