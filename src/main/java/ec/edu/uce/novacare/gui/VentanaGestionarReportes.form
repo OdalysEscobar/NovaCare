@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="ec.edu.uce.novacare.gui.VentanaGestionarReportes">
+  <grid id="27dc6" binding="panelPrincipal" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+    <constraints>
+      <xy x="20" y="20" width="464" height="509"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="6ec79" class="javax.swing.JButton" binding="consultarReportesButton">
+        <constraints/>
+        <properties>
+          <text value="Consultar Reportes"/>
+        </properties>
+      </component>
+      <component id="8d7e" class="javax.swing.JButton" binding="regresarButton">
+        <constraints/>
+        <properties>
+          <text value="Regresar"/>
+        </properties>
+      </component>
+      <component id="ef9d5" class="javax.swing.JButton" binding="volverAlMenuPrincipalButton">
+        <constraints/>
+        <properties>
+          <text value="Volver al Menú Principal"/>
+        </properties>
+      </component>
+      <scrollpane id="2e1b0">
+        <constraints/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="39186" class="javax.swing.JTable" binding="table1" default-binding="true">
+            <constraints/>
+            <properties/>
+          </component>
+        </children>
+      </scrollpane>
+    </children>
+  </grid>
+</form>

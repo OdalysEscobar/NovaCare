@@ -1,62 +1,85 @@
 package ec.edu.uce.novacare.gui;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class VentanaGestionarDisponibilidad {
     public JPanel panelPrincipal;
-    private JButton crearDisponibilidadButton;
-    private JButton actualizarDisponibilidadButton;
     private JButton consultarDisponibilidadButton;
-    private JButton eliminarDisponibilidadButton;
     private JButton volverAlMenuPrincipalButton;
+    private JTable table1;
+    private JButton regresarButton;
 
     public VentanaGestionarDisponibilidad() {
+        consultarDisponibilidadButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                consultarDisponibilidad();
+            }
+        });
+
+        regresarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                regresarAGestionarCitas();
+            }
+        });
 
         volverAlMenuPrincipalButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame menuFrame = new JFrame("Menú Principal - NovaCare");
-                menuFrame.setContentPane(new ec.edu.uce.novacare.gui.VentanaMenu().panelPrincipal);
-                menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                menuFrame.pack();
-                menuFrame.setLocationRelativeTo(null);
-                menuFrame.setVisible(true);
-
-                JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor(volverAlMenuPrincipalButton);
-                if (ventanaActual != null) {
-                    ventanaActual.dispose();
-                }
+                regresarMenuPrincipal();
             }
         });
+    }
 
-        crearDisponibilidadButton.addActionListener(new ActionListener() {
+    private void consultarDisponibilidad() {
+        Object[][] datos = {
+                {"1", "09:00", "Disponible"},
+                {"2", "10:00", "Ocupado"},
+                {"3", "11:00", "Disponible"},
+                {"4", "12:00", "Disponible"}
+        };
+
+        String[] columnas = {"N°", "Hora", "Estado"};
+
+        DefaultTableModel modelo = new DefaultTableModel(datos, columnas) {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Aquí va la ventana para crear disponibilidad.");
+            public boolean isCellEditable(int row, int column) {
+                return false;
             }
-        });
+        };
 
-        actualizarDisponibilidadButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Aquí va la ventana para actualizar disponibilidad.");
-            }
-        });
+        table1.setModel(modelo);
+    }
 
-        consultarDisponibilidadButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Aquí va la ventana para consultar disponibilidad.");
-            }
-        });
+    private void regresarAGestionarCitas() {
+        JFrame gestionarCitasFrame = new JFrame("Gestionar Citas - NovaCare");
+        gestionarCitasFrame.setContentPane(new VentanaGestionarCitas().panelPrincipal);
+        gestionarCitasFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        gestionarCitasFrame.pack();
+        gestionarCitasFrame.setLocationRelativeTo(null);
+        gestionarCitasFrame.setVisible(true);
 
-        eliminarDisponibilidadButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Aquí va la ventana para eliminar disponibilidad.");
-            }
-        });
+        JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor(regresarButton);
+        if (ventanaActual != null) {
+            ventanaActual.dispose();
+        }
+    }
+
+    private void regresarMenuPrincipal() {
+        JFrame menuFrame = new JFrame("NovaCare - Menú Principal");
+        menuFrame.setContentPane(new VentanaMenu().panelPrincipal);
+        menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        menuFrame.pack();
+        menuFrame.setLocationRelativeTo(null);
+        menuFrame.setVisible(true);
+
+        JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor(volverAlMenuPrincipalButton);
+        if (ventanaActual != null) {
+            ventanaActual.dispose();
+        }
     }
 }
