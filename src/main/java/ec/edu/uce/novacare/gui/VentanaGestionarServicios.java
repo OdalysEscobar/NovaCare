@@ -47,9 +47,32 @@ public class VentanaGestionarServicios {
             }
         });
 
-        actualizarServiciosButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        actualizarServiciosButton.addActionListener(e -> {
+
+            JFrame frame = new JFrame("Actualizar Servicio - NovaCare");
+
+            VentanaActualizarServicios ventanaActualizar =
+                    new VentanaActualizarServicios();
+
+            frame.setContentPane(
+                    ventanaActualizar.panelPrincipal
+            );
+
+            frame.setDefaultCloseOperation(
+                    JFrame.EXIT_ON_CLOSE
+            );
+
+            frame.pack();
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+
+            JFrame ventanaActual =
+                    (JFrame) SwingUtilities.getWindowAncestor(
+                            panelPrincipal
+                    );
+
+            if (ventanaActual != null) {
+                ventanaActual.dispose();
             }
         });
 
